@@ -823,12 +823,12 @@ isGuard = true
 end
 ```
 
-````lua
+```lua
 createBuffDef()
 -- no examples yet
 ```
 
-``` lua
+```lua
 createSkillDef()
 
 function piracy_carddef()
