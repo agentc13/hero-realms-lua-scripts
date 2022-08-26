@@ -826,6 +826,7 @@ end
 ````lua
 createBuffDef()
 -- no examples yet
+```
 ``` lua
 createSkillDef()
 
