@@ -866,7 +866,7 @@ w for free"
 })
 })
 end
-````
+```
 
 ```lua
 createMagicArmorDef()
