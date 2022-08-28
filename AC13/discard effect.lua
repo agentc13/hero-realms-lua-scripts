@@ -1,3 +1,5 @@
+-- code to discard a card
+
 pushTargetedEffect({
                     desc="Discard a card",
                     min=1,
