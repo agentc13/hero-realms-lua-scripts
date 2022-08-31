@@ -280,15 +280,17 @@ Conversions:
 Used when you need to check for something - returns `BoolExpression`
 
 Conditional:
-``lua
+
+```lua
 ifInt(boolExpression, intExpression1, intExpression2) -- if bool true - returns expression1, otherwise expression 2
 
-````
+```
 
 Operations:
+
 ```lua
 minInt(intExp, intExp) -- returns min of two values
-````
+```
 
 ### StringExpression
 
