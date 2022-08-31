@@ -502,7 +502,7 @@ Random card effects
 
 ```lua
 
-probabilityTarget({ chance, onSuccessTarget, onFailureTarget}) -- executes onSuccess target effect with chance probability, otherwise executes onFalureTarget effect.
+probabilityTarget({ chance, onSuccessTarget, onFailureTarget}) -- executes onSuccess target effect with chance probability, otherwise executes onFailureTarget effect.
 randomTarget(cardEffect, intExpression) --
 ```
 
