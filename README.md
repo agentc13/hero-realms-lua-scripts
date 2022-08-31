@@ -171,11 +171,13 @@ selectOppStunnable() -- select all opponent’s champions that can be stunned
 
 #### Filtering
 
-`selector.where(BoolCardExpression)` -- to filter by a property on each card
+```lua
+selector.where(BoolCardExpression) -- to filter by a property on each card
+```
 
 **Example:**
 
-```
+```lua
 -- selects cards from opponent's in play, which are not expended and can be stunned
 selectLoc(loc(oppPid, inPlayPloc)).where(isCardExpended().invert().And(isCardStunnable()))
 ```
