@@ -967,36 +967,36 @@ Examples:
 "<size= 300 %><line-height= 0 %><voffset=-0.6em> <pos=-75%><sprite name=\"requiresHealth_40\"></size><line-height= 100 %> \n <voffset=1.5em>Target<space= 2 em> \n <space=0.1em> Champion \n gets - 1 <sprite name=\"shield\"> permanently."
 ```
 
-![Example 1 image](https://github.com/agentc13/HR-scripts/blob/main/example_1.jpg?raw=true)
+![Example 1 image](https://github.com/agentc13/HR-scripts/blob/main/images/example_1.jpg?raw=true)
 
 ```
 "Gain 2 <sprite name=\"health\"> and 1 <sprite name=\"combat\"> for each time your deck has been shuffled"
 
 ```
 
-![Example 2 image](https://github.com/agentc13/HR-scripts/blob/main/example_2.jpg?raw=true)
+![Example 2 image](https://github.com/agentc13/HR-scripts/blob/main/images/example_2.jpg?raw=true)
 
 ```
 "<size= 200 %><space=-2em><voffset=-4><sprite name=\"expend\"></voffset><space= 1 em><sprite name=\"combat_2\"></size>"
 ```
 
-![Example 3 image](https://github.com/agentc13/HR-scripts/blob/main/example_3.jpg?raw=true)
+![Example 3 image](https://github.com/agentc13/HR-scripts/blob/main/images/example_3.jpg?raw=true)
 
 ```
 "Elite<br><voffset= 1 em><space=-3.7em><voffset=0.2em><size= 200%> <sprite name=\"expend\"></size></voffset><pos= 30 %> <voffset= 0.5em><line-height= 40 ><space=-3.7em>Stun a<br>champion</voffset></voffset>"
 ```
 
-![Example 4 image](https://github.com/agentc13/HR-scripts/blob/main/example_4.jpg?raw=true)
+![Example 4 image](https://github.com/agentc13/HR-scripts/blob/main/images/example_4.jpg?raw=true)
 
 ```
 "<line-height= 175 ><size= 190 %><voffset=-140><pos= 5 ><sprite name=\"expend\"></pos></voffset></size><size= 70 %><voffset=-125><pos= 70 >Draw 1 then discard 1.</pos></voffset></size><br><voffset= 25 ><pos= 0 >\***\*\*\*\*\***\_\***\*\*\*\*\***</pos></voffset><br><voffset= 140 ><pos=-95><size= 143 %><sprite name=\"wild\"> <sprite name=\"combat_3\"></size></pos></voffset>"
 ```
 
-![Example 5 image](https://github.com/agentc13/HR-scripts/blob/main/example_5.jpg?raw=true)
+![Example 5 image](https://github.com/agentc13/HR-scripts/blob/main/images/example_5.jpg?raw=true)
 
-![layout 1 image](https://github.com/agentc13/HR-scripts/blob/main/layout_1.jpg?raw=true)
-![layout 2 image](https://github.com/agentc13/HR-scripts/blob/main/layout_2.jpg?raw=true)
-![layout 3 image](https://github.com/agentc13/HR-scripts/blob/main/layout_3.jpg?raw=true)
+![layout 1 image](https://github.com/agentc13/HR-scripts/blob/main/images/layout_1.jpg?raw=true)
+![layout 2 image](https://github.com/agentc13/HR-scripts/blob/main/images/layout_2.jpg?raw=true)
+![layout 3 image](https://github.com/agentc13/HR-scripts/blob/main/images/layout_3.jpg?raw=true)
 
 ### Slots
 
