@@ -409,9 +409,9 @@ valueItem(int, effect) -- creates value item for RandomEffect, where determines 
 
 ```lua
 return randomEffect({
-valueItem(5, effect1),
-valueItem(5, effect2),
-valueItem(5, effect3)
+    valueItem(5, effect1),
+    valueItem(5, effect2),
+    valueItem(5, effect3)
 })
 
 ```
