@@ -1,5 +1,5 @@
 # Lua Effect Documentation
-** This is a modified Markdown version of the pdf provided by WWG, this is not my creation, just my edits/and formatting
+** This is a modified Markdown version of the pdf provided by WWG, this is not my creation, just my edits/and formatting **
 
 ### Goal
 
