@@ -943,7 +943,7 @@ All other tags that can also be used are detailed in the documentation with
 examples:
 [http://digitalnativestudios.com/textmeshpro/docs/rich-text/#size](http://digitalnativestudios.com/textmeshpro/docs/rich-text/#size)
 
-![sprites image](https://github.com/agentc13/HR-scripts/blob/master/sprites.jpg?raw=true)
+![sprites image](https://github.com/agentc13/Hero-Realms-Lua-Scripts/blob/afcdd03490bc413e2f9a26003bb1b863f418876d/images/sprites.jpg?raw=true)
 
 Sprites:
 <sprite name="shield">
@@ -974,29 +974,29 @@ Examples:
 
 ```
 
-![Example 2 image](https://github.com/agentc13/HR-scripts/blob/main/images/example_2.jpg?raw=true)
+![Example 2 image](https://github.com/agentc13/Hero-Realms-Lua-Scripts/blob/afcdd03490bc413e2f9a26003bb1b863f418876d/images/example_2.jpg?raw=true)
 
 ```
 "<size= 200 %><space=-2em><voffset=-4><sprite name=\"expend\"></voffset><space= 1 em><sprite name=\"combat_2\"></size>"
 ```
 
-![Example 3 image](https://github.com/agentc13/HR-scripts/blob/main/images/example_3.jpg?raw=true)
+![Example 3 image](https://github.com/agentc13/Hero-Realms-Lua-Scripts/blob/afcdd03490bc413e2f9a26003bb1b863f418876d/images/example_3.jpg?raw=true)
 
 ```
 "Elite<br><voffset= 1 em><space=-3.7em><voffset=0.2em><size= 200%> <sprite name=\"expend\"></size></voffset><pos= 30 %> <voffset= 0.5em><line-height= 40 ><space=-3.7em>Stun a<br>champion</voffset></voffset>"
 ```
 
-![Example 4 image](https://github.com/agentc13/HR-scripts/blob/main/images/example_4.jpg?raw=true)
+![Example 4 image](https://github.com/agentc13/Hero-Realms-Lua-Scripts/blob/afcdd03490bc413e2f9a26003bb1b863f418876d/images/example_4.jpg?raw=true)
 
 ```
 "<line-height= 175 ><size= 190 %><voffset=-140><pos= 5 ><sprite name=\"expend\"></pos></voffset></size><size= 70 %><voffset=-125><pos= 70 >Draw 1 then discard 1.</pos></voffset></size><br><voffset= 25 ><pos= 0 >\***\*\*\*\*\***\_\***\*\*\*\*\***</pos></voffset><br><voffset= 140 ><pos=-95><size= 143 %><sprite name=\"wild\"> <sprite name=\"combat_3\"></size></pos></voffset>"
 ```
 
-![Example 5 image](https://github.com/agentc13/HR-scripts/blob/main/images/example_5.jpg?raw=true)
+![Example 5 image](https://github.com/agentc13/Hero-Realms-Lua-Scripts/blob/afcdd03490bc413e2f9a26003bb1b863f418876d/images/example_5.jpg?raw=true)
 
-![layout 1 image](https://github.com/agentc13/HR-scripts/blob/main/images/layout_1.jpg?raw=true)
-![layout 2 image](https://github.com/agentc13/HR-scripts/blob/main/images/layout_2.jpg?raw=true)
-![layout 3 image](https://github.com/agentc13/HR-scripts/blob/main/images/layout_3.jpg?raw=true)
+![layout 1 image](https://github.com/agentc13/Hero-Realms-Lua-Scripts/blob/afcdd03490bc413e2f9a26003bb1b863f418876d/images/layout_1.jpg?raw=true)
+![layout 2 image](https://github.com/agentc13/Hero-Realms-Lua-Scripts/blob/afcdd03490bc413e2f9a26003bb1b863f418876d/images/layout_2.jpg?raw=true)
+![layout 3 image](https://github.com/agentc13/Hero-Realms-Lua-Scripts/blob/afcdd03490bc413e2f9a26003bb1b863f418876d/images/layout_3.jpg?raw=true)
 
 ### Slots
 
