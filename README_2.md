@@ -9,3 +9,7 @@ For example:
 - ac13_orc_pauldrons.lua (a file from me 'agentc13', for the 'Orc Pauldrons' armor upgrade)
 - userkaffe_ranger_rebalance.lua (a file shared by 'userkaffe' with ranger balance changes)
 - templates will start with 'template\_' (I will make these, but want to name them differently than my normal Lua files)
+
+### dev branch
+
+This is where I will put the lua files I am working on, but that may not be finished or tested to the point that I want to share them.
