@@ -13,3 +13,21 @@ For example:
 ### dev branch
 
 This is where I will put the lua files I am working on, but that may not be finished or tested to the point that I want to share them.
+
+## Task List (upcoming additions/changes)
+
+- Templates
+  - [x] Make template for Magic Armor (Orc Pauldrons)
+  - [ ] Make template for Class Ability
+  - [x] Make template for Class upgrade (Rallying Flag)
+  - [ ] Make template for Game Buff/Debuffs or 'Battlefield Effects'
+  - [ ] Make template for Game setup
+  - [ ] Make template for Class Skill
+  - [ ] Make template for Market Card
+- How to guides (these will be posted to YouTube and I will likely have a smaller text version here)
+  - [ ] Overview
+  - [ ] Editing Templates
+  - [ ] Game Setup
+- Custom Game setups
+- Balance change ideas
+- More scripts shared form the HR community
