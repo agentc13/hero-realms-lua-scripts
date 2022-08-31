@@ -104,14 +104,15 @@ function endGame(g) -- more info on this later
 end
 
 
+
 function setupMeta(meta)
-    meta.name = "Shining breastplate"
+    meta.name = "wwg_shining_breastplate"
     meta.minLevel = 0
     meta.maxLevel = 0
     meta.introbackground = ""
     meta.introheader = ""
     meta.introdescription = ""
-    meta.path = "C:/Users/timot/HR scripts/Shining breastplate.lua"
+    meta.path = "D:/HRLS/Hero-Realms-Lua-Scripts/WWG/wwg_shining_breastplate.lua"
      meta.features = {
 }
 

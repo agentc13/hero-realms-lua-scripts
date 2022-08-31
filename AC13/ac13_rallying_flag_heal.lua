@@ -6,15 +6,15 @@ require 'hardai'
 require 'mediumai'
 require 'easyai'
 
-function rallying_flag_carddef()
+function fighter_rallying_flag_carddef()
     return createActionDef({
-        id = "flag",
+        id = "fighter_rallying_flag",
         name = "Rallying Flag",
         types = { actionType, noStealType },
         acquireCost = 0,
         abilities = {
             createAbility({
-                id = "flag",
+                id = "fighter_rallying_flag",
                 trigger = autoTrigger,
                 effect = gainGoldEffect(1).seq(gainHealthEffect(3)),
             })
@@ -31,9 +31,6 @@ end
 
 
 function setupGame(g)
-    registerCards(g, {
-        rallying_flag_carddef()
-    })
     standardSetup(g, {
         description = "Vanilla (No Heroes)",
         playerOrder = { plid1, plid2 },
@@ -54,7 +51,7 @@ function setupGame(g)
                         fatigueCount(40, 1, "FatigueP1"),
                     },
                     deck = {
-                        { qty = 1, card = rallying_flag_carddef() },
+                        { qty = 1, card = fighter_rallying_flag_carddef() },
                 },
                     skills = {
                         fighter_devastating_blow_carddef(),
@@ -85,4 +82,17 @@ function setupGame(g)
             }
         }
     })
+end
+
+function setupMeta(meta)
+    meta.name = "ac13_rallying_flag_heal"
+    meta.minLevel = 0
+    meta.maxLevel = 0
+    meta.introbackground = ""
+    meta.introheader = ""
+    meta.introdescription = ""
+    meta.path = "D:/HRLS/Hero-Realms-Lua-Scripts/AC13/ac13_rallying_flag_heal.lua"
+     meta.features = {
+}
+
 end

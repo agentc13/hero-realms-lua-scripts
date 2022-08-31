@@ -18,8 +18,8 @@ function setupGame(g)
             {
                 id = plid1,
                 startDraw = 3,
-                name = "Player 1",
-                avatar = "avatars/cristov_s_recruits",
+                name = "Snackforce",
+                avatar = "ogre",
                 health = 50,
                 cards = {
                     deck = {
@@ -39,8 +39,8 @@ function setupGame(g)
                 id = plid2,
                 isAi = true,
                 startDraw = 5,
-                name = "Player 2",
-                avatar = "avatars/origins_shoulder_bash",
+                name = "TrplDubz",
+                avatar = "skeleton",
                 health = 50,
                 cards = {
                     deck = {
@@ -64,6 +64,7 @@ function endGame(g)
 end
 
 
+
 function setupMeta(meta)
     meta.name = "ac13_noheroes_fixed"
     meta.minLevel = 0
@@ -71,7 +72,7 @@ function setupMeta(meta)
     meta.introbackground = ""
     meta.introheader = ""
     meta.introdescription = ""
-    meta.path = "C:/Users/timot/OneDrive/Documents/Hero-Realms-Lua-Scripts/AC13/ac13_noheroes_fixed.lua"
+    meta.path = "D:/HRLS/Hero-Realms-Lua-Scripts/AC13/ac13_noheroes_fixed.lua"
      meta.features = {
 }
 

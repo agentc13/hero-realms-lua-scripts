@@ -135,3 +135,17 @@ end
 
 
 
+
+
+function setupMeta(meta)
+    meta.name = "ac13_orc_pauldrons_dmg"
+    meta.minLevel = 0
+    meta.maxLevel = 0
+    meta.introbackground = ""
+    meta.introheader = ""
+    meta.introdescription = ""
+    meta.path = "D:/HRLS/Hero-Realms-Lua-Scripts/AC13/ac13_orc_pauldrons_dmg.lua"
+     meta.features = {
+}
+
+end

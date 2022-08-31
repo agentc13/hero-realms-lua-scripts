@@ -297,3 +297,17 @@ end
 
 function endGame(g)
 end
+
+
+function setupMeta(meta)
+    meta.name = "userkaffe_ranger_rebalance"
+    meta.minLevel = 0
+    meta.maxLevel = 0
+    meta.introbackground = ""
+    meta.introheader = ""
+    meta.introdescription = ""
+    meta.path = "D:/HRLS/Hero-Realms-Lua-Scripts/Community/userkaffe_ranger_rebalance.lua"
+     meta.features = {
+}
+
+end

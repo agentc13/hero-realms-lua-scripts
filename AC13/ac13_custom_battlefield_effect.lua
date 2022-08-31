@@ -6,6 +6,10 @@ require 'hardai'
 require 'mediumai'
 require 'easyai'
 
+
+-- THIS IS NOT COMPLETED YET!!!!!
+
+
 -- just an empty card to be displayed in skills area and for checking when granting gold
 local function wisdom_of_the_wolf()
     card = createSkillDef({
@@ -91,7 +95,7 @@ end
 function setupGame(g)
     -- startardSetup function accepts a table with all data required to set the game up
     standardSetup(g, {
-        description = "Sibling Rivalry experiment", -- script description - displayed in in-game menu
+        description = "This is not complete!", -- script description - displayed in in-game menu
         playerOrder = { plid1, plid2 }, -- order in which players take turns
         ai = createHardAi(), -- sets AI for ai players
         -- randomOrder = true, -- if true, randomizes players order
@@ -131,19 +135,4 @@ function setupGame(g)
 end
 
 function endGame(g) -- more info on this later
-end
-
-
-
-function setupMeta(meta)
-    meta.name = "wwg_sibling_rivalry"
-    meta.minLevel = 0
-    meta.maxLevel = 0
-    meta.introbackground = ""
-    meta.introheader = ""
-    meta.introdescription = ""
-    meta.path = "D:/HRLS/Hero-Realms-Lua-Scripts/WWG/wwg_sibling_rivalry.lua"
-     meta.features = {
-}
-
 end

@@ -71,14 +71,15 @@ function endGame(g)
 end
 
 
+
 function setupMeta(meta)
-    meta.name = "DoubleHealth"
+    meta.name = "wwg_double_health"
     meta.minLevel = 0
     meta.maxLevel = 0
     meta.introbackground = ""
     meta.introheader = ""
     meta.introdescription = ""
-    meta.path = "C:/Users/timot/HR scripts/DoubleHealth.lua"
+    meta.path = "D:/HRLS/Hero-Realms-Lua-Scripts/WWG/wwg_double_health.lua"
      meta.features = {
 }
 
