@@ -397,12 +397,12 @@ Fatigue counter
 fatigueCount(startingTurn, delta, name) -- fatigue counter
 
 local oneSwitch = equalSwitchEffect(
-s.GetCounter(name),
--- default effect if counter value doesn't match 0 or 1 = 2 in power of counter - 1
--- in case of 2 - which is first default value hit after starting turn - 2 ^(2-1) = 2
-getFatigueEffect(s.Power(s.Const(2), s.Minus(s.GetCounter(name), s.Const(1)))),
-e.ValueItem(0, e.NullEffect()),
-e.ValueItem(1, getFatigueEffect(s.Const(1)))
+    s.GetCounter(name),
+    -- default effect if counter value doesn't match 0 or 1 = 2 in power of counter - 1
+    -- in case of 2 - which is first default value hit after starting turn - 2 ^(2-1) = 2
+    getFatigueEffect(s.Power(s.Const(2), s.Minus(s.GetCounter(name), s.Const(1)))),
+    e.ValueItem(0, e.NullEffect()),
+    e.ValueItem(1, getFatigueEffect(s.Const(1)))
 )
 ```
 
@@ -416,10 +416,10 @@ valueItem(int, effect) -- creates value item for RandomEffect, where determines 
 
 ```lua
 return randomEffect({
-valueItem(5, effect1),
-valueItem(5, effect2),
-valueItem(5, effect3)
-})
+    valueItem(5, effect1),
+    valueItem(5, effect2),
+    valueItem(5, effect3)
+    })
 
 ```
 
@@ -429,26 +429,26 @@ randomChoice(choicesArray1, choicesArray2)
 
 ```lua
 return randomChoiceEffect({
-choices = {
-{
-effect = effect,
-layout = createLayout()
-},
-{
-effect = effect,
-layout = createLayout()
-}
-},{
-choices_2 = {
-{
-effect = e.CreateFromString("fire_gem", currentHandLoc),
-layout = createLayout()
-},
-{
-effect = e.CreateFromString("fire_gem", currentHandLoc),
-layout = createLayout()
-}
-}
+    choices = {
+        {
+        effect = effect,
+        layout = createLayout()
+        },
+        {
+        effect = effect,
+        layout = createLayout()
+        }
+        },{
+    choices_2 = {
+        {
+        effect = e.CreateFromString("fire_gem", currentHandLoc),
+        layout = createLayout()
+        },
+        {
+        effect = e.CreateFromString("fire_gem", currentHandLoc),
+        layout = createLayout()
+        }
+    }
 })
 ```
 
@@ -549,12 +549,12 @@ Also, note that you can use `selectTargets(`)` to return the targets while proce
 ```lua
 
 pushTargetedEffect({
-desc=“Sacrifice a card in hand”,
-min=0,
-max=1,
-validTargets=selectLoc(loc(currentPid, handPloc)),
-targetEffect=sacrificeTarget(),
-tags = { "cheapest" }
+    desc=“Sacrifice a card in hand”,
+    min=0,
+    max=1,
+    validTargets=selectLoc(loc(currentPid, handPloc)),
+    targetEffect=sacrificeTarget(),
+    tags = { "cheapest" }
 })
 
 ```
@@ -567,21 +567,20 @@ item.
 ```lua
 
 pushChoiceEffect({
-choices={
-{
-id="choicelayoutid",
-effect=gainCombatEffect(5)
-},
-{
-effect = healPlayerEffect(currentPid, v),
-layout = layoutCard({
-title = "Heal Myself",
-art = "icons/cleric_lesser_resurrect",
-text = format("{{{0} health}}", { v }),
-flavor = format("Health: {0}", { getPlayerHealth(cur
-rentPid) })
-})
-}
+    choices={
+        {
+        id="choicelayoutid",
+        effect=gainCombatEffect(5)
+        },
+        {
+        effect = healPlayerEffect(currentPid, v),
+        layout = layoutCard({
+        title = "Heal Myself",
+        art = "icons/cleric_lesser_resurrect",
+        text = format("{{{0} health}}", { v }),
+        flavor = format("Health: {0}", { getPlayerHealth(currentPid) })
+        })
+    }
 }
 })
 
@@ -679,13 +678,13 @@ The createDef() function accepts a cardEffectAbilities table in its table parame
 ```lua
 card = createDef({
 ...
-abilities = { },
-cardEffectAbilities = {
-createCardEffectAbility({
-trigger = playedCardTrigger,
-effect = expendTarget().apply(selectTargets().where(isCardChampion()))
-})
-},
+    abilities = { },
+    cardEffectAbilities = {
+        createCardEffectAbility({
+            trigger = playedCardTrigger,
+            effect = expendTarget().apply(selectTargets().where(isCardChampion()))
+        })
+    },
 ...
 })
 ```
@@ -737,22 +736,22 @@ buffDetails: for global buffs, this creates the display when its clicked for det
 
 ```lua
 createBuffDetails({
-art = "wizard_spell_components",
-name = "Soak",
-text = "+ 1 cost"
-}),
+    art = "wizard_spell_components",
+    name = "Soak",
+    text = "+ 1 cost"
+    }),
 ```
 
 layout: if we want to dynamically generate the card layout, example code:
 
 ```lua
 createLayout({
-name = "Little Fire Sacer",
-art = "icons/fighter_knock_back",
-text = "Expend: Sacrifice a card in your hand or d
-iscard pile",
-flavor = "Water cleanses all"
-})
+    name = "Little Fire Sacer",
+    art = "icons/fighter_knock_back",
+    text = "Expend: Sacrifice a card in your hand or d
+    iscard pile",
+    flavor = "Water cleanses all"
+    })
 ```
 
 See layout text chapter below for more formatting info.
@@ -765,157 +764,146 @@ playLocation: where the card is played, one of the player loc, e.g. castPloc for
 
 Helper methods for creating card defs. These generally just fill in the required type, playLocation and cardTypeLabel.
 
-```lua
 createActionDef()
 
+```lua
 function confused_apparition_carddef()
-return createActionDef({
-id="confused_apparition",
-name="Confused Apparition",
-types={noStealType},
-acquireCost=0,
-abilities = {
-createAbility({
-id="confused_apparition_auto",
-trigger= autoTrigger,
-effect = ifEffect(selectLoc(currentInPlayLoc).
-where(isCardName("weak_skeleton")).count().lte(0), healPlayerE
-ffect(oppPid, 1))
-})
-},
-layout = createLayout({
-name = "Confused Apparition",
-art = "art/T_Confused_Apparition",
-frame = "frames/Coop_Campaign_CardFrame",
-text = "Opponent gains 1 <sprite name=\"health\">
-unless you have a Weak Skeleton in play."
-})
+    return createActionDef({
+        id="confused_apparition",
+        name="Confused Apparition",
+        types={noStealType},
+        acquireCost=0,
+        abilities = {
+            createAbility({
+            id="confused_apparition_auto",
+            trigger= autoTrigger,
+            effect = ifEffect(selectLoc(currentInPlayLoc).where(isCardName("weak_skeleton")).count().lte(0), healPlayerEffect(oppPid, 1))
+            })
+        },
+        layout = createLayout({
+        name = "Confused Apparition",
+        art = "art/T_Confused_Apparition",
+        frame = "frames/Coop_Campaign_CardFrame",
+        text = "Opponent gains 1 <sprite name=\"health\"> unless you have a Weak Skeleton in play."
+    })
 })
 end
 ```
 
-```lua
 createChampionDef()
+
+```lua
 function orc_guardian_carddef()
-return createChampionDef({
-id="orc_guardian",
-name="Orc Guardian",
-types={orcType, noStealType},
-acquireCost=0,
-health = 3,
-isGuard = true,
-abilities = {
-createAbility({
-id="feisty_orcling_auto",
-trigger=autoTrigger,
-effect = e.NullEffect()
-})
-},
-layout = createLayout({
-name = "Orc Guardian",
-art = "art/T_Orc_Guardian",
-frame = "frames/Coop_Campaign_CardFrame",
-text = "<i>He's quite defensive.</i>",
-health = 3,
-isGuard = true
-})
+    return createChampionDef({
+        id="orc_guardian",
+        name="Orc Guardian",
+        types={orcType, noStealType},
+        acquireCost=0,
+        health = 3,
+        isGuard = true,
+        abilities = {
+            createAbility({
+            id="feisty_orcling_auto",
+            trigger=autoTrigger,
+            effect = e.NullEffect()
+            })
+        },
+        layout = createLayout({
+        name = "Orc Guardian",
+        art = "art/T_Orc_Guardian",
+        frame = "frames/Coop_Campaign_CardFrame",
+        text = "<i>He's quite defensive.</i>",
+        health = 3,
+        isGuard = true
+    })
 })
 end
 ```
 
-```lua
 createBuffDef()
+
+```lua
 -- no examples yet
 ```
 
-```lua
 createSkillDef()
 
+```lua
 function piracy_carddef()
-return createSkillDef({
-id="piracy",
-name="Piracy",
-abilities = {
-createAbility({
-id="piracy_auto",
-trigger=autoTrigger,
-effect = --showTextTarget("Piracy!").apply(sel
-ectSource())
-showCardEffect(layoutCard({
-title = "Piracy",
-art = "art/T_Piracy",
-frame = "frames/Coop_Campaign_Card
-Frame",
-text = "Acquire the cheapest card
-in the market row for free"
-}))
-.seq(acquireForFreeTarget().apply(sele
-ctLoc(centerRowLoc).where(isCardAcquirable()).order(getCardCos
-t()).take(1)))
-.seq(ifEffect(selectLoc(currentDiscard
-Loc).reverse().take(1).sum(getCardCost()).gte(6), showTextEffe
-ct("Mighty fine plunder, that one.")))
-})
-},
-layout = createLayout({
-name = "Piracy",
-art = "art/T_Piracy",
-frame = "frames/Coop_Campaign_CardFrame",
-text = "Acquire the cheapest card in the market ro
-w for free"
-})
-})
+    return createSkillDef({
+        id="piracy",
+        name="Piracy",
+        abilities = {
+            createAbility({
+            id="piracy_auto",
+            trigger=autoTrigger,
+            effect = showTextTarget("Piracy!").apply(selectSource())
+
+           showCardEffect(layoutCard({
+                title = "Piracy",
+                art = "art/T_Piracy",
+                frame = "frames/Coop_Campaign_CardFrame",
+                text = "Acquire the cheapest card in the market row for free"
+            }))
+            .seq(acquireForFreeTarget().apply(selectLoc(centerRowLoc).where(isCardAcquirable()).order(getCardCost()).take(1)))
+            .seq(ifEffect(selectLoc(currentDiscardLoc).reverse().take(1).sum(getCardCost()).gte(6), showTextEffect("Mighty fine plunder, that one.")))
+        })
+    },
+        layout = createLayout({
+        name = "Piracy",
+        art = "art/T_Piracy",
+        frame = "frames/Coop_Campaign_CardFrame",
+        text = "Acquire the cheapest card in the market row for free"
+        })
+    })
 end
 ```
 
-```lua
 createMagicArmorDef()
 
+```lua
 function cleric_shining_breastplate2_carddef()
-local cardLayout = createLayout({
-name = "Shining Breastplate 2",
-art = "icons/cleric_shining_breastplate",
-frame = "frames/Cleric_CardFrame",
-text = "Champion get + 1 defense till the end of turn"
-})
+    local cardLayout = createLayout({
+        name = "Shining Breastplate 2",
+        art = "icons/cleric_shining_breastplate",
+        frame = "frames/Cleric_CardFrame",
+        text = "Champion get + 1 defense till the end of turn"
+    })
 
-return createMagicArmorDef({
-id = "cleric_shining_breastplate2",
-name = "Shining Breastplate 2",
-types = {clericType, magicArmorType, treasureType, che
-stType},
-layout = cardLayout,
-layoutPath = "icons/cleric_shining_breastplate",
-abilities = {
-createAbility( {
-id = "cleric_shining_breastplate2",
-trigger = uiTrigger,
-activations = singleActivation,
-layout = cardLayout,
-effect = pushTargetedEffect(
-{
-desc = "Choose a champion to get + 1 de
-fense",
-validTargets = s.CurrentPlayer(CardLo
-cEnum.InPlay),
-min = 1,
-max = 1,
-targetEffect = grantHealthTarget(1, {
-SlotExpireEnum.LeavesPlay }, nullEffect(), "shield"),
-tags = {toughestTag}
-}
-),
-cost = AbilityCosts.Expend,
-check = minHealthCurrent(40).And(selectLoc(cur
-rentInPlayLoc).where(isCardChampion()).count().gte(1))
-})
-}
-})
+        return createMagicArmorDef({
+            id = "cleric_shining_breastplate2",
+            name = "Shining Breastplate 2",
+            types = {clericType, magicArmorType, treasureType, che
+            stType},
+            layout = cardLayout,
+            layoutPath = "icons/cleric_shining_breastplate",
+            abilities = {
+                createAbility( {
+                    id = "cleric_shining_breastplate2",
+                    trigger = uiTrigger,
+                    activations = singleActivation,
+                    layout = cardLayout,
+                    effect = pushTargetedEffect(
+                        {
+                        desc = "Choose a champion to get + 1 defense",
+                        validTargets = s.CurrentPlayer(CardLocEnum.InPlay),
+                        min = 1,
+                        max = 1,
+                        targetEffect = grantHealthTarget(1, { SlotExpireEnum.LeavesPlay }, nullEffect(), "shield"),
+                        tags = {toughestTag}
+                        }
+                        ),
+                    cost = AbilityCosts.Expend,
+                    check = minHealthCurrent(40).And(selectLoc(currentInPlayLoc).where(isCardChampion()).count().gte(1))
+            })
+        }
+    })
 end
 ```
 
-```lua
 createHeroAbilityDef()
+
+```lua
 -- no examples yet
 ```
 
