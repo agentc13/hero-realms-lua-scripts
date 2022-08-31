@@ -1,0 +1,20 @@
+{
+    "Lua.diagnostics.globals": [
+        "standardSetup",
+        "plid1",
+        "plid2",
+        "ai",
+        "createAggressiveAI",
+        "createHardAi2",
+        "createTimeoutAi",
+        "dagger_carddef",
+        "shortsword_carddef",
+        "ruby_carddef",
+        "gold_carddef",
+        "drawCardsAtTurnEndDef",
+        "discardCardsAtTurnStartDef",
+        "fatigueCount",
+        "setupGame",
+        "endGame"
+    ]
+}
