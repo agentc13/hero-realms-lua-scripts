@@ -18,9 +18,8 @@ function setupGame(g)
             {
                 id = plid1,
                 startDraw = 3,
-                init = {
-                    fromEnv = plid1
-                },
+                name = "Player 1",
+                avatar = "avatars/cristov_s_recruits",
                 health = 50,
                 cards = {
                     deck = {
@@ -40,9 +39,8 @@ function setupGame(g)
                 id = plid2,
                 isAi = true,
                 startDraw = 5,
-                init = {
-                    fromEnv = plid2
-                },
+                name = "Player 2",
+                avatar = "avatars/origins_shoulder_bash",
                 health = 50,
                 cards = {
                     deck = {
@@ -65,4 +63,15 @@ end
 function endGame(g)
 end
 
+function setupMeta(meta)
+    meta.name = "VanillaAI"
+    meta.minLevel = 0
+    meta.maxLevel = 0
+    meta.introbackground = ""
+    meta.introheader = ""
+    meta.introdescription = ""
+    meta.path = "C:/Users/timot/HR scripts/VanillaAI.lua"
+    meta.features = {
+    }
 
+end
