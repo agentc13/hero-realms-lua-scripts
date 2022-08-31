@@ -221,7 +221,6 @@
         "arkus**imperial_dragon_carddef()",
         "borg**ogre_mercenary_carddef()",
         "bribe_carddef()",
-        "broelyn\_\_loreweaver_carddef()",
         "cleric_battle_resurrect_carddef()",
         "cleric_bless_carddef()",
         "cleric_bless_of_heart_carddef()",
@@ -254,7 +253,6 @@
         "cron**the_berserker_carddef()",
         "cult_priest_carddef()",
         "dagger_carddef()",
-        "darian\_\_war_mage_carddef()",
         "dark_energy_carddef()",
         "dark_reward_carddef()",
         "death_cultist_carddef()",
@@ -313,7 +311,6 @@
         "influence_carddef()",
         "intimidation_carddef()",
         "kraka**high_priest_carddef()",
-        "krythos\_\_master_vampire_carddef()",
         "life_drain_carddef()",
         "lightning_gem_carddef()",
         "lys**the_unseen_carddef()",
@@ -426,5 +423,9 @@
         "wolf_shaman_carddef()",
         "wondrous_wand_carddef()",
         "word_of_power_carddef()"
+    ],
+    "Lua.diagnostics.disable": [
+        "undefined-global",
+        "lowercase-global"
     ]
 }

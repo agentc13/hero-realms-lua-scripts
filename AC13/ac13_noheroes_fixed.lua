@@ -9,7 +9,7 @@ require 'aggressiveai'
 
 function setupGame(g)
     standardSetup(g, {
-        description = "Vanilla (No Heroes)",
+        description = "No Heroes",
         playerOrder = { plid1, plid2 },
         ai = ai.CreateKillSwitchAi(createAggressiveAI(), createHardAi2()),
         timeoutAi = createTimeoutAi(),
@@ -63,15 +63,16 @@ end
 function endGame(g)
 end
 
+
 function setupMeta(meta)
-    meta.name = "VanillaAI"
+    meta.name = "ac13_noheroes_fixed"
     meta.minLevel = 0
     meta.maxLevel = 0
     meta.introbackground = ""
     meta.introheader = ""
     meta.introdescription = ""
-    meta.path = "C:/Users/timot/HR scripts/VanillaAI.lua"
-    meta.features = {
-    }
+    meta.path = "C:/Users/timot/OneDrive/Documents/Hero-Realms-Lua-Scripts/AC13/ac13_noheroes_fixed.lua"
+     meta.features = {
+}
 
 end

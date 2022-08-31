@@ -99,3 +99,7 @@ function setupGame(g)
         }
     })
 end
+
+-- more info on this later
+function endGame(g)
+end
