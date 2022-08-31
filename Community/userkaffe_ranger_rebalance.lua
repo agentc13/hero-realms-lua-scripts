@@ -5,6 +5,10 @@ require 'timeoutai'
 require 'hardai_2'
 require 'aggressiveai'
 
+
+-- These changes were taken from ideas shared by DaKAtSesMeow on the RR Discord.
+
+
 function ranger_snake_pet_carddef()
 	return createChampionDef({
 		id="ranger_snake_pet",
