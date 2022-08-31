@@ -967,7 +967,7 @@ Examples:
 "<size= 300 %><line-height= 0 %><voffset=-0.6em> <pos=-75%><sprite name=\"requiresHealth_40\"></size><line-height= 100 %> \n <voffset=1.5em>Target<space= 2 em> \n <space=0.1em> Champion \n gets - 1 <sprite name=\"shield\"> permanently."
 ```
 
-![Example 1 image](https://github.com/agentc13/HR-scripts/blob/main/images/example_1.jpg?raw=true)
+![Example 1 image](https://github.com/agentc13/Hero-Realms-Lua-Scripts/blob/afcdd03490bc413e2f9a26003bb1b863f418876d/images/example_1.jpg?raw=true)
 
 ```
 "Gain 2 <sprite name=\"health\"> and 1 <sprite name=\"combat\"> for each time your deck has been shuffled"
