@@ -422,7 +422,20 @@
         "wolf_form_carddef()",
         "wolf_shaman_carddef()",
         "wondrous_wand_carddef()",
-        "word_of_power_carddef()"
+        "word_of_power_carddef()",
+        "createLayout",
+        "createMagicArmorDef",
+        "createAbility",
+        "pushChoiceEffect",
+        "drawCardsEffect",
+        "layoutCard",
+        "draw1Tag",
+        "gainHealthEffect",
+        "gainHealth2Tag",
+        "uiTrigger",
+        "selectLoc",
+        "currentCastLoc",
+        "isCardType"
     ],
     "Lua.diagnostics.disable": [
         "undefined-global",

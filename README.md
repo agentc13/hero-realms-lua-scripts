@@ -1,5 +1,7 @@
 # Lua Effect Documentation
 
+**This is a modified Markdown version of the pdf provided by WWG, this is not my creation, just my edits/and formatting**
+
 ### Goal
 
 To standardize naming of all lua effects to make it clear what kind of effect it is.
@@ -169,11 +171,13 @@ selectOppStunnable() -- select all opponent’s champions that can be stunned
 
 #### Filtering
 
-`selector.where(BoolCardExpression)` -- to filter by a property on each card
+```lua
+selector.where(BoolCardExpression) -- to filter by a property on each card
+```
 
 **Example:**
 
-```
+```lua
 -- selects cards from opponent's in play, which are not expended and can be stunned
 selectLoc(loc(oppPid, inPlayPloc)).where(isCardExpended().invert().And(isCardStunnable()))
 ```
@@ -276,15 +280,17 @@ Conversions:
 Used when you need to check for something - returns `BoolExpression`
 
 Conditional:
-``lua
+
+```lua
 ifInt(boolExpression, intExpression1, intExpression2) -- if bool true - returns expression1, otherwise expression 2
 
-````
+```
 
 Operations:
+
 ```lua
 minInt(intExp, intExp) -- returns min of two values
-````
+```
 
 ### StringExpression
 
@@ -409,9 +415,9 @@ valueItem(int, effect) -- creates value item for RandomEffect, where determines 
 
 ```lua
 return randomEffect({
-valueItem(5, effect1),
-valueItem(5, effect2),
-valueItem(5, effect3)
+    valueItem(5, effect1),
+    valueItem(5, effect2),
+    valueItem(5, effect3)
 })
 
 ```
