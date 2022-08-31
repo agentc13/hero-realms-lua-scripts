@@ -1,7 +1,5 @@
 *.pdf
 
-*.pdf
-
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
