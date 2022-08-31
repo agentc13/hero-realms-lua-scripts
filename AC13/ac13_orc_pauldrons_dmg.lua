@@ -6,22 +6,28 @@ require 'hardai'
 require 'mediumai'
 require 'easyai'
 
--- Custom magic armor "Orc Pauldrons" This version activates when you have a weapon in hand or in play.
+-- Custom reskin of Spiked Pauldrons
 function orc_pauldrons_carddef()
     local cardLayout = createLayout({
+        -- Name of card
         name = "Orc Pauldrons",
+        -- Art for card
         art = "icons/battle_cry",
+        -- frame for card
         frame = "frames/Warrior_CardFrame",
         text = (
-            "<size=300%><line-height=0%><voffset=-.8em> <pos=-75%><sprite name=\"requiresHealth_25\"></size><line-height=80%> \n <voffset=1.8em><size=80%> If you have played a weapon this turn \n Draw 1 \n or \n Gain 2 <sprite name=\"health\"> </size>"
+            "<size=300%><line-height=0%><voffset=-.8em> <pos=-75%><sprite name=\"requiresHealth_25\"></size><line-height=80%> \n <voffset=1.8em><size=80%> If you have dealt 5 <sprite name=\"combat\"> to an opponent this turn. \n Draw 1 then \n discard 1 or, \n Gain 2 <sprite name=\"health\"> </size>"
             ),
     })
 
     return createMagicArmorDef({
         id = "orc_pauldrons",
+        -- card name as it appears in top banner
         name = "Orc Pauldrons",
         layout = cardLayout,
+        -- card art
         layoutPath = "icons/battle_cry",
+        -- card effects
         abilities = {
             createAbility({
                 id = "orc_pauldrons",
@@ -29,11 +35,18 @@ function orc_pauldrons_carddef()
                 effect = pushChoiceEffect({
                     choices = {
                         {
-                            effect = drawCardsEffect(1),
+                            effect = drawCardsEffect(1).seq(
+                                pushTargetedEffect({
+                                    desc = "Discard a card",
+                                    min = 1,
+                                    max = 1,
+                                    validTargets = selectLoc(currentHandLoc),
+                                    targetEffect = discardTarget()
+                                })),
                             layout = layoutCard({
                                 title = "Orc Pauldrons",
                                 art = "icons/battle_cry",
-                                text = ("Draw 1. "),
+                                text = ("Draw 1 then discard 1."),
                             }),
                             tags = { draw1Tag }
 
@@ -49,9 +62,11 @@ function orc_pauldrons_carddef()
                         }
                     }
                 }),
+                -- trigger to activate ability
                 trigger = uiTrigger,
-                check = selectLoc(currentCastLoc).where(isCardType(weaponType)).count()
-                    .gte(1),
+                -- conditions to check to activate ability
+                check = minDamageTakenOpp(5).And(minHealthCurrent(25)),
+                -- cost to use ability
                 cost = expendCost,
                 tags = { draw1Tag, gainHealthTag, gainHealth2Tag },
             })
@@ -60,8 +75,8 @@ function orc_pauldrons_carddef()
 end
 
 function setupGame(g)
-    -- register newly created cards for further use (cards you made like "Orc Pauldrons")
-    -- no need to register overridden cards (cards you have modified, but were already in game)
+    -- register newly created cards for further use
+    -- no need to register overridden cards, like shining breastplate here
     registerCards(g, {
         orc_pauldrons_carddef()
     })
@@ -70,7 +85,7 @@ function setupGame(g)
         description = "Orc Pauldrons Armor test", -- script description - displayed in in-game menu
         playerOrder = { plid1, plid2 }, -- order in which players take turns
         ai = createHardAi(), -- sets AI for ai players
-        randomOrder = true, -- if true, randomizes players order
+        -- randomOrder = true, -- if true, randomizes players order
         opponents = { { plid1, plid2 } }, -- pairs of opponents
         players = { -- array of players
             {
@@ -99,10 +114,10 @@ function setupGame(g)
                 health = 50,
                 cards = {
                     deck = {
-                        { qty = 2, card = tentacle_carddef() },
-                        { qty = 2, card = tentacle_whip_carddef() },
-                        { qty = 1, card = ruby_carddef() },
-                        { qty = 5, card = gold_carddef() },
+                        { qty = 1, card = tentacle_carddef() },
+                        { qty = 1, card = tentacle_whip_carddef() },
+                        { qty = 3, card = elixir_of_fortune_carddef() },
+                        { qty = 5, card = gold_male_dark_carddef() },
                     },
                     buffs = {
                         drawCardsAtTurnEndDef(),
@@ -118,15 +133,5 @@ end
 function endGame(g) -- more info on this later
 end
 
-function setupMeta(meta)
-    meta.name = "Orc Pauldrons2"
-    meta.minLevel = 0
-    meta.maxLevel = 0
-    meta.introbackground = ""
-    meta.introheader = ""
-    meta.introdescription = ""
-    meta.path = "C:/Users/timot/HR scripts/Orc Pauldrons2.lua"
-    meta.features = {
-    }
 
-end
+
