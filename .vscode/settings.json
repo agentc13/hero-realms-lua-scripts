@@ -137,7 +137,7 @@
         "locationChangedCardTrigger",
         "postAcquiredCardTrigger",
         "postSelfAcquiredCardTrigger",
-        "playedCardTrigger "
+        "playedCardTrigger ",
         "noStealType",
         "knifeType",
         "bowType",

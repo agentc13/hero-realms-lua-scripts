@@ -33,7 +33,7 @@ function orc_pauldrons_carddef()
                             layout = layoutCard({
                                 title = "Orc Pauldrons",
                                 art = "icons/battle_cry",
-                                text = ("Draw 1. "),
+                                text = ("Draw 1 then discard 1. "),
                             }),
                             tags = { draw1Tag }
 
