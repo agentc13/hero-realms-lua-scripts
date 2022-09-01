@@ -9,7 +9,7 @@ require 'hardai'
 require 'mediumai'
 require 'easyai'
 
--- insert card(s) you are testing here and remove the snackforce placeholder.
+--[[ insert card(s) you are testing here and remove the snackforce placeholder. Remove the brackets to make this a single line comment instead of multi-line. Or just remove this altogether.
 
 function snackforce_carddef()
     local cardLayout = createLayout({
@@ -36,12 +36,13 @@ function snackforce_carddef()
     })
 end
 
--- end card testing area
+end card testing area (remove this line when testing)]]
 
 function setupGame(g)
         registerCards(g, {
-        -- add the carddefs for all the cards you want to test here.    
+        --[[ add the carddefs for all the cards you want to test here.    
         snackforce_carddef()
+        end added carddefs ]]
     })
 
     standardSetup(g, {
@@ -53,8 +54,9 @@ function setupGame(g)
         -- I like to add the cards to the market row just so I can see how they display/work right away. To do this list them as one of the 5 cards here.  If you have less than 5 listed, add other cards otherwise you will have less than 5 cards in your starting row.
         centerRow = { "snackforce", "fire_bomb", "grak__storm_giant", "tyrannor__the_devourer", "domination" },
         tradeDeckExceptions = {
-            -- enter the number of each card you are adding to the market deck.
+            --[[ enter the number of each card you are adding to the market deck.
             { qty = 2, cardId = "snackforce" },
+            end market deck insertions here ]]
         },
         noTradeDeck = false,
         noFireGems = false,
@@ -95,17 +97,4 @@ function setupGame(g)
 end
 
 function endGame(g)
-end
-
-function setupMeta(meta)
-    meta.name = "ac13_snackforce_market_card"
-    meta.minLevel = 0
-    meta.maxLevel = 0
-    meta.introbackground = ""
-    meta.introheader = ""
-    meta.introdescription = ""
-    meta.path = "D:/HRLS/Hero-Realms-Lua-Scripts/AC13/ac13_snackforce_market_card.lua"
-     meta.features = {
-}
-
 end
