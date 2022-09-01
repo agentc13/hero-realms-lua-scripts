@@ -18,7 +18,7 @@ For example:
 
 `template_setupGame.lua` Template file with comments on what the lines of code do.
 
-## Task List (upcoming or possible additions/changes)
+## Task List (Planned Projects)
 
 - Templates
 
@@ -32,12 +32,15 @@ For example:
   - [x] Market Card (snackforce_carddef)
 
 - How to guides (these will be posted to YouTube and I will likely have a smaller text version here at some point)
-  - [ ] Setting up an IDE (Integrated Development Environment, really a fancy text editor). I will be using VS Code, but there are many options that do the same thing.
+
+  - [ ] Setting up an IDE (Integrated Development Environment, really a fancy text editor).
   - [ ] Downloading the GitHub repo and adding it to to your IDE.
-  - [ ] Editing existing .lua files (taking examples/templates and modifying them to do something), this will be pretty basic.
+  - [ ] Editing existing .lua files (taking examples/templates and modifying them to do something).
   - [ ] Loading the file you made into the HR dev area, and testing it.
   - [ ] Setting up your own GitHub, making a fork of the repo, and submitting a pull request.
+
 - Custom Game setup ideas (not all are necessarily possible or attainable within my skillset, but this is a working list of ideas)
+
   - [ ] Market card price change effects
   - [ ] Player health buff/debuff each turn
   - [ ] Healing debuff (lessen effectiveness by %)
@@ -51,7 +54,7 @@ For example:
   - [ ] NPC cards (something like SR heroes, but we already have hero classes so it needs a different name)
   - [ ] Ally buffs (all or some ally abilities trigger every turn)
   - [ ] Different fatigue effects
+
 - Custom Classes/Races
+
 - Balance change ideas
-- More scripts shared from the HR community
-- Intro video series on getting started with Lua scripting for Hero Realms Digital.
