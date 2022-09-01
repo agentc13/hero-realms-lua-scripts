@@ -21,7 +21,7 @@ For example:
   - [x] Make template for Game setup (setupGame)
   - [x] Make template for Class Ability (piercing_screech_def)
   - [x] Make template for Class Skill (siphon_life_def)
-  - [x] Make template for Market Card (devotion_carddef)
+  - [x] Make template for Market Card (snackforce_carddef)
 - How to guides (these will be posted to YouTube and I will likely have a smaller text version here)
   - [ ] Overview
   - [ ] Editing Templates
