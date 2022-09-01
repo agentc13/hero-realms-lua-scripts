@@ -16,6 +16,7 @@ function setupGame(g)
     -- registerCards function will register newly created cards for further use within our setup.
     -- You only need to use this when adding new carddefs, if you are using modified carddefs of existing cards you do not net to register them.
     registerCards(g, {
+        -- This registers the example card orc_guardian from the WWG examples.
         orc_guardian_carddef()
     })
 
