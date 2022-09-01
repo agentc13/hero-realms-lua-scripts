@@ -19,10 +19,9 @@ For example:
   - [x] Make template for creating Ability (createAbility)
   - [x] Make template for Game Buff/Debuffs or 'Battlefield Effects' (buff_debuff)
   - [x] Make template for Game setup (setupGame)
-  - [ ] Make template for Class Ability
-  - [ ] Make template for Class Skill
+  - [x] Make template for Class Ability (piercing_screech_def)
+  - [x] Make template for Class Skill (siphon_life_def)
   - [x] Make template for Market Card (devotion_carddef)
-  - [ ] Make Template for custom Class
 - How to guides (these will be posted to YouTube and I will likely have a smaller text version here)
   - [ ] Overview
   - [ ] Editing Templates

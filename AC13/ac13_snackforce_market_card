@@ -1,7 +1,3 @@
--- WWG provided pretty thorough comments in the setupGame example. I will just be adding a few clarifications that may help people who are unfamiliar with coding.
-
-
--- The following lines are basically telling the game that this script requires other code from elsewhere (sort of like a code library) to work. For most game setups you will definitely need 'herorealms' 'decks' 'stdlib' and 'stdcards' the ai is here because we can only test this against the ai for now, and when first testing your code it is a good idea to have a default game setup against the ai player just to make sure it works, but 'hardai' 'mediumai' 'easyai' would not be required in a pvp game.
 require 'herorealms'
 require 'decks'
 require 'stdlib'
@@ -10,20 +6,41 @@ require 'hardai'
 require 'mediumai'
 require 'easyai'
 
+function snackforce_carddef()
+    return createActionDef({
+        id = "snackforce",
+        name = "Snackforce",
+        types = { actionType },
+        acquireCost = 2,
+        abilities = {
+            createAbility({
+                id = "snackforce",
+                trigger = autoTrigger,
+                effect = gainGoldEffect(1).seq(gainHealthEffect(3)),
+            })
+        },
+        layout = createLayout({
+               name = "Snackforce",
+            art = "art/T_Feisty_Orcling",
+            frame = "frames/HR_CardFrame_Action_Necros",
+            cost - 2,
+            text = "<size=200%><sprite name=\"gold_1\">   <sprite name=\"health_3\">",
+        })
+    })
+end
 
--- All game setups require the setupGame(g) function. 
 function setupGame(g)
     -- registerCards function will register newly created cards for further use within our setup.
     -- You only need to use this when adding new carddefs, if you are using modified carddefs of existing cards you do not net to register them.
     registerCards(g, {
         -- This registers the example card orc_guardian from the WWG examples.
-        orc_guardian_carddef()
+        snackforce_carddef()
     })
 
     -- startardSetup function accepts a table with all data required to set the game up. 
     standardSetup(g, {
         -- script description - displayed in in-game menu
-        description = "Custom no heroes game",
+        description = "Snackforce Test",
         -- order in which players take turns
         playerOrder = { plid1, plid2 },
         -- sets AI for ai players (I will assume this isn't necessary for stricly pvp setups)
@@ -34,17 +51,12 @@ function setupGame(g)
         opponents = { { plid1, plid2 } },
         -- specify up to 5 cards to appear in the center row at the start of the game
         -- this isn't necessary if you want the startgin cards to be random
-        centerRow = { "arkus__imperial_dragon", "fire_bomb", "grak__storm_giant", "tyrannor__the_devourer", "domination" },
+        centerRow = { "snackforce", "fire_bomb", "grak__storm_giant", "tyrannor__the_devourer", "domination" },
         -- this allows us to change market deck. qty=0 will remove cards, and qty='positive number' will add that many to the market deck
         tradeDeckExceptions = {
             -- here we set 0 quantity for cards we added to center row, so they don't appear in market deck
-            { qty = 0, cardId = "arkus__imperial_dragon" },
-            { qty = 0, cardId = "fire_bomb" },
-            { qty = 0, cardId = "grak__storm_giant" },
-            { qty = 0, cardId = "tyrannor__the_devourer" },
-            { qty = 0, cardId = "domination" },
             -- and 3 orc guardians go into deck
-            { qty = 3, cardId = "orc_guardian" },
+            { qty = 2, cardId = "snackforce" },
         },
         -- set to true if you don't want trade deck
         noTradeDeck = false,
@@ -73,7 +85,6 @@ function setupGame(g)
                         -- grants increased by 1 combat starting from turn 40
                         fatigueCount(40, 1, "FatigueP1"),
                         -- custom buff we created to double health (this is used in the template_buff_debuff file if you want to reference it)
-                        doubleHealthBuffDef()
                     }
                 }
             },
