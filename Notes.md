@@ -20,12 +20,12 @@ I have added a Dev branch to this repo. It is where I will put the lua files I a
 - Templates
   - [x] Make template for Magic Armor (orc_pauldrons_carddef)
   - [x] Make template for Class upgrade (fighter_rallying_flag_carddef)
-  - [x] Make template for creating ability (createAbility)
+  - [x] Make template for creating Ability (createAbility)
+  - [x] Make template for Game Buff/Debuffs or 'Battlefield Effects' (buff_debuff)
+  - [x] Make template for Game setup (no_heroes)
   - [ ] Make template for Class Ability
-  - [ ] Make template for Game Buff/Debuffs or 'Battlefield Effects'
-  - [ ] Make template for Game setup (no heroes example)
   - [ ] Make template for Class Skill
-  - [ ] Make template for Market Card
+  - [x] Make template for Market Card (devotion_carddef)
   - [ ] Make Template for custom Class
 - How to guides (these will be posted to YouTube and I will likely have a smaller text version here)
   - [ ] Overview
