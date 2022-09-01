@@ -1,3 +1,6 @@
+-- this is a template to easily test the cards you are working on to make sure they work properly.
+-- I didn't add comments for everything here, just where you will want to change what is in this file. Refer to the specific card or setup templates for deeper comments on them.
+
 require 'herorealms'
 require 'decks'
 require 'stdlib'
