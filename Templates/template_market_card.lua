@@ -9,6 +9,8 @@ function snackforce_carddef()
         art = "art/T_Feisty_Orcling",
         -- Frame around the edges of the card.
         frame = "frames/HR_CardFrame_Action_Necros",
+        -- card cost as it appears in the top corner, this is required to display the cost, but the acquireCost below needs to match.
+        cost = 2,
         -- Text layout, refer to 'Layout Text Formatting' section in Lua documentation
         text = "<size=200%><sprite name=\"gold_1\">   <sprite name=\"health_3\">",
     })
