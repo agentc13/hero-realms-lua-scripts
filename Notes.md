@@ -5,6 +5,7 @@
 I will be adding files written by other people than myself here, and when doing so I will start the filename with their ign (or discord username). The folder structure has seperate folders for scripts provided by WWG, myself, and other community members. There are alsp folders for templates and image files (used in the Lua Documentation README.md).
 
 For example:
+
 - wwg_sibling_rivalry.lua (a file shared by the developers at Wise Wizard Games used as an example in the Lua documentation)
 - ac13_orc_pauldrons.lua (a file from me 'agentc13', for the 'Orc Pauldrons' armor upgrade)
 - userkaffe_ranger_rebalance.lua (a file shared by 'userkaffe' with ranger balance changes)
@@ -28,6 +29,20 @@ I have added a Dev branch to this repo. It is where I will put the lua files I a
   - [ ] Overview
   - [ ] Editing Templates
   - [ ] Game Setup
-- Custom Game setups
+- Custom Game setup ideas (not all are necessarily possible or attainable within my skillset, but this is a working list of ideas)
+  - [ ] Market card price change effects
+  - [ ] Player health buff/debuff each turn
+  - [ ] Healing debuff (lessen effectiveness by %)
+  - [ ] Damage debuff (lessen effectiveness by %)
+  - [ ] Missing factions from market
+  - [ ] Modifier to champions defense (+/-)
+  - [ ] Alternative to Fire Gems
+  - [ ] Special skills/abilities for both players
+  - [ ] Bonus effect when using sacrifice/or damage applied above a threshold
+  - [ ] Events (custom market cards similar to SR events)
+  - [ ] NPC cards (something like SR heroes, but we already have hero classes so it needs a different name)
+  - [ ] Ally buffs (all or some ally abilities trigger every turn)
+  - [ ] Different fatigue effects
+- Custom Classes/Races
 - Balance change ideas
-- More scripts shared form the HR community
+- More scripts shared from the HR community
