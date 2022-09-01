@@ -22,21 +22,14 @@ For example:
 
 - Templates
 
-  [x] Magic Armor (orc_pauldrons_carddef)
-
-  [x] Class upgrade (fighter_rallying_flag_carddef)
-
-  [x] Creating an Ability (createAbility)
-
-  [x] Game Buff/Debuffs or 'Battlefield Effects' (buff_debuff)
-
-  [x] Game setup (setupGame)
-
-  [x] Class Ability (piercing_screech_def)
-
-  [x] Class Skill (siphon_life_def)
-
-  [x] Market Card (snackforce_carddef)
+  - [x] Magic Armor (orc_pauldrons_carddef)
+  - [x] Class upgrade (fighter_rallying_flag_carddef)
+  - [x] Creating an Ability (createAbility)
+  - [x] Game Buff/Debuffs or 'Battlefield Effects' (buff_debuff)
+  - [x] Game setup (setupGame)
+  - [x] Class Ability (piercing_screech_def)
+  - [x] Class Skill (siphon_life_def)
+  - [x] Market Card (snackforce_carddef)
 
 - How to guides (these will be posted to YouTube and I will likely have a smaller text version here at some point)
   - [ ] Setting up an IDE (Integrated Development Environment, really a fancy text editor). I will be using VS Code, but there are many options that do the same thing.
