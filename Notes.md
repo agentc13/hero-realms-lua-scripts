@@ -18,7 +18,7 @@ For example:
   - [x] Make template for Class upgrade (fighter_rallying_flag_carddef)
   - [x] Make template for creating Ability (createAbility)
   - [x] Make template for Game Buff/Debuffs or 'Battlefield Effects' (buff_debuff)
-  - [x] Make template for Game setup (no_heroes)
+  - [x] Make template for Game setup (setupGame)
   - [ ] Make template for Class Ability
   - [ ] Make template for Class Skill
   - [x] Make template for Market Card (devotion_carddef)
