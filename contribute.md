@@ -1,5 +1,7 @@
 # Contributing to this repository
 
+_all of this info was taken and modified from https://kbroman.org/github_tutorial/_
+
 So you want to contribute changes to this repository? Here are instructions on how you can do this.
 
 1.  Go to my repository on github. (https://github.com/agentc13/Hero-Realms-Lua-Scripts)
