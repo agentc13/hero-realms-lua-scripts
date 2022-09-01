@@ -20,7 +20,7 @@ function siphon_life_def()
 				layout = createLayout({
 					name = "Siphon Life",
 					art = "art/T_The_Rot",
-					text = "<size=400%><line-height=0%><voffset=-0.6em> <pos=-95%><sprite name=\"expend_2\"></size><line-height=100%> \n <voffset=1.5em><pos=10%>You gain 1<sprite name=\"health\"> and\n<pos=10%>target opponent\n<pos=10%>loses 1<sprite name=\"health\">.\n<pos=10%>This also affects\n<pos=10%>maximum health."
+					text = "<size=400%><line-height=0%><voffset=-0.6em> <pos=-95%><sprite name=\"expend_2\"></size><line-height=100%> \n <voffset=1.8em><size=90%><pos=10%>You gain 1<sprite name=\"health\"> and\n<pos=10%>target opponent\n<pos=10%>loses 1<sprite name=\"health\">.\n<pos=10%>This also affects\n<pos=10%>maximum health."
 				}),
 				effect = gainMaxHealthEffect(currentPid, 1).seq(gainHealthEffect(1)).seq(hitOpponentEffect(1)).seq(gainMaxHealthEffect(oppPid, -1)),
 				cost = goldCost(2)
@@ -29,7 +29,7 @@ function siphon_life_def()
 		layout = createLayout({
 			name = "Siphon Life",
 			art = "art/T_The_Rot",
-			text = "<size=400%><line-height=0%><voffset=-0.6em> <pos=-95%><sprite name=\"expend_2\"></size><line-height=100%> \n <voffset=1.5em><pos=10%>You gain 1<sprite name=\"health\"> and\n<pos=10%>target opponent\n<pos=10%>loses 1<sprite name=\"health\">.\n<pos=10%>This also affects\n<pos=10%>maximum health."
+			text = "<size=400%><line-height=0%><voffset=-0.6em> <pos=-95%><sprite name=\"expend_2\"></size><line-height=100%> \n <voffset=1.8em><size=90%><pos=10%>You gain 1<sprite name=\"health\"> and\n<pos=10%>target opponent\n<pos=10%>loses 1<sprite name=\"health\">.\n<pos=10%>This also affects\n<pos=10%>maximum health."
 		}),
 		layoutPath= "art/T_The_Rot"
 	})
