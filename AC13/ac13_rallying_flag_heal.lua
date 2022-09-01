@@ -41,30 +41,23 @@ function setupGame(g)
             {
                 id = plid1,
                 startDraw = 3,
-                name = "Player 1",
-                avatar = "avatars/krythos",
-                health = 50,
+                init = { -- sets how hero get initialized
+                    fromEnv = plid1 -- takes hero data from the selection (VS AI or Online)
+                },
                 cards = { -- cards allows to add any cards to any of hero location at the start of the game
                     buffs = {
                         drawCardsAtTurnEndDef(),
                         discardCardsAtTurnStartDef(),
                         fatigueCount(40, 1, "FatigueP1"),
                     },
-                    deck = {
-                        { qty = 1, card = fighter_rallying_flag_carddef() },
-                },
-                    skills = {
-                        fighter_devastating_blow_carddef(),
-                        fighter_shoulder_crush_carddef()
-                    }
-                }
+                 }
             },
             {
                 id = plid2,
                 isAi = true,
                 startDraw = 5,
                 name = "Player 2",
-                avatar = "avatars/assassin",
+                avatar = "skeleton",
                 health = 50,
                 cards = {
                     deck = {
