@@ -342,7 +342,7 @@ function warehouse_carddef()
 		art = "T_Devotion",
 		frame = "frames/HR_CardFrame_Action_Imperial",
 		cost = 3,
-		text = "<size=80%>Draw a card<br>OR<br>Put three cards from with no cost from your discard to your hand."
+		text = "<size=80%>Draw a card<br>OR<br>Put three cards with no cost from your discard to your hand."
 	})
 	
 	local drawLayout = layoutCard({

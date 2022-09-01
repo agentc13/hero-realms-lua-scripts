@@ -79,7 +79,7 @@ function orc_pauldrons_carddef()
                 -- cost to use magic armor
                 cost = expendCost,
                 -- tags for magic armor
-                tags = { draw1Tag, gainHealthTag, gainHealth2Tag },
+                tags = { draw1Tag, gainHealthTag },
             })
         }
     })
