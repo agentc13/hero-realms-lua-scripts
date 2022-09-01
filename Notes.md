@@ -11,10 +11,6 @@ For example:
 - userkaffe_ranger_rebalance.lua (a file shared by 'userkaffe' with ranger balance changes)
 - templates will start with 'template\_' (I will make these, but want to name them differently than my normal Lua files)
 
-## Dev Branch
-
-I have added a Dev branch to this repo. It is where I will put the lua files I am working on, but that are not yet finished. These are not ready for copying/use by the general public, and are a way for me to keep those files separate from the ones ready for use by the HR community.
-
 ## Task List (upcoming or possible additions/changes)
 
 - Templates
