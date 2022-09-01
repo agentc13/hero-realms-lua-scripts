@@ -11,7 +11,8 @@ function siphon_life_def()
 	return createSkillDef({
 		id = "siphon_life",
 		name = "Siphon Life",
-		abilities = {
+		types = { skillType },
+        abilities = {
 			createAbility({
 				id = "siphonLifeActivate",
 				trigger = uiTrigger,
@@ -35,10 +36,11 @@ function siphon_life_def()
 end		
 
 function piercing_screech_def()
-	return createSkillDef({
+	return createHeroAbilityDef({
 		id = "piercing_screech",
 		name = "Piercing Screech",
-		abilities = {
+		types = { heroAbilityType },
+        abilities = {
 			createAbility({
 				id = "piercingScreechActivate",
 				trigger = uiTrigger,
@@ -79,9 +81,9 @@ function witch_flash_freeze_carddef()
 				trigger = autoTrigger,
 				effect = gainCombatEffect(1).seq(pushTargetedEffect({
 					desc = "Expend target Champion",
-					min = 0,
+					min = 1,
 					max = 1,
-					validTargets = selectLoc(loc(oppPid, inPlayPloc)).where(isCardStunnable()),
+					validTargets = selectLoc(loc(oppPid, inPlayPloc)).where(isCardStunnable()).where(isCardExpended().invert()),
 					targetEffect = expendTarget()
 				}))
 			})
@@ -94,7 +96,7 @@ function witch_cauldron_carddef()
 		name = "Witch's Cauldron",
 		art = "art/T_Maurader",
 		frame = "frames/Wizard_CardFrame",
-		text = "<size=150%><sprite name=\"gold_1\"> <sprite name=\"health_2\"><size=80%><br>You may stun one of your champions. If you do, draw a card."
+		text = "<size=150%><sprite name=\"gold_1\"> <sprite name=\"health_3\"><size=80%><br>You may stun one of your champions. If you do, draw a card."
 	})
 	
 	return createActionDef({
@@ -105,11 +107,13 @@ function witch_cauldron_carddef()
 			createAbility({
 				id = "cauldronMain",
 				trigger = autoTrigger,
-				effect = gainGoldEffect(1).seq(gainHealthEffect(2))
+				effect = gainGoldEffect(1).seq(gainHealthEffect(3))
 			}),
 			createAbility({
 				id = "cauldronStun",
 				trigger = uiTrigger,
+				promptType = showPrompt,
+				layout = cardLayout,
 				effect = pushTargetedEffect({
 					desc = "Stun a friendly champion.",
 					min = 1,
@@ -142,7 +146,7 @@ function setupGame(g)
                 id = plid1,
                 startDraw = 3,
                 name = "Witch",
-                avatar="assassin",
+                avatar="chanting_cultist",
                 health = 45,
                 cards = {
 					deck = {
@@ -165,9 +169,9 @@ function setupGame(g)
             },
             {
                 id = plid2,
-				isAi = true, 
+		isAi = true, 
                 startDraw = 5,
-				init = {
+		init = {
                     fromEnv = plid2
                 },
                 cards = {
@@ -186,18 +190,3 @@ function endGame(g)
 end
 
 -- Created by Userkaffe
-
-
-
-function setupMeta(meta)
-    meta.name = "userkaffe_witch_class"
-    meta.minLevel = 0
-    meta.maxLevel = 0
-    meta.introbackground = ""
-    meta.introheader = ""
-    meta.introdescription = ""
-    meta.path = "D:/HRLS/Hero-Realms-Lua-Scripts/Community/userkaffe_witch_class.lua"
-     meta.features = {
-}
-
-end
