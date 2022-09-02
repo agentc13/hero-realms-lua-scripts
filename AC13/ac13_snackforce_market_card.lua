@@ -31,9 +31,8 @@ function snackforce_carddef()
     })
 end
 
-
 function setupGame(g)
-        registerCards(g, {
+        registerCards(g, { 
         snackforce_carddef()
     })
 
@@ -88,3 +87,15 @@ end
 function endGame(g)
 end
 
+function setupMeta(meta)
+    meta.name = "ac13_snackforce_market_card"
+    meta.minLevel = 0
+    meta.maxLevel = 0
+    meta.introbackground = ""
+    meta.introheader = ""
+    meta.introdescription = ""
+    meta.path = "D:/HRLS/Hero-Realms-Lua-Scripts/AC13/ac13_snackforce_market_card.lua"
+     meta.features = {
+}
+
+end
