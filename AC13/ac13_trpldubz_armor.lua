@@ -9,23 +9,23 @@ require 'easyai'
 
 
 
-function trpldubz_carddef()
+function faction_armor_carddef()
     local cardLayout = createLayout({
-        name = "TrplDubz",
+        name = "Faction Armor",
         art = "icons/growing_flame",
-		frame = "frames/HR_CardFrame_Item_Generic",
+        frame = "frames/HR_CardFrame_Item_Generic",
         text = (
-            "<size=300%><line-height=0%><voffset=-.8em> <pos=-75%><sprite name=\"requiresHealth_20\"></size><line-height=80%> \n <voffset=1.8em><size=80%> If you have played a faction card this turn, all cards of that faction cost 1 less. </size>"
+            "<size=300%><line-height=0%><voffset=-.8em> <pos=-75%><sprite name=\"requiresHealth_20\"></size><line-height=80%> \n <voffset=1.8em><size=80%> If you have played a Wild faction card this turn, all cards of that faction cost 1 less. </size>"
             ),
     })
     return createMagicArmorDef({
-        id = "trpldubz_armor",
-        name = "TrplDubz",
+        id = "faction_armor",
+        name = "Faction Armor",
         layout = cardLayout,
         layoutPath = "icons/growing_flame",
         abilities = {
             createAbility({
-                id = "trpldubz_ab",
+                id = "faction_armor_ab",
                 layout = cardLayout,
                 effect = ifEffect(selectLoc(currentInPlayLoc).where(isCardFaction(Faction.Wild).count().gte(1), acquireTarget(1,currentDiscardLoc).apply(selectLoc(centerRowLoc).where(isCardFaction(Faction.Wild)))))
             }),
@@ -40,11 +40,11 @@ end
 
 function setupGame(g)
     registerCards(g, { 
-    trpldubz_carddef()
+    faction_armor_carddef()
 })
 
 standardSetup(g, {
-    description = "Purchasable Armor Test",
+    description = "Faction Armor Test",
     playerOrder = { plid1, plid2 },
     ai = createHardAi(),
     randomOrder = true,
@@ -71,7 +71,7 @@ standardSetup(g, {
                     fatigueCount(40, 1, "FatigueP1"),
                 },
                 skills = {
-                    trpldubz_carddef(),
+                    faction_armor_carddef(),
                 }
             }
         },
