@@ -9,57 +9,29 @@ require 'easyai'
 
 
 
--- purchasable armor
-
-function purchasable_armor_carddef()
-	local cardLayout = createLayout({
-		name = "TrplDubz",
-        art = "zoomedbuffs/goblin_warlord",
-		cost = 5,
-		frame = "frames/HR_CardFrame_Item_Generic",
-        text = (
-            "<size=300%><line-height=0%><voffset=-.8em> <pos=-75%><sprite name=\"requiresHealth_20\"></size><line-height=80%> \n <voffset=1.8em><size=80%> If you have played a faction card this turn, all cards of that faction cost 1 less. </size>"
-            ),
-	})
-	
-	return createActionDef({
-		id = "trpldubz_armor",
-		name = "TrplDubz",
-		acquireCost = 5,
-		layout = cardLayout,
-		abilities = {},
-		cardEffectAbilities = {
-			createCardEffectAbility({
-				trigger = postSelfAcquiredCardTrigger,
-				effect = createCardEffect(orc_pauldrons_carddef(), currentSkillsLoc).seq(sacrificeTarget().apply(selectSource()))
-			})
-		},
-	})
-end
-
 function trpldubz_carddef()
     local cardLayout = createLayout({
         name = "TrplDubz",
-        art = "zoomedbuffs/goblin_warlord",
+        art = "icons/growing_flame",
 		frame = "frames/HR_CardFrame_Item_Generic",
         text = (
             "<size=300%><line-height=0%><voffset=-.8em> <pos=-75%><sprite name=\"requiresHealth_20\"></size><line-height=80%> \n <voffset=1.8em><size=80%> If you have played a faction card this turn, all cards of that faction cost 1 less. </size>"
             ),
     })
-
     return createMagicArmorDef({
         id = "trpldubz_armor",
         name = "TrplDubz",
         layout = cardLayout,
-        layoutPath = "zoomedbuffs/goblin_warlord",
+        layoutPath = "icons/growing_flame",
         abilities = {
             createAbility({
                 id = "trpldubz_ab",
                 layout = cardLayout,
-                effect = ifEffect(selectLoc(currentInPlayLoc).where(isCardFaction(Faction.Wild).count().gte(1), acquireTarget(1,currentDiscardLoc).apply(selectLoc(centerRowLoc).where(isCardFaction(Faction.Wild))),
-                trigger = autoTrigger,
-                check = minHealthCurrent(20)
-            })
+                effect = ifEffect(selectLoc(currentInPlayLoc).where(isCardFaction(Faction.Wild).count().gte(1), acquireTarget(1,currentDiscardLoc).apply(selectLoc(centerRowLoc).where(isCardFaction(Faction.Wild)))))
+            }),
+        trigger = autoTrigger,
+        check = minHealthCurrent(20),
+
         }
     })
 end
@@ -68,7 +40,6 @@ end
 
 function setupGame(g)
     registerCards(g, { 
-    purchasable_armor_carddef(),
     trpldubz_carddef()
 })
 
@@ -78,7 +49,7 @@ standardSetup(g, {
     ai = createHardAi(),
     randomOrder = true,
     opponents = { { plid1, plid2 } },
-    centerRow = { "trpldubz_armor", "fire_bomb", "grak__storm_giant", "tyrannor__the_devourer", "domination" },
+    centerRow = { "elven_gift", "fire_bomb", "grak__storm_giant", "tyrannor__the_devourer", "domination" },
     tradeDeckExceptions = {
         { qty = 0, cardId = "fire_bomb" },
         { qty = 0, cardId = "grak__storm_giant" },
@@ -98,6 +69,9 @@ standardSetup(g, {
                     drawCardsAtTurnEndDef(),
                     discardCardsAtTurnStartDef(),
                     fatigueCount(40, 1, "FatigueP1"),
+                },
+                skills = {
+                    trpldubz_carddef(),
                 }
             }
         },
@@ -128,14 +102,16 @@ end
 function endGame(g)
 end
 
+
+
 function setupMeta(meta)
-    meta.name = "ac13_trpldubz_purchasable_armor"
+    meta.name = "ac13_trpldubz_armor"
     meta.minLevel = 0
     meta.maxLevel = 0
     meta.introbackground = ""
     meta.introheader = ""
     meta.introdescription = ""
-    meta.path = "C:/Users/timot/OneDrive/Documents/Hero-Realms-Lua-Scripts/AC13/ac13_trpldubz_purchasable_armor.lua"
+    meta.path = "C:/Users/timot/OneDrive/Documents/Hero-Realms-Lua-Scripts/AC13/ac13_trpldubz_armor.lua"
      meta.features = {
 }
 
