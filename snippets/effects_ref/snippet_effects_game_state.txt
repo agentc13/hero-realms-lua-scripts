@@ -15,22 +15,3 @@ prepareTarget() --prepares targets
 stunTarget() -- stuns target
 transformTarget(cardStringId) -- transforms target to a card with the given id
 modifyCardDefTarget(healthDelta, ability) --- gives an existing card a modified health value and/or a new ability
-
---Random Effects
-probabilityTarget({ chance, onSuccessTarget, onFailureTarget}) -- executes onSuccess target effect with chance probability, otherwise executes onFailureTarget effect.
-randomTarget(cardEffect, intExpression) 
-
---Animation Effects
-showTextTarget(text) -- show the provided text above the target card
-
--- Control Flow Effects
-ifElseTarget(boolCardExpression, yesCardEffect, noCardEffect) -- same as ifElseEffect
-
---Targeted Effects
-pushTargetedEffect()
-
--- Choice Effects
-pushChoiceEffect()
-
--- Target Player Effects
-pushTargetPlayerEffect()

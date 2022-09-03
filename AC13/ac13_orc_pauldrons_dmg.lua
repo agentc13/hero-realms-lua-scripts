@@ -9,11 +9,8 @@ require 'easyai'
 -- Custom reskin of Spiked Pauldrons
 function orc_pauldrons_carddef()
     local cardLayout = createLayout({
-        -- Name of card
         name = "Orc Pauldrons",
-        -- Art for card
         art = "icons/battle_cry",
-        -- frame for card
         frame = "frames/Warrior_CardFrame",
         text = (
             "<size=300%><line-height=0%><voffset=-.8em> <pos=-75%><sprite name=\"requiresHealth_25\"></size><line-height=80%> \n <voffset=1.8em><size=80%> If you have dealt 5 <sprite name=\"combat\"> to an opponent this turn. \n Draw 1 then \n discard 1 or, \n Gain 2 <sprite name=\"health\"> </size>"
@@ -22,12 +19,9 @@ function orc_pauldrons_carddef()
 
     return createMagicArmorDef({
         id = "orc_pauldrons",
-        -- card name as it appears in top banner
         name = "Orc Pauldrons",
         layout = cardLayout,
-        -- card art
         layoutPath = "icons/battle_cry",
-        -- card effects
         abilities = {
             createAbility({
                 id = "orc_pauldrons",
@@ -62,11 +56,8 @@ function orc_pauldrons_carddef()
                         }
                     }
                 }),
-                -- trigger to activate ability
                 trigger = uiTrigger,
-                -- conditions to check to activate ability
                 check = minDamageTakenOpp(5).And(minHealthCurrent(25)),
-                -- cost to use ability
                 cost = expendCost,
                 tags = { draw1Tag, gainHealthTag, gainHealth2Tag },
             })

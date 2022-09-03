@@ -1,0 +1,2 @@
+--Animation Effects
+showTextTarget(text) -- show the provided text above the target card
