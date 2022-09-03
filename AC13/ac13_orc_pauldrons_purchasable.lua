@@ -108,7 +108,7 @@ function setupGame(g)
 })
 
 standardSetup(g, {
-    description = "Purchasable Armor Test",
+    description = "Purchasable Orc Pauldrons Armor Test",
     playerOrder = { plid1, plid2 },
     ai = createHardAi(),
     randomOrder = true,
