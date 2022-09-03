@@ -18,7 +18,7 @@ function purchasable_armor_carddef()
 		cost = 5,
 		frame = "frames/HR_CardFrame_Item_Generic",
         text = (
-            "<size=300%><line-height=0%><voffset=-.8em> <pos=-75%><sprite name=\"requiresHealth_25\"></size><line-height=80%> \n <voffset=1.8em><size=80%> If you have dealt 5 <sprite name=\"combat\"> to an opponent this turn. \n Draw 1 then \n discard 1 or, \n Gain 2 <sprite name=\"health\"> </size>"
+            "<size=300%><line-height=0%><voffset=-.8em> <pos=-75%><sprite name=\"requiresHealth_20\"></size><line-height=80%> \n <voffset=1.8em><size=80%> If you have dealt 5 <sprite name=\"combat\"> to an opponent this turn. \n Draw 1 then \n discard 1 or, \n Gain 2 <sprite name=\"health\"> </size>"
             ),
 	})
 	
@@ -37,13 +37,17 @@ function purchasable_armor_carddef()
 	})
 end
 
+-- end purchasable armor
+
+-- orc pauldrons armor card
+
 function orc_pauldrons_carddef()
     local cardLayout = createLayout({
         name = "Orc Pauldrons",
         art = "icons/battle_cry",
 		frame = "frames/HR_CardFrame_Item_Generic",
         text = (
-            "<size=300%><line-height=0%><voffset=-.8em> <pos=-75%><sprite name=\"requiresHealth_25\"></size><line-height=80%> \n <voffset=1.8em><size=80%> If you have dealt 5 <sprite name=\"combat\"> to an opponent this turn. \n Draw 1 then \n discard 1 or, \n Gain 2 <sprite name=\"health\"> </size>"
+            "<size=300%><line-height=0%><voffset=-.8em> <pos=-75%><sprite name=\"requiresHealth_20\"></size><line-height=80%> \n <voffset=1.8em><size=80%> If you have dealt 5 <sprite name=\"combat\"> to an opponent this turn. \n Draw 1 then \n discard 1 or, \n Gain 2 <sprite name=\"health\"> </size>"
             ),
     })
 
@@ -95,6 +99,8 @@ function orc_pauldrons_carddef()
     })
 end
 
+-- end orc pauldrons armor card
+
 function setupGame(g)
     registerCards(g, { 
     purchasable_armor_carddef(),
@@ -107,7 +113,7 @@ standardSetup(g, {
     ai = createHardAi(),
     randomOrder = true,
     opponents = { { plid1, plid2 } },
-    centerRow = { "trpldubz_armor", "fire_bomb", "grak__storm_giant", "tyrannor__the_devourer", "domination" },
+    centerRow = { "orc_pauldrons_armor", "fire_bomb", "grak__storm_giant", "tyrannor__the_devourer", "domination" },
     tradeDeckExceptions = {
         { qty = 0, cardId = "fire_bomb" },
         { qty = 0, cardId = "grak__storm_giant" },
@@ -155,4 +161,17 @@ standardSetup(g, {
 end
 
 function endGame(g)
+end
+
+function setupMeta(meta)
+    meta.name = "ac13_orc_pauldrons_purchasable"
+    meta.minLevel = 0
+    meta.maxLevel = 0
+    meta.introbackground = ""
+    meta.introheader = ""
+    meta.introdescription = ""
+    meta.path = "C:/Users/timot/OneDrive/Documents/Hero-Realms-Lua-Scripts/AC13/ac13_orc_pauldrons_purchasable.lua"
+     meta.features = {
+}
+
 end
