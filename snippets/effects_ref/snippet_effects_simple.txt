@@ -1,0 +1,3 @@
+-- Simple Effects
+endGameEffect()
+showMessageEffect(message)

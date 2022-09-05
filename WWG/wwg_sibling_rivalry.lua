@@ -11,7 +11,9 @@ local function wisdom_of_the_wolf()
     card = createSkillDef({
         id = "cunning_of_the_wolf",
         name = "Wisdom of the Wolf",
-        abilities = {},
+        abilities = {
+
+        },
         cardEffectAbilities = {
         },
         layout = createLayout({
@@ -23,7 +25,7 @@ local function wisdom_of_the_wolf()
     return card
 end
 
--- just an empty card to be displayed in skills area and for checking when granting combat
+--[[ just an empty card to be displayed in skills area and for checking when granting combat
 local function wolf_strength_skill()
     card = createSkillDef({
         id = "strength_of_the_wolf",
@@ -39,6 +41,7 @@ local function wolf_strength_skill()
     })
     return card
 end
+]]
 
 -- simple choice effect, showing two layouts and executing selected one, triggers at the game start
 local function chooseTheSkill()
@@ -46,18 +49,18 @@ local function chooseTheSkill()
         id = "choose_the_wolf_skill",
         name = "Choose the wolf skill",
         trigger = startOfGameTrigger,
-
+--[[
         upperTitle = "Choose one.",
         lowerTitle = "(Your opponent gets the other.)",
-
+]]
         effectFirst = createCardEffect(wisdom_of_the_wolf(), loc(currentPlayer(), skillsPloc))
             .seq(createCardEffect(wolf_strength_skill(), loc(oppPlayer(), skillsPloc)))
             .seq(nuUndoEffect()).seq(drawCardsWithAnimation(3)),
-
+--[[
         effectSecond = createCardEffect(wolf_strength_skill(), loc(currentPlayer(), skillsPloc))
             .seq(createCardEffect(wisdom_of_the_wolf(), loc(oppPlayer(), skillsPloc)))
             .seq(nuUndoEffect()).seq(drawCardsWithAnimation(3)),
-
+]]
         layoutFirst = layoutCard({
             title = "Wisdom of the Wolf",
             art = "art/T_Cunning_Of_The_Wolf",
@@ -74,12 +77,14 @@ local function chooseTheSkill()
     })
 end
 
+--[[
 -- combat mod function allows you to do anything with any combat generated in game
 -- here we check if a card with double combat is in current player's skills location
 function combatMod(value)
     return ifInt(selectLoc(currentSkillsLoc).where(isCardName("strength_of_the_wolf")).count().eq(1),
         multiply(toIntExpression(value), const(2)), toIntExpression(value))
 end
+]]
 
 -- gold mod function allows you to do anything with any gold yielded from cards
 -- here we check if a card with double gold is in current player's skills location
@@ -89,7 +94,6 @@ function goldMod(value)
 end
 
 function setupGame(g)
-    -- startardSetup function accepts a table with all data required to set the game up
     standardSetup(g, {
         description = "Sibling Rivalry experiment", -- script description - displayed in in-game menu
         playerOrder = { plid1, plid2 }, -- order in which players take turns

@@ -1,0 +1,27 @@
+loc(player, ploc) -- where ploc is (ends with Ploc or player loc)
+
+inPlayPloc
+discardPloc
+handPloc
+castPloc
+deckPloc
+buffsPloc
+skillsPloc
+revealPloc -- common reveal location for any cards that get revealed to both players
+myRevealPloc -- used when you need to reveal cards only to player
+
+-- also, predefined locs without a need to specify player (ends with -Loc)
+
+centerRowLoc
+fireGemsLoc
+tradeDeckLoc
+revealLoc
+
+currentInPlayLoc
+currentCastLoc
+currentDeckLoc
+currentHandLoc
+currentDiscardLoc
+currentBuffsLoc
+currentSkillsLoc
+currentRevealLoc

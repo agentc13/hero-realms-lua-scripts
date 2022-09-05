@@ -6,46 +6,39 @@ require 'hardai'
 require 'mediumai'
 require 'easyai'
 
-function snackforce_carddef()
-    local cardLayout = createLayout({
-            name = "Snackforce",
-            art = "art/T_Feisty_Orcling",
-            frame = "frames/HR_CardFrame_Action_Necros",
-            cost = 2,
-            text = "<size=200%><sprite name=\"gold_1\">   <sprite name=\"health_3\">",
-        })
 
+function confused_apparition_carddef()
     return createActionDef({
-        id = "snackforce",
-        name = "Snackforce",
-        types = { actionType },
-        acquireCost = 2,
+        id="confused_apparition",
+        name="Confused Apparition",
+        types={noStealType},
+        acquireCost=0,
         abilities = {
             createAbility({
-                id = "snackforce",
-                trigger = autoTrigger,
-                effect = gainGoldEffect(1).seq(gainHealthEffect(3)),
+                id="confused_apparition_auto",
+                trigger= autoTrigger,
+                effect = ifEffect(selectLoc(currentInPlayLoc).where(isCardName("weak_skeleton")).count().lte(0), healPlayerEffect(oppPid, 1))
             })
         },
-        layout = cardLayout,
-    })
+        layout = createLayout({
+            name = "Confused Apparition",
+            frame = "frames/Coop_Campaign_CardFrame",
+            text = "Opponent gains 1 <sprite name=\"health\"> unless you have a Weak Skeleton in play."
+        })
+})
 end
 
 function setupGame(g)
-        registerCards(g, { 
-        snackforce_carddef()
+    registerCards(g, {
+        confused_apparition_carddef()
     })
 
     standardSetup(g, {
-        description = "Snackforce Test",
+        description = "Testing Setup",
         playerOrder = { plid1, plid2 },
         ai = createHardAi(),
         randomOrder = true,
         opponents = { { plid1, plid2 } },
-        centerRow = { "snackforce", "fire_bomb", "grak__storm_giant", "tyrannor__the_devourer", "domination" },
-        tradeDeckExceptions = {
-            { qty = 2, cardId = "snackforce" },
-        },
         noTradeDeck = false,
         noFireGems = false,
         players = {
@@ -55,6 +48,9 @@ function setupGame(g)
                     fromEnv = plid1
                 },
                 cards = {
+                    deck = {
+                        { qty = 1, card = confused_apparition_carddef() }
+                    },
                     buffs = {
                         drawCardsAtTurnEndDef(),
                         discardCardsAtTurnStartDef(),
@@ -65,7 +61,7 @@ function setupGame(g)
             {
                 id = plid2,
                 isAi = true,
-                name = "AI",
+                name = "Silent AI",
                 avatar = "skeleton",
                 health = 50,
                 cards = {
@@ -84,18 +80,7 @@ function setupGame(g)
     })
 end
 
+-- more info on this later
 function endGame(g)
 end
 
-function setupMeta(meta)
-    meta.name = "ac13_snackforce_market_card"
-    meta.minLevel = 0
-    meta.maxLevel = 0
-    meta.introbackground = ""
-    meta.introheader = ""
-    meta.introdescription = ""
-    meta.path = "D:/HRLS/Hero-Realms-Lua-Scripts/AC13/ac13_snackforce_market_card.lua"
-     meta.features = {
-}
-
-end

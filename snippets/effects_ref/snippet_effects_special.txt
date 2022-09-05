@@ -1,0 +1,3 @@
+-- SPECIAL Effects
+noUndoEffect() -- prevents user from undoing their actions from this point
+nullEffect() -- does nothing - can be used to do nothing in certain cases

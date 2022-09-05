@@ -1,0 +1,23 @@
+-- CARD FRAMES 
+
+frames/Cleric_armor_frame
+frames/Cleric_CardFrame
+frames/Fighter_armor_frame
+frames/HR_CardFrame_Action_Guild
+frames/HR_CardFrame_Action_Imperial
+frames/HR_CardFrame_Action_Necros
+frames/HR_CardFrame_Action_Wild
+frames/HR_CardFrame_Champion_Guild
+frames/HR_CardFrame_Champion_Imperial
+frames/HR_CardFrame_Champion_Necros
+frames/HR_CardFrame_Champion_Wild
+frames/HR_CardFrame_Item_Generic
+frames/Necros_Action_CardFrame
+frames/Ranger_armor_frame
+frames/Ranger_CardFrame
+frames/Thief_armor_frame
+frames/Thief_CardFrame
+frames/Warrior_CardFrame
+frames/Wild_Champion_CardFrame
+frames/Wizard_armor_frame
+frames/Wizard_CardFrame
