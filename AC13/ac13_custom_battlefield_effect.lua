@@ -8,7 +8,7 @@ require 'easyai'
 
 
 -- THIS IS NOT COMPLETED YET!!!!!
-
+-- This is a comment.
 
 -- just an empty card to be displayed in skills area and for checking when granting gold
 local function wisdom_of_the_wolf()
