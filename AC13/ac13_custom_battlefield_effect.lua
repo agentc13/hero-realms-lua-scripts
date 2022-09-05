@@ -136,3 +136,17 @@ end
 
 function endGame(g) -- more info on this later
 end
+
+
+function setupMeta(meta)
+    meta.name = "ac13_custom_battlefield_effect"
+    meta.minLevel = 0
+    meta.maxLevel = 0
+    meta.introbackground = ""
+    meta.introheader = ""
+    meta.introdescription = ""
+    meta.path = "D:/HRLS/Hero-Realms-Lua-Scripts/AC13/ac13_custom_battlefield_effect.lua"
+     meta.features = {
+}
+
+end

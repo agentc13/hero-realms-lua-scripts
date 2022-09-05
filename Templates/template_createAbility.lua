@@ -23,3 +23,16 @@ createAbility({
     -- cost to use ability. this requires you expend it and pay 2 gold.
     cost = costAnd({ expendCost, goldCost(2),})
 })
+
+function setupMeta(meta)
+    meta.name = "template_createAbility"
+    meta.minLevel = 0
+    meta.maxLevel = 0
+    meta.introbackground = ""
+    meta.introheader = ""
+    meta.introdescription = ""
+    meta.path = "D:/HRLS/Hero-Realms-Lua-Scripts/Templates/template_createAbility.lua"
+     meta.features = {
+}
+
+end
