@@ -80,7 +80,7 @@ end
 
 -- combat mod function allows you to do anything with any combat generated in game
 -- here we check if a card with double combat is in current player's skills location
-function combatMod(value)
+function healthMod(value)
     return ifInt(selectLoc(currentSkillsLoc).where(isCardName("strength_of_the_wolf")).count().eq(1),
         multiply(toIntExpression(value), const(2)), toIntExpression(value))
 end
@@ -135,4 +135,18 @@ function setupGame(g)
 end
 
 function endGame(g) -- more info on this later
+end
+
+
+function setupMeta(meta)
+    meta.name = "ac13_custom_battlefield_effect"
+    meta.minLevel = 0
+    meta.maxLevel = 0
+    meta.introbackground = ""
+    meta.introheader = ""
+    meta.introdescription = ""
+    meta.path = "C:/Users/timot/OneDrive/Documents/Hero-Realms-Lua-Scripts/AC13/ac13_custom_battlefield_effect.lua"
+     meta.features = {
+}
+
 end

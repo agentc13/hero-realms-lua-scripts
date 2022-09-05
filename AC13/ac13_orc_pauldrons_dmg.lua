@@ -13,7 +13,7 @@ function orc_pauldrons_carddef()
         art = "icons/battle_cry",
         frame = "frames/Warrior_CardFrame",
         text = (
-            "<size=300%><line-height=0%><voffset=-.8em> <pos=-75%><sprite name=\"requiresHealth_25\"></size><line-height=80%> \n <voffset=1.8em><size=80%> If you have dealt 5 <sprite name=\"combat\"> to an opponent this turn. \n Draw 1 then \n discard 1 or, \n Gain 2 <sprite name=\"health\"> </size>"
+            "<size=300%><line-height=0%><voffset=-.8em> <pos=-75%><sprite name=\"requiresHealth_20\"></size><line-height=80%> \n <voffset=1.8em><size=80%> If you have dealt 5 <sprite name=\"combat\"> to an opponent this turn. \n  Gain 2 <sprite name=\"health\"> \n or Draw 1 \n then discard 1 </size>"
             ),
     })
 
@@ -57,7 +57,7 @@ function orc_pauldrons_carddef()
                     }
                 }),
                 trigger = uiTrigger,
-                check = minDamageTakenOpp(5).And(minHealthCurrent(25)),
+                check = minDamageTakenOpp(5).And(minHealthCurrent(20)),
                 cost = expendCost,
                 tags = { draw1Tag, gainHealthTag, gainHealth2Tag },
             })
@@ -128,6 +128,7 @@ end
 
 
 
+
 function setupMeta(meta)
     meta.name = "ac13_orc_pauldrons_dmg"
     meta.minLevel = 0
@@ -135,7 +136,7 @@ function setupMeta(meta)
     meta.introbackground = ""
     meta.introheader = ""
     meta.introdescription = ""
-    meta.path = "D:/HRLS/Hero-Realms-Lua-Scripts/AC13/ac13_orc_pauldrons_dmg.lua"
+    meta.path = "C:/Users/timot/OneDrive/Documents/Hero-Realms-Lua-Scripts/AC13/ac13_orc_pauldrons_dmg.lua"
      meta.features = {
 }
 

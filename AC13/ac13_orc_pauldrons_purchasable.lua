@@ -13,12 +13,12 @@ require 'easyai'
 
 function purchasable_armor_carddef()
 	local cardLayout = createLayout({
-		name = "orc_pauldrons_armor",
+		name = "Orc Pauldrons",
         art = "icons/battle_cry",
 		cost = 5,
 		frame = "frames/HR_CardFrame_Item_Generic",
         text = (
-            "<size=300%><line-height=0%><voffset=-.8em> <pos=-75%><sprite name=\"requiresHealth_20\"></size><line-height=80%> \n <voffset=1.8em><size=80%> If you have dealt 5 <sprite name=\"combat\"> to an opponent this turn. \n Draw 1 then \n discard 1 or, \n Gain 2 <sprite name=\"health\"> </size>"
+            "<size=300%><line-height=0%><voffset=-.8em> <pos=-75%><sprite name=\"requiresHealth_20\"></size><line-height=80%> \n <voffset=1.8em><size=80%> If you have dealt 5 <sprite name=\"combat\"> to an opponent this turn. \n  Gain 2 <sprite name=\"health\"> \n or Draw 1 \n then discard 1 </size>"
             ),
 	})
 	
@@ -45,9 +45,9 @@ function orc_pauldrons_carddef()
     local cardLayout = createLayout({
         name = "Orc Pauldrons",
         art = "icons/battle_cry",
-		frame = "frames/HR_CardFrame_Item_Generic",
+        frame = "frames/Warrior_CardFrame",
         text = (
-            "<size=300%><line-height=0%><voffset=-.8em> <pos=-75%><sprite name=\"requiresHealth_20\"></size><line-height=80%> \n <voffset=1.8em><size=80%> If you have dealt 5 <sprite name=\"combat\"> to an opponent this turn. \n Draw 1 then \n discard 1 or, \n Gain 2 <sprite name=\"health\"> </size>"
+            "<size=300%><line-height=0%><voffset=-.8em> <pos=-75%><sprite name=\"requiresHealth_20\"></size><line-height=80%> \n <voffset=1.8em><size=80%> If you have dealt 5 <sprite name=\"combat\"> to an opponent this turn. \n  Gain 2 <sprite name=\"health\"> \n or Draw 1 \n then discard 1 </size>"
             ),
     })
 
@@ -58,7 +58,7 @@ function orc_pauldrons_carddef()
         layoutPath = "icons/battle_cry",
         abilities = {
             createAbility({
-                id = "orc_pauldrons_ab",
+                id = "orc_pauldrons",
                 layout = cardLayout,
                 effect = pushChoiceEffect({
                     choices = {

@@ -7,7 +7,7 @@ require 'mediumai'
 require 'easyai'
 
 
-
+--WIP
 
 function faction_armor_carddef()
     local cardLayout = createLayout({
@@ -27,7 +27,7 @@ function faction_armor_carddef()
             createAbility({
                 id = "faction_armor_ab",
                 layout = cardLayout,
-                effect = ifEffect(selectLoc(currentInPlayLoc).where(isCardFaction(Faction.Wild).count().gte(1), acquireTarget(1,currentDiscardLoc).apply(selectLoc(centerRowLoc).where(isCardFaction(Faction.Wild)))))
+                effect = ifElseTarget(selectLoc(currentInPlayLoc).where(isCardFaction(Faction.Wild)),acquireTarget(1,selectLoc(currentDiscardLoc)).where(isCardFaction(Faction.Wild)),nullEffect())
             }),
         trigger = autoTrigger,
         check = minHealthCurrent(20),
@@ -104,15 +104,5 @@ end
 
 
 
-function setupMeta(meta)
-    meta.name = "ac13_trpldubz_armor"
-    meta.minLevel = 0
-    meta.maxLevel = 0
-    meta.introbackground = ""
-    meta.introheader = ""
-    meta.introdescription = ""
-    meta.path = "C:/Users/timot/OneDrive/Documents/Hero-Realms-Lua-Scripts/AC13/ac13_trpldubz_armor.lua"
-     meta.features = {
-}
 
-end
+
