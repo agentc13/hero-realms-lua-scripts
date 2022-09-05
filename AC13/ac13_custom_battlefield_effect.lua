@@ -145,7 +145,11 @@ function setupMeta(meta)
     meta.introbackground = ""
     meta.introheader = ""
     meta.introdescription = ""
+<<<<<<< HEAD
     meta.path = "C:/Users/timot/OneDrive/Documents/Hero-Realms-Lua-Scripts/AC13/ac13_custom_battlefield_effect.lua"
+=======
+    meta.path = "D:/HRLS/Hero-Realms-Lua-Scripts/AC13/ac13_custom_battlefield_effect.lua"
+>>>>>>> 3241201e6a5d4f856b9bd66022819cf8fe90ef28
      meta.features = {
 }
 

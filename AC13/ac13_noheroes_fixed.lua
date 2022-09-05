@@ -18,7 +18,7 @@ function setupGame(g)
             {
                 id = plid1,
                 startDraw = 3,
-                name = "Snackforce",
+                name = "Player 1",
                 avatar = "ogre",
                 health = 50,
                 cards = {
@@ -39,7 +39,7 @@ function setupGame(g)
                 id = plid2,
                 isAi = true,
                 startDraw = 5,
-                name = "TrplDubz",
+                name = "Player 2",
                 avatar = "skeleton",
                 health = 50,
                 cards = {
@@ -62,7 +62,6 @@ end
 
 function endGame(g)
 end
-
 
 
 function setupMeta(meta)
