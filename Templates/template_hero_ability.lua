@@ -1,4 +1,4 @@
--- The example code was taken from the Piercing Screech hero ability that is part of the custom Witch class by Userkaffe. The comments are from agentc13.
+-- The example code was taken from the Piercing Screech hero ability that is part of the custom Witch class by Userkaffe. The comments are from agentc13. This template will not work on it's own without the gameSetup script.
 
 
 -- carddef function, this creates the card and is referred to in the game setup.

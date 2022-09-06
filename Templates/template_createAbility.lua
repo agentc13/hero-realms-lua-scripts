@@ -1,3 +1,5 @@
+--This template will not work on it's own, it will need to be part of a card script or without the gameSetup scripting.
+
 -- Abilities link effects with their trigger times.
 -- the basic code structure to creat an ability is createAbility({id, trigger, effect, cost, activations, check})
 -- Abilites are usually part of a carddef and so this code snippet is something that you will see as part of a carddef script.
@@ -24,15 +26,3 @@ createAbility({
     cost = costAnd({ expendCost, goldCost(2),})
 })
 
-function setupMeta(meta)
-    meta.name = "template_createAbility"
-    meta.minLevel = 0
-    meta.maxLevel = 0
-    meta.introbackground = ""
-    meta.introheader = ""
-    meta.introdescription = ""
-    meta.path = "D:/HRLS/Hero-Realms-Lua-Scripts/Templates/template_createAbility.lua"
-     meta.features = {
-}
-
-end

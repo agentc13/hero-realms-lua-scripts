@@ -1,4 +1,4 @@
--- This is a sample template for a Fighter ability.
+-- This is a sample template for a Fighter ability. It will not work on it's own without the gameSetup script.
 -- The "--" lines are comments that do not effect the actual Lua code
 -- They are used to help explain each line of code used so you know what everything does.
 
