@@ -1,3 +1,4 @@
+-- This template will not work on it's own.  It will need the gameSetup script as well.
 
 -- carddef function, this creates the card and is referred to in the game setup.
 function snackforce_carddef()

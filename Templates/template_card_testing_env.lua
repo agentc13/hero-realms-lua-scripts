@@ -39,11 +39,14 @@ end
 end card testing area (remove this line when testing)]]
 
 function setupGame(g)
-        registerCards(g, {
-        --[[ add the carddefs for all the cards you want to test here.    
+            --add the carddefs for all the cards you want to test here.   
+            --[[ REMOVE THIS TO UNCOMMENT THE CODE AND TO ADD YOUR CARD(S). 
+
+    registerCards(g, {
         snackforce_carddef()
-        end added carddefs ]]
     })
+        REMOVE THIS TO FINISH UNCOMMENTING THE CODE!------>>>>]]
+
 
     standardSetup(g, {
         description = "Snackforce Test",
@@ -51,13 +54,19 @@ function setupGame(g)
         ai = createHardAi(),
         randomOrder = true,
         opponents = { { plid1, plid2 } },
-        -- I like to add the cards to the market row just so I can see how they display/work right away. To do this list them as one of the 5 cards here.  If you have less than 5 listed, add other cards otherwise you will have less than 5 cards in your starting row.
-        centerRow = { "snackforce", "fire_bomb", "grak__storm_giant", "tyrannor__the_devourer", "domination" },
+          -- I like to add the cards to the market row just so I can see how they display/work right away. To do this list them as one of the 5 cards listed below.  If you have less than 5 listed, add other cards otherwise you will have less than 5 cards in your starting row. 
+
+        --[[ REMOVE THIS TO UNCOMMENT THE CODE AND TO ADD YOUR CARD(S). 
+
+         centerRow = { "snackforce", "fire_bomb", "grak__storm_giant", "tyrannor__the_devourer", "domination" },
+    
         tradeDeckExceptions = {
-            --[[ enter the number of each card you are adding to the market deck.
+            Enter the number of each card you are adding to the market deck.
             { qty = 2, cardId = "snackforce" },
-            end market deck insertions here ]]
+            end market deck insertions here
         },
+
+        REMOVE THIS TO FINISH UNCOMMENTING THE CODE! ]]
         noTradeDeck = false,
         noFireGems = false,
         players = {

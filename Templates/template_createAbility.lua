@@ -1,3 +1,5 @@
+--This template will not work on it's own, it will need to be part of a card script or without the gameSetup scripting.
+
 -- Abilities link effects with their trigger times.
 -- the basic code structure to creat an ability is createAbility({id, trigger, effect, cost, activations, check})
 -- Abilites are usually part of a carddef and so this code snippet is something that you will see as part of a carddef script.
@@ -23,3 +25,4 @@ createAbility({
     -- cost to use ability. this requires you expend it and pay 2 gold.
     cost = costAnd({ expendCost, goldCost(2),})
 })
+

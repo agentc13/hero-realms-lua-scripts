@@ -1,3 +1,5 @@
+--This template will not work on it's own, it will need to have the gameSetup script as well.
+
 -- This buff will be given to the players at the start of the game, triggers at the start of first player's turn then sacrifices itself. It doubles both players max health and heals them to that amount.
 
 -- Code to name the function for the buff we are writing    
