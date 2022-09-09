@@ -4,7 +4,7 @@ Paladin Custom Class
 Starting Cards 
 Longsword (from Fighter - 3 dmg)(weapon)
 Spiked Mace (from Cleric - 2 dmg, 1g)(weapon)
-Warhammer (2 dmg or 2 heal, both if xxxxxx)(weapon)
+Warhammer (2 dmg or 2 heal, both if another wapon is in play)(weapon)
 Squire (2 Guard, 1g or 1 heal) (champion)
 Gold x 5 (item)
 Ruby x 1 (item)
@@ -33,7 +33,7 @@ function setupGame(g)
     standardSetup(
         g,
         {
-            description = "Custom no heroes game",
+            description = "Custom Paladin Class",
             playerOrder = {plid1, plid2},
             ai = createHardAi(),
             randomOrder = true,
@@ -49,23 +49,23 @@ function setupGame(g)
                         buffs = {
                             drawCardsAtTurnEndDef(),
                             discardCardsAtTurnStartDef(),
-                            fatigueCount(40, 1, "FatigueP1"),
-                            doubleHealthBuffDef()
+                            fatigueCount(40, 1, "FatigueP1")
                         }
                     }
                 },
                 {
                     id = plid2,
                     isAi = true,
-                    -- startDraw = 5,
                     name = "AI",
                     avatar = "assassin",
-                    health = 500,
-                    maxHealth = 500,
+                    health = 50,
+                    maxHealth = 50,
                     cards = {
                         deck = {
-                            {qty = 2, card = dagger_carddef()},
-                            {qty = 8, card = gold_carddef()}
+                            {qty = 1, card = dagger_carddef()},
+                            {qty = 1, card = shortsword_carddef()},
+                            {qty = 1, card = ruby_carddef()},
+                            {qty = 7, card = gold_carddef()}
                         },
                         buffs = {
                             drawCardsAtTurnEndDef(),
