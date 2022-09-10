@@ -1,4 +1,0 @@
---IF EFFECTS
-
-ifEffect(condition, simpleEffect)  -- if condition is true, executes the effect
-ifElseEffect(condition, yesSimpleEffect, noSimpleEffect) -- if condition is true executes yes effect, otherwise no effect
