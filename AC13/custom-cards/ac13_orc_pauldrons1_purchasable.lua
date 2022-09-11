@@ -192,13 +192,16 @@ end
 function endGame(g)
 end
 
+
 function setupMeta(meta)
-    meta.name = "ac13_orc_pauldrons_purchasable"
+    meta.name = "ac13_orc_pauldrons1_purchasable"
     meta.minLevel = 0
     meta.maxLevel = 0
     meta.introbackground = ""
     meta.introheader = ""
     meta.introdescription = ""
-    meta.path = "C:/Users/timot/OneDrive/Documents/Hero-Realms-Lua-Scripts/AC13/ac13_orc_pauldrons_purchasable.lua"
-    meta.features = {}
+    meta.path = "C:/Users/timot/OneDrive/Documents/Hero-Realms-Lua-Scripts/AC13/custom-cards/ac13_orc_pauldrons1_purchasable.lua"
+     meta.features = {
+}
+
 end

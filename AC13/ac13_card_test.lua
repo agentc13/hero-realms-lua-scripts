@@ -6,49 +6,72 @@ require "hardai"
 require "mediumai"
 require "easyai"
 
-function fighter_hand_scythe_carddef()
-    return createActionDef(
+function paladin_crusader_carddef()
+    return createChampionDef(
         {
-            id = "fighter_hand_scythe",
-            name = "Hand Scythe",
-            types = {weaponType, noStealType, fighterType, itemType, meleeWeaponType, scytheType},
+            id = "paladin_Crusader",
+            name = "Crusader",
             acquireCost = 0,
+            health = 2,
+            isGuard = true,
             abilities = {
                 createAbility(
                     {
-                        id = "fighter_hand_scythe",
-                        trigger = autoTrigger,
-                        effect = gainGoldEffect(2).seq(
-                            pushTargetedEffect(
-                                {
-                                    desc = "Deal 3 damage to an opposing guard.",
-                                    min = 1,
-                                    max = 1,
-                                    validTargets = selectLoc(loc(oppPid, inPlayPloc)).where(isCardStunnable()),
-                                    targetEffect = damageTarget(3)
+                        id = "Crusader_main",
+                        trigger = uiTrigger,
+                        cost = expendCost,
+                        activations = multipleActivations,
+                        effect = pushChoiceEffect(
+                            {
+                                choices = {
+                                    {
+                                        effect = gainGoldEffect(1),
+                                        layout = layoutCard(
+                                            {
+                                                title = "Crusader",
+                                                art = "avatars/man_at_arms",
+                                                text = ("{1 gold}")
+                                            }
+                                        ),
+                                        tags = {gainGoldTag}
+                                    },
+                                    {
+                                        effect = gainHealthEffect(1),
+                                        layout = layoutCard(
+                                            {
+                                                title = "Crusader",
+                                                art = "avatars/man_at_arms",
+                                                text = ("{1 health}")
+                                            }
+                                        ),
+                                        tags = {gainHealthTag}
+                                    }
                                 }
-                            )
+                            }
                         )
                     }
                 )
             },
             layout = createLayout(
                 {
-                    name = "Hand Scythe",
-                    art = "art/T_Flesh_Ripper",
-                    frame = "frames/Warrior_CardFrame",
-                    text = '<size=50%><i>Replaces: Gold</i></size><br><size=170%><sprite name="gold_2"></size> <br><size=75%>Deal 3 damage to an opposing guard.</size>'
+                    name = "Crusader",
+                    art = "avatars/man_at_arms",
+                    frame = "frames/Cleric_CardFrame",
+                    text = "<size=250%><pos=-5%><sprite name=\"expend\"></pos></size><size=175%><pos=25%><voffset=.2em><sprite name=\"combat_1\"> or <sprite name=\"health_1\"></size></voffset>",
+                    health = 2,
+                    isGuard = true
                 }
             )
         }
     )
 end
 
+
 function setupGame(g)
     standardSetup(
         g,
         {
-            description = "Hand Scythe Test", -- script description - displayed in in-game menu
+            description = "Card Test", -- script description - displayed in in-game menu
             playerOrder = {plid1, plid2}, -- order in which players take turns
             ai = createHardAi(), -- sets AI for ai players
             -- randomOrder = true, -- if true, randomizes players order
@@ -70,7 +93,7 @@ function setupGame(g)
                             fatigueCount(40, 1, "FatigueP1")
                         },
                         deck = {
-                            fighter_hand_scythe_carddef()
+                            paladin_crusader_carddef()
                         }
                     }
                 },
@@ -103,13 +126,16 @@ end
 function endGame(g) -- more info on this later
 end
 
+
 function setupMeta(meta)
-    meta.name = "ac13_hand_scythe_test"
+    meta.name = "ac13_card_test"
     meta.minLevel = 0
     meta.maxLevel = 0
     meta.introbackground = ""
     meta.introheader = ""
     meta.introdescription = ""
-    meta.path = "C:/Users/timot/OneDrive/Documents/Hero-Realms-Lua-Scripts/AC13/ac13_hand_scythe_test.lua"
-    meta.features = {}
+    meta.path = "C:/Users/timot/OneDrive/Documents/Hero-Realms-Lua-Scripts/AC13/ac13_card_test.lua"
+     meta.features = {
+}
+
 end

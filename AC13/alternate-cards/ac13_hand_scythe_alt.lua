@@ -35,3 +35,17 @@ function fighter_hand_scythe_carddef()
         }
     )
 end
+
+
+function setupMeta(meta)
+    meta.name = "ac13_hand_scythe_alt"
+    meta.minLevel = 0
+    meta.maxLevel = 0
+    meta.introbackground = ""
+    meta.introheader = ""
+    meta.introdescription = ""
+    meta.path = "C:/Users/timot/OneDrive/Documents/Hero-Realms-Lua-Scripts/AC13/alternate-cards/ac13_hand_scythe_alt.lua"
+     meta.features = {
+}
+
+end

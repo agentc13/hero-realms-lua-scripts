@@ -25,12 +25,14 @@ require "easyai"
 
 -- START Warhammer CARD
 function paladin_warhammer_carddef()
-    return createActionDef(
+    return createDef(
         {
             id = "paladin_warhammer",
             name = "Warhammer",
             types = {weaponType, noStealType, paladinType, itemType, meleeWeaponType, hammerType},
             acquireCost = 0,
+            cardTypeLabel = "Item",
+            playLocation = castPloc,
             abilities = {
                 createAbility(
                     {
@@ -47,7 +49,7 @@ function paladin_warhammer_carddef()
                                                 {
                                                     title = "Warhammer",
                                                     art = "icons/cleric_brightstar_shield",
-                                                    text = ("{2 combat}")
+                                                    text = "Gain <sprite name=\"combat_2\">"
                                                 }
                                             ),
                                             tags = {gainCombat2Tag}
@@ -58,7 +60,7 @@ function paladin_warhammer_carddef()
                                                 {
                                                     title = "Warhammer",
                                                     art = "icons/cleric_brightstar_shield",
-                                                    text = ("{2 health}")
+                                                    text = "Gain <sprite name=\"health_2\">"
                                                 }
                                             ),
                                             tags = {gainHealth2Tag}
@@ -76,7 +78,7 @@ function paladin_warhammer_carddef()
                     name = "Warhammer",
                     art = "zoomedbuffs/cleric_brightstar_shield",
                     frame = "frames/Cleric_CardFrame",
-                    text = "Gain 2 combat or gain 2 health. \n <size=50%>If you have played a weapon this turn, gain both.</size>",
+                    text = "Gain <sprite name=\"combat_2\"> or Gain <sprite name=\"health_2\"> \n <size=50%>If you have played a weapon this turn, gain both.</size>",
                 }
             )
         }
@@ -136,7 +138,7 @@ function paladin_crusader_carddef()
                     name = "Crusader",
                     art = "avatars/man_at_arms",
                     frame = "frames/Cleric_CardFrame",
-                    text = '<voffset=.5em><size=200%><sprite name=\"expend\"></size><br></line-height><size=150%><sprite name=\"gold_1\"></size>or<size=150%> <sprite name=\"health_1\"></size>',
+                    text = "<size=250%><pos=-5%><sprite name=\"expend\"></pos></size><size=175%><pos=25%><voffset=.2em><sprite name=\"combat_1\"> or <sprite name=\"health_1\"></size></voffset>",
                     health = 2,
                     isGuard = true
                 }
@@ -152,7 +154,7 @@ function paladin_smite_carddef()
         name = "Smite",
         art = "icons/wind_storm",
         frame = "frames/Cleric_CardFrame",
-        text = "<size=300%><line-height=0%><voffset=-0.6em> <pos=-75%><sprite name=\"expend_2\"></size><line-height=100%> \n <voffset=1.8em><size=90%><pos=10%>Gain <sprite name=\"health_3\">\n Gain  <sprite name=\"combat_1\">."
+        text = "<size=400%><line-height=0%><voffset=-.25em> <pos=-75%><sprite name=\"expend_2\"></size><line-height=135%> \n <voffset=2em><size=120%><pos=10%>Gain <sprite name=\"health_3\">\n   Gain  <sprite name=\"combat_1\">"
     })
 
     return createSkillDef({
@@ -191,6 +193,7 @@ function paladin_zealous_devotion_carddef()
                 layout = createLayout ({
                     name = "Zealous Devotion",
                     art = "art/T_Devotion",
+                    frame = "frames/Cleric_CardFrame",
                     text = "Prepare up to 3 champions in play."
                     }),
                 effect = pushTargetedEffect({
@@ -284,14 +287,15 @@ end
 
 
 
+
 function setupMeta(meta)
-    meta.name = "ac13_paladin_class"
+    meta.name = "ac13_paladin_custom_class"
     meta.minLevel = 0
     meta.maxLevel = 0
     meta.introbackground = ""
     meta.introheader = ""
     meta.introdescription = ""
-    meta.path = "C:/Users/timot/OneDrive/Documents/Hero-Realms-Lua-Scripts/AC13/ac13_paladin_class.lua"
+    meta.path = "C:/Users/timot/OneDrive/Documents/Hero-Realms-Lua-Scripts/AC13/ac13_paladin_custom_class.lua"
      meta.features = {
 }
 
