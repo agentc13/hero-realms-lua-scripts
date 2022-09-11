@@ -1,2 +1,0 @@
--- Control Flow Effects
-ifElseTarget(boolCardExpression, yesCardEffect, noCardEffect) -- same as ifElseEffect
