@@ -9,8 +9,25 @@ Crusader (2 Guard, 1g or 1 heal) (champion)
 Gold x 5 (item)
 Ruby x 1 (item)
 
-Level 3 Skill
-Smite (1 dmg + 1 health)
+Upgrade Name Ideas
+Divine Favor
+Shield of Faith
+Warding Bond
+Prayer of Healing
+Aura of Purity
+Destructive Wave
+Holy Weapon
+Skill Name Ideas
+Smite (1 dmg + 3 health)
+Searing Smite
+Thunderous Smite
+Wrathful Smite
+Branding Smite
+Blinding Smite
+
+
+
+
 
 Level 3 Ability
 Zealous Oath (Prepare up to 3 champions)
@@ -169,6 +186,7 @@ function paladin_smite_carddef()
                 trigger = uiTrigger,
                 activations = singleActivation,
                 layout = cardLayout,
+                promptType = showPrompt,
                 effect = gainHealthEffect(3).seq(gainCombatEffect(1)),
                 cost = goldCost(2),
             }),
