@@ -4,16 +4,16 @@ Paladin Custom Class
 Starting Cards 
 Longsword (from Fighter - 3 dmg)(weapon)
 Spiked Mace (from Cleric - 2 dmg, 1g)(weapon)
-Warhammer (2 dmg or 2 heal, both if another wapon is in play)(weapon)
+Warhammer (2 dmg or 2 heal, both if another weapon is in play)(weapon)
 Crusader (2 Guard, 1g or 1 heal) (champion)
 Gold x 5 (item)
 Ruby x 1 (item)
 
 Level 3 Skill
-Smite (+1 dmg to a weapon in hand or play, up to double base dmg)
+Smite (1 dmg + 1 health)
 
 Level 3 Ability
-Zealous Oath (Draw 1, You may stun one of your champions in play, gain combat equal to it's defense)
+Zealous Oath (Prepare up to 3 champions)
 ]]
 require "herorealms"
 require "decks"
@@ -23,7 +23,7 @@ require "hardai"
 require "mediumai"
 require "easyai"
 
--- START WARHAMMER CARD, NEED TO WORK OUT TRIGGER TO APPLY BOTH EFFECTS
+-- START Warhammer CARD
 function paladin_warhammer_carddef()
     return createActionDef(
         {
@@ -36,7 +36,9 @@ function paladin_warhammer_carddef()
                     {
                         id = "paladin_warhammer",
                         layout = cardLayout,
-                        effect = pushChoiceEffect(
+                        effect = ifElseEffect(selectLoc(currentCastLoc).where(isCardType(weaponType)).count().gte(2),
+                        gainCombatEffect(2).seq(gainHealthEffect(2)),
+                        pushChoiceEffect(
                                 {
                                     choices = {
                                         {
@@ -48,7 +50,7 @@ function paladin_warhammer_carddef()
                                                     text = ("{2 combat}")
                                                 }
                                             ),
-                                            tags = {}
+                                            tags = {gainCombat2Tag}
                                         },
                                         {
                                             effect = gainHealthEffect(2),
@@ -63,7 +65,7 @@ function paladin_warhammer_carddef()
                                         }
                                     }
                                 }
-                            ),
+                        )),
                         trigger = autoTrigger,
                         tags = {}
                     }
@@ -74,13 +76,13 @@ function paladin_warhammer_carddef()
                     name = "Warhammer",
                     art = "zoomedbuffs/cleric_brightstar_shield",
                     frame = "frames/Cleric_CardFrame",
-                    text = "Deal 2 dmg or gain 2 health"
+                    text = "Gain 2 combat or gain 2 health",
                 }
             )
         }
     )
 end
--- END WARHAMMER
+-- END Warhammer CARD
 
 -- START Crusader CARD
 function paladin_crusader_carddef()
@@ -110,7 +112,7 @@ function paladin_crusader_carddef()
                                                 text = ("{1 gold}")
                                             }
                                         ),
-                                        tags = {}
+                                        tags = {gainGoldTag}
                                     },
                                     {
                                         effect = gainHealthEffect(1),
@@ -121,7 +123,7 @@ function paladin_crusader_carddef()
                                                 text = ("{1 health}")
                                             }
                                         ),
-                                        tags = {gainHealthTag, gainGoldTag}
+                                        tags = {gainHealthTag}
                                     }
                                 }
                             }
@@ -144,42 +146,72 @@ function paladin_crusader_carddef()
 end
 -- END Crusader CARD
 
---[[ START Smite SKILL
+-- START Smite SKILL 
 function paladin_smite_carddef()
-	return createSkillDef({
-        id = "paladin_smite",
+    local cardLayout = createLayout({
         name = "Smite",
-        types = { paladinType, skillType, spellType },
+        art = "icons/wind_storm",
+        frame = "frames/Cleric_CardFrame",
+        text = "<size=300%><line-height=0%><voffset=-0.6em> <pos=-75%><sprite name=\"expend_2\"></size><line-height=100%> \n <voffset=1.8em><size=90%><pos=10%>Gain <sprite name=\"health_3\">\n  Deal 1 damage\n  to an opposing \n champion."
+    })
+
+    return createSkillDef({
+        id = "paladin_smite_skill",
+        name = "Smite",
+        types = { paladinType, skillType },
+        layout = cardLayout,
+        layoutPath = "icons/wind_storm",
         abilities = {
             createAbility({
-                id="smite_skill",
-                trigger=uiTrigger,
-                effect = pushTargetedEffect(
-                    {
-                        desc = "Choose a weapon to get +1 combat (permanent)",
-                        validTargets = s.CurrentPlayer(CardLocEnum.InPlay),
-                        min = 1,
-                        max = 1,
-                        targetEffect = grantCombatTarget(1, { SlotExpireEnum.Never }, nullEffect(), "shield"),
-                        tags = {  }
-                    }
-                ),
-                cost =  goldCost(2),
-                check = selectLoc(currentInPlayLoc).where(isCardWeapon()).count().gte(1)
-            })
+                id = "paladin_smite_ab",
+                trigger = uiTrigger,
+                activations = singleActivation,
+                layout = cardLayout,
+                effect = gainHealthEffect(3).seq(gainCombatEffect(1)),
+                cost = goldCost(2),
+            }),
+        }
+        
+    })
+end
+-- END Smite SKILL 
+
+--START Zealous Devotion ABILITY 
+function paladin_zealous_devotion_carddef()
+	return createHeroAbilityDef({
+		id = "zealous_devotion",
+		name = "Zealous Devotion",
+		types = { heroAbilityType },
+        abilities = {
+            createAbility( {
+                id = "zealous_devotion_ab",
+                trigger = uiTrigger,
+                activations = singleActivation,
+                promptType = showPrompt,
+                layout = createLayout ({
+                    name = "Zealous Devotion",
+                    art = "art/T_Devotion",
+                    text = "Prepare up to 3 champions in play."
+                    }),
+                effect = pushTargetedEffect({
+                    desc = "Choose up to 3 championsin play. Prepare those champions",
+                    validTargets = s.CurrentPlayer(CardLocEnum.InPlay).where(isCardChampion()),
+                    min = 1,
+                    max = 3,
+                    targetEffect = prepareTarget(),
+			    }),
+                cost = sacrificeSelfCost,
+            }),
         },
         layout = createLayout({
-        name = "Smite",
-        art = "art/T_Pillar_Of_Fire",
-        frame = "frames/Cleric_CardFrame",
-        text = "Elite<br><voffset=1em><space=-3.7em><voffset=0.2em><size=200%><sprite name=\"expend\"></size></voffset><pos=30%> <voffset=0.5em><line-height=40><space=-3.7em>Give a weapon +1 <sprite name=\"combat\"></voffset></voffset>"
-    })
-})
-end
-
--- END Smite SKILL ]]
-
-
+            name = "Zealous Devotion",
+            art = "art/T_Devotion",
+            text = "Prepare up to 3 champions in play."
+        }),
+        layoutPath  = "art/T_Devotion",
+	})
+end	
+-- END Zealous Devotion ABILITY
 
 function setupGame(g)
     registerCards(
@@ -187,8 +219,8 @@ function setupGame(g)
         {
             paladin_warhammer_carddef(),
             paladin_crusader_carddef(),
-            --paladin_smite_carddef(),
-            --paladin_zealous_fury_carddef(),
+            paladin_smite_carddef(),
+            paladin_zealous_devotion_carddef(),
         }
     )
 
@@ -217,9 +249,9 @@ function setupGame(g)
                             {qty = 5, card = gold_carddef()},
                         },
                         skills = {
-                        --{qty = 1, card = paladin_smite_carddef },
-                        --{qty = 1, card = paladin_zealous_fury_def()}
-                        }, 
+                        {qty = 1, card = paladin_smite_carddef() },
+                        {qty = 1, card = paladin_zealous_devotion_carddef()}
+                        },
                         buffs = {
                             drawCardsAtTurnEndDef(),
                             discardCardsAtTurnStartDef(),
