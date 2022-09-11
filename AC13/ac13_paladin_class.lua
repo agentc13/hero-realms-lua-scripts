@@ -76,7 +76,7 @@ function paladin_warhammer_carddef()
                     name = "Warhammer",
                     art = "zoomedbuffs/cleric_brightstar_shield",
                     frame = "frames/Cleric_CardFrame",
-                    text = "Gain 2 combat or gain 2 health",
+                    text = "Gain 2 combat or gain 2 health. \n <size=50%>If you have played a weapon this turn, gain both.</size>",
                 }
             )
         }
@@ -152,7 +152,7 @@ function paladin_smite_carddef()
         name = "Smite",
         art = "icons/wind_storm",
         frame = "frames/Cleric_CardFrame",
-        text = "<size=300%><line-height=0%><voffset=-0.6em> <pos=-75%><sprite name=\"expend_2\"></size><line-height=100%> \n <voffset=1.8em><size=90%><pos=10%>Gain <sprite name=\"health_3\">\n  Deal 1 damage\n  to an opposing \n champion."
+        text = "<size=300%><line-height=0%><voffset=-0.6em> <pos=-75%><sprite name=\"expend_2\"></size><line-height=100%> \n <voffset=1.8em><size=90%><pos=10%>Gain <sprite name=\"health_3\">\n Gain  <sprite name=\"combat_1\">."
     })
 
     return createSkillDef({
