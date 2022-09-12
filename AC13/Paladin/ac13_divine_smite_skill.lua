@@ -1,4 +1,4 @@
-function paladin_smite_carddef()
+function paladin_divine_smite_carddef()
     local cardLayout = createLayout({
         name = "Divine Smite",
         art = "icons/wind_storm",

@@ -10,7 +10,7 @@ Gold x 5 (item)
 Ruby x 1 (item)
 
 Level 3 Skill 
-Smite (1 dmg + 3 health)
+Prayer (1 dmg + 3 health)
 
 Level 3 Ability
 Zealous Oath (Prepare up to 3 champions)
@@ -106,15 +106,15 @@ function paladin_crusader_carddef()
                             {
                                 choices = {
                                     {
-                                        effect = gainGoldEffect(1),
+                                        effect = gainCombatEffect(1),
                                         layout = layoutCard(
                                             {
                                                 title = "Crusader",
                                                 art = "avatars/man_at_arms",
-                                                text = ("{1 gold}")
+                                                text = ("{1 combat}")
                                             }
                                         ),
-                                        tags = {gainGoldTag}
+                                        tags = {gainCombatTag}
                                     },
                                     {
                                         effect = gainHealthEffect(1),
@@ -126,17 +126,6 @@ function paladin_crusader_carddef()
                                             }
                                         ),
                                         tags = {gainHealthTag}
-                                    },
-                                    {
-                                        effect = gainCombatEffect(1),
-                                        layout = layoutCard(
-                                            {
-                                                title = "Crusader",
-                                                art = "avatars/man_at_arms",
-                                                text = ("{1 combat}")
-                                            }
-                                        ),
-                                        tags = {gainCombatTag}
                                     }
                                 }
                             }
@@ -158,6 +147,68 @@ function paladin_crusader_carddef()
     )
 end
 -- END Crusader CARD
+
+-- START Templar CARD 
+function paladin_templar_carddef()
+    return createChampionDef(
+        {
+            id = "paladin_templar",
+            name = "Templar",
+            acquireCost = 0,
+            health = 3,
+            isGuard = true,
+            abilities = {
+                createAbility(
+                    {
+                        id = "templar_main",
+                        trigger = uiTrigger,
+                        cost = expendCost,
+                        activations = multipleActivations,
+                        effect = pushChoiceEffect(
+                            {
+                                choices = {
+                                    {
+                                        effect = gainCombatEffect(2),
+                                        layout = layoutCard(
+                                            {
+                                                title = "Templar",
+                                                art = "avatars/man_at_arms",
+                                                text = ("{2 combat}")
+                                            }
+                                        ),
+                                        tags = {gainCombatTag}
+                                    },
+                                    {
+                                        effect = gainHealthEffect(2),
+                                        layout = layoutCard(
+                                            {
+                                                title = "Templar",
+                                                art = "avatars/man_at_arms",
+                                                text = ("{2 health}")
+                                            }
+                                        ),
+                                        tags = {gainHealthTag}
+                                    }
+                                }
+                            }
+                        )
+                    }
+                )
+            },
+            layout = createLayout(
+                {
+                    name = "Templar",
+                    art = "avatars/man_at_arms",
+                    frame = "frames/Cleric_CardFrame",
+                    text = "<size=250%><pos=-5%><sprite name=\"expend\"></pos></size><size=175%><pos=25%><voffset=.2em><sprite name=\"combat_2\"> or <sprite name=\"health_2\"></size></voffset>",
+                    health = 3,
+                    isGuard = true
+                }
+            )
+        }
+    )
+end
+-- END Templar CARD 
 
 -- START Smite SKILL 
 function paladin_prayer_carddef()
@@ -188,22 +239,172 @@ function paladin_prayer_carddef()
         
     })
 end
--- END Smite SKILL 
+-- END Smite SKILL  
 
---START Zealous Devotion ABILITY 
-function paladin_zealous_devotion_carddef()
+-- START Divine Smite SKILL 
+function paladin_divine_smite_carddef()
+    local cardLayout = createLayout({
+        name = "Divine Smite",
+        art = "icons/wind_storm",
+        frame = "frames/Cleric_CardFrame",
+        text = "<size=400%><line-height=0%><voffset=-.25em> <pos=-75%><sprite name=\"expend_2\"></size><line-height=135%> \n <voffset=2em><size=120%><pos=10%>Gain <sprite name=\"health_3\">\n   Gain  <sprite name=\"combat_2\">"
+    })
+
+    return createSkillDef({
+        id = "paladin_divine_smite_skill",
+        name = "Divine Smite",
+        types = { paladinType, skillType },
+        layout = cardLayout,
+        layoutPath = "icons/wind_storm",
+        abilities = {
+            createAbility({
+                id = "paladin_divine_smite_ab",
+                trigger = uiTrigger,
+                activations = singleActivation,
+                layout = cardLayout,
+                effect = gainHealthEffect(3).seq(gainCombatEffect(2)),
+                cost = goldCost(2),
+            }),
+        }
+        
+    })
+end
+-- END Divine Smite SKILL 
+
+-- START Lay On Hands SKILL 
+function paladin_lay_on_hands_carddef()
+    local cardLayout = createLayout({
+        name = "Lay on Hands",
+        art = "icons/wind_storm",
+        frame = "frames/Cleric_CardFrame",
+        text = "<size=400%><line-height=0%><voffset=-.25em> <pos=-75%><sprite name=\"expend_2\"></size><line-height=135%> \n <voffset=2em><size=120%><pos=10%>Gain <sprite name=\"health_4\">\n   Gain  <sprite name=\"combat_1\">"
+    })
+
+    return createSkillDef({
+        id = "paladin_lay_on_hands_skill",
+        name = "Lay on Hands",
+        types = { paladinType, skillType },
+        layout = cardLayout,
+        layoutPath = "icons/wind_storm",
+        abilities = {
+            createAbility({
+                id = "paladin_lay_on_hands_ab",
+                trigger = uiTrigger,
+                activations = singleActivation,
+                layout = cardLayout,
+                effect = gainHealthEffect(4).seq(gainCombatEffect(1)),
+                cost = goldCost(2),
+            }),
+        }
+        
+    })
+end
+-- END Lay On Hands SKILL 
+
+-- START Prayer Of Devotion SKILL 
+function paladin_prayer_of_devotion_carddef()
+    local cardLayout = createLayout({
+        name = "Prayer of Devotion",
+        art = "icons/wind_storm",
+        frame = "frames/Cleric_CardFrame",
+        text = "<size=400%><line-height=0%><voffset=-.25em> <pos=-75%><sprite name=\"expend_2\"></size><line-height=135%> \n <voffset=2em><size=120%><pos=10%>Gain <sprite name=\"health_3\">\n   Gain  <sprite name=\"combat_1\">"
+    })
+
+    return createSkillDef({
+        id = "paladin_prayer_of_devotion_skill",
+        name = "Prayer of Devotion",
+        types = { paladinType, skillType },
+        layout = cardLayout,
+        layoutPath = "icons/wind_storm",
+        abilities = {
+            createAbility({
+                id = "paladin_prayer_of_devotion_ab",
+                trigger = uiTrigger,
+                activations = singleActivation,
+                layout = cardLayout,
+                effect = gainHealthEffect(3).seq(gainCombatEffect(3)),
+                cost = goldCost(2),
+            }),
+        }
+        
+    })
+end
+-- END Prayer of Devotion SKILL
+
+-- START Consecration SKILL 
+function paladin_consecration_carddef()
+    local cardLayout = createLayout({
+        name = "Consecration",
+        art = "icons/wind_storm",
+        frame = "frames/Cleric_CardFrame",
+        text = "<size=400%><line-height=0%><voffset=-.25em> <pos=-75%><sprite name=\"expend_2\"></size><line-height=135%> \n <voffset=2em><size=120%><pos=10%>Gain <sprite name=\"health_4\">\n   Gain  <sprite name=\"combat_2\">"
+    })
+
+    return createSkillDef({
+        id = "paladin_consecration_skill",
+        name = "Consecration",
+        types = { paladinType, skillType },
+        layout = cardLayout,
+        layoutPath = "icons/wind_storm",
+        abilities = {
+            createAbility({
+                id = "paladin_consecration_ab",
+                trigger = uiTrigger,
+                activations = singleActivation,
+                layout = cardLayout,
+                effect = gainHealthEffect(4).seq(gainCombatEffect(2)),
+                cost = goldCost(2),
+            }),
+        }
+        
+    })
+end
+-- END Consecration SKILL
+
+-- START Prayer of Healing SKILL 
+function paladin_prayer_of_healing_carddef()
+    local cardLayout = createLayout({
+        name = "Prayer of Healing",
+        art = "icons/wind_storm",
+        frame = "frames/Cleric_CardFrame",
+        text = "<size=400%><line-height=0%><voffset=-.25em> <pos=-75%><sprite name=\"expend_2\"></size><line-height=135%> \n <voffset=2em><size=120%><pos=10%>Gain <sprite name=\"health_5\">\n   Gain  <sprite name=\"combat_1\">"
+    })
+
+    return createSkillDef({
+        id = "paladin_prayer_of_healing_skill",
+        name = "Prayer of Healing",
+        types = { paladinType, skillType },
+        layout = cardLayout,
+        layoutPath = "icons/wind_storm",
+        abilities = {
+            createAbility({
+                id = "paladin_prayer_of_healing_ab",
+                trigger = uiTrigger,
+                activations = singleActivation,
+                layout = cardLayout,
+                effect = gainHealthEffect(5).seq(gainCombatEffect(1)),
+                cost = goldCost(2),
+            }),
+        }
+        
+    })
+end
+-- END Prayer of Healing SKILL 
+
+--START Sacred Oath ABILITY 
+function paladin_sacred_oath_carddef()
 	return createHeroAbilityDef({
-		id = "zealous_devotion",
-		name = "Zealous Devotion",
+		id = "sacred_oath",
+		name = "Sacred Oath",
 		types = { heroAbilityType },
         abilities = {
             createAbility( {
-                id = "zealous_devotion_ab",
+                id = "sacred_oath_ab",
                 trigger = uiTrigger,
                 activations = singleActivation,
                 promptType = showPrompt,
                 layout = createLayout ({
-                    name = "Zealous Devotion",
+                    name = "Sacred Oath",
                     art = "art/T_Devotion",
                     frame = "frames/Cleric_CardFrame",
                     text = "Prepare up to 3 champions in play."
@@ -219,14 +420,14 @@ function paladin_zealous_devotion_carddef()
             }),
         },
         layout = createLayout({
-            name = "Zealous Devotion",
+            name = "Sacred Oath",
             art = "art/T_Devotion",
             text = "Prepare up to 3 champions in play."
         }),
         layoutPath  = "art/T_Devotion",
 	})
 end	
--- END Zealous Devotion ABILITY
+-- END Sacred Oath ABILITY
 
 function setupGame(g)
     registerCards(
@@ -235,7 +436,12 @@ function setupGame(g)
             paladin_warhammer_carddef(),
             paladin_crusader_carddef(),
             paladin_prayer_carddef(),
-            paladin_zealous_devotion_carddef(),
+            paladin_sacred_oath_carddef(),
+            paladin_divine_smite_carddef(),
+            paladin_lay_on_hands_carddef(),
+            paladin_prayer_of_healing_carddef(),
+            paladin_consecration_carddef(),
+            paladin_prayer_of_devotion_carddef(),
         }
     )
 
@@ -259,13 +465,13 @@ function setupGame(g)
                             {qty = 1, card = fighter_longsword_carddef()},
                             {qty = 1, card = cleric_spiked_mace_carddef()},
                             {qty = 1, card = paladin_warhammer_carddef()},
-                            {qty = 1, card = paladin_crusader_carddef()},
+                            {qty = 1, card = paladin_templar_carddef()},
                             {qty = 1, card = ruby_carddef()},
                             {qty = 5, card = gold_carddef()},
                         },
                         skills = {
-                        {qty = 1, card = paladin_prayer_carddef() },
-                        {qty = 1, card = paladin_zealous_devotion_carddef()}
+                        {qty = 1, card = paladin_consecration_carddef() },
+                        {qty = 1, card = paladin_sacred_oath_carddef()}
                         },
                         buffs = {
                             drawCardsAtTurnEndDef(),
@@ -296,6 +502,7 @@ end
 
 function endGame(g)
 end
+
 
 
 

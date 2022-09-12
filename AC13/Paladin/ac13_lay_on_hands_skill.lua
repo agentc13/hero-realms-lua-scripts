@@ -1,4 +1,4 @@
-function paladin_smite_carddef()
+function paladin_lay_on_hands_carddef()
     local cardLayout = createLayout({
         name = "Lay on Hands",
         art = "icons/wind_storm",

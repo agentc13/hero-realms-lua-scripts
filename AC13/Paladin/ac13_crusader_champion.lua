@@ -17,15 +17,15 @@ function paladin_crusader_carddef()
                             {
                                 choices = {
                                     {
-                                        effect = gainGoldEffect(1),
+                                        effect = gainCombatEffect(1),
                                         layout = layoutCard(
                                             {
                                                 title = "Crusader",
                                                 art = "avatars/man_at_arms",
-                                                text = ("{1 gold}")
+                                                text = ("{1 combat}")
                                             }
                                         ),
-                                        tags = {gainGoldTag}
+                                        tags = {gainCombatTag}
                                     },
                                     {
                                         effect = gainHealthEffect(1),
@@ -49,7 +49,7 @@ function paladin_crusader_carddef()
                     name = "Crusader",
                     art = "avatars/man_at_arms",
                     frame = "frames/Cleric_CardFrame",
-                    text = '<voffset=.5em><size=200%><sprite name=\"expend\"></size><br></line-height><size=150%><sprite name=\"gold_1\"></size>or<size=150%> <sprite name=\"health_1\"></size>',
+                    text = '<voffset=.5em><size=200%><sprite name=\"expend\"></size><br></line-height><size=150%><sprite name=\"gold_1\"></size> or<size=150%> <sprite name=\"health_1\"></size>',
                     health = 2,
                     isGuard = true
                 }

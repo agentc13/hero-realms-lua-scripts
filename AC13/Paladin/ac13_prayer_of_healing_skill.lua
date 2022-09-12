@@ -1,4 +1,4 @@
-function paladin_smite_carddef()
+function paladin_prayer_of_healing_carddef()
     local cardLayout = createLayout({
         name = "Prayer of Healing",
         art = "icons/wind_storm",
