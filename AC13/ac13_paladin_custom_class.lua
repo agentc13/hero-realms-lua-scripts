@@ -15,6 +15,7 @@ Prayer (1 dmg + 3 health)
 Level 3 Ability
 Zealous Oath (Prepare up to 3 champions)
 ]]
+
 require "herorealms"
 require "decks"
 require "stdlib"
@@ -22,6 +23,7 @@ require "stdcards"
 require "hardai"
 require "mediumai"
 require "easyai"
+
 
 -- START Warhammer CARD
 function paladin_warhammer_carddef()
