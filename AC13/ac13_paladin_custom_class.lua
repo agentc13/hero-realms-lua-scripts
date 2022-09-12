@@ -9,25 +9,8 @@ Crusader (2 Guard, 1g or 1 heal) (champion)
 Gold x 5 (item)
 Ruby x 1 (item)
 
-Upgrade Name Ideas
-Divine Favor
-Shield of Faith
-Warding Bond
-Prayer of Healing
-Aura of Purity
-Destructive Wave
-Holy Weapon
-Skill Name Ideas
+Level 3 Skill 
 Smite (1 dmg + 3 health)
-Searing Smite
-Thunderous Smite
-Wrathful Smite
-Branding Smite
-Blinding Smite
-
-
-
-
 
 Level 3 Ability
 Zealous Oath (Prepare up to 3 champions)
@@ -143,6 +126,17 @@ function paladin_crusader_carddef()
                                             }
                                         ),
                                         tags = {gainHealthTag}
+                                    },
+                                    {
+                                        effect = gainCombatEffect(1),
+                                        layout = layoutCard(
+                                            {
+                                                title = "Crusader",
+                                                art = "avatars/man_at_arms",
+                                                text = ("{1 combat}")
+                                            }
+                                        ),
+                                        tags = {gainCombatTag}
                                     }
                                 }
                             }
@@ -166,23 +160,23 @@ end
 -- END Crusader CARD
 
 -- START Smite SKILL 
-function paladin_smite_carddef()
+function paladin_prayer_carddef()
     local cardLayout = createLayout({
-        name = "Smite",
+        name = "Prayer",
         art = "icons/wind_storm",
         frame = "frames/Cleric_CardFrame",
         text = "<size=400%><line-height=0%><voffset=-.25em> <pos=-75%><sprite name=\"expend_2\"></size><line-height=135%> \n <voffset=2em><size=120%><pos=10%>Gain <sprite name=\"health_3\">\n   Gain  <sprite name=\"combat_1\">"
     })
 
     return createSkillDef({
-        id = "paladin_smite_skill",
-        name = "Smite",
+        id = "paladin_prayer_skill",
+        name = "Prayer",
         types = { paladinType, skillType },
         layout = cardLayout,
         layoutPath = "icons/wind_storm",
         abilities = {
             createAbility({
-                id = "paladin_smite_ab",
+                id = "paladin_prayer_ab",
                 trigger = uiTrigger,
                 activations = singleActivation,
                 layout = cardLayout,
@@ -240,7 +234,7 @@ function setupGame(g)
         {
             paladin_warhammer_carddef(),
             paladin_crusader_carddef(),
-            paladin_smite_carddef(),
+            paladin_prayer_carddef(),
             paladin_zealous_devotion_carddef(),
         }
     )
@@ -270,7 +264,7 @@ function setupGame(g)
                             {qty = 5, card = gold_carddef()},
                         },
                         skills = {
-                        {qty = 1, card = paladin_smite_carddef() },
+                        {qty = 1, card = paladin_prayer_carddef() },
                         {qty = 1, card = paladin_zealous_devotion_carddef()}
                         },
                         buffs = {
