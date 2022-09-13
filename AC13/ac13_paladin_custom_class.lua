@@ -431,6 +431,235 @@ function paladin_sacred_oath_carddef()
 end	
 -- END Sacred Oath ABILITY
 
+-- START Oath of Devotion ABILITY 
+function paladin_oath_of_devotion_carddef()
+	return createHeroAbilityDef({
+		id = "oath_of_devotion",
+		name = "Oath of Devotion",
+		types = { heroAbilityType },
+        abilities = {
+            createAbility( {
+                id = "oath_of_devotion_ab",
+                trigger = uiTrigger,
+                activations = singleActivation,
+                promptType = showPrompt,
+                layout = createLayout ({
+                    name = "Oath of Devotion",
+                    art = "art/T_Devotion",
+                    text = "Prepare up to 3 champions in play. Those champions gain +1 <sprite name=\"shield\"> until they leave play"
+                    }),
+                effect = pushTargetedEffect({
+                    desc = "Choose up to 3 champions in play. Prepare those champions and they gain +1 defense until they leave play.",
+                    validTargets = s.CurrentPlayer(CardLocEnum.InPlay).where(isCardChampion()),
+                    min = 1,
+                    max = 3,
+                    targetEffect = prepareTarget().seq(grantHealthTarget(1, { SlotExpireEnum.LeavesPlay }, nullEffect(), "shield")),
+			    }),
+                cost = sacrificeSelfCost,
+            }),
+        },
+        layout = createLayout({
+            name = "Oath of Devotion",
+            art = "art/T_Devotion",
+            text = "Prepare up to 3 champions in play. Those champions gain +1 <sprite name=\"shield\"> until they leave play"
+        }),
+        layoutPath  = "art/T_Devotion",
+	})
+end	
+--END Oath of Devotion ABILITY
+
+-- START Oath of Righteousness ABILITY
+function paladin_oath_of_righteousness_carddef()
+	return createHeroAbilityDef({
+		id = "oath_of_righteousness",
+		name = "Oath of Righteousness",
+		types = { heroAbilityType },
+        abilities = {
+            createAbility( {
+                id = "oath_of_righteousness_ab",
+                trigger = uiTrigger,
+                activations = singleActivation,
+                promptType = showPrompt,
+                layout = createLayout ({
+                    name = "Oath of Righteousness",
+                    art = "art/T_Devotion",
+                    text = "Prepare up to 3 champions in play. Gain +1 <sprite name=\"combat\"> for each champion you have in play." 
+                    }),
+                effect = pushTargetedEffect({
+                    desc = "Choose up to 3 championsin play. Prepare those champions. Gain +1 Combat for each champion you have in play.",
+                    validTargets = s.CurrentPlayer(CardLocEnum.InPlay).where(isCardChampion()),
+                    min = 1,
+                    max = 3,
+                    targetEffect = prepareTarget().seq(gainCombatEffect(selectLoc(loc(currentPid, inPlayPloc)).count())),
+			    }),
+                cost = sacrificeSelfCost,
+            }),
+        },
+        layout = createLayout({
+            name = "Oath of Righteousness",
+            art = "art/T_Devotion",
+            text = "Prepare up to 3 champions in play. Gain +1 <sprite name=\"combat\"> for each champion you have in play"
+        }),
+        layoutPath  = "art/T_Devotion",
+	})
+end	
+-- END Oath of Righteousness ABILITY
+
+-- START Oath of Protection ABILITY
+function paladin_oath_of_protection_carddef()
+	return createHeroAbilityDef({
+		id = "oath_of_protection",
+		name = "Oath of Protection",
+		types = { heroAbilityType },
+        abilities = {
+            createAbility( {
+                id = "oath_of_protection_ab",
+                trigger = uiTrigger,
+                activations = singleActivation,
+                promptType = showPrompt,
+                layout = createLayout ({
+                    name = "Oath of Protection",
+                    art = "art/T_Devotion",
+                    text = "Prepare up to 3 champions in play. Those champions gain +1 <sprite name=\"shield\"> permanently."
+                    }),
+                effect = pushTargetedEffect({
+                    desc = "Choose up to 3 champions in play. Prepare those champions and they gain +1 defense permanently.",
+                    validTargets = s.CurrentPlayer(CardLocEnum.InPlay).where(isCardChampion()),
+                    min = 1,
+                    max = 3,
+                    targetEffect = prepareTarget().seq(grantHealthTarget(1, { SlotExpireEnum.Never }, nullEffect(), "shield")),
+			    }),
+                cost = sacrificeSelfCost,
+            }),
+        },
+        layout = createLayout({
+            name = "Oath of Protection",
+            art = "art/T_Devotion",
+            text = "Prepare up to 3 champions in play. Those champions gain +1 <sprite name=\"shield\"> permanently."
+        }),
+        layoutPath  = "art/T_Devotion",
+	})
+end	
+-- END Oath of Protection ABILITY
+
+-- START Oath of Vengeance ABILITY
+function paladin_oath_of_vengeance_carddef()
+	return createHeroAbilityDef({
+		id = "oath_of_vengeance",
+		name = "Oath of Vengeance",
+		types = { heroAbilityType },
+        abilities = {
+            createAbility( {
+                id = "oath_of_vengeance_ab",
+                trigger = uiTrigger,
+                activations = singleActivation,
+                promptType = showPrompt,
+                layout = createLayout ({
+                    name = "Oath of Vengeance",
+                    art = "art/T_Devotion",
+                    text = "Expend up to 3 friendly champions in play. Gain <sprite name=\"combat\"> equal to their total <sprite name=\"shield\"> values. Draw 1."
+                    }),
+                effect = pushTargetedEffect({
+                    desc = "Choose up to 3 friendly champions in play. Expend those champions and gain Combat equal to their total Defense. Draw a Card.",
+                    validTargets = s.CurrentPlayer(CardLocEnum.InPlay).where(isCardChampion().And(isCardStunnable())),
+                    min = 1,
+                    max = 3,
+                    targetEffect = expendTarget().seq(gainCombatEffect(selectTargets().sum(getCardHealth()))).seq(drawCardsEffect(1)),
+			    }),
+                cost = sacrificeSelfCost,
+            }),
+        },
+        layout = createLayout({
+            name = "Oath of Vengeance",
+            art = "art/T_Devotion",
+            text = "Expend up to 3 friendly champions in play. Gain <sprite name=\"combat\"> equal to their total <sprite name=\"shield\"> values. Draw 1."
+        }),
+        layoutPath  = "art/T_Devotion",
+	})
+end	
+-- END Oath of Vengeance ABILITY
+
+-- START Oath of Justice ABILITY
+function paladin_oath_of_justice_carddef()
+	return createHeroAbilityDef({
+		id = "oath_of_justice",
+		name = "Oath of Justice",
+		types = { heroAbilityType },
+        abilities = {
+            createAbility( {
+                id = "oath_of_justice_ab",
+                trigger = uiTrigger,
+                activations = singleActivation,
+                promptType = showPrompt,
+                layout = createLayout ({
+                    name = "Oath of Justice",
+                    art = "art/T_Devotion",
+                    text = "Prepare up to 3 champions in play. Gain <sprite name=\"combat_2\"> for each champion you have in play." 
+                    }),
+                effect = pushTargetedEffect({
+                    desc = "Choose up to 3 championsin play. Prepare those champions. Gain +2 Combat for each champion you have in play.",
+                    validTargets = s.CurrentPlayer(CardLocEnum.InPlay).where(isCardChampion()),
+                    min = 1,
+                    max = 3,
+                    targetEffect = prepareTarget().seq(gainCombatEffect(selectLoc(loc(currentPid, inPlayPloc)).count().multiply(2))),
+			    }),
+                cost = sacrificeSelfCost,
+            }),
+        },
+        layout = createLayout({
+            name = "Oath of Justice",
+            art = "art/T_Devotion",
+            text = "Prepare up to 3 champions in play. Gain <sprite name=\"combat_2\"> for each champion you have in play."
+        }),
+        layoutPath  = "art/T_Devotion",
+	})
+end	
+-- END Oath of Justice ABILITY
+
+-- START Lightbringer CARD
+
+function paladin_lightbringer_carddef()
+    return createActionDef(
+        {
+            id = "paladin_lightbringer",
+            name = "Lightbringer",
+            types = {weaponType, noStealType, paladinType, itemType,holyRelicType, magicWeaponType, meleeWeaponType, swordType},
+            acquireCost = 0,
+            abilities = {
+                createAbility(
+                    {
+                        id = "paladin_lightbringer",
+                        trigger = autoTrigger,
+                        effect = gainCombatEffect(3).seq(
+                            pushTargetedEffect(
+                                {
+                                    desc = "Stun target champion.",
+                                    min = 1,
+                                    max = 1,
+                                    validTargets = selectLoc(loc(oppPid, inPlayPloc)).where(isCardStunnable()),
+                                    targetEffect =stunTarget()
+                                }
+                            )
+                        ),
+                        check = selectLoc(currentCastLoc).where(isCardType(weaponType)).count().gte(1),
+                    }
+                )
+            },
+            layout = createLayout(
+                {
+                    name = "Lightbringer",
+                    art = "art/T_Flesh_Ripper",
+                    frame = "frames/Warrior_CardFrame",
+                    text = '<size=50%><i>Replaces: Longsword/i></size><br><size=170%><sprite name="combat_3"></size> <br><size=75%>If you have played another weapon this turn, stun target champion.</size>'
+                }
+            )
+        }
+    )
+end
+
+-- END LightBringer Card
+
+
 function setupGame(g)
     registerCards(
         g,
@@ -444,6 +673,12 @@ function setupGame(g)
             paladin_prayer_of_healing_carddef(),
             paladin_consecration_carddef(),
             paladin_prayer_of_devotion_carddef(),
+            paladin_oath_of_devotion_carddef(),
+            paladin_oath_of_protection_carddef(),
+            paladin_oath_of_righteousness_carddef(),
+            paladin_oath_of_vengeance_carddef(),
+            paladin_oath_of_justice_carddef(),
+            paladin_lightbringer_carddef()
         }
     )
 
@@ -470,10 +705,11 @@ function setupGame(g)
                             {qty = 1, card = paladin_templar_carddef()},
                             {qty = 1, card = ruby_carddef()},
                             {qty = 5, card = gold_carddef()},
+                            {qty = 1, card = paladin_lightbringer_carddef()},
                         },
                         skills = {
-                        {qty = 1, card = paladin_consecration_carddef() },
-                        {qty = 1, card = paladin_sacred_oath_carddef()}
+                            {qty = 1, card = paladin_consecration_carddef() },
+                            {qty = 1, card = paladin_oath_of_justice_carddef()}
                         },
                         buffs = {
                             drawCardsAtTurnEndDef(),
@@ -509,6 +745,7 @@ end
 
 
 
+
 function setupMeta(meta)
     meta.name = "ac13_paladin_custom_class"
     meta.minLevel = 0
@@ -516,7 +753,7 @@ function setupMeta(meta)
     meta.introbackground = ""
     meta.introheader = ""
     meta.introdescription = ""
-    meta.path = "C:/Users/timot/OneDrive/Documents/Hero-Realms-Lua-Scripts/AC13/ac13_paladin_custom_class.lua"
+    meta.path = "D:/HRLS/Hero-Realms-Lua-Scripts/AC13/ac13_paladin_custom_class.lua"
      meta.features = {
 }
 
