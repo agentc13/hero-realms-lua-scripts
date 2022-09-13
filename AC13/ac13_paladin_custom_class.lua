@@ -150,7 +150,7 @@ function paladin_crusader_carddef()
 end
 -- END Crusader CARD
 
--- START Smite SKILL 
+-- START Prayer SKILL 
 function paladin_prayer_carddef()
     local cardLayout = createLayout({
         name = "Prayer",
@@ -179,7 +179,7 @@ function paladin_prayer_carddef()
         
     })
 end
--- END Smite SKILL  
+-- END Prayer SKILL  
 
 -- START Divine Smite SKILL 
 function paladin_divine_smite_carddef()
@@ -555,7 +555,6 @@ end
 -- END Oath of Justice ABILITY
 
 -- START Lightbringer CARD
-
 function paladin_lightbringer_carddef()
     return createActionDef(
         {
@@ -596,7 +595,6 @@ function paladin_lightbringer_carddef()
 end
 
 -- END LightBringer Card
-
 
 -- START Templar CARD 
 function paladin_templar_carddef()
@@ -660,6 +658,146 @@ function paladin_templar_carddef()
 end
 -- END Templar CARD 
 
+-- START Lightbringer CARD
+function paladin_lightbringer_carddef()
+    return createActionDef(
+        {
+            id = "paladin_lightbringer",
+            name = "Lightbringer",
+            types = {weaponType, noStealType, paladinType, itemType,holyRelicType, magicWeaponType, meleeWeaponType, swordType},
+            acquireCost = 0,
+            abilities = {
+                createAbility(
+                    {
+                        id = "paladin_lightbringer",
+                        trigger = autoTrigger,
+                        effect = gainCombatEffect(3).seq(
+                            pushTargetedEffect(
+                                {
+                                    desc = "Stun target champion.",
+                                    min = 1,
+                                    max = 1,
+                                    validTargets = selectLoc(loc(oppPid, inPlayPloc)).where(isCardStunnable()),
+                                    targetEffect =stunTarget()
+                                }
+                            )
+                        ),
+                        check = selectLoc(currentCastLoc).where(isCardType(weaponType)).count().gte(1),
+                    }
+                )
+            },
+            layout = createLayout(
+                {
+                    name = "Lightbringer",
+                    art = "icons/fighter_precision_blow",
+                    frame = "frames/Cleric_CardFrame",
+                    text = '<size=50%><i>Replaces: Longsword</i></size><br><size=170%><sprite name="combat_3"></size> <br><size=75%>If you have played another weapon this turn, stun target champion.</size>'
+                }
+            )
+        }
+    )
+end
+-- END Lightbringer CARD
+
+-- START Jeweled Dagger CARD
+function paladin_jeweled_dagger_carddef()
+    return createActionDef(
+        {
+            id = "paladin_jeweled_dagger",
+            name = "Jeweled Dagger",
+            types = {weaponType, noStealType, paladinType, itemType, magicWeaponType, meleeWeaponType, daggerType},
+            acquireCost = 0,
+            abilities = {
+                createAbility(
+                    {
+                        id = "paladin_jeweled_dagger_ab",
+                        trigger = autoTrigger,
+                        effect = gainCombatEffect(2).seq(gainGoldEffect(1))
+                            
+                    }
+                ),
+                createAbility(
+                    {
+                        id = "paladin_jeweled_dagger_sac",
+                        trigger = uiTrigger,
+                        cost = sacrificeSelfCost,
+                        promptType= showPrompt,
+                        effect = pushTargetedEffect(
+                                {
+                                    desc = "Sacrifice a card from your discard pile.",
+                                    min = 0,
+                                    max = 1,
+                                    validTargets = selectLoc(loc(currentPid,discardPloc)),
+                                    targetEffect =sacrificeTarget(),
+                                 }),
+                        layout = createLayout({
+                            name = "Jeweled Dagger",
+                            art = "art/T_Influence",
+                            frame = "frames/Cleric_CardFrame",
+                            text = '<size=170%><line-height=75%><sprite name="combat_2"> <sprite name=\"gold_1\"></line-height></size> \n<size=150%><line-height=50%><pos=-15%><sprite name=\"scrap\"><space=.3em></size><size=60%><voffset=1em>Sacrifice a card in your \ndiscard pile.</size></line-height>'
+                        })
+
+                    }
+                )
+            },
+            layout = createLayout(
+                {
+                    name = "Jeweled Dagger",
+                    art = "art/T_Influence",
+                    frame = "frames/Cleric_CardFrame",
+                    text = '<size=170%><line-height=75%><sprite name="combat_2"> <sprite name=\"gold_1\"></line-height></size> \n<size=150%><line-height=50%><pos=-15%><sprite name=\"scrap\"><space=.3em></size><size=60%><voffset=1em>Sacrifice a card in your \ndiscard pile.</size></line-height>'
+                }
+            )
+        }
+    )
+end
+-- END Jeweled Dagger CARD
+
+-- START Blind Justice CARD
+
+-- END Blind Justice CARD
+
+-- START Guardian's Shield ARMOR  
+
+-- END Guardian's Shield ARMOR   
+
+-- START Gauntlets of Purification ARMOR   
+
+-- END Gauntlets of Purification ARMOR
+
+-- START Holy Relic UPGRADE
+function paladin_holy_relic_carddef()
+    return createActionDef(
+        {
+            id = "paladin_holy_relic",
+            name = "Holy Relic",
+            types = {itemType, actionType, noStealType},
+            acquireCost = 0,
+            abilities = {
+                createAbility(
+                    {
+                        id = "paladin_holy_relic",
+                        trigger = autoTrigger,
+                        effect = gainGoldEffect(2).seq(gainHealthEffect(selectLoc(currentCastLoc).where(isCardType(weaponType)).count()))
+                    }
+                )
+            },
+            layout = createLayout(
+                {
+                    name = "Holy Relic",
+                    art = "icons/thief_swipe",
+                    frame = "frames/Cleric_CardFrame",
+                    text = '<size=200%><voffset=.4em><sprite name="gold_2"></voffset></size><line-height=70%><size=75%>\n+1 <sprite name="health"> for each weapon you have in play.</size></line-height>'
+                }
+            )
+        }
+    )
+end
+-- END Holy Relic UPGRADE
+
+-- START level 11 UPGRADE
+
+-- END level 11 UPGRADE
 
 function setupGame(g)
     registerCards(
@@ -679,7 +817,9 @@ function setupGame(g)
             paladin_oath_of_righteousness_carddef(),
             paladin_oath_of_vengeance_carddef(),
             paladin_oath_of_justice_carddef(),
-            paladin_lightbringer_carddef()
+            paladin_lightbringer_carddef(),
+            paladin_jeweled_dagger_carddef(),
+            paladin_holy_relic_carddef()
         }
     )
 
@@ -700,17 +840,18 @@ function setupGame(g)
                     health = 58,
                     cards = {
                         deck = {
-                            {qty = 1, card = fighter_longsword_carddef()},
                             {qty = 1, card = cleric_spiked_mace_carddef()},
                             {qty = 1, card = paladin_warhammer_carddef()},
-                            {qty = 1, card = paladin_templar_carddef()},
+                            {qty = 1, card = paladin_crusader_carddef()},
                             {qty = 1, card = ruby_carddef()},
                             {qty = 5, card = gold_carddef()},
                             {qty = 1, card = paladin_lightbringer_carddef()},
+                            {qty = 1, card = paladin_holy_relic_carddef()},
+                            {qty = 1, card = paladin_jeweled_dagger_carddef()}
                         },
                         skills = {
-                            {qty = 1, card = paladin_consecration_carddef() },
-                            {qty = 1, card = paladin_oath_of_justice_carddef()}
+                            {qty = 1, card = paladin_prayer_carddef() },
+                            {qty = 1, card = paladin_sacred_oath_carddef()}
                         },
                         buffs = {
                             drawCardsAtTurnEndDef(),
