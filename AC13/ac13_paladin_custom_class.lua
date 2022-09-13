@@ -150,68 +150,6 @@ function paladin_crusader_carddef()
 end
 -- END Crusader CARD
 
--- START Templar CARD 
-function paladin_templar_carddef()
-    return createChampionDef(
-        {
-            id = "paladin_templar",
-            name = "Templar",
-            acquireCost = 0,
-            health = 3,
-            isGuard = true,
-            abilities = {
-                createAbility(
-                    {
-                        id = "templar_main",
-                        trigger = uiTrigger,
-                        cost = expendCost,
-                        activations = multipleActivations,
-                        effect = pushChoiceEffect(
-                            {
-                                choices = {
-                                    {
-                                        effect = gainCombatEffect(2),
-                                        layout = layoutCard(
-                                            {
-                                                title = "Templar",
-                                                art = "avatars/man_at_arms",
-                                                text = ("{2 combat}")
-                                            }
-                                        ),
-                                        tags = {gainCombatTag}
-                                    },
-                                    {
-                                        effect = gainHealthEffect(2),
-                                        layout = layoutCard(
-                                            {
-                                                title = "Templar",
-                                                art = "avatars/man_at_arms",
-                                                text = ("{2 health}")
-                                            }
-                                        ),
-                                        tags = {gainHealthTag}
-                                    }
-                                }
-                            }
-                        )
-                    }
-                )
-            },
-            layout = createLayout(
-                {
-                    name = "Templar",
-                    art = "avatars/man_at_arms",
-                    frame = "frames/Cleric_CardFrame",
-                    text = "<size=250%><pos=-5%><sprite name=\"expend\"></pos></size><size=175%><pos=25%><voffset=.2em><sprite name=\"combat_2\"> or <sprite name=\"health_2\"></size></voffset>",
-                    health = 3,
-                    isGuard = true
-                }
-            )
-        }
-    )
-end
--- END Templar CARD 
-
 -- START Smite SKILL 
 function paladin_prayer_carddef()
     local cardLayout = createLayout({
@@ -658,6 +596,69 @@ function paladin_lightbringer_carddef()
 end
 
 -- END LightBringer Card
+
+
+-- START Templar CARD 
+function paladin_templar_carddef()
+    return createChampionDef(
+        {
+            id = "paladin_templar",
+            name = "Templar",
+            acquireCost = 0,
+            health = 3,
+            isGuard = true,
+            abilities = {
+                createAbility(
+                    {
+                        id = "templar_main",
+                        trigger = uiTrigger,
+                        cost = expendCost,
+                        activations = multipleActivations,
+                        effect = pushChoiceEffect(
+                            {
+                                choices = {
+                                    {
+                                        effect = gainCombatEffect(2),
+                                        layout = layoutCard(
+                                            {
+                                                title = "Templar",
+                                                art = "avatars/man_at_arms",
+                                                text = ("{2 combat}")
+                                            }
+                                        ),
+                                        tags = {gainCombatTag}
+                                    },
+                                    {
+                                        effect = gainHealthEffect(2),
+                                        layout = layoutCard(
+                                            {
+                                                title = "Templar",
+                                                art = "avatars/man_at_arms",
+                                                text = ("{2 health}")
+                                            }
+                                        ),
+                                        tags = {gainHealthTag}
+                                    }
+                                }
+                            }
+                        )
+                    }
+                )
+            },
+            layout = createLayout(
+                {
+                    name = "Templar",
+                    art = "avatars/man_at_arms",
+                    frame = "frames/Cleric_CardFrame",
+                    text = "<size=250%><pos=-5%><sprite name=\"expend\"></pos></size><size=175%><pos=25%><voffset=.2em><sprite name=\"combat_2\"> or <sprite name=\"health_2\"></size></voffset>",
+                    health = 3,
+                    isGuard = true
+                }
+            )
+        }
+    )
+end
+-- END Templar CARD 
 
 
 function setupGame(g)
