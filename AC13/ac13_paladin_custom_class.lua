@@ -658,47 +658,6 @@ function paladin_templar_carddef()
 end
 -- END Templar CARD 
 
--- START Lightbringer CARD
-function paladin_lightbringer_carddef()
-    return createActionDef(
-        {
-            id = "paladin_lightbringer",
-            name = "Lightbringer",
-            types = {weaponType, noStealType, paladinType, itemType,holyRelicType, magicWeaponType, meleeWeaponType, swordType},
-            acquireCost = 0,
-            abilities = {
-                createAbility(
-                    {
-                        id = "paladin_lightbringer",
-                        trigger = autoTrigger,
-                        effect = gainCombatEffect(3).seq(
-                            pushTargetedEffect(
-                                {
-                                    desc = "Stun target champion.",
-                                    min = 1,
-                                    max = 1,
-                                    validTargets = selectLoc(loc(oppPid, inPlayPloc)).where(isCardStunnable()),
-                                    targetEffect =stunTarget()
-                                }
-                            )
-                        ),
-                        check = selectLoc(currentCastLoc).where(isCardType(weaponType)).count().gte(1),
-                    }
-                )
-            },
-            layout = createLayout(
-                {
-                    name = "Lightbringer",
-                    art = "icons/fighter_precision_blow",
-                    frame = "frames/Cleric_CardFrame",
-                    text = '<size=50%><i>Replaces: Longsword</i></size><br><size=170%><sprite name="combat_3"></size> <br><size=75%>If you have played another weapon this turn, stun target champion.</size>'
-                }
-            )
-        }
-    )
-end
--- END Lightbringer CARD
-
 -- START Jeweled Dagger CARD
 function paladin_jeweled_dagger_carddef()
     return createActionDef(
@@ -766,9 +725,9 @@ function paladin_blind_justice_carddef()
                     {
                         id = "paladin_blind_justice_ab",
                         trigger = autoTrigger,
-                        effect = damageTarget(1).where(isCardChampion())
+                        effect = hitOpponentEffect(2),
                     }
-                )
+                ),
             },
             layout = createLayout(
                 {
@@ -846,7 +805,8 @@ function setupGame(g)
             paladin_lightbringer_carddef(),
             paladin_jeweled_dagger_carddef(),
             paladin_holy_relic_carddef(),
-            paladin_blind_justice_carddef()
+            paladin_blind_justice_carddef(),
+
         }
     )
 
@@ -872,9 +832,9 @@ function setupGame(g)
                             {qty = 1, card = paladin_crusader_carddef()},
                             {qty = 1, card = ruby_carddef()},
                             {qty = 5, card = gold_carddef()},
-                            {qty = 1, card = paladin_lightbringer_carddef()},
-                            {qty = 1, card = paladin_holy_relic_carddef()},
-                            {qty = 1, card = paladin_blind_justice_carddef()}
+                            {qty = 1, card = fighter_longsword_carddef()},
+                            {qty = 1, card = paladin_blind_justice_carddef()},
+
                         },
                         skills = {
                             {qty = 1, card = paladin_prayer_carddef() },
