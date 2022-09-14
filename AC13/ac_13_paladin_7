@@ -712,7 +712,7 @@ function paladin_jeweled_dagger_carddef()
 end
 -- END Jeweled Dagger CARD
 
--- START Blind Justice CARD
+--[[START Blind Justice CARD
 function paladin_blind_justice_carddef()
     return createActionDef(
         {
@@ -740,7 +740,7 @@ function paladin_blind_justice_carddef()
         }
     )
 end
--- END Blind Justice CARD
+-- END Blind Justice CARD]]
 
 -- START Guardian's Shield ARMOR  
 
@@ -832,11 +832,13 @@ function setupGame(g)
                             {qty = 1, card = paladin_crusader_carddef()},
                             {qty = 1, card = ruby_carddef()},
                             {qty = 5, card = gold_carddef()},
-                            {qty = 1, card = fighter_longsword_carddef()},
+                            {qty = 1, card = paladin_lightbringer_carddef()},
+                            {qty = 1, card = paladin_jeweled_dagger_carddef()},
+
                         },
                         skills = {
-                            {qty = 1, card = paladin_prayer_carddef() },
-                            {qty = 1, card = paladin_sacred_oath_carddef()}
+                            {qty = 1, card = paladin_prayer_of_devotion_carddef() },
+                            {qty = 1, card = paladin_oath_of_righteousness_carddef()}
                         },
                         buffs = {
                             drawCardsAtTurnEndDef(),
