@@ -754,7 +754,33 @@ end
 -- END Jeweled Dagger CARD
 
 -- START Blind Justice CARD
-
+function paladin_blind_justice_carddef()
+    return createActionDef(
+        {
+            id = "paladin_blind_justice",
+            name = "Blind Justice",
+            types = { itemType, noStealType},
+            acquireCost = 0,
+            abilities = {
+                createAbility(
+                    {
+                        id = "paladin_blind_justice_ab",
+                        trigger = autoTrigger,
+                        effect = damageTarget(1).where(isCardChampion())
+                    }
+                )
+            },
+            layout = createLayout(
+                {
+                    name = "Blind Justice",
+                    art = "art/T_Pillar_Of_Fire",
+                    frame = "frames/Cleric_CardFrame",
+                    text = 'Deal 2 damage to opponent, and 1 damage to each opposing champion.'
+                }
+            )
+        }
+    )
+end
 -- END Blind Justice CARD
 
 -- START Guardian's Shield ARMOR  
@@ -819,7 +845,8 @@ function setupGame(g)
             paladin_oath_of_justice_carddef(),
             paladin_lightbringer_carddef(),
             paladin_jeweled_dagger_carddef(),
-            paladin_holy_relic_carddef()
+            paladin_holy_relic_carddef(),
+            paladin_blind_justice_carddef()
         }
     )
 
@@ -847,7 +874,7 @@ function setupGame(g)
                             {qty = 5, card = gold_carddef()},
                             {qty = 1, card = paladin_lightbringer_carddef()},
                             {qty = 1, card = paladin_holy_relic_carddef()},
-                            {qty = 1, card = paladin_jeweled_dagger_carddef()}
+                            {qty = 1, card = paladin_blind_justice_carddef()}
                         },
                         skills = {
                             {qty = 1, card = paladin_prayer_carddef() },
