@@ -108,12 +108,12 @@ function paladin_crusader_carddef()
                             {
                                 choices = {
                                     {
-                                        effect = gainCombatEffect(1),
+                                        effect = gainGoldEffect(1),
                                         layout = layoutCard(
                                             {
                                                 title = "Crusader",
                                                 art = "avatars/man_at_arms",
-                                                text = ("{1 combat}")
+                                                text = ("{1 gold}")
                                             }
                                         ),
                                         tags = {gainCombatTag}
@@ -350,7 +350,7 @@ function paladin_sacred_oath_carddef()
                     text = "Prepare up to 3 champions in play."
                     }),
                 effect = pushTargetedEffect({
-                    desc = "Choose up to 3 championsin play. Prepare those champions",
+                    desc = "Choose up to 3 champions in play. Prepare those champions",
                     validTargets = s.CurrentPlayer(CardLocEnum.InPlay).where(isCardChampion()),
                     min = 1,
                     max = 3,
@@ -578,7 +578,7 @@ function paladin_lightbringer_carddef()
                                 }
                             )
                         ),
-                        check = selectLoc(currentCastLoc).where(isCardType(weaponType)).count().gte(1),
+                        check = selectLoc(currentCastLoc).where(isCardType(weaponType)).count().gte(2),
                     }
                 )
             },

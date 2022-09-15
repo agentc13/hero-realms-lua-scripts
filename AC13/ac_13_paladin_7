@@ -108,12 +108,12 @@ function paladin_crusader_carddef()
                             {
                                 choices = {
                                     {
-                                        effect = gainCombatEffect(1),
+                                        effect = gainGoldEffect(1),
                                         layout = layoutCard(
                                             {
                                                 title = "Crusader",
                                                 art = "avatars/man_at_arms",
-                                                text = ("{1 combat}")
+                                                text = ("{1 gold}")
                                             }
                                         ),
                                         tags = {gainCombatTag}
@@ -247,7 +247,7 @@ function paladin_prayer_of_devotion_carddef()
         name = "Prayer of Devotion",
         art = "icons/wind_storm",
         frame = "frames/Cleric_CardFrame",
-        text = "<size=400%><line-height=0%><voffset=-.25em> <pos=-75%><sprite name=\"expend_2\"></size><line-height=135%> \n <voffset=2em><size=120%><pos=10%>Gain <sprite name=\"health_3\">\n   Gain  <sprite name=\"combat_1\">"
+        text = "<size=400%><line-height=0%><voffset=-.25em> <pos=-75%><sprite name=\"expend_2\"></size><line-height=135%> \n <voffset=2em><size=120%><pos=10%>Gain <sprite name=\"health_3\">\n   Gain  <sprite name=\"combat_2\">"
     })
 
     return createSkillDef({
@@ -262,7 +262,7 @@ function paladin_prayer_of_devotion_carddef()
                 trigger = uiTrigger,
                 activations = singleActivation,
                 layout = cardLayout,
-                effect = gainHealthEffect(3).seq(gainCombatEffect(3)),
+                effect = gainHealthEffect(3).seq(gainCombatEffect(2)),
                 cost = goldCost(2),
             }),
         }
@@ -578,14 +578,14 @@ function paladin_lightbringer_carddef()
                                 }
                             )
                         ),
-                        check = selectLoc(currentCastLoc).where(isCardType(weaponType)).count().gte(1),
+                        check = selectLoc(currentCastLoc).where(isCardType(weaponType)).count().gte(2),
                     }
                 )
             },
             layout = createLayout(
                 {
                     name = "Lightbringer",
-                    art = "art/T_Flesh_Ripper",
+                    art = "icons/fighter_mighty_blow",
                     frame = "frames/Warrior_CardFrame",
                     text = '<size=50%><i>Replaces: Longsword/i></size><br><size=170%><sprite name="combat_3"></size> <br><size=75%>If you have played another weapon this turn, stun target champion.</size>'
                 }
@@ -805,7 +805,7 @@ function setupGame(g)
             paladin_lightbringer_carddef(),
             paladin_jeweled_dagger_carddef(),
             paladin_holy_relic_carddef(),
-            paladin_blind_justice_carddef(),
+            --paladin_blind_justice_carddef(),
 
         }
     )
@@ -851,10 +851,21 @@ function setupGame(g)
                     id = plid2,
                     isAi = true,
                     startDraw = 5,
-                    init = {
-                        fromEnv = plid2
-                    },
+                    name = "DeebleDoobz",
+                    avatar = "thief_02",
+                    health = 52,
                     cards = {
+                        deck = {
+                            {qty = 2, card = thief_throwing_knife_carddef()},
+                            {qty = 1, card = thief_keen_throwing_knife_carddef()},
+                            {qty = 1, card = thief_knife_belt_carddef()},
+                            {qty = 2, card = ruby_carddef()},
+                            {qty = 5, card = gold_carddef()},
+                        },
+                        skills = {
+                            {qty = 1, card = thief_distracted_exchange_carddef()},
+                            {qty = 1, card = thief_heist_carddef()},
+                        },
                         buffs = {
                             drawCardsAtTurnEndDef(),
                             discardCardsAtTurnStartDef(),
