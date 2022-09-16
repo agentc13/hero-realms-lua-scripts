@@ -277,7 +277,7 @@ function setupGame(g)
     })
 
     standardSetup(g, {
-        description = "Snackforce Test",
+        description = "Art Browser",
         playerOrder = { plid1, plid2 },
         ai = createHardAi(),
         randomOrder = true,
