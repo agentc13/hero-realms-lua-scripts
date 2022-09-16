@@ -452,15 +452,16 @@ function bless_and_bash_def()
         abilities = {
 			createAbility({
 				id = "blessAndBashActivate",
-				trigger = uiTrigger,
-				promptType = showPrompt,
+				trigger = autoTrigger, --The AI does not know how to use the ability, so I'll force their hand.
+				--promptType = showPrompt, --The AI does not need this :D
 				layout = createLayout({
 					name = "Bless & Bash",
 					art = "icons/fighter_knock_down_OLD",
 					text = "<size=400%><line-height=0%><voffset=-0.6em> <pos=-95%><sprite name=\"expend_2\"></size><line-height=100%> \n <voffset=1.8em><size=120%><pos=10%><sprite name=\"combat_2\"> <sprite name=\"health_3\">\n<size=90%>Your champions\ngain +1<sprite name=\"shield\"> until\nyour next turn."
 				}),
 				effect = gainCombatEffect(2).seq(gainHealthEffect(3)).seq(grantHealthTarget(1, {startOfOwnerTurnExpiry, leavesPlayExpiry}).apply(selectLoc(currentInPlayLoc))),
-				cost = goldCost(2)
+				cost = goldCost(2),
+				check = selectLoc(currentInPlayLoc).count().gte(3).Or(getPlayerHealth(oppPid).lte(2)) -- Stop the AI from wasting their money unnecessarily
 			})
 		},
 		layout = createLayout({
@@ -483,27 +484,28 @@ function smashing_resurrection_def()
         abilities = {
 			createAbility({
 				id = "smashingResActivate",
-				trigger = uiTrigger,
-				promptType = showPrompt,
+				trigger = autoTrigger, -- Forces the AI to use the ability
+				--promptType = showPrompt,
 				layout = createLayout({
 					name = "Smashing Resurrection",
 					art = "icons/fighter_knock_back",
-			text = "<voffset=1em><space=-11.0em><voffset=-4.0em><size=200%><sprite name=\"scrap\"></size></voffset><pos=30%> <voffset=1.0em><line-height=40><space=-5.0em><space=1.0em><size=160%><line-height=100%>\n<sprite name=\"combat_8\"><size=80%><line-height=100%>\nReturn a champion\nfrom your discard pile\nto your hand.</voffset></voffset>"
+			text = "<voffset=1em><space=-11.0em><voffset=-4.0em><size=200%><sprite name=\"scrap\"></size></voffset><pos=30%> <voffset=1.0em><line-height=40><space=-5.0em><space=1.0em><size=160%><line-height=100%>\n<sprite name=\"combat_8\"><size=80%><line-height=100%>\nReturn a champion\nthat was stunned\nthis game\nfrom your discard pile\nto your hand.</voffset></voffset>"
 				}),
 				effect = gainCombatEffect(8).seq(pushTargetedEffect({
-					desc = "Return a champion to your hand.",
-					min = 0,
+					desc = "Return a champion that was stunned this game to your hand.",
+					min = 1,
 					max = 1,
-					validTargets = selectLoc(currentDiscardLoc).where(isCardChampion()),
+					validTargets = selectLoc(currentDiscardLoc).where(isCardChampion()).where(isCardFaction(102)),
 					targetEffect = moveTarget(0)
 				})),
 				cost = sacrificeSelfCost,
+				check = selectLoc(currentDiscardLoc).where(isCardChampion()).where(isCardFaction(102)).where(getCardCost().gte(4)).count().gte(1) -- Stop the AI from firing blanks. The AI will res if there is a target of cost 4 or greater available.
 			}),
---			createAbility({
---				id = "smashResSlotPlacer",
---				trigger = startOfTurnTrigger,
---				effect = addSlotToTarget(createCostChangeSlot(1, {endOfOwnerTurnExpiry})).apply(selectLoc(currentInPlayLoc))
---			})
+			createAbility({
+				id = "smashResSlotPlacer",
+				trigger = endOfTurnTrigger,
+				effect = addSlotToTarget(createFactionsSlot({102}, {neverExpiry})).apply(selectLoc(currentInPlayLoc))
+			})
 		},
 		layout = createLayout({
 			name = "Smashing Resurrection",
