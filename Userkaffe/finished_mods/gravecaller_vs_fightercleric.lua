@@ -835,7 +835,7 @@ function setupGame(g)
                 startDraw = 5,
 				name = "Fighter-Cleric",
 				avatar = "Inquisition",
-				health = 65,
+				health = 115,
                 cards = {
 					deck = {
 						{ qty=2, card=shield_bearing_follower_carddef() },
