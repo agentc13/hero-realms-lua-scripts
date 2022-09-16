@@ -39,6 +39,12 @@ function fire_gem_carddef()
 				promptType = showPrompt,
 				layout = loadLayoutTexture("Textures/fire_gem"),
 				effect = gainCombatEffect(3).seq(moveTarget(12).apply(selectSource()))
+			}),
+			createAbility({	-- This ability should cause the AI to sacrifice their Fire Gems at all times
+				id = "fireGemScrap2",
+				trigger = autoTrigger,
+				effect = gainCombatEffect(3).seq(moveTarget(12).apply(selectSource())),
+				check = selectLoc(currentSkillsLoc).where(isCardName("bless_and_bash")).count().gte(1)
 			})
 		},
 		cardEffectAbilities = {},
@@ -489,7 +495,7 @@ function smashing_resurrection_def()
 				layout = createLayout({
 					name = "Smashing Resurrection",
 					art = "icons/fighter_knock_back",
-			text = "<voffset=1em><space=-11.0em><voffset=-4.0em><size=200%><sprite name=\"scrap\"></size></voffset><pos=30%> <voffset=1.0em><line-height=40><space=-5.0em><space=1.0em><size=160%><line-height=100%>\n<sprite name=\"combat_8\"><size=80%><line-height=100%>\nReturn a champion\nthat was stunned\nthis game\nfrom your discard pile\nto your hand.</voffset></voffset>"
+					text = "<voffset=1em><space=-11.0em><voffset=-4.0em><size=200%><sprite name=\"scrap\"></size></voffset><pos=30%> <voffset=1.0em><line-height=40><space=-5.0em><space=1.0em><size=160%><line-height=100%>\n<sprite name=\"combat_8\"><size=80%><line-height=100%>\nReturn a champion\nthat was stunned\nthis game\nfrom your discard pile\nto your hand.</voffset></voffset>"
 				}),
 				effect = gainCombatEffect(8).seq(pushTargetedEffect({
 					desc = "Return a champion that was stunned this game to your hand.",
@@ -499,7 +505,7 @@ function smashing_resurrection_def()
 					targetEffect = moveTarget(0)
 				})),
 				cost = sacrificeSelfCost,
-				check = selectLoc(currentDiscardLoc).where(isCardChampion()).where(isCardFaction(102)).where(getCardCost().gte(4)).count().gte(1) -- Stop the AI from firing blanks. The AI will res if there is a target of cost 4 or greater available.
+				check = (selectLoc(currentDiscardLoc).where(isCardChampion()).where(isCardFaction(102)).where(getCardCost().gte(4)).count().gte(1)).Or(getPlayerHealth(oppPid).lte(8)) -- Stop the AI from firing blanks. The AI will res if there is a target of cost 4 or greater available.
 			}),
 			createAbility({
 				id = "smashResSlotPlacer",
@@ -514,6 +520,43 @@ function smashing_resurrection_def()
 			}),
 		layoutPath= "icons/fighter_knock_back"
 	})
+end
+
+function breastplate_of_fury_carddef()
+    local cardLayout = createLayout({
+        name = "Breastplate of Fury",
+        art = "icons/cleric_shining_breastplate",
+        frame = "frames/Cleric_armor_frame",
+        text = "<sprite name=\"requiresHealth_30\"> Target champion gets +1<sprite name=\"shield\"> permanently. If its a Guard, gain <sprite name=\"combat_3\">."
+    })
+    
+    return createMagicArmorDef({
+        id = "breastplate_of_fury",
+        name = "Breastplate of Fury",
+        types = {clericType, fighterType, magicArmorType, treasureType, chestType},
+        layout = cardLayout,
+        layoutPath = "icons/cleric_shining_breastplate",
+        abilities = {
+            createAbility( {
+                id = "breastplate_of_fury_main",
+                trigger = autoTrigger,
+                activations = singleActivation,
+                layout = cardLayout,
+                effect = pushTargetedEffect(
+                {
+                        desc = "Target champions gets +1 defence. If its a Guard, gain 3 combat.",
+                        validTargets =  s.CurrentPlayer(CardLocEnum.InPlay),
+                        min = 1,
+                        max = 1,
+                        targetEffect = grantHealthTarget(1, { SlotExpireEnum.Never }, nullEffect(), "shield").seq(gainCombatEffect(selectTargets().where(isGuard()).count().multiply(3))),
+                        tags = {toughestTag}                        
+                    }
+                ),
+                cost = AbilityCosts.Expend,
+                check = minHealthCurrent(30).And(selectLoc(currentInPlayLoc).where(isCardChampion()).count().gte(1)).And(selectLoc(currentHandLoc).count().eq(0))
+            })
+        }        
+    })
 end
 
 function the_call_def()
@@ -534,7 +577,7 @@ function the_call_def()
 					art = "art/T_Angry_Skeleton",
 					text = "<voffset=1em><space=-1.5em><voffset=-1.3em><size=200%><sprite name=\"scrap\"></size></voffset><pos=30%> <voffset=1.0em><line-height=40><space=-3.0em><space=1.0em><size=80%><line-height=100%>Play all cards\nthat were\nsacrificed\nthis game.</voffset></voffset>"
 				}),
-				effect = playTarget().apply(s.currentPlayer(12).union(s.oppPlayer(12)).where(isCardAction().Or(isCardChampion()).Or(isCardType(itemType)))),
+				effect = playTarget().apply(s.currentPlayer(12).where(isCardAction().Or(isCardChampion()).Or(isCardType(itemType)))).seq(playTarget().apply(s.oppPlayer(12).where(isCardAction().Or(isCardChampion()).Or(isCardType(itemType))))),
 				cost = sacrificeSelfCost
 			})
 		},
@@ -629,7 +672,7 @@ function underworld_smuggling_carddef()
 			createAbility({
 				id = "underworldSmugglingMain",
 				trigger = autoTrigger,
-				effect = moveTarget(9).apply(s.currentPlayer(12).union(s.oppPlayer(12)).where(isCardAction().Or(isCardChampion()).Or(isCardType(itemType)))).seq(pushTargetedEffect({
+				effect = moveTarget(9).apply(s.currentPlayer(12).where(isCardAction().Or(isCardChampion()).Or(isCardType(itemType)))).seq(moveTarget(9).apply(s.oppPlayer(12).where(isCardAction().Or(isCardChampion()).Or(isCardType(itemType))))).seq(pushTargetedEffect({
 					desc = "Acquire a card to your hand.",
 					min = 0,
 					max = 1,
@@ -783,6 +826,57 @@ function extraDrawBuffDef()
     })
 end
 
+function chooseDifficulty()
+    local ef = pushChoiceEffect({
+		choices = {
+			{
+				effect = gainMaxHealthEffect(currentPid, 20).seq(healPlayerEffect(currentPid, 20)),--.seq(sacrificeTarget().apply(selectLoc(loc(oppPid, buffsPloc)).where(isCardName("extra_draw_buff")))),
+				layout = layoutCard({
+					title = "Easy",
+					art = "art/T_Seek_Revenge",
+					text = "You start with +20 <size=200%><sprite name=\"health\">"
+				}),
+			},
+			{
+				effect = nullEffect(),--sacrificeTarget().apply(selectLoc(loc(oppPid, buffsPloc)).where(isCardName("extra_draw_buff"))),
+				layout = layoutCard({
+					title = "Standard",
+					art = "avatars/orcs",
+					text = "No modifiers."
+				}),
+			},
+			{
+				effect = createCardEffect(breastplate_of_fury_carddef(), loc(oppPid, skillsPloc)),--.seq(sacrificeTarget().apply(selectLoc(loc(oppPid, buffsPloc)).where(isCardName("extra_draw_buff")))),
+				layout = layoutCard({
+					title = "Hard",
+					art = "icons/orc_raiders",
+					text = "The opponent has Breastplate of Fury."
+				}),
+			},
+			{
+				effect = createCardEffect(breastplate_of_fury_carddef(), loc(oppPid, skillsPloc)).seq(moveTarget(loc(oppPid, handPloc)).apply(selectLoc(loc(oppPid, deckPloc)).take(1))).seq(createCardEffect(gold_carddef(), currentDeckLoc)).seq(createCardEffect(dagger_carddef(), currentDeckLoc)).seq(createCardEffect(gold_carddef(), currentDeckLoc)).seq(createCardEffect(dagger_carddef(), currentDeckLoc)),
+				layout = layoutCard({
+					title = "Harder",
+					art = "art/T_Orc_Riot",
+					text = "<size=80%>The opponent has Breastplate of Fury. Additional two golds and two daggers are added in your starting deck."
+				})
+			}
+		}	
+	}).seq(sacrificeSelf())
+
+    return createGlobalBuff({
+        id="choose_difficulty",
+        name = "Choose Difficulty",
+        abilities = {
+            createAbility({
+                id="choose_difficulty",
+                trigger = startOfGameTrigger,
+                effect = ef
+            })
+        }
+    })
+end
+
 function setupGame(g)
 	registerCards(g, {
 		haphazard_resurrection_carddef(),
@@ -825,9 +919,10 @@ function setupGame(g)
 						{ qty=1, card=the_call_def() }
 					},
                     buffs = {
+						chooseDifficulty(),
                         drawCardsAtTurnEndDef(),
                         discardCardsAtTurnStartDef(),
-                        fatigueCount(40, 1, "FatigueP1")
+                        fatigueCount(40, 1, "FatigueP1"),
                     }
                 }
             },
@@ -850,10 +945,11 @@ function setupGame(g)
 					},
 					skills = {
 						{ qty=1, card=bless_and_bash_def() },
-						{ qty=1, card=smashing_resurrection_def() }
+						{ qty=1, card=smashing_resurrection_def() },
 					},
                     buffs = {
                         drawCardsAtTurnEndDef(),
+						--extraDrawBuffDef(),
                         discardCardsAtTurnStartDef(),
                         fatigueCount(40, 1, "FatigueP2"),
                     }
