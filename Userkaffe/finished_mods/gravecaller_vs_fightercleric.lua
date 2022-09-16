@@ -819,8 +819,6 @@ function setupGame(g)
 					  { qty=5, card=gold_carddef() }
 					},
 					skills = {
-						{ qty=1, card=bless_and_bash_def() },
-						{ qty=1, card=smashing_resurrection_def() },
 						{ qty=1, card=burial_rites_def() },
 						{ qty=1, card=the_call_def() }
 					},
