@@ -201,7 +201,7 @@ function the_rot_carddef()
 			createAbility({
 				id = "rotAlly",
 				allyFactions = {necrosFaction},
-				trigger = uiTrigger,
+				trigger = autoTrigger,
 				effect = gainCombatEffect(3)
 			})
 		}
