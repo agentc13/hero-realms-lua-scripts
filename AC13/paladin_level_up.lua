@@ -920,3 +920,16 @@ end
 
 function endGame(g)
 end
+
+function setupMeta(meta)
+    meta.name = "paladin_level_up"
+    meta.minLevel = 0
+    meta.maxLevel = 0
+    meta.introbackground = ""
+    meta.introheader = ""
+    meta.introdescription = ""
+    meta.path = "D:/HRLS/Hero-Realms-Lua-Scripts/AC13/paladin_level_up.lua"
+     meta.features = {
+}
+
+end
