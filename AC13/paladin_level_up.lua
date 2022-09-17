@@ -709,7 +709,7 @@ function paladin_blind_justice_carddef()
                     {
                         id = "paladin_blind_justice_ab",
                         trigger = autoTrigger,
-                        effect = hitOpponentEffect(2).seq(damageTarget(1).applyselectLoc(loc(oppPid, inPlayPloc)).where(isCardExpended().invert().And(isCardStunnable())))
+                        effect = hitOpponentEffect(2).seq(damageTarget(1).apply(selectLoc(loc(oppPid, inPlayPloc)).where(isCardExpended().invert().And(isCardStunnable()))))
                     }
                 ),
             },
