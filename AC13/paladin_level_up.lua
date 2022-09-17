@@ -726,12 +726,111 @@ function paladin_blind_justice_carddef()
 end
 -- END Blind Justice CARD
 
--- START Guardian's Shield ARMOR  
+--[[START Guardian's Shield ARMOR  WIP
+function paladin_guardians_shield_carddef()
+    local cardLayout =
+        createLayout(
+        {
+            name = "Guardian's Shield",
+            art = "icons/cleric_brightstar_shield",
+            frame = "frames/Warrior_CardFrame",
+            text = ('<size=300%><line-height=0%><voffset=-.8em> <pos=-75%><sprite name="requiresHealth_20"></size><line-height=80%> \n <voffset=1.8em><size=80%> Gain 2 <sprite name="combat"> for each champion\n you have in play.</size>')
+        }
+    )
 
--- END Guardian's Shield ARMOR   
+    return createMagicArmorDef(
+        {
+            id = "guardians_shield",
+            name = "Guardian's Shield",
+            layout = cardLayout,
+            layoutPath = "icons/cleric_brightstar_shield",
+            abilities = {
+                createAbility({
+                    id = "paladin_guardians_shield_ab",
+                    trigger = uiTrigger,
+                    effect = gainCombatEffect(selectLoc(currentInPlayPloc).where(isCardType(championType)).count().multiply(2)),
+                    check = minHealthCurrent(20),
+                    cost = expendCost,
+                    tags = {}
+                })
+            }
+        }
+    )
+end
+
+-- END Guardian's Shield ARMOR   ]]
 
 -- START Gauntlets of Purification ARMOR   
+function paladin_gauntlets_of_purification_carddef()
+    local cardLayout =
+        createLayout(
+        {
+            name = "Gauntlets of Purification",
+            art = "icons/wizard_spellcaster_gloves",
+            frame = "frames/Warrior_CardFrame",
+            text = ('<size=300%><line-height=0%><voffset=-.8em> <pos=-75%><sprite name="requiresHealth_20"></size><line-height=80%> \n <voffset=1.8em><size=80%> If you have dealt 5 <sprite name="combat"> to an opponent this turn. \n  Gain 2 <sprite name="health"> \n or Draw 1 \n then discard 1 </size>')
+        }
+    )
 
+    return createMagicArmorDef(
+        {
+            id = "guardians_shield",
+            name = "Gauntlets of Purification",
+            layout = cardLayout,
+            layoutPath = "icons/wizard_spellcaster_gloves",
+            abilities = {
+                createAbility(
+                    {
+                        id = "gauntlets_of_purification",
+                        layout = cardLayout,
+                        effect = pushChoiceEffect(
+                            {
+                                choices = {
+                                    {
+                                        effect = drawCardsEffect(1).seq(
+                                            pushTargetedEffect(
+                                                {
+                                                    desc = "Discard a card",
+                                                    min = 1,
+                                                    max = 1,
+                                                    validTargets = selectLoc(currentHandLoc),
+                                                    targetEffect = discardTarget()
+                                                }
+                                            )
+                                        ),
+                                        layout = layoutCard(
+                                            {
+                                                title = "Gauntlets of Purification",
+                                                art = "icons/wizard_spellcaster_gloves",
+                                                text = ("Draw 1 then discard 1.")
+                                            }
+                                        ),
+                                        tags = {cycle1Tag}
+                                    },
+                                    {
+                                        effect = gainGoldEffect(1),
+                                        layout = layoutCard(
+                                            {
+                                                title = "Gauntlets of Purification",
+                                                art = "icons/wizard_spellcaster_gloves",
+                                                text = ("{1 gold}")
+                                            }
+                                        ),
+                                        tags = {gainGold1Tag}
+                                    }
+                                }
+                            }
+                        ),
+                        trigger = uiTrigger,
+                        check = minDamageTakenOpp(5).And(minHealthCurrent(30)),
+                        cost = expendCost,
+                        tags = {draw1Tag, gainHealthTag, gainHealth2Tag}
+                    }
+                )
+            }
+        }
+    )
+end
 -- END Gauntlets of Purification ARMOR
 
 -- START Holy Relic UPGRADE
@@ -858,7 +957,8 @@ function setupGame(g)
             paladin_jeweled_dagger_carddef(),
             paladin_holy_relic_carddef(),
             paladin_blind_justice_carddef(),
-
+            paladin_guardians_shield_carddef(),
+            paladin_gauntlets_of_purification_carddef(),
         }
     )
 
@@ -889,7 +989,8 @@ function setupGame(g)
                         },
                         skills = {
                             {qty = 1, card = paladin_prayer_carddef() },
-                            {qty = 1, card = paladin_sacred_oath_carddef()}
+                            {qty = 1, card = paladin_sacred_oath_carddef()},
+                            {qty = 1, card = paladin_guardians_shield_carddef()}
                         },
                         buffs = {
                             --chooseDifficulty(),
