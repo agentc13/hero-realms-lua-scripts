@@ -885,6 +885,7 @@ function setupGame(g)
                             {qty = 1, card = ruby_carddef()},
                             {qty = 5, card = gold_carddef()},
                             {qty = 1, card = fighter_longsword_carddef()},
+                            {qty = 1, card = paladin_blind_justice_carddef()},
                         },
                         skills = {
                             {qty = 1, card = paladin_prayer_carddef() },
@@ -921,6 +922,7 @@ end
 function endGame(g)
 end
 
+
 function setupMeta(meta)
     meta.name = "paladin_level_up"
     meta.minLevel = 0
@@ -928,7 +930,7 @@ function setupMeta(meta)
     meta.introbackground = ""
     meta.introheader = ""
     meta.introdescription = ""
-    meta.path = "D:/HRLS/Hero-Realms-Lua-Scripts/AC13/paladin_level_up.lua"
+    meta.path = "C:/Users/agentc13/github/hero-realms-lua-scripts/AC13/paladin_level_up.lua"
      meta.features = {
 }
 
