@@ -34,7 +34,7 @@ function paladin_warhammer_carddef()
                                             layout = layoutCard(
                                                 {
                                                     title = "Warhammer",
-                                                    art = "icons/cleric_brightstar_shield",
+                                                    art = "art/T_Flesh_Ripper",
                                                     text = "Gain <sprite name=\"combat_2\">"
                                                 }
                                             ),
@@ -45,7 +45,7 @@ function paladin_warhammer_carddef()
                                             layout = layoutCard(
                                                 {
                                                     title = "Warhammer",
-                                                    art = "icons/cleric_brightstar_shield",
+                                                    art = "art/T_Flesh_Ripper",
                                                     text = "Gain <sprite name=\"health_2\">"
                                                 }
                                             ),
@@ -62,7 +62,7 @@ function paladin_warhammer_carddef()
             layout = createLayout(
                 {
                     name = "Warhammer",
-                    art = "zoomedbuffs/cleric_brightstar_shield",
+                    art = "art/T_Flesh_Ripper",
                     frame = "frames/Cleric_CardFrame",
                     text = "Gain <sprite name=\"combat_2\"> or Gain <sprite name=\"health_2\"> \n <size=50%>If you have played a weapon this turn, gain both.</size>",
                 }
@@ -124,7 +124,7 @@ function paladin_crusader_carddef()
                     name = "Crusader",
                     art = "avatars/man_at_arms",
                     frame = "frames/Cleric_CardFrame",
-                    text = "<size=250%><pos=-5%><sprite name=\"expend\"></pos></size><size=175%><pos=25%><voffset=.2em><sprite name=\"combat_1\"> or <sprite name=\"health_1\"></size></voffset>",
+                    text = "<size=250%><pos=-5%><sprite name=\"expend\"></pos></size><size=175%><pos=25%><voffset=.2em><sprite name=\"gold_1\"> or <sprite name=\"health_1\"></size></voffset>",
                     health = 2,
                     isGuard = true
                 }
@@ -569,7 +569,7 @@ function paladin_lightbringer_carddef()
             layout = createLayout(
                 {
                     name = "Lightbringer",
-                    art = "art/T_Angry_Skeleton",
+                    art = "icons/fighter_mighty_blow_OLD",
                     frame = "frames/Cleric_CardFrame",
                     text = '<size=50%><i>Replaces: Longsword/i></size><br><size=170%><sprite name="combat_3"></size> <br><size=75%>If you have played another weapon this turn, stun target champion.</size>'
                 }
@@ -600,6 +600,17 @@ function paladin_templar_carddef()
                             {
                                 choices = {
                                     {
+                                        effect = gainGoldEffect(2),
+                                        layout = layoutCard(
+                                            {
+                                                title = "Templar",
+                                                art = "avatars/man_at_arms",
+                                                text = ("{2 gold}")
+                                            }
+                                        ),
+                                        tags = {gainGoldTag}
+                                    },
+                                    {
                                         effect = gainCombatEffect(2),
                                         layout = layoutCard(
                                             {
@@ -609,17 +620,6 @@ function paladin_templar_carddef()
                                             }
                                         ),
                                         tags = {gainCombatTag}
-                                    },
-                                    {
-                                        effect = gainHealthEffect(2),
-                                        layout = layoutCard(
-                                            {
-                                                title = "Templar",
-                                                art = "avatars/man_at_arms",
-                                                text = ("{2 health}")
-                                            }
-                                        ),
-                                        tags = {gainHealthTag}
                                     }
                                 }
                             }
@@ -632,7 +632,7 @@ function paladin_templar_carddef()
                     name = "Templar",
                     art = "avatars/man_at_arms",
                     frame = "frames/Cleric_CardFrame",
-                    text = "<size=250%><pos=-5%><sprite name=\"expend\"></pos></size><size=175%><pos=25%><voffset=.2em><sprite name=\"combat_2\"> or <sprite name=\"health_2\"></size></voffset>",
+                    text = "<size=250%><pos=-5%><sprite name=\"expend\"></pos></size><size=175%><pos=25%><voffset=.2em><sprite name=\"gold_2\"> or <sprite name=\"combat_2\"></size></voffset>",
                     health = 3,
                     isGuard = true
                 }
@@ -980,7 +980,7 @@ function setupGame(g)
                         deck = {
                             {qty = 1, card = cleric_spiked_mace_carddef()},
                             {qty = 1, card = paladin_warhammer_carddef()},
-                            {qty = 1, card = paladin_crusader_carddef()},
+                            {qty = 1, card = paladin_templar_carddef()},
                             {qty = 1, card = ruby_carddef()},
                             {qty = 5, card = gold_carddef()},
                             {qty = 1, card = fighter_longsword_carddef()},
