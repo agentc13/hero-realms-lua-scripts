@@ -569,8 +569,8 @@ function paladin_lightbringer_carddef()
             layout = createLayout(
                 {
                     name = "Lightbringer",
-                    art = "art/T_Flesh_Ripper",
-                    frame = "frames/Warrior_CardFrame",
+                    art = "art/T_Angry_Skeleton",
+                    frame = "frames/Cleric_CardFrame",
                     text = '<size=50%><i>Replaces: Longsword/i></size><br><size=170%><sprite name="combat_3"></size> <br><size=75%>If you have played another weapon this turn, stun target champion.</size>'
                 }
             )
@@ -726,7 +726,7 @@ function paladin_blind_justice_carddef()
 end
 -- END Blind Justice CARD
 
---[[START Guardian's Shield ARMOR  WIP
+--START Guardian's Shield ARMOR  WIP
 function paladin_guardians_shield_carddef()
     local cardLayout =
         createLayout(
@@ -734,7 +734,7 @@ function paladin_guardians_shield_carddef()
             name = "Guardian's Shield",
             art = "icons/cleric_brightstar_shield",
             frame = "frames/Warrior_CardFrame",
-            text = ('<size=300%><line-height=0%><voffset=-.8em> <pos=-75%><sprite name="requiresHealth_20"></size><line-height=80%> \n <voffset=1.8em><size=80%> Gain 2 <sprite name="combat"> for each champion\n you have in play.</size>')
+            text = ('<size=300%><line-height=0%><voffset=-.2em> <pos=-75%><sprite name="requiresHealth_20"></size><line-height=80%> \n <voffset=1.8em><size=80%> Gain 2 <sprite name="combat"> for\n  each champion\n  you have in\n  play.</size>')
         }
     )
 
@@ -747,8 +747,8 @@ function paladin_guardians_shield_carddef()
             abilities = {
                 createAbility({
                     id = "paladin_guardians_shield_ab",
-                    trigger = uiTrigger,
-                    effect = gainCombatEffect(selectLoc(currentInPlayPloc).where(isCardType(championType)).count().multiply(2)),
+                    trigger = autoTrigger,
+                    effect = gainCombatEffect(selectLoc(currentCastLoc).where(isCardChampion()).count().multiply(2)),
                     check = minHealthCurrent(20),
                     cost = expendCost,
                     tags = {}
@@ -757,31 +757,30 @@ function paladin_guardians_shield_carddef()
         }
     )
 end
-
 -- END Guardian's Shield ARMOR   ]]
 
--- START Gauntlets of Purification ARMOR   
-function paladin_gauntlets_of_purification_carddef()
+-- START Gauntlets of Power ARMOR   
+function paladin_gauntlets_of_power_carddef()
     local cardLayout =
         createLayout(
         {
-            name = "Gauntlets of Purification",
+            name = "Gauntlets of Power",
             art = "icons/wizard_spellcaster_gloves",
-            frame = "frames/Warrior_CardFrame",
+            frame = "frames/Cleric_armor_frame",
             text = ('<size=300%><line-height=0%><voffset=-.8em> <pos=-75%><sprite name="requiresHealth_20"></size><line-height=80%> \n <voffset=1.8em><size=80%> If you have dealt 5 <sprite name="combat"> to an opponent this turn. \n  Gain 2 <sprite name="health"> \n or Draw 1 \n then discard 1 </size>')
         }
     )
 
     return createMagicArmorDef(
         {
-            id = "guardians_shield",
-            name = "Gauntlets of Purification",
+            id = "gauntlets_of_power",
+            name = "Gauntlets of Power",
             layout = cardLayout,
             layoutPath = "icons/wizard_spellcaster_gloves",
             abilities = {
                 createAbility(
                     {
-                        id = "gauntlets_of_purification",
+                        id = "gauntlets_of_power",
                         layout = cardLayout,
                         effect = pushChoiceEffect(
                             {
@@ -800,7 +799,7 @@ function paladin_gauntlets_of_purification_carddef()
                                         ),
                                         layout = layoutCard(
                                             {
-                                                title = "Gauntlets of Purification",
+                                                title = "Gauntlets of Power",
                                                 art = "icons/wizard_spellcaster_gloves",
                                                 text = ("Draw 1 then discard 1.")
                                             }
@@ -811,12 +810,12 @@ function paladin_gauntlets_of_purification_carddef()
                                         effect = gainGoldEffect(1),
                                         layout = layoutCard(
                                             {
-                                                title = "Gauntlets of Purification",
+                                                title = "Gauntlets of Power",
                                                 art = "icons/wizard_spellcaster_gloves",
                                                 text = ("{1 gold}")
                                             }
                                         ),
-                                        tags = {gainGold1Tag}
+                                        tags = { gainGold1Tag }
                                     }
                                 }
                             }
@@ -824,14 +823,14 @@ function paladin_gauntlets_of_purification_carddef()
                         trigger = uiTrigger,
                         check = minDamageTakenOpp(5).And(minHealthCurrent(30)),
                         cost = expendCost,
-                        tags = {draw1Tag, gainHealthTag, gainHealth2Tag}
+                        tags = { draw1Tag, gainGold1Tag }
                     }
                 )
             }
         }
     )
 end
--- END Gauntlets of Purification ARMOR
+-- END Gauntlets of Power ARMOR
 
 -- START Holy Relic UPGRADE
 function paladin_holy_relic_carddef()
@@ -958,7 +957,7 @@ function setupGame(g)
             paladin_holy_relic_carddef(),
             paladin_blind_justice_carddef(),
             paladin_guardians_shield_carddef(),
-            paladin_gauntlets_of_purification_carddef(),
+            paladin_gauntlets_of_power_carddef(),
         }
     )
 
