@@ -100,7 +100,7 @@ function paladin_crusader_carddef()
                                                 text = ("{1 gold}")
                                             }
                                         ),
-                                        tags = {gainCombatTag}
+                                        tags = {gainGoldTag}
                                     },
                                     {
                                         effect = gainHealthEffect(1),
@@ -611,15 +611,15 @@ function paladin_templar_carddef()
                                         tags = {gainGoldTag}
                                     },
                                     {
-                                        effect = gainCombatEffect(2),
+                                        effect = gainHealthEffect(2),
                                         layout = layoutCard(
                                             {
                                                 title = "Templar",
                                                 art = "avatars/man_at_arms",
-                                                text = ("{2 combat}")
+                                                text = ("{2 health}")
                                             }
                                         ),
-                                        tags = {gainCombatTag}
+                                        tags = {gainHealth2Tag}
                                     }
                                 }
                             }
@@ -632,7 +632,7 @@ function paladin_templar_carddef()
                     name = "Templar",
                     art = "avatars/man_at_arms",
                     frame = "frames/Cleric_CardFrame",
-                    text = "<size=250%><pos=-5%><sprite name=\"expend\"></pos></size><size=175%><pos=25%><voffset=.2em><sprite name=\"gold_2\"> or <sprite name=\"combat_2\"></size></voffset>",
+                    text = "<size=250%><pos=-5%><sprite name=\"expend\"></pos></size><size=175%><pos=25%><voffset=.2em><sprite name=\"gold_2\"> or <sprite name=\"health_2\"></size></voffset>",
                     health = 3,
                     isGuard = true
                 }
@@ -734,7 +734,7 @@ function paladin_guardians_shield_carddef()
             name = "Guardian's Shield",
             art = "icons/cleric_brightstar_shield",
             frame = "frames/Warrior_CardFrame",
-            text = ('<size=300%><line-height=0%><voffset=-.2em> <pos=-75%><sprite name="requiresHealth_20"></size><line-height=80%> \n <voffset=1.8em><size=80%> Gain 2 <sprite name="combat"> for\n  each champion\n  you have in\n  play.</size>')
+            text = ('<size=300%><line-height=0%><voffset=-.4em> <pos=-75%><sprite name="requiresHealth_20"></size><line-height=80%>\n <voffset=1.8em><size=80%><sprite name=\"expend\"> \n Gain 2 <sprite name="combat"> for\n  each champion\n  you have in\n  play.</size>')
         }
     )
 
@@ -747,9 +747,9 @@ function paladin_guardians_shield_carddef()
             abilities = {
                 createAbility({
                     id = "paladin_guardians_shield_ab",
-                    trigger = autoTrigger,
-                    effect = gainCombatEffect(selectLoc(currentCastLoc).where(isCardChampion()).count().multiply(2)),
-                    check = minHealthCurrent(20),
+                    trigger = uiTrigger,
+                    effect = gainCombatEffect(selectLoc(currentInPlayLoc).where(isCardChampion()).count().multiply(2)), 
+                    check = minHealthCurrent(20).And(selectLoc(currentInPlayLoc).where(isCardChampion()).count().gte(1)),
                     cost = expendCost,
                     tags = {}
                 })
@@ -862,9 +862,35 @@ function paladin_holy_relic_carddef()
 end
 -- END Holy Relic UPGRADE
 
--- START level 11 UPGRADE
-
--- END level 11 UPGRADE
+-- START Blessed Whetstone UPGRADE
+function paladin_blessed_whetstone_carddef()
+    return createActionDef(
+        {
+            id = "paladin_blessed_whetstone",
+            name = "Blessed Whetstone",
+            types = {itemType, actionType, noStealType},
+            acquireCost = 0,
+            abilities = {
+                createAbility(
+                    {
+                        id = "paladin_blessed_whetstone",
+                        trigger = autoTrigger,
+                        effect = drawCardsEffect(1).seq(gainCombatEffect(selectLoc(currentCastLoc).where(isCardType(weaponType)).count()))
+                    }
+                )
+            },
+            layout = createLayout(
+                {
+                    name = "Blessed Whetstone",
+                    art = "icons/cunning_of_the_wolf",
+                    frame = "frames/Cleric_CardFrame",
+                    text = '<size=200%><voffset=.4em><sprite name="gold_2"></voffset></size><line-height=70%><size=75%>\n+1 <sprite name="health"> for each weapon you have in play.</size></line-height>'
+                }
+            )
+        }
+    )
+end
+-- END Blessed Whetstone UPGRADE
 --[[
 function extraDrawBuffDef()
 	--Causes player with the buff to play with one extra card each turn.
@@ -955,6 +981,7 @@ function setupGame(g)
             paladin_lightbringer_carddef(),
             paladin_jeweled_dagger_carddef(),
             paladin_holy_relic_carddef(),
+            paladin_blessed_whetstone_carddef(),
             paladin_blind_justice_carddef(),
             paladin_guardians_shield_carddef(),
             paladin_gauntlets_of_power_carddef(),
@@ -984,7 +1011,7 @@ function setupGame(g)
                             {qty = 1, card = ruby_carddef()},
                             {qty = 5, card = gold_carddef()},
                             {qty = 1, card = fighter_longsword_carddef()},
-                            {qty = 1, card = paladin_blind_justice_carddef()},
+                            {qty = 1, card = paladin_blessed_whetstone_carddef()}
                         },
                         skills = {
                             {qty = 1, card = paladin_prayer_carddef() },
