@@ -1010,12 +1010,12 @@ function setupGame(g)
                             {qty = 1, card = paladin_templar_carddef()},
                             {qty = 1, card = ruby_carddef()},
                             {qty = 5, card = gold_carddef()},
-                            {qty = 1, card = fighter_longsword_carddef()},
+                            {qty = 1, card = fighter_lightbringer_carddef()},
                             {qty = 1, card = paladin_blessed_whetstone_carddef()}
                         },
                         skills = {
                             {qty = 1, card = paladin_prayer_carddef() },
-                            {qty = 1, card = paladin_sacred_oath_carddef()},
+                            {qty = 1, card = paladin_oath_of_righteousness_carddef()},
                             {qty = 1, card = paladin_guardians_shield_carddef()}
                         },
                         buffs = {
