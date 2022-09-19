@@ -1,20 +1,3 @@
---[[
-Paladin Custom Class
-
-Starting Cards 
-Longsword (from Fighter - 3 dmg)(weapon)
-Spiked Mace (from Cleric - 2 dmg, 1g)(weapon)
-Warhammer (2 dmg or 2 heal, both if another weapon is in play)(weapon)
-Crusader (2 Guard, 1g or 1 heal) (champion)
-Gold x 5 (item)
-Ruby x 1 (item)
-
-Level 3 Skill 
-Prayer (1 dmg + 3 health)
-
-Level 3 Ability
-Zealous Oath (Prepare up to 3 champions)
-]]
 
 require "herorealms"
 require "decks"
@@ -23,6 +6,7 @@ require "stdcards"
 require "hardai"
 require "mediumai"
 require "easyai"
+require "aggressiveai"
 
 
 -- START Warhammer CARD
@@ -50,7 +34,7 @@ function paladin_warhammer_carddef()
                                             layout = layoutCard(
                                                 {
                                                     title = "Warhammer",
-                                                    art = "icons/cleric_brightstar_shield",
+                                                    art = "art/T_Flesh_Ripper",
                                                     text = "Gain <sprite name=\"combat_2\">"
                                                 }
                                             ),
@@ -61,7 +45,7 @@ function paladin_warhammer_carddef()
                                             layout = layoutCard(
                                                 {
                                                     title = "Warhammer",
-                                                    art = "icons/cleric_brightstar_shield",
+                                                    art = "art/T_Flesh_Ripper",
                                                     text = "Gain <sprite name=\"health_2\">"
                                                 }
                                             ),
@@ -78,7 +62,7 @@ function paladin_warhammer_carddef()
             layout = createLayout(
                 {
                     name = "Warhammer",
-                    art = "zoomedbuffs/cleric_brightstar_shield",
+                    art = "art/T_Flesh_Ripper",
                     frame = "frames/Cleric_CardFrame",
                     text = "Gain <sprite name=\"combat_2\"> or Gain <sprite name=\"health_2\"> \n <size=50%>If you have played a weapon this turn, gain both.</size>",
                 }
@@ -116,7 +100,7 @@ function paladin_crusader_carddef()
                                                 text = ("{1 gold}")
                                             }
                                         ),
-                                        tags = {gainCombatTag}
+                                        tags = {gainGoldTag}
                                     },
                                     {
                                         effect = gainHealthEffect(1),
@@ -140,7 +124,7 @@ function paladin_crusader_carddef()
                     name = "Crusader",
                     art = "avatars/man_at_arms",
                     frame = "frames/Cleric_CardFrame",
-                    text = "<size=250%><pos=-5%><sprite name=\"expend\"></pos></size><size=175%><pos=25%><voffset=.2em><sprite name=\"combat_1\"> or <sprite name=\"health_1\"></size></voffset>",
+                    text = "<size=250%><pos=-5%><sprite name=\"expend\"></pos></size><size=175%><pos=25%><voffset=.2em><sprite name=\"gold_1\"> or <sprite name=\"health_1\"></size></voffset>",
                     health = 2,
                     isGuard = true
                 }
@@ -585,8 +569,8 @@ function paladin_lightbringer_carddef()
             layout = createLayout(
                 {
                     name = "Lightbringer",
-                    art = "art/T_Flesh_Ripper",
-                    frame = "frames/Warrior_CardFrame",
+                    art = "icons/fighter_mighty_blow_OLD",
+                    frame = "frames/Cleric_CardFrame",
                     text = '<size=50%><i>Replaces: Longsword/i></size><br><size=170%><sprite name="combat_3"></size> <br><size=75%>If you have played another weapon this turn, stun target champion.</size>'
                 }
             )
@@ -616,15 +600,15 @@ function paladin_templar_carddef()
                             {
                                 choices = {
                                     {
-                                        effect = gainCombatEffect(2),
+                                        effect = gainGoldEffect(2),
                                         layout = layoutCard(
                                             {
                                                 title = "Templar",
                                                 art = "avatars/man_at_arms",
-                                                text = ("{2 combat}")
+                                                text = ("{2 gold}")
                                             }
                                         ),
-                                        tags = {gainCombatTag}
+                                        tags = {gainGoldTag}
                                     },
                                     {
                                         effect = gainHealthEffect(2),
@@ -635,7 +619,7 @@ function paladin_templar_carddef()
                                                 text = ("{2 health}")
                                             }
                                         ),
-                                        tags = {gainHealthTag}
+                                        tags = {gainHealth2Tag}
                                     }
                                 }
                             }
@@ -648,7 +632,7 @@ function paladin_templar_carddef()
                     name = "Templar",
                     art = "avatars/man_at_arms",
                     frame = "frames/Cleric_CardFrame",
-                    text = "<size=250%><pos=-5%><sprite name=\"expend\"></pos></size><size=175%><pos=25%><voffset=.2em><sprite name=\"combat_2\"> or <sprite name=\"health_2\"></size></voffset>",
+                    text = "<size=250%><pos=-5%><sprite name=\"expend\"></pos></size><size=175%><pos=25%><voffset=.2em><sprite name=\"gold_2\"> or <sprite name=\"health_2\"></size></voffset>",
                     health = 3,
                     isGuard = true
                 }
@@ -725,7 +709,7 @@ function paladin_blind_justice_carddef()
                     {
                         id = "paladin_blind_justice_ab",
                         trigger = autoTrigger,
-                        effect = hitOpponentEffect(2),
+                        effect = hitOpponentEffect(2).seq(damageTarget(1).apply(selectLoc(loc(oppPid, inPlayPloc)).where(isCardExpended().invert().And(isCardStunnable()))))
                     }
                 ),
             },
@@ -742,13 +726,111 @@ function paladin_blind_justice_carddef()
 end
 -- END Blind Justice CARD
 
--- START Guardian's Shield ARMOR  
+--START Guardian's Shield ARMOR  WIP
+function paladin_guardians_shield_carddef()
+    local cardLayout =
+        createLayout(
+        {
+            name = "Guardian's Shield",
+            art = "icons/cleric_brightstar_shield",
+            frame = "frames/Warrior_CardFrame",
+            text = ('<size=300%><line-height=0%><voffset=-.4em> <pos=-75%><sprite name="requiresHealth_20"></size><line-height=80%>\n <voffset=1.8em><size=80%><sprite name=\"expend\"> \n Gain 2 <sprite name="combat"> for\n  each champion\n  you have in\n  play.</size>')
+        }
+    )
 
--- END Guardian's Shield ARMOR   
+    return createMagicArmorDef(
+        {
+            id = "guardians_shield",
+            name = "Guardian's Shield",
+            layout = cardLayout,
+            layoutPath = "icons/cleric_brightstar_shield",
+            abilities = {
+                createAbility({
+                    id = "paladin_guardians_shield_ab",
+                    trigger = uiTrigger,
+                    effect = gainCombatEffect(selectLoc(currentInPlayLoc).where(isCardChampion()).count().multiply(2)), 
+                    check = minHealthCurrent(20).And(selectLoc(currentInPlayLoc).where(isCardChampion()).count().gte(1)),
+                    cost = expendCost,
+                    tags = {}
+                })
+            }
+        }
+    )
+end
+-- END Guardian's Shield ARMOR   ]]
 
--- START Gauntlets of Purification ARMOR   
+-- START Gauntlets of Power ARMOR   
+function paladin_gauntlets_of_power_carddef()
+    local cardLayout =
+        createLayout(
+        {
+            name = "Gauntlets of Power",
+            art = "icons/wizard_spellcaster_gloves",
+            frame = "frames/Cleric_armor_frame",
+            text = ('<size=300%><line-height=0%><voffset=-.8em> <pos=-75%><sprite name="requiresHealth_20"></size><line-height=80%> \n <voffset=1.8em><size=80%> If you have dealt 5 <sprite name="combat"> to an opponent this turn. \n  Gain 2 <sprite name="health"> \n or Draw 1 \n then discard 1 </size>')
+        }
+    )
 
--- END Gauntlets of Purification ARMOR
+    return createMagicArmorDef(
+        {
+            id = "gauntlets_of_power",
+            name = "Gauntlets of Power",
+            layout = cardLayout,
+            layoutPath = "icons/wizard_spellcaster_gloves",
+            abilities = {
+                createAbility(
+                    {
+                        id = "gauntlets_of_power",
+                        layout = cardLayout,
+                        effect = pushChoiceEffect(
+                            {
+                                choices = {
+                                    {
+                                        effect = drawCardsEffect(1).seq(
+                                            pushTargetedEffect(
+                                                {
+                                                    desc = "Discard a card",
+                                                    min = 1,
+                                                    max = 1,
+                                                    validTargets = selectLoc(currentHandLoc),
+                                                    targetEffect = discardTarget()
+                                                }
+                                            )
+                                        ),
+                                        layout = layoutCard(
+                                            {
+                                                title = "Gauntlets of Power",
+                                                art = "icons/wizard_spellcaster_gloves",
+                                                text = ("Draw 1 then discard 1.")
+                                            }
+                                        ),
+                                        tags = {cycle1Tag}
+                                    },
+                                    {
+                                        effect = gainGoldEffect(1),
+                                        layout = layoutCard(
+                                            {
+                                                title = "Gauntlets of Power",
+                                                art = "icons/wizard_spellcaster_gloves",
+                                                text = ("{1 gold}")
+                                            }
+                                        ),
+                                        tags = { gainGold1Tag }
+                                    }
+                                }
+                            }
+                        ),
+                        trigger = uiTrigger,
+                        check = minDamageTakenOpp(5).And(minHealthCurrent(30)),
+                        cost = expendCost,
+                        tags = { draw1Tag, gainGold1Tag }
+                    }
+                )
+            }
+        }
+    )
+end
+-- END Gauntlets of Power ARMOR
 
 -- START Holy Relic UPGRADE
 function paladin_holy_relic_carddef()
@@ -780,9 +862,103 @@ function paladin_holy_relic_carddef()
 end
 -- END Holy Relic UPGRADE
 
--- START level 11 UPGRADE
+-- START Blessed Whetstone UPGRADE
+function paladin_blessed_whetstone_carddef()
+    return createActionDef(
+        {
+            id = "paladin_blessed_whetstone",
+            name = "Blessed Whetstone",
+            types = {itemType, actionType, noStealType},
+            acquireCost = 0,
+            abilities = {
+                createAbility(
+                    {
+                        id = "paladin_blessed_whetstone",
+                        trigger = autoTrigger,
+                        effect = drawCardsEffect(1).seq(gainCombatEffect(selectLoc(currentCastLoc).where(isCardType(weaponType)).count()))
+                    }
+                )
+            },
+            layout = createLayout(
+                {
+                    name = "Blessed Whetstone",
+                    art = "icons/cunning_of_the_wolf",
+                    frame = "frames/Cleric_CardFrame",
+                    text = '<size=200%><voffset=.4em><sprite name="gold_2"></voffset></size><line-height=70%><size=75%>\n+1 <sprite name="health"> for each weapon you have in play.</size></line-height>'
+                }
+            )
+        }
+    )
+end
+-- END Blessed Whetstone UPGRADE
+--[[
+function extraDrawBuffDef()
+	--Causes player with the buff to play with one extra card each turn.
+    return createGlobalBuff({
+        id="extra_draw_buff",
+        name = "Extra Draw",
+        abilities = {
+            createAbility({
+                id="extra_draw_effect",
+                trigger = endOfTurnTrigger,
+                effect = drawCardsEffect(1)
+            })
+        }
+    })
+end
 
--- END level 11 UPGRADE
+-- Choices at the beginning.
+function chooseDifficulty()
+    local ef = pushChoiceEffect({
+		choices = {
+			{
+				effect = gainMaxHealthEffect(currentPid, 20).seq(healPlayerEffect(currentPid, 20)),
+				layout = layoutCard({
+					title = "Easy",
+					art = "art/T_Seek_Revenge",
+					text = "You start with +20 <size=200%><sprite name=\"health\">"
+				}),
+			},
+			{
+				effect = nullEffect(),
+				layout = layoutCard({
+					title = "Standard",
+					art = "avatars/orcs",
+					text = "No modifiers."
+				}),
+			},
+			{
+				effect = createCardEffect(breastplate_of_fury_carddef(), loc(oppPid, skillsPloc)),
+				layout = layoutCard({
+					title = "Hard",
+					art = "icons/orc_raiders",
+					text = "The opponent has Breastplate of Fury."
+				}),
+			},
+			{
+				effect = createCardEffect(breastplate_of_fury_carddef(), loc(oppPid, skillsPloc)).seq(moveTarget(loc(oppPid, handPloc)).apply(selectLoc(loc(oppPid, deckPloc)).take(1))).seq(createCardEffect(gold_carddef(), currentDeckLoc)).seq(createCardEffect(dagger_carddef(), currentDeckLoc)).seq(createCardEffect(gold_carddef(), currentDeckLoc)).seq(createCardEffect(dagger_carddef(), currentDeckLoc)),
+				layout = layoutCard({
+					title = "Harder",
+					art = "art/T_Orc_Riot",
+					text = "<size=80%>The opponent has Breastplate of Fury. Additional two golds and two daggers are added in your starting deck."
+				})
+			}
+		}	
+	}).seq(sacrificeSelf())
+
+	-- Triggers choices at game start.
+    return createGlobalBuff({
+        id="choose_difficulty",
+        name = "Choose Difficulty",
+        abilities = {
+            createAbility({
+                id="choose_difficulty",
+                trigger = startOfGameTrigger,
+                effect = ef
+            })
+        }
+    })
+end]]
 
 function setupGame(g)
     registerCards(
@@ -805,8 +981,10 @@ function setupGame(g)
             paladin_lightbringer_carddef(),
             paladin_jeweled_dagger_carddef(),
             paladin_holy_relic_carddef(),
+            paladin_blessed_whetstone_carddef(),
             paladin_blind_justice_carddef(),
-
+            paladin_guardians_shield_carddef(),
+            paladin_gauntlets_of_power_carddef(),
         }
     )
 
@@ -829,16 +1007,19 @@ function setupGame(g)
                         deck = {
                             {qty = 1, card = cleric_spiked_mace_carddef()},
                             {qty = 1, card = paladin_warhammer_carddef()},
-                            {qty = 1, card = paladin_crusader_carddef()},
+                            {qty = 1, card = paladin_templar_carddef()},
                             {qty = 1, card = ruby_carddef()},
                             {qty = 5, card = gold_carddef()},
                             {qty = 1, card = fighter_longsword_carddef()},
+                            {qty = 1, card = paladin_blessed_whetstone_carddef()}
                         },
                         skills = {
                             {qty = 1, card = paladin_prayer_carddef() },
-                            {qty = 1, card = paladin_sacred_oath_carddef()}
+                            {qty = 1, card = paladin_sacred_oath_carddef()},
+                            {qty = 1, card = paladin_guardians_shield_carddef()}
                         },
                         buffs = {
+                            --chooseDifficulty(),
                             drawCardsAtTurnEndDef(),
                             discardCardsAtTurnStartDef(),
                             fatigueCount(40, 1, "FatigueP1")
@@ -866,4 +1047,18 @@ function setupGame(g)
 end
 
 function endGame(g)
+end
+
+
+function setupMeta(meta)
+    meta.name = "paladin_level_up"
+    meta.minLevel = 0
+    meta.maxLevel = 0
+    meta.introbackground = ""
+    meta.introheader = ""
+    meta.introdescription = ""
+    meta.path = "C:/Users/agentc13/github/hero-realms-lua-scripts/AC13/paladin_level_up.lua"
+     meta.features = {
+}
+
 end
