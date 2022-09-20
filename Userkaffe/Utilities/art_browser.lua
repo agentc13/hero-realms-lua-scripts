@@ -404,5 +404,4 @@ function setupMeta(meta)
     meta.path = "D:/HRLS/Hero-Realms-Lua-Scripts/Userkaffe/Utilities/art_browser.lua"
      meta.features = {
 }
-
 end

@@ -324,5 +324,4 @@ function setupMeta(meta)
     meta.path = "D:/HRLS/Hero-Realms-Lua-Scripts/Userkaffe/Utilities/avatar_browser.lua"
      meta.features = {
 }
-
 end

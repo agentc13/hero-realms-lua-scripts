@@ -908,7 +908,7 @@ function extraDrawBuffDef()
 end
 
 -- Choices at the beginning.
-function chooseUpgrades()
+function chooseDifficulty()
     local ef = pushChoiceEffect({
 		choices = {
 			{
@@ -919,7 +919,7 @@ function chooseUpgrades()
 					text = "You start with +20 <size=200%><sprite name=\"health\">"
 				}),
 			},
-			{   
+			{
 				effect = nullEffect(),
 				layout = layoutCard({
 					title = "Standard",
@@ -1010,12 +1010,12 @@ function setupGame(g)
                             {qty = 1, card = paladin_templar_carddef()},
                             {qty = 1, card = ruby_carddef()},
                             {qty = 5, card = gold_carddef()},
-                            {qty = 1, card = fighter_longsword_carddef()},
+                            {qty = 1, card = paladin_lightbringer_carddef()},
                             {qty = 1, card = paladin_blessed_whetstone_carddef()}
                         },
                         skills = {
                             {qty = 1, card = paladin_prayer_carddef() },
-                            {qty = 1, card = paladin_sacred_oath_carddef()},
+                            {qty = 1, card = paladin_oath_of_righteousness_carddef()},
                             {qty = 1, card = paladin_guardians_shield_carddef()}
                         },
                         buffs = {
@@ -1050,6 +1050,7 @@ function endGame(g)
 end
 
 
+
 function setupMeta(meta)
     meta.name = "paladin_level_up"
     meta.minLevel = 0
@@ -1057,7 +1058,7 @@ function setupMeta(meta)
     meta.introbackground = ""
     meta.introheader = ""
     meta.introdescription = ""
-    meta.path = "C:/Users/agentc13/github/hero-realms-lua-scripts/AC13/paladin_level_up.lua"
+    meta.path = "C:/Users/agentc13/projects/hero-realms-lua-scripts/AC13/paladin_level_up.lua"
      meta.features = {
 }
 
