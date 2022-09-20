@@ -908,7 +908,7 @@ function extraDrawBuffDef()
 end
 
 -- Choices at the beginning.
-function chooseDifficulty()
+function chooseUpgrades()
     local ef = pushChoiceEffect({
 		choices = {
 			{
@@ -919,7 +919,7 @@ function chooseDifficulty()
 					text = "You start with +20 <size=200%><sprite name=\"health\">"
 				}),
 			},
-			{
+			{   
 				effect = nullEffect(),
 				layout = layoutCard({
 					title = "Standard",

@@ -437,5 +437,9 @@
     "currentCastLoc",
     "isCardType"
   ],
-  "Lua.diagnostics.disable": ["undefined-global", "lowercase-global"]
+  "Lua.diagnostics.disable": [
+    "undefined-global",
+    "lowercase-global",
+    "duplicate-index"
+  ]
 }
