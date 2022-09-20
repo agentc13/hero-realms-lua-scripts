@@ -394,7 +394,6 @@ function endGame(g)
 end
 
 
-
 function setupMeta(meta)
     meta.name = "art_browser"
     meta.minLevel = 0
@@ -402,8 +401,7 @@ function setupMeta(meta)
     meta.introbackground = ""
     meta.introheader = ""
     meta.introdescription = ""
-    meta.path = "C:/Users/agentc13/github/hero-realms-lua-scripts/Userkaffe/Utilities/art_browser.lua"
+    meta.path = "D:/HRLS/Hero-Realms-Lua-Scripts/Userkaffe/Utilities/art_browser.lua"
      meta.features = {
 }
-
 end

@@ -11,6 +11,7 @@ function siphon_life_def()
 	return createSkillDef({
 		id = "siphon_life",
 		name = "Siphon Life",
+		cardTypeLabel = "Skill",
 		types = { skillType },
         abilities = {
 			createAbility({
@@ -19,7 +20,7 @@ function siphon_life_def()
 				promptType = showPrompt,
 				layout = createLayout({
 					name = "Siphon Life",
-					art = "art/T_The_Rot",
+					art = "art/T_Life_Force",
 					text = "<size=400%><line-height=0%><voffset=-0.6em> <pos=-95%><sprite name=\"expend_2\"></size><line-height=100%> \n <voffset=1.8em><size=90%><pos=10%>You gain 1<sprite name=\"health\"> and\n<pos=10%>target opponent\n<pos=10%>loses 1<sprite name=\"health\">.\n<pos=10%>This also affects\n<pos=10%>maximum health."
 				}),
 				effect = gainMaxHealthEffect(currentPid, 1).seq(gainHealthEffect(1)).seq(hitOpponentEffect(1)).seq(gainMaxHealthEffect(oppPid, -1)),
@@ -28,17 +29,20 @@ function siphon_life_def()
 		},
 		layout = createLayout({
 			name = "Siphon Life",
-			art = "art/T_The_Rot",
+			art = "art/T_Life_Force",
 			text = "<size=400%><line-height=0%><voffset=-0.6em> <pos=-95%><sprite name=\"expend_2\"></size><line-height=100%> \n <voffset=1.8em><size=90%><pos=10%>You gain 1<sprite name=\"health\"> and\n<pos=10%>target opponent\n<pos=10%>loses 1<sprite name=\"health\">.\n<pos=10%>This also affects\n<pos=10%>maximum health."
 		}),
-		layoutPath= "art/T_The_Rot"
+		layoutPath= "art/T_Life_Force"
 	})
 end		
 
 function piercing_screech_def()
-	return createHeroAbilityDef({
+	return createDef({
 		id = "piercing_screech",
 		name = "Piercing Screech",
+		acquireCost = 0,
+		cardTypeLabel = "Ability",
+		playLocation = skillsPloc,
 		types = { heroAbilityType },
         abilities = {
 			createAbility({
@@ -57,7 +61,7 @@ function piercing_screech_def()
 		layout = createLayout({
 			name = "Piercing Screech",
 			art = "art/T_Flesh_Ripper",
-			text = "<voffset=1em><space=-3.7em><voffset=0.2em><size=200%><sprite name=\"scrap\"></size></voffset><pos=30%> <voffset=0.5em><line-height=40><space=-3.7em>Target opponent discards two cards.</voffset></voffset>"
+			text = "<voffset=1em><space=-1.5em><voffset=-1.3em><size=300%><sprite name=\"scrap\"></size></voffset><pos=30%> <voffset=1.0em><line-height=40><space=-3.0em><space=1.0em>Target opponent\n<space=1.0em>discards\n<space=1.0em>two cards.</voffset></voffset>"
 		}),
 		layoutPath= "art/T_Flesh_Ripper"
 	})
@@ -94,15 +98,20 @@ end
 function witch_cauldron_carddef()
 	local cardLayout = createLayout({
 		name = "Witch's Cauldron",
-		art = "art/T_Maurader",
-		frame = "frames/Wizard_CardFrame",
+		art = "art/T_Confused_Apparition",
+		frame = "frames/HR_CardFrame_Item_Generic",
+		cardTypeLabel = "Item",
 		text = "<size=150%><sprite name=\"gold_1\"> <sprite name=\"health_3\"><size=80%><br>You may stun one of your champions. If you do, draw a card."
 	})
 	
-	return createActionDef({
+	return createDef({
 		id = "witch_cauldron",
 		name = "Witch's Cauldron",
+		acquireCost = 0,
+		cardTypeLabel = "Item",
+		types = { itemType },
 		layout = cardLayout,
+		playLocation = castPloc,
 		abilities = {
 			createAbility({
 				id = "cauldronMain",

@@ -314,7 +314,6 @@ function endGame(g)
 end
 
 
-
 function setupMeta(meta)
     meta.name = "avatar_browser"
     meta.minLevel = 0
@@ -322,8 +321,7 @@ function setupMeta(meta)
     meta.introbackground = ""
     meta.introheader = ""
     meta.introdescription = ""
-    meta.path = "C:/Users/agentc13/github/hero-realms-lua-scripts/Userkaffe/Utilities/avatar_browser.lua"
+    meta.path = "D:/HRLS/Hero-Realms-Lua-Scripts/Userkaffe/Utilities/avatar_browser.lua"
      meta.features = {
 }
-
 end

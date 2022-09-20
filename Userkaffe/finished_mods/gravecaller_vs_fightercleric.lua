@@ -826,7 +826,7 @@ function extraDrawBuffDef()
     })
 end
 
--- Choices at the beginning.
+
 function chooseDifficulty()
     local ef = pushChoiceEffect({
 		choices = {
@@ -865,7 +865,7 @@ function chooseDifficulty()
 		}	
 	}).seq(sacrificeSelf())
 
-	-- Triggers choices at game
+
     return createGlobalBuff({
         id="choose_difficulty",
         name = "Choose Difficulty",
