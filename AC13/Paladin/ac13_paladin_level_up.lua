@@ -891,74 +891,98 @@ function paladin_blessed_whetstone_carddef()
     )
 end
 -- END Blessed Whetstone UPGRADE
---[[
-function extraDrawBuffDef()
-	--Causes player with the buff to play with one extra card each turn.
-    return createGlobalBuff({
-        id="extra_draw_buff",
-        name = "Extra Draw",
-        abilities = {
-            createAbility({
-                id="extra_draw_effect",
-                trigger = endOfTurnTrigger,
-                effect = drawCardsEffect(1)
-            })
-        }
-    })
-end
 
--- Choices at the beginning.
-function chooseDifficulty()
+-- BEGIN UPGRADE CHOICES
+function level4Upgrades()
     local ef = pushChoiceEffect({
 		choices = {
 			{
-				effect = gainMaxHealthEffect(currentPid, 20).seq(healPlayerEffect(currentPid, 20)),
+                --skills
+				effect = pushChoiceEffect({
+                    choices = {
+                        {
+                            -- Lay on Hands
+                            effect = createCardEffect(paladin_lay_on_hands_carddef(), loc(currentPid, skillsPloc)).seq(sacrificeTarget().apply(selectLoc(loc(currentPid, skillsPloc)).where(isCardName("Prayer")))),
+                            layout = createLayout({
+                                name = "Lay on Hands",
+                                art = "icons/wind_storm",
+                                text = "<size=400%><line-height=0%><voffset=-.25em> <pos=-75%><sprite name=\"expend_2\"></size><line-height=135%> \n <voffset=2em><size=120%><pos=10%>Gain <sprite name=\"health_4\">\n   Gain  <sprite name=\"combat_1\">"
+                            })
+                        },
+                        {
+                            -- Prayer of Devotion
+                            effect = createCardEffect(paladin_prayer_of_devotion_carddef(), loc(currentPid, skillsPloc)).seq(sacrificeTarget().apply(selectLoc(loc(currentPid, skillsPloc)).where(isCardName("Prayer")))),
+                            layout = createLayout({
+                                name = "Prayer of Devotion",
+                                art = "icons/wind_storm",
+                                text = "<size=400%><line-height=0%><voffset=-.25em> <pos=-75%><sprite name=\"expend_2\"></size><line-height=135%> \n <voffset=2em><size=120%><pos=10%>Gain <sprite name=\"health_3\">\n   Gain  <sprite name=\"combat_1\">"
+                            })
+                        },
+
+                    },
+                }),
 				layout = layoutCard({
-					title = "Easy",
+					title = "Upgrade Skill",
 					art = "art/T_Seek_Revenge",
-					text = "You start with +20 <size=200%><sprite name=\"health\">"
+					text = "Upgrade your skill tree."
 				}),
 			},
 			{
-				effect = nullEffect(),
+                -- abilities
+				effect = pushChoiceEffect({
+                    choices = {
+                        {
+                            -- Oath of Righteousness
+                            effect = createCardEffect(paladin_oath_of_righteousness_carddef(), loc(currentPid, skillsPloc)).seq(sacrificeTarget().apply(selectLoc(loc(currentPid, skillsPloc)).where(isCardName("Sacred Oath")))),
+                            layout = createLayout({
+                                name = "Oath of Righteousness",
+                                art = "art/T_Devotion",
+                                text = "Prepare up to 3 champions in play. Gain +1 <sprite name=\"combat\"> for each champion you have in play"
+                            }),
+                        },
+                        {
+                            -- Oath of Devotion
+                            effect = createCardEffect(paladin_oath_of_devotion_carddef(), loc(currentPid, skillsPloc)).seq(sacrificeTarget().apply(selectLoc(loc(currentPid, skillsPloc)).where(isCardName("Sacred Oath")))),
+                            layout = createLayout({
+                                name = "Oath of Devotion",
+                                art = "art/T_Devotion",
+                                text = "Prepare up to 3 champions in play. Those champions gain +1 <sprite name=\"shield\"> until they leave play"
+                            }),
+                        },
+
+                    },
+                }),
 				layout = layoutCard({
-					title = "Standard",
-					art = "avatars/orcs",
-					text = "No modifiers."
+					title = "Upgrade Ability",
+					art = "art/T_Devotion",
+					text = "Upgrade you Sacred Oath ability."
 				}),
 			},
-			{
-				effect = createCardEffect(breastplate_of_fury_carddef(), loc(oppPid, skillsPloc)),
+            {
+                -- Health
+				effect = gainMaxHealthEffect(currentPid, 7).seq(healPlayerEffect(currentPid, 7)),
 				layout = layoutCard({
-					title = "Hard",
-					art = "icons/orc_raiders",
-					text = "The opponent has Breastplate of Fury."
+					title = "Upgrade Health",
+					art = "avatars/cristov__the_just",
+					text = "Gain +7 Health"
 				}),
 			},
-			{
-				effect = createCardEffect(breastplate_of_fury_carddef(), loc(oppPid, skillsPloc)).seq(moveTarget(loc(oppPid, handPloc)).apply(selectLoc(loc(oppPid, deckPloc)).take(1))).seq(createCardEffect(gold_carddef(), currentDeckLoc)).seq(createCardEffect(dagger_carddef(), currentDeckLoc)).seq(createCardEffect(gold_carddef(), currentDeckLoc)).seq(createCardEffect(dagger_carddef(), currentDeckLoc)),
-				layout = layoutCard({
-					title = "Harder",
-					art = "art/T_Orc_Riot",
-					text = "<size=80%>The opponent has Breastplate of Fury. Additional two golds and two daggers are added in your starting deck."
-				})
-			}
-		}	
+		}
 	}).seq(sacrificeSelf())
 
-	-- Triggers choices at game start.
+
     return createGlobalBuff({
-        id="choose_difficulty",
-        name = "Choose Difficulty",
+        id="level_4",
+        name = "Level Choices",
         abilities = {
             createAbility({
-                id="choose_difficulty",
+                id="level_4",
                 trigger = startOfGameTrigger,
                 effect = ef
             })
         }
     })
-end]]
+end
 
 function setupGame(g)
     registerCards(
@@ -1050,16 +1074,3 @@ function endGame(g)
 end
 
 
-
-function setupMeta(meta)
-    meta.name = "paladin_level_up"
-    meta.minLevel = 0
-    meta.maxLevel = 0
-    meta.introbackground = ""
-    meta.introheader = ""
-    meta.introdescription = ""
-    meta.path = "C:/Users/agentc13/projects/hero-realms-lua-scripts/AC13/paladin_level_up.lua"
-     meta.features = {
-}
-
-end
