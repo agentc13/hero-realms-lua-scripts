@@ -577,7 +577,6 @@ function paladin_lightbringer_carddef()
         }
     )
 end
-
 -- END LightBringer Card
 
 -- START Templar CARD 
@@ -892,7 +891,7 @@ function paladin_blessed_whetstone_carddef()
 end
 -- END Blessed Whetstone UPGRADE
 
--- BEGIN UPGRADE CHOICES
+--[[ BEGIN UPGRADE CHOICES
 function level4Upgrades()
     local ef = pushChoiceEffect({
 		choices = {
@@ -972,18 +971,18 @@ function level4Upgrades()
 
 
     return createGlobalBuff({
-        id="level_4",
-        name = "Level Choices",
+        id="choose_difficulty",
+        name = "Choose Difficulty",
         abilities = {
             createAbility({
-                id="level_4",
+                id="choose_difficulty",
                 trigger = startOfGameTrigger,
                 effect = ef
             })
         }
     })
 end
-
+]]
 function setupGame(g)
     registerCards(
         g,
@@ -1031,19 +1030,17 @@ function setupGame(g)
                         deck = {
                             {qty = 1, card = cleric_spiked_mace_carddef()},
                             {qty = 1, card = paladin_warhammer_carddef()},
-                            {qty = 1, card = paladin_templar_carddef()},
+                            {qty = 1, card = paladin_crusader_carddef()},
                             {qty = 1, card = ruby_carddef()},
                             {qty = 5, card = gold_carddef()},
-                            {qty = 1, card = paladin_lightbringer_carddef()},
-                            {qty = 1, card = paladin_blessed_whetstone_carddef()}
+                            {qty = 1, card = fighter_longsword_carddef()},
                         },
                         skills = {
                             {qty = 1, card = paladin_prayer_carddef() },
-                            {qty = 1, card = paladin_oath_of_righteousness_carddef()},
-                            {qty = 1, card = paladin_guardians_shield_carddef()}
+                            {qty = 1, card = paladin_sacred_oath_carddef()},
                         },
                         buffs = {
-                            level4Upgrades(),
+                            --level4Upgrades(),
                             drawCardsAtTurnEndDef(),
                             discardCardsAtTurnStartDef(),
                             fatigueCount(40, 1, "FatigueP1")
@@ -1076,6 +1073,8 @@ end
 
 
 
+
+
 function setupMeta(meta)
     meta.name = "ac13_paladin_level_up"
     meta.minLevel = 0
@@ -1083,7 +1082,7 @@ function setupMeta(meta)
     meta.introbackground = ""
     meta.introheader = ""
     meta.introdescription = ""
-    meta.path = "Y:/Projects/hero-realms-lua-scripts/AC13/Paladin/ac13_paladin_level_up.lua"
+    meta.path = "C:/Users/agentc13/projects/hero-realms-lua-scripts/AC13/Paladin/ac13_paladin_level_up.lua"
      meta.features = {
 }
 
