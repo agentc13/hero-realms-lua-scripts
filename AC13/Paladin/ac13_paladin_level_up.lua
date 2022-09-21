@@ -1043,7 +1043,7 @@ function setupGame(g)
                             {qty = 1, card = paladin_guardians_shield_carddef()}
                         },
                         buffs = {
-                            --chooseDifficulty(),
+                            level4Upgrades(),
                             drawCardsAtTurnEndDef(),
                             discardCardsAtTurnStartDef(),
                             fatigueCount(40, 1, "FatigueP1")
