@@ -826,7 +826,6 @@ function extraDrawBuffDef()
     })
 end
 
-
 function chooseDifficulty()
     local ef = pushChoiceEffect({
 		choices = {
@@ -865,7 +864,6 @@ function chooseDifficulty()
 		}	
 	}).seq(sacrificeSelf())
 
-
     return createGlobalBuff({
         id="choose_difficulty",
         name = "Choose Difficulty",
@@ -901,18 +899,19 @@ function setupGame(g)
         players = {
             {
                 id = plid1,
-                startDraw = 5,
+                startDraw = 4,
                 name = "Gravecaller",
                 avatar="necromancers",
                 health = 50,
                 cards = {
 					hand = {
+					  { qty=1, card=reaper_s_scythe_carddef() }
 					},
 					deck = {
                       { qty=1, card=haphazard_resurrection_carddef() },
 					  { qty=1, card=underworld_smuggling_carddef() },
 					  { qty=1, card=ruby_carddef() },
-					  { qty=2, card=reaper_s_scythe_carddef() },
+					  { qty=1, card=reaper_s_scythe_carddef() },
 					  { qty=5, card=dagger_carddef() },
 					  { qty=5, card=gold_carddef() }
 					},
