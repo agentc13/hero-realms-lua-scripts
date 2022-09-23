@@ -891,7 +891,7 @@ function paladin_blessed_whetstone_carddef()
 end
 -- END Blessed Whetstone UPGRADE
 
---[[ BEGIN UPGRADE CHOICES
+-- BEGIN UPGRADE CHOICES
 function level4Upgrades()
     local ef = pushChoiceEffect({
 		choices = {
@@ -982,7 +982,8 @@ function level4Upgrades()
         }
     })
 end
-]]
+-- END UPGRADE CHOICES ]]
+
 function setupGame(g)
     registerCards(
         g,
