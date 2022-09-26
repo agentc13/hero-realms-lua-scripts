@@ -11,9 +11,8 @@ require 'easyai'
 -- Add custom cards here.
 
 function setupGame(g)
-    -- Add custom cards here. 
     registerCards(g, {
-        
+     -- Add custom cards here.    
     })
 
     standardSetup(g, {
@@ -56,9 +55,14 @@ function setupGame(g)
                 maxHealth = 55,
                 cards = {
                     deck = {
+                        -- Replace these with AI starting cards
                         { qty = 2, card = dagger_carddef() },
                         { qty = 8, card = gold_carddef() },
                     },
+                                        --[[ Add starting skill, ability and armor here.  Commented out for now. 
+                    skills = {
+
+                    },]]
                     buffs = {
                         drawCardsAtTurnEndDef(),
                         discardCardsAtTurnStartDef(),
