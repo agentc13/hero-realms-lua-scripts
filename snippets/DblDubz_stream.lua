@@ -8,9 +8,10 @@ require 'hardai'
 require 'mediumai'
 require 'easyai'
 
-
+-- Add custom cards here.
 
 function setupGame(g)
+    -- Add custom cards here. 
     registerCards(g, {
         
     })
@@ -31,9 +32,14 @@ function setupGame(g)
                 maxHealth = 55,
                 cards = {
                     deck = {
+                        -- Replace these cards with the starter card for the class Goldx6, follower_a, follwer_b, prayer beads, and ruby. 
                         { qty = 2, card = dagger_carddef() },
                         { qty = 8, card = gold_carddef() },
                     },
+                    --[[ Add starting skill, ability and armor here.  Commented out for now. 
+                    skills = {
+
+                    },]]
                     buffs = {
                         drawCardsAtTurnEndDef(),
                         discardCardsAtTurnStartDef(),
@@ -66,4 +72,17 @@ end
 
 -- more info on this later
 function endGame(g)
+end
+
+function setupMeta(meta)
+    meta.name = "DblDubz_stream"
+    meta.minLevel = 0
+    meta.maxLevel = 0
+    meta.introbackground = ""
+    meta.introheader = ""
+    meta.introdescription = ""
+    meta.path = "Y:/Projects/hero-realms-lua-scripts/snippets/DblDubz_stream.lua"
+     meta.features = {
+}
+
 end
