@@ -136,12 +136,25 @@ function setupGame(g)
                 isAi = true,
                 name = "AC13",
                 avatar = "the_wolf_tribe",
-                health = 55,
-                maxHealth = 55,
+                health = 75,
+                maxHealth = 75,
                 cards = {
                     deck = {
-                        { qty = 2, card = dagger_carddef() },
-                        { qty = 8, card = gold_carddef() },
+                        { qty = 1, card = ruby_carddef() },
+                        { qty = 4, card = gold_carddef() },
+                        { qty = 1, card = wizard_spell_components_carddef() },
+                        { qty = 1, card = ranger_snake_pet_carddef() },
+                        { qty = 2, card = wizard_ignite_carddef() },
+                        { qty = 1, card = wizard_silverskull_amulet_carddef() },
+                        { qty = 1, card = wizard_arcane_wand_carddef() },
+                        { qty = 1, card = wizard_magic_mirror_carddef() },
+                        { qty = 1, card = wondrous_wand_carddef() }
+
+                    },
+                    skills = {
+                        { qty = 1, card = wizard_runic_robes_carddef() },
+                        { qty = 1, card = wizard_pure_channel_carddef() },
+                        { qty = 1, card = wizard_explosive_fireball_carddef() }
                     },
                     buffs = {
                         drawCardsAtTurnEndDef(),
@@ -154,6 +167,20 @@ function setupGame(g)
     })
 end
 
--- more info on this later
+
 function endGame(g)
+end
+
+
+function setupMeta(meta)
+    meta.name = "stream_final"
+    meta.minLevel = 0
+    meta.maxLevel = 0
+    meta.introbackground = ""
+    meta.introheader = ""
+    meta.introdescription = ""
+    meta.path = "Y:/Projects/hero-realms-lua-scripts/AC13/stream_final.lua"
+     meta.features = {
+}
+
 end
