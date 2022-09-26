@@ -1,6 +1,6 @@
 # Contributing to this repository
 
-Here are instructions on how to contribute to this repo from the CLI (Command Line Interface), I will add instructions on how to do this from the GitHub Desktop app later as well.
+Here are instructions on how to contribute to this repo from the CLI (Command Line Interface), I will add instructions on how to do this from the GitHub Desktop app at a later date.
 
 _all of this info was taken and modified from https://kbroman.org/github_tutorial/_
 
