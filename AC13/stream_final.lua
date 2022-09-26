@@ -7,17 +7,22 @@ require 'mediumai'
 require 'easyai'
 
 function sacrificial_mace_carddef()
-    return createActionDef(
+    return createDef(
         {
             id = "sacrificial_mace",
             name = "Sacfiricial Mace",
             types = {weaponType, noStealType, thiefype, clericType, itemType, magicWeaponType, meleeWeaponType, maceType},
             acquireCost = 0,
+            -- this makes it an item that you play like a normal card.
+            cardTypeLabel = "Item",
+            playLocation = castPloc,
             abilities = {
                 createAbility(
                     {
                         id = "sacrificial_mace_ab",
+                        -- triggers when played
                         trigger = autoTrigger,
+                        -- Prompt to select sacrifice (see desc)
                         prompt = showPrompt,
                         -- Make sure to discuss sequencing here!!!
                         effect = gainCombatEffect(1).seq(gainGoldEffect(1)).seq(gainHealthEffect(1)).seq(pushTargetedEffect
@@ -25,27 +30,66 @@ function sacrificial_mace_carddef()
                                     desc = "Sacrifice a card from your hand or discard pile.",
                                     min = 0,
                                     max = 1,
-                                    validTargets = selectLoc(loc(currentPid,discardPloc)),
-                                    targetEffect =sacrificeTarget(),
+                                    -- make sure to discuss .union and the different ways to write these locations and that they can't mix.
+                                    validTargets = selectLoc(loc(currentPid,discardPloc)).union(selectLoc(loc(currentPid, handPloc))),
+                                    targetEffect = sacrificeTarget(),
                                  }),
                             
                     }),
-                layout = createLayout(
-                        {
-                            name = "Sacrificial Mace",
-                            art = "art/T_Influence",
-                            frame = "frames/Cleric_CardFrame",
-                            text = '<size=170%><line-height=75%><sprite name="combat_1"> <sprite name=\"gold_1\"><sprite name=\"health_1\"></line-height></size> \nsize=60%><voffset=1em>Sacrifice a card in your \n hand or discard pile.</size></line-height>'
-                        }
+                },
+            layout = createLayout(
+                {
+                       name = "Sacrificial Mace",
+                       -- Limited art available
+                       art = "art/T_Influence",
+                       -- Card Frames
+                       frame = "frames/Cleric_CardFrame",
+                       -- 
+                       text = '<size=170%><line-height=75%><sprite name=\"combat_1\"> <sprite name=\"gold_1\"><sprite name=\"health_1\"></line-height></size> \n<size=75%><line-height=100%><voffset=1.5em>Sacrifice a card in your \n hand or discard pile.</size></line-height>'
+                }
                 ),
-            },
+
         })
+end
+
+function bless_of_silence_carddef()
+    local cardLayout = createLayout({
+        name = "Bless of Silence",
+        art = "icons/cleric_bless_the_flock",
+        frame = "frames/Cleric_CardFrame",
+        text = "<size=400%><line-height=0%><voffset=-.5em> <pos=-75%><sprite name=\"expend_2\"></size><line-height=100%> \n <voffset=2em><size=100%><pos=10%>Gain <sprite name=\"health_3\">\n Sacrifice a \n card in the \n market row."
+    })
+
+    return createSkillDef({
+        id = "bless_of_silence_skill",
+        name = "Bless of Silence",
+        types = { skillType },
+        layout = cardLayout,
+        layoutPath = "icons/cleric_bless_the_flock",
+        abilities = {
+            createAbility({
+                id = "bless_of_silence_ab",
+                trigger = uiTrigger,
+                activations = singleActivation,
+                layout = cardLayout,
+                effect = gainHealthEffect(2).seq(pushTargetedEffect({
+					desc = "Sacrifice a card in the Market Row.",
+					min = 1,
+					max = 1,
+					validTargets = selectLoc(centerRowLoc),
+					targetEffect = sacrificeTarget(),
+				})),
+                cost = goldCost(2),
+            }),
+        }
+        
+    })
 end
 
 function setupGame(g)
     registerCards(g, {
         sacrificial_mace_carddef(),
-        --bless_of_silence_carddef(),
+        bless_of_silence_carddef(),
     })
 
     standardSetup(g, {
@@ -77,7 +121,7 @@ function setupGame(g)
                     skills = {
                         { qty = 1, card = thief_smooth_heist_carddef() },
                         { qty = 1, card = thief_silent_boots_carddef() },
-                        { qty = 1, card = cleric_bless_the_flock_carddef() },
+                        { qty = 1, card = bless_of_silence_carddef() },
 
                     },
                     buffs = {
