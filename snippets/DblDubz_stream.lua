@@ -1,3 +1,5 @@
+-- This is the base script we will edit for the stream.  You can write this from scratch, or use this template for your own game. We will modify this and remove a couple things for our game.
+
 require 'herorealms'
 require 'decks'
 require 'stdlib'
@@ -17,7 +19,6 @@ function setupGame(g)
         description = "Custom DblDubz Stream Game",
         playerOrder = { plid1, plid2 },
         ai = createHardAi(),
-        randomOrder = true,
         opponents = { { plid1, plid2 } },
         noTradeDeck = false,
         noFireGems = false,
