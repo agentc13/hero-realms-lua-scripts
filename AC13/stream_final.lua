@@ -171,16 +171,3 @@ end
 function endGame(g)
 end
 
-
-function setupMeta(meta)
-    meta.name = "stream_final"
-    meta.minLevel = 0
-    meta.maxLevel = 0
-    meta.introbackground = ""
-    meta.introheader = ""
-    meta.introdescription = ""
-    meta.path = "Y:/Projects/hero-realms-lua-scripts/AC13/stream_final.lua"
-     meta.features = {
-}
-
-end
