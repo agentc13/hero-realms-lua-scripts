@@ -10,7 +10,7 @@ So you want to contribute changes to this repository? Here are instructions on h
 
     You’ll now have your own copy of that repository in your github account.
 
-3.  Open a terminal/shell. (If you are using vscode, "ctrl+shift+`" will open a terminal in the IDE, you can use other methods as well)
+3.  Open a terminal/shell. (If you are using vscode, "ctrl+shift+\`"  ("^+Shift+\`" on mac) will open a terminal in the IDE, you can use other methods as well)
 
 4.  Type `$ git clone git@github.com:username/Hero-Realms-Lua-Scripts` where 'username' is your username.
 
