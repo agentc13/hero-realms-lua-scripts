@@ -1,10 +1,10 @@
+-- These are parts of the game code that are required to run the script.  I believe this means that you require the code from herorealms, the deck setup, stdlib (standard library?), stdcards (standard cards form HR), and the ai difficulty (here we only have the hardai, which is used for p2, but there are other options available as well).  I only included the stuff we are using for this script for this ai.
 require 'herorealms'
 require 'decks'
 require 'stdlib'
 require 'stdcards'
 require 'hardai'
-require 'mediumai'
-require 'easyai'
+
 
 function sacrificial_mace_carddef()
     -- Talk about brackets,parenthesis here.  They can be on the same line or on their own.
