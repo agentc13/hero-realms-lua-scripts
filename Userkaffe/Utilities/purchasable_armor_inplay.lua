@@ -48,7 +48,6 @@ function purchasable_armor_carddef()
 			})
 		},
 		types = {},
-		layout = cardLayout,
 		cardTypeLabel = "Magic Armor",
 		playLocation = inPlayPloc
 	})
