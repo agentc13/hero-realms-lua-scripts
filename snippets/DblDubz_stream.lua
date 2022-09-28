@@ -12,7 +12,7 @@ require 'easyai'
 
 function setupGame(g)
     registerCards(g, {
-     -- Add custom cards here.    
+     -- Add custom cards to the game setup here.    
     })
 
     standardSetup(g, {

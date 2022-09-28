@@ -1,4 +1,4 @@
-
+-- This file contains all the upgrades for the Paladin class. The scripting to "level up" is a WIP.
 require "herorealms"
 require "decks"
 require "stdlib"
