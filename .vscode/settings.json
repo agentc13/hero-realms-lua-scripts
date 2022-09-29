@@ -440,6 +440,7 @@
   "Lua.diagnostics.disable": [
     "undefined-global",
     "lowercase-global",
-    "duplicate-index"
+    "duplicate-index",
+    "redundant-value"
   ]
 }

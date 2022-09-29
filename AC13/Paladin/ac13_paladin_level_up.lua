@@ -892,96 +892,7 @@ end
 -- END Blessed Whetstone UPGRADE
 
 -- BEGIN UPGRADE CHOICES
-function level4Upgrades()
-    local ef = pushChoiceEffect({
-		choices = {
-			{
-                --skills
-				effect = pushChoiceEffect({
-                    choices = {
-                        {
-                            -- Lay on Hands
-                            effect = createCardEffect(paladin_lay_on_hands_carddef(), loc(currentPid, skillsPloc)).seq(sacrificeTarget().apply(selectLoc(loc(currentPid, skillsPloc)).where(isCardName("Prayer")))),
-                            layout = createLayout({
-                                name = "Lay on Hands",
-                                art = "icons/wind_storm",
-                                text = "<size=400%><line-height=0%><voffset=-.25em> <pos=-75%><sprite name=\"expend_2\"></size><line-height=135%> \n <voffset=2em><size=120%><pos=10%>Gain <sprite name=\"health_4\">\n   Gain  <sprite name=\"combat_1\">"
-                            })
-                        },
-                        {
-                            -- Prayer of Devotion
-                            effect = createCardEffect(paladin_prayer_of_devotion_carddef(), loc(currentPid, skillsPloc)).seq(sacrificeTarget().apply(selectLoc(loc(currentPid, skillsPloc)).where(isCardName("Prayer")))),
-                            layout = createLayout({
-                                name = "Prayer of Devotion",
-                                art = "icons/wind_storm",
-                                text = "<size=400%><line-height=0%><voffset=-.25em> <pos=-75%><sprite name=\"expend_2\"></size><line-height=135%> \n <voffset=2em><size=120%><pos=10%>Gain <sprite name=\"health_3\">\n   Gain  <sprite name=\"combat_1\">"
-                            })
-                        },
 
-                    },
-                }),
-				layout = layoutCard({
-					title = "Upgrade Skill",
-					art = "art/T_Seek_Revenge",
-					text = "Upgrade your skill tree."
-				}),
-			},
-			{
-                -- abilities
-				effect = pushChoiceEffect({
-                    choices = {
-                        {
-                            -- Oath of Righteousness
-                            effect = createCardEffect(paladin_oath_of_righteousness_carddef(), loc(currentPid, skillsPloc)).seq(sacrificeTarget().apply(selectLoc(loc(currentPid, skillsPloc)).where(isCardName("Sacred Oath")))),
-                            layout = createLayout({
-                                name = "Oath of Righteousness",
-                                art = "art/T_Devotion",
-                                text = "Prepare up to 3 champions in play. Gain +1 <sprite name=\"combat\"> for each champion you have in play"
-                            }),
-                        },
-                        {
-                            -- Oath of Devotion
-                            effect = createCardEffect(paladin_oath_of_devotion_carddef(), loc(currentPid, skillsPloc)).seq(sacrificeTarget().apply(selectLoc(loc(currentPid, skillsPloc)).where(isCardName("Sacred Oath")))),
-                            layout = createLayout({
-                                name = "Oath of Devotion",
-                                art = "art/T_Devotion",
-                                text = "Prepare up to 3 champions in play. Those champions gain +1 <sprite name=\"shield\"> until they leave play"
-                            }),
-                        },
-
-                    },
-                }),
-				layout = layoutCard({
-					title = "Upgrade Ability",
-					art = "art/T_Devotion",
-					text = "Upgrade you Sacred Oath ability."
-				}),
-			},
-            {
-                -- Health
-				effect = gainMaxHealthEffect(currentPid, 7).seq(healPlayerEffect(currentPid, 7)),
-				layout = layoutCard({
-					title = "Upgrade Health",
-					art = "avatars/cristov__the_just",
-					text = "Gain +7 Health"
-				}),
-			},
-		}
-	}).seq(sacrificeSelf())
-
-
-    return createGlobalBuff({
-        id="choose_difficulty",
-        name = "Choose Difficulty",
-        abilities = {
-            createAbility({
-                id="choose_difficulty",
-                trigger = startOfGameTrigger,
-                effect = ef
-            })
-        }
-    })
-end
 -- END UPGRADE CHOICES ]]
 
 function setupGame(g)
@@ -1041,7 +952,7 @@ function setupGame(g)
                             {qty = 1, card = paladin_sacred_oath_carddef()},
                         },
                         buffs = {
-                            --level4Upgrades(),
+                            --chooseDifficulty(),
                             drawCardsAtTurnEndDef(),
                             discardCardsAtTurnStartDef(),
                             fatigueCount(40, 1, "FatigueP1")
@@ -1070,4 +981,3 @@ end
 
 function endGame(g)
 end
-
