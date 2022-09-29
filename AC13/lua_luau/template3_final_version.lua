@@ -13,7 +13,7 @@ function sacrificial_mace_carddef()
             id = "sacrificial_mace",
             -- Name displayed on the card
             name = "Sacrificial Mace",
-            types = {weaponType, noStealType, thiefype, clericType, itemType, magicWeaponType, meleeWeaponType, maceType},
+            types = {weaponType, noStealType, thiefType, clericType, itemType, magicWeaponType, meleeWeaponType, maceType},
             acquireCost = 0,
             -- the next two lines of code make it an item and say that it gets played to the normal play location.
             cardTypeLabel = "Item",

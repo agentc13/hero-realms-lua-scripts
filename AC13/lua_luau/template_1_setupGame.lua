@@ -77,16 +77,3 @@ end
 -- more info on this later
 function endGame(g)
 end
-
-function setupMeta(meta)
-    meta.name = "DblDubz_stream"
-    meta.minLevel = 0
-    meta.maxLevel = 0
-    meta.introbackground = ""
-    meta.introheader = ""
-    meta.introdescription = ""
-    meta.path = "Y:/Projects/hero-realms-lua-scripts/snippets/DblDubz_stream.lua"
-     meta.features = {
-}
-
-end
