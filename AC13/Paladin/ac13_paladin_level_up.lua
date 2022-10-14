@@ -952,7 +952,7 @@ function setupGame(g)
                             {qty = 1, card = paladin_sacred_oath_carddef()},
                         },
                         buffs = {
-                            --chooseDifficulty(),
+                            --levelUp(),
                             drawCardsAtTurnEndDef(),
                             discardCardsAtTurnStartDef(),
                             fatigueCount(40, 1, "FatigueP1")

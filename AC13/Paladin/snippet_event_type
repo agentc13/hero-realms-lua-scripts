@@ -1,6 +1,0 @@
-require 'hardai_2'
-require 'aggressiveai'
-
-eventType = "event"
-
-function eventTriggeringBuffDef()
