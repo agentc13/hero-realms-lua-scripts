@@ -25,7 +25,7 @@ function fighter_rallying_flag_carddef()
             layout = createLayout(
                 {
                     name = "Rallying Flag",
-                    art = "art/T_Devotion",
+                    art = "art/T_Fighter_Rallying_Flag.png",
                     frame = "frames/Warrior_CardFrame",
                     text = '<size=200%><sprite name="gold_1">   <sprite name="health_3">'
                 }
@@ -38,7 +38,7 @@ function setupGame(g)
     standardSetup(
         g,
         {
-            description = "Vanilla (No Heroes)",
+            description = "Rallying Flag Alt",
             playerOrder = {plid1, plid2},
             ai = ai.CreateKillSwitchAi(createAggressiveAI(), createHardAi2()),
             timeoutAi = createTimeoutAi(),
@@ -53,6 +53,9 @@ function setupGame(g)
                     },
                     cards = {
                         -- cards allows to add any cards to any of hero location at the start of the game
+                        deck = {
+                            {qty = 1, card = fighter_rallying_flag_carddef()},
+                        },
                         buffs = {
                             drawCardsAtTurnEndDef(),
                             discardCardsAtTurnStartDef(),
