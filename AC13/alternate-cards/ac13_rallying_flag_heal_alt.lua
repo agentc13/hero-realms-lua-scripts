@@ -90,6 +90,7 @@ function setupGame(g)
 end
 
 
+
 function setupMeta(meta)
     meta.name = "ac13_rallying_flag_heal_alt"
     meta.minLevel = 0
@@ -97,7 +98,7 @@ function setupMeta(meta)
     meta.introbackground = ""
     meta.introheader = ""
     meta.introdescription = ""
-    meta.path = "C:/Users/timot/OneDrive/Documents/Hero-Realms-Lua-Scripts/AC13/alternate-cards/ac13_rallying_flag_heal_alt.lua"
+    meta.path = "Z:/Projects/hero-realms-lua-scripts/AC13/alternate-cards/ac13_rallying_flag_heal_alt.lua"
      meta.features = {
 }
 
