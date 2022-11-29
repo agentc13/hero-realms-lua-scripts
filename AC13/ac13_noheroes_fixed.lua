@@ -23,6 +23,7 @@ function setupGame(g)
                     name = "Player 1",
                     avatar = "ogre",
                     health = 50,
+                    maxHealth=300,
                     cards = {
                         deck = {
                             {qty = 1, card = dagger_carddef()},
@@ -44,6 +45,7 @@ function setupGame(g)
                     name = "Player 2",
                     avatar = "skeleton",
                     health = 50,
+                    maxHealth=300,
                     cards = {
                         deck = {
                             {qty = 1, card = dagger_carddef()},
@@ -64,15 +66,4 @@ function setupGame(g)
 end
 
 function endGame(g)
-end
-
-function setupMeta(meta)
-    meta.name = "ac13_noheroes_fixed"
-    meta.minLevel = 0
-    meta.maxLevel = 0
-    meta.introbackground = ""
-    meta.introheader = ""
-    meta.introdescription = ""
-    meta.path = "D:/HRLS/Hero-Realms-Lua-Scripts/AC13/ac13_noheroes_fixed.lua"
-    meta.features = {}
 end
