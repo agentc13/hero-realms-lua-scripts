@@ -244,8 +244,7 @@ function setupGame(g)
                             {qty = 1, card = paladin_sacred_oath_carddef()},
                         },
                         buffs = {
-                            --chooseDifficulty(),
-                            drawCardsAtTurnEndDef(),
+                            drawCardsCountAtTurnEndDef(5),
                             discardCardsAtTurnStartDef(),
                             fatigueCount(40, 1, "FatigueP1")
                         }
@@ -253,14 +252,14 @@ function setupGame(g)
                 },
                 {
                     id = plid2,
-                    isAi = true,
+                    -- isAi = true,
                     startDraw = 5,
                     init = {
                         fromEnv = plid2
                     },
                     cards = {
                         buffs = {
-                            drawCardsAtTurnEndDef(),
+                            drawCardsCountAtTurnEndDef(5),
                             discardCardsAtTurnStartDef(),
                             fatigueCount(40, 1, "FatigueP2")
                         }
@@ -273,6 +272,7 @@ end
 
 function endGame(g)
 end
+
 
 
 function setupMeta(meta)
