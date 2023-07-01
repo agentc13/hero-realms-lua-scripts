@@ -169,26 +169,25 @@ function setupGame(g)
 						{ qty=1, card=siphon_life_def() },
 						{ qty=1, card=piercing_screech_def() }
 					},
-                    buffs = {
-                        drawCardsAtTurnEndDef(),
-                        discardCardsAtTurnStartDef(),
-                        fatigueCount(40, 1, "FatigueP1")
-                    }
+					buffs = {
+						drawCardsCountAtTurnEndDef(5),
+						discardCardsAtTurnStartDef(),
+						fatigueCount(40, 1, "FatigueP1")
+					}
                 }
             },
             {
                 id = plid2,
-		isAi = true, 
                 startDraw = 5,
 		init = {
                     fromEnv = plid2
                 },
                 cards = {
-                    buffs = {
-                        drawCardsAtTurnEndDef(),
-                        discardCardsAtTurnStartDef(),
-                        fatigueCount(40, 1, "FatigueP2")
-                    }
+					buffs = {
+						drawCardsCountAtTurnEndDef(5),
+						discardCardsAtTurnStartDef(),
+						fatigueCount(40, 1, "FatigueP2")
+					}
                 }
             }            
         }
@@ -199,3 +198,17 @@ function endGame(g)
 end
 
 -- Created by Userkaffe
+
+
+function setupMeta(meta)
+    meta.name = "userkaffe_witch_class"
+    meta.minLevel = 0
+    meta.maxLevel = 0
+    meta.introbackground = ""
+    meta.introheader = ""
+    meta.introdescription = ""
+    meta.path = "Z:/Projects/hero-realms-lua-scripts/Userkaffe/finished_mods/userkaffe_witch_class.lua"
+     meta.features = {
+}
+
+end

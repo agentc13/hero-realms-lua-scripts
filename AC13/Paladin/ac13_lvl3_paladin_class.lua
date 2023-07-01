@@ -181,7 +181,7 @@ function paladin_sacred_oath_carddef()
                     name = "Sacred Oath",
                     art = "art/T_Devotion",
                     frame = "frames/Cleric_CardFrame",
-                    text = "Prepare up to 3 champions in play."
+                    text = "<voffset=1em><space=-.5em><voffset=-1.3em><size=200%><sprite name=\"scrap\"></size></voffset><pos=30%> <voffset=1.0em><line-height=40><space=-3.0em><space=1.5em>Prepare up to\n<space=1.5em>3 champions\n<space=1.5em>in play.</voffset></voffset>"
                     }),
                 effect = pushTargetedEffect({
                     desc = "Choose up to 3 champions in play. Prepare those champions",
@@ -196,7 +196,7 @@ function paladin_sacred_oath_carddef()
         layout = createLayout({
             name = "Sacred Oath",
             art = "art/T_Devotion",
-            text = "Prepare up to 3 champions in play."
+            text = "<voffset=1em><space=-.5em><voffset=-1.3em><size=200%><sprite name=\"scrap\"></size></voffset><pos=30%> <voffset=1.0em><line-height=40><space=-3.0em><space=1.5em>Prepare up to\n<space=1.5em>3 champions\n<space=1.5em>in play.</voffset></voffset>"
         }),
         layoutPath  = "art/T_Devotion",
 	})
@@ -272,6 +272,7 @@ end
 
 function endGame(g)
 end
+
 
 
 
