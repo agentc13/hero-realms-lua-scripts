@@ -20,10 +20,11 @@ function setupGame(g)
                 {
                     id = plid1,
                     startDraw = 3,
-                    name = "Player 1",
-                    avatar = "ogre",
+                    init = {
+                        fromEnv = plid1
+                    },
                     health = 50,
-                    maxHealth=300,
+                    maxHealth=50,
                     cards = {
                         deck = {
                             {qty = 1, card = dagger_carddef()},
@@ -40,12 +41,12 @@ function setupGame(g)
                 },
                 {
                     id = plid2,
-                    isAi = true,
                     startDraw = 5,
-                    name = "Player 2",
-                    avatar = "skeleton",
+                    init = {
+                        fromEnv = plid2
+                    },
                     health = 50,
-                    maxHealth=300,
+                    maxHealth=50,
                     cards = {
                         deck = {
                             {qty = 1, card = dagger_carddef()},
