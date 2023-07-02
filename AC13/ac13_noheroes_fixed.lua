@@ -32,7 +32,7 @@ function setupGame(g)
                             {qty = 7, card = gold_carddef()}
                         },
                         buffs = {
-                            drawCardsAtTurnEndDef(),
+                            drawCardsCountAtTurnEndDef(5),
                             discardCardsAtTurnStartDef(),
                             fatigueCount(40, 1, "FatigueP1")
                         }
@@ -54,7 +54,7 @@ function setupGame(g)
                             {qty = 7, card = gold_carddef()}
                         },
                         buffs = {
-                            drawCardsAtTurnEndDef(),
+                            drawCardsCountAtTurnEndDef(5),
                             discardCardsAtTurnStartDef(),
                             fatigueCount(40, 1, "FatigueP2")
                         }
