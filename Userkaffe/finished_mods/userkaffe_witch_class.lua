@@ -201,6 +201,7 @@ end
 
 
 
+
 function setupMeta(meta)
     meta.name = "userkaffe_witch_class"
     meta.minLevel = 0
