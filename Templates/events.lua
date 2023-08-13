@@ -99,3 +99,17 @@ end
 
 function endGame(g)
 end
+
+
+function setupMeta(meta)
+    meta.name = "events"
+    meta.minLevel = 0
+    meta.maxLevel = 0
+    meta.introbackground = ""
+    meta.introheader = ""
+    meta.introdescription = ""
+    meta.path = "C:/Users/xTheC/Desktop/Git Repositories/hero-realms-lua-scripts/Templates/events.lua"
+     meta.features = {
+}
+
+end

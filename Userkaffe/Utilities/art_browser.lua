@@ -393,3 +393,17 @@ end
 function endGame(g)
 end
 
+
+
+function setupMeta(meta)
+    meta.name = "art_browser"
+    meta.minLevel = 0
+    meta.maxLevel = 0
+    meta.introbackground = ""
+    meta.introheader = ""
+    meta.introdescription = ""
+    meta.path = "C:/Users/xTheC/Desktop/Git Repositories/hero-realms-lua-scripts/Userkaffe/Utilities/art_browser.lua"
+     meta.features = {
+}
+
+end

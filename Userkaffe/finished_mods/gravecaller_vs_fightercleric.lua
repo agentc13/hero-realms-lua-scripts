@@ -964,3 +964,17 @@ function endGame(g)
 end
 
 -- Created by Userkaffe
+
+
+function setupMeta(meta)
+    meta.name = "gravecaller_vs_fightercleric"
+    meta.minLevel = 0
+    meta.maxLevel = 0
+    meta.introbackground = ""
+    meta.introheader = ""
+    meta.introdescription = ""
+    meta.path = "C:/Users/xTheC/Desktop/Git Repositories/hero-realms-lua-scripts/Userkaffe/finished_mods/gravecaller_vs_fightercleric.lua"
+     meta.features = {
+}
+
+end

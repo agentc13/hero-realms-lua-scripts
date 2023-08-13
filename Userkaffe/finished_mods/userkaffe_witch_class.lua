@@ -200,6 +200,8 @@ end
 -- Created by Userkaffe
 
 
+
+
 function setupMeta(meta)
     meta.name = "userkaffe_witch_class"
     meta.minLevel = 0
@@ -207,7 +209,7 @@ function setupMeta(meta)
     meta.introbackground = ""
     meta.introheader = ""
     meta.introdescription = ""
-    meta.path = "Z:/Projects/hero-realms-lua-scripts/Userkaffe/finished_mods/userkaffe_witch_class.lua"
+    meta.path = "C:/Users/xTheC/Desktop/Git Repositories/hero-realms-lua-scripts/Userkaffe/finished_mods/userkaffe_witch_class.lua"
      meta.features = {
 }
 
