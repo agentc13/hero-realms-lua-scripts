@@ -6,6 +6,124 @@ require 'hardai_2'
 require 'aggressiveai'
 
 --=======================================================================================================
+-- This is a proof of concept script to be able to play a custom class at any level without needing
+-- to remember what level to send a challenge. 
+
+
+--=======================================================================================================
+-- simple choice effect, showing two layouts and executing selected one, triggers at the game start
+local function chooseTheClass()
+    return cardChoiceSelectorEffect({
+        id = "choose_the_class_s_a_r",
+        name = "Choose a class",
+        trigger = startOfTurnTrigger,
+        upperTitle  = "Choose a class",
+        lowerTitle  = "",
+        effectFirst = sacrificeTarget().apply(selectLoc(loc(currentPid, handPloc)).union(selectLoc(loc(currentPid, deckPloc))).union(selectLoc(loc(currentPid, skillsPloc))))
+					  .seq(addSlotToPlayerEffect(currentPid, createPlayerSlot({ key = "customClass", expiry = { Never } }))),
+        effectSecond = nullEffect(),
+        layoutFirst = createLayout({
+            name = "Fighter Choice",
+            art = "art/T_Fighter_Male",
+			text = format("Play as a Level<br> {0} Fighter", { getHeroLevel(currentPid) })}),
+
+        layoutSecond = createLayout({
+            name = "Selected class",
+            art = "art/T_Prism_RainerPetter",
+            text = "Play as the character you selected when setting up the game." }),
+		
+        turn = 1
+    })
+end
+
+local function goFirstEffect()
+	return createGlobalBuff({
+        id="draw_three_start_buff",
+        name = "Go First",
+        abilities = {
+            createAbility({
+                id="go_first_draw_effect",
+                trigger = endOfTurnTrigger,
+                effect = ElseEffect(
+					getTurnsPlayed(oppPid).eq(1),
+					nullEffectif(),
+					drawCardsEffect(2)
+				)
+            })
+        }
+    })
+end
+
+--=======================================================================================================
+function setupGame(g)
+	registerCards(g, {
+	})
+
+    standardSetup(g, {
+        description = "Example Script on how to setup a custom build by hero level.",
+        playerOrder = { plid1, plid2 },
+        ai = ai.CreateKillSwitchAi(createAggressiveAI(),  createHardAi2()),
+        timeoutAi = createTimeoutAi(),
+        opponents = { { plid1, plid2 } },
+        players = {
+            {
+                id = plid1,
+                -- isAi = true,
+                startDraw = 3,
+				init = {
+                    fromEnv = plid1
+                },
+                cards = {
+					buffs = {
+						chooseTheClass(),
+						customClassBuffDef(),
+						drawCardsCountAtTurnEndDef(5),
+						discardCardsAtTurnStartDef(),
+						fatigueCount(40, 1, "FatigueP1"),
+					}
+                }
+            },
+            {
+                id = plid2,
+                isAi = true,
+                startDraw = 5,
+				init = {
+                    fromEnv = plid2
+                },
+                cards = {
+					buffs = {
+						chooseTheClass(),
+						customClassBuffDef(),
+						drawCardsCountAtTurnEndDef(5),
+						discardCardsAtTurnStartDef(),
+						fatigueCount(40, 1, "FatigueP2"),
+					}
+                }
+            },            
+        }
+    })
+end
+
+function endGame(g)
+end
+
+-- Created by WardenSlayer
+
+
+function setupMeta(meta)
+    meta.name = "wardenslayer_level_agnostic"
+    meta.minLevel = 0
+    meta.maxLevel = 0
+    meta.introbackground = ""
+    meta.introheader = ""
+    meta.introdescription = ""
+    meta.path = "C:/Users/xTheC/Desktop/Git Repositories/hero-realms-lua-scripts/WardenSlayer/wardenslayer_level_agnostic.lua"
+     meta.features = {
+}
+
+end
+
+--=======================================================================================================
 --Buffs
 function customClassBuffDef()
 	--
@@ -150,117 +268,4 @@ function customClassBuffDef()
             })
         }
     })
-end
-
---=======================================================================================================
--- simple choice effect, showing two layouts and executing selected one, triggers at the game start
-local function chooseTheClass()
-    return cardChoiceSelectorEffect({
-        id = "choose_the_class_s_a_r",
-        name = "Choose a class",
-        trigger = startOfTurnTrigger,
-        upperTitle  = "Choose a class",
-        lowerTitle  = "",
-        effectFirst = sacrificeTarget().apply(selectLoc(loc(currentPid, handPloc)).union(selectLoc(loc(currentPid, deckPloc))).union(selectLoc(loc(currentPid, skillsPloc))))
-					  .seq(addSlotToPlayerEffect(currentPid, createPlayerSlot({ key = "customClass", expiry = { Never } }))),
-        effectSecond = nullEffect(),
-        layoutFirst = createLayout({
-            name = "Fighter Choice",
-            art = "art/T_Fighter_Male",
-			text = format("Play as a Level<br> {0} Fighter", { getHeroLevel(currentPid) })}),
-
-        layoutSecond = createLayout({
-            name = "Selected class",
-            art = "art/T_Prism_RainerPetter",
-            text = "Play as the character you selected when setting up the game." }),
-		
-        turn = 1
-    })
-end
-
-local function goFirstEffect()
-	return createGlobalBuff({
-        id="draw_three_start_buff",
-        name = "Go First",
-        abilities = {
-            createAbility({
-                id="go_first_draw_effect",
-                trigger = endOfTurnTrigger,
-                effect = ElseEffect(
-					getTurnsPlayed(oppPid).eq(1),
-					nullEffectif(),
-					drawCardsEffect(2)
-				)
-            })
-        }
-    })
-end
-
---=======================================================================================================
-function setupGame(g)
-	registerCards(g, {
-	})
-
-    standardSetup(g, {
-        description = "Example Script on how to setup a custom build by hero level.",
-        playerOrder = { plid1, plid2 },
-        ai = ai.CreateKillSwitchAi(createAggressiveAI(),  createHardAi2()),
-        timeoutAi = createTimeoutAi(),
-        opponents = { { plid1, plid2 } },
-        players = {
-            {
-                id = plid1,
-                -- isAi = true,
-                startDraw = 3,
-				init = {
-                    fromEnv = plid1
-                },
-                cards = {
-					buffs = {
-						chooseTheClass(),
-						customClassBuffDef(),
-						drawCardsCountAtTurnEndDef(5),
-						discardCardsAtTurnStartDef(),
-						fatigueCount(40, 1, "FatigueP1"),
-					}
-                }
-            },
-            {
-                id = plid2,
-                isAi = true,
-                startDraw = 5,
-				init = {
-                    fromEnv = plid2
-                },
-                cards = {
-					buffs = {
-						chooseTheClass(),
-						customClassBuffDef(),
-						drawCardsCountAtTurnEndDef(5),
-						discardCardsAtTurnStartDef(),
-						fatigueCount(40, 1, "FatigueP2"),
-					}
-                }
-            },            
-        }
-    })
-end
-
-function endGame(g)
-end
-
--- Created by WardenSlayer
-
-
-function setupMeta(meta)
-    meta.name = "wardenslayer_level_agnostic"
-    meta.minLevel = 0
-    meta.maxLevel = 0
-    meta.introbackground = ""
-    meta.introheader = ""
-    meta.introdescription = ""
-    meta.path = "C:/Users/xTheC/Desktop/Git Repositories/hero-realms-lua-scripts/WardenSlayer/wardenslayer_level_agnostic.lua"
-     meta.features = {
-}
-
 end
