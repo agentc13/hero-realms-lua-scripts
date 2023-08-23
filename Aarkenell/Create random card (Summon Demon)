@@ -1,0 +1,158 @@
+-- START Summon Demon SKILL
+function demonologist_summon_demon_carddef()
+    local cardLayout = createLayout({
+        name = "Summon",
+        art = "icons/The_Summoning",
+        frame = "frames/necromancer_frames/necromancer_item_cardframe",
+		xmlText=[[
+		<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="1">
+            <tmpro text="{expend_2}" fontsize="72"/>
+        </box>
+        <box flexiblewidth="7">
+            <tmpro text="{health_-1} 
+Randomly summon 1 of 3 demon tokens into play." fontsize="25"/>
+</box>
+</hlayout>
+</vlayout>
+		]]
+    })
+
+ return createSkillDef({
+        id = "demonologist_summon_skill",
+        name = "Summon Demon",
+        types = { skillType },
+        layout = cardLayout,
+        layoutPath = "icons/The_Summoning",
+        abilities = {
+            createAbility({
+                id = "demonologist_summon_demon_ab",
+                trigger = uiTrigger,
+				check = minHealthCurrent(2),
+                activations = singleActivation,
+                layout = cardLayout,
+                promptType = showPrompt,
+                effect =pushChoiceEffectWithTitle(
+                                {
+                                    choices = {
+                                        {
+                                            effect = hitSelfEffect(1).seq(randomEffect({
+					valueItem(1, createCardEffect(demonologist_demonic_leech_carddef(), currentInPlayLoc)),
+					valueItem(1, createCardEffect(demonologist_succubus_carddef(), currentInPlayLoc)),
+					valueItem(1, createCardEffect(demonologist_fel_hound_carddef(), currentInPlayLoc))
+})).seq(noUndoEffect()),
+                                            layout = createLayout(
+                {
+                    name = "Demonic leech",
+                    art = "art/T_wurm",
+                    frame = "frames/necromancer_frames/necromancer_item_cardframe",
+					xmlText = [[
+<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="1">
+            <tmpro text="{expend}" fontsize="40"/>
+        </box>
+        <box flexiblewidth="7">
+            <tmpro text="Deal 1 damage to opponent.
+Demonic Leech gains 1{shield} until it leaves play." fontsize="25"/>
+</box>
+</hlayout>
+</vlayout>
+					]],
+					health = 1,
+                    isGuard = false
+                }
+            ),
+                                            tags = {gainCombatTag}
+                                        },
+                                        
+										{
+                                           effect = hitSelfEffect(1).seq(randomEffect({
+					valueItem(1, createCardEffect(demonologist_demonic_leech_carddef(), currentInPlayLoc)),
+					valueItem(1, createCardEffect(demonologist_succubus_carddef(), currentInPlayLoc)),
+					valueItem(1, createCardEffect(demonologist_fel_hound_carddef(), currentInPlayLoc))
+})).seq(noUndoEffect()),
+                                            layout = createLayout(
+                {
+                    name = "Fel hound",
+                    art = "art/T_Strength_of_the_wolf",
+                    frame = "frames/necromancer_frames/necromancer_item_cardframe",
+                    xmlText=[[
+					<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="1">
+            <tmpro text="{expend}" fontsize="40"/>
+        </box>
+        <box flexiblewidth="7">
+            <icon text="{combat_2}" fontsize="60"/>
+</box>
+</hlayout>
+</vlayout>
+					]],
+                    health = 1,
+                    isGuard = false
+                }
+            ),
+                                            tags = {gainCombatTag}
+                                        },
+										
+										{
+                                            effect = hitSelfEffect(1).seq(randomEffect({
+					valueItem(1, createCardEffect(demonologist_demonic_leech_carddef(), currentInPlayLoc)),
+					valueItem(1, createCardEffect(demonologist_succubus_carddef(), currentInPlayLoc)),
+					valueItem(1, createCardEffect(demonologist_fel_hound_carddef(), currentInPlayLoc))
+})).seq(noUndoEffect()),
+                                            layout = createLayout(
+                {
+                    name = "Succubus",
+                    art = "art/T_Banshee",
+                    frame = "frames/necromancer_frames/necromancer_item_cardframe",
+                    xmlText=[[
+					<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="1">
+            <tmpro text="{expend}" fontsize="40"/>
+        </box>
+        <box flexiblewidth="7">
+            <tmpro text="Give target champion -1{shield} until it leaves play." fontsize="25"/>
+</box>
+</hlayout>
+</vlayout>
+					]],
+                    health = 1,
+                    isGuard = false
+                }
+            ),
+                                                                                    }
+                                    },
+					upperTitle = "Summon one of these 3 demon tokens, randomly.",
+					lowerTitle = "Click any card to proceed."
+					}),
+				cost = goldCost(2),
+			}),
+        },
+		layout = createLayout(
+                {
+                    name = "Summon Demon",
+                    art = "icons/The_Summoning",
+                    frame = "frames/necromancer_frames/necromancer_item_cardframe",
+                    xmlText=[[
+					<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="1">
+            <tmpro text="{expend_2}" fontsize="72"/>
+        </box>
+        <box flexiblewidth="7">
+            <tmpro text="{health_-1} 
+Randomly summon 1 of 3 demon tokens into play." fontsize="25"/>
+</box>
+</hlayout>
+</vlayout>
+					]]
+                }
+            )
+        
+    })
+end
+-- END Summon Demon Skill
