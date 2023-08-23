@@ -1,0 +1,265 @@
+local function chooseTheClass()
+    return cardChoiceSelectorEffect({
+        id = "choose_the_class_demonologist",
+        name = "Choose a class",
+        trigger = startOfTurnTrigger,
+
+        upperTitle  = "Choose a class",
+        lowerTitle  = "",
+
+        effectFirst = sacrificeTarget().apply(selectLoc(loc(currentPid, handPloc)).union(selectLoc(loc(currentPid, deckPloc))).union(selectLoc(loc(currentPid, skillsPloc))))
+			.seq(setPlayerNameEffect("Demonologist", currentPid))
+			.seq(setPlayerAvatarEffect("ruinos_zealot", currentPid))
+			.seq(gainMaxHealthEffect(currentPid, const(50).add(getPlayerMaxHealth(currentPid).negate())))
+			.seq(gainHealthEffect(50))
+			.seq(createCardEffect(demonologist_summon_greater_demon_carddef(), currentSkillsLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(demonologist_shadow_feeder_carddef(), currentDeckLoc))
+			.seq(createCardEffect(demonologist_void_guard_carddef(), currentDeckLoc))
+			.seq(createCardEffect(demonologist_lesser_devourer_carddef(), currentDeckLoc))
+			.seq(createCardEffect(demonologist_shadow_gem_carddef(), currentDeckLoc))
+
+--Level 4 skill choice--
+							
+			.seq(pushChoiceEffectWithTitle(
+                                {
+                                    choices = {
+                                        {
+                                            effect = sacrificeTarget().apply(selectLoc(loc(currentPid, skillsPloc)).where(isCardName("demonologist_summon_demon_skill")))
+				.seq(createCardEffect(demonologist_forced_summon_carddef(), currentSkillsLoc)),
+                                            layout = createLayout(
+                {
+                    name = "Forced Summon",
+                    art = "icons/The_Summoning",
+                    frame = "frames/necromancer_frames/necromancer_item_cardframe",
+                    xmlText=[[
+					<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="1">
+            <tmpro text="{expend_2}" fontsize="72"/>
+        </box>
+        <box flexiblewidth="7">
+            <tmpro text="{health_-1} 
+Choose 1 of 3 demon tokens to summon into play." fontsize="25"/>
+</box>
+</hlayout>
+</vlayout>
+					]]
+                }
+            ),
+                                            tags = {}
+                                        },
+                                        
+										{
+                                            effect = sacrificeTarget().apply(selectLoc(loc(currentPid, skillsPloc)).where(isCardName("demonologist_summon_demon_skill")))
+				.seq(createCardEffect(demonologist_dark_summon_carddef(), currentSkillsLoc)),
+                                            layout = createLayout(
+                {
+                    name = "Dark Summon",
+                    art = "icons/The_Summoning",
+                    frame = "frames/necromancer_frames/necromancer_item_cardframe",
+                    xmlText=[[
+					<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="1">
+            <tmpro text="{expend_2}" fontsize="72"/>
+        </box>
+        <box flexiblewidth="7">
+            <tmpro text="{health_-1} 
+Randomly summon 1 of 3 demon tokens with +1{shield} into play." fontsize="25"/>
+</box>
+</hlayout>
+</vlayout>
+					]]
+                }
+            ),
+                                            tags = {}
+                                        },
+										
+                                    },
+					upperTitle = "Choose which skill you would like to upgrade to.",
+					lowerTitle = "Click your choice to proceed."
+					}))
+
+--Level 5 card choice--
+
+.seq(pushChoiceEffectWithTitle({
+                                    choices = {
+                                        {
+                                            effect = sacrificeTarget().apply(selectLoc(loc(currentPid, deckPloc)).where(isCardName("demonologist_lesser_devourer")))
+.seq(createCardEffect(demonologist_devourer_carddef(), currentDeckLoc)),
+                                            layout = createLayout(
+                {
+                    name = "Devourer",
+                    art = "art/T_Demon",
+                    frame = "frames/Wizard_CardFrame",
+                    xmlText = [[
+<vlayout>
+    <hlayout flexibleheight="3">
+            <tmpro text="{expend}" fontsize="40" flexiblewidth="2"/>
+            <tmpro text="{health_-1} {combat_1}
+Devourer gains +1{shield} until it leaves play." fontsize="21" flexiblewidth="10" />
+    </hlayout>
+    <divider/>
+    <hlayout flexibleheight="2">
+            <tmpro text="If Devourer leaves play gain {health_2} at the start of your turn." fontsize="21" flexiblewidth="10" />
+    </hlayout> 
+</vlayout>
+					]],
+                    health = 2,
+                    isGuard = true
+                })
+            ,
+                                            tags = {}
+                                        },
+                                        
+										{
+                                            effect = sacrificeTarget().apply(selectLoc(loc(currentPid, deckPloc)).where(isCardName("demonologist_void_guard")))
+.seq(createCardEffect(demonologist_void_sentinel_carddef(), currentDeckLoc)),
+                                            layout = createLayout(
+                {
+                    name = "Void Sentinel",
+                    art = "art/T_Midnight_Knight",
+                    frame = "frames/necromancer_frames/necromancer_item_cardframe",
+                    xmlText=[[
+					<vlayout>
+    <hlayout flexibleheight="1">
+            <tmpro text="{expend}" fontsize="30" flexiblewidth="2"/>
+            <text text="{combat_1}"
+fontsize="30" flexiblewidth="10" />
+    </hlayout>
+    <divider/>
+    <hlayout flexibleheight="3">
+            <tmpro text="If you have 2 other demon minions in play, deal 3 damage to target champion." fontsize="20" flexiblewidth="8" />
+    </hlayout> 
+</vlayout>
+					]],
+                    health = 2,
+                    isGuard = true
+                }
+            ),
+                                            tags = {}
+                                        },
+										
+                                    },
+					upperTitle = "Choose which card you would like to upgrade to.",
+					lowerTitle = "Click your choice to proceed."
+					}))
+			
+--Resume--
+			.seq(shuffleEffect(currentDeckLoc))
+			.seq(waitForClickEffect("Thank you for choosing your class.", ""))
+		.seq(waitForClickEffect("Now please choose your upgrades. Then click 'End Turn'.", "")),
+        effectSecond = waitForClickEffect("Thank you for choosing your class.", "")
+		.seq(waitForClickEffect("If you enjoy this game, be sure to Favourite the script.", ""))
+		.seq(waitForClickEffect("Once the game ends, click back on the game record tile. An 'Add to Favourites' tile will have appeared alongside 'Replay' and 'Rematch'.", ""))
+		.seq(waitForClickEffect("Once favourited, you will be able to host your own custom games using this script.", ""))
+		.seq(waitForClickEffect("For game to begin normally please end turn now.", "")),
+
+        layoutFirst = createLayout({
+            name = "Demonologist",
+            art = "art/T_Tyrannor_The_Devourer",
+            text = "Play as a level 5 Demonologist."  }),
+
+        layoutSecond = createLayout({
+            name = "Selected class",
+            art = "art/gold_female_white_grayscale",
+            text = "Play as the character you selected when setting up the game." }),
+
+        turn = 1
+    })
+end
+
+local function goFirstEffect()
+	return createGlobalBuff({
+        id="draw_three_start_buff",
+        name = "Go First",
+        abilities = {
+            createAbility({
+                id="go_first_draw_effect",
+                trigger = endOfTurnTrigger,
+                effect = ifElseEffect(
+					getTurnsPlayed(oppPid).eq(1),
+					nullEffect(),
+					drawCardsEffect(2)
+				)
+            })
+        }
+    })
+end
+
+function setupGame(g)
+    registerCards(
+        g,
+        {
+            demonologist_shadow_gem_carddef(),
+			demonologist_shadow_feeder_carddef(),
+			demonologist_void_guard_carddef(),
+			demonologist_lesser_devourer_carddef(),
+			demonologist_summon_greater_demon_carddef(),
+			demonologist_demonic_leech_carddef(),
+			demonologist_succubus_carddef(),
+			demonologist_fel_hound_carddef(),
+			demonologist_incubus_carddef(),
+			demonologist_keeper_of_the_void_carddef(),
+			demonologist_demon_master_carddef(),
+			demonologist_forced_summon_carddef(),
+			demonologist_dark_summon_carddef(),
+			demonologist_dark_succubus_carddef(),
+			demonologist_raging_fel_hound_carddef(),
+			demonologist_demonic_leech_carddef(),
+			demonologist_void_sentinel_carddef(),
+			demonologist_devourer_carddef(),
+
+			
+        }
+    )
+
+    standardSetup(
+        g,
+        {
+            description = "Demonologist Class (v3.04) Level 5. Created by Aarkenell.",
+            playerOrder = { plid1, plid2 },
+        ai = ai.CreateKillSwitchAi(createAggressiveAI(),  createHardAi2()),
+        timeoutAi = createTimeoutAi(),
+        opponents = { { plid1, plid2 } },
+        players = {
+            {
+                id = plid1,
+                startDraw = 0,
+                init = {
+                    fromEnv = plid1
+                },
+                cards = {
+                    buffs = {
+						drawCardsCountAtTurnEndDef(3),
+						goFirstEffect(),
+                        discardCardsAtTurnStartDef(),
+						chooseTheClass(),
+						fatigueCount(42, 1, "FatigueP2")
+                    }
+                }
+            },
+            {
+                id = plid2,
+                startDraw = 0,
+				init = {
+                    fromEnv = plid2
+                },
+                cards = {
+                    buffs = {
+                        drawCardsCountAtTurnEndDef(5),
+                        discardCardsAtTurnStartDef(),
+						chooseTheClass(),
+						fatigueCount(43, 1, "FatigueP2")
+                    }
+                }
+            }            
+        }
+    })
+end
