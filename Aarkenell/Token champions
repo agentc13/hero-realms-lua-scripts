@@ -1,0 +1,62 @@
+--This is an example of how to create a token champion, that self-sacrifices when it leaves play
+
+--START Fel Hound CARD
+
+function demonologist_fel_hound_carddef()
+    return createChampionDef(
+        {
+            id = "demonologist_fel_hound",
+            name = "Fel hound",
+			types = {minionType, championType, demonType, nostealType, tokenType},
+            acquireCost = 0,
+            health = 1,
+            isGuard = false,
+            abilities = {
+			--base ability
+                createAbility(
+                    {
+                        id = "fel_hound_main",
+                        trigger = autoTrigger,
+                        cost = expendCost,
+                        activations = multipleActivations,
+                        effect = gainCombatEffect(2)
+						
+                    }
+                )
+            ,
+			--self-sac ability
+                createAbility(
+                    {
+                        id = "fel_hound_sac",
+                        trigger = onLeavePlayTrigger,
+                        cost = sacrificeSelfCost,
+                        activations = singleActivations,
+                        effect = nullEffect()
+					}	
+                    
+                )},
+            layout = createLayout(
+                {
+                    name = "Fel hound",
+                    art = "art/T_Strength_of_the_wolf",
+                    frame = "frames/necromancer_frames/necromancer_item_cardframe",
+                    xmlText=[[
+					<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="1">
+            <tmpro text="{expend}" fontsize="40"/>
+        </box>
+        <box flexiblewidth="7">
+            <icon text="{combat_2}" fontsize="60"/>
+</box>
+</hlayout>
+</vlayout>
+					]],
+                    health = 1,
+                    isGuard = false
+                }
+            )
+        }
+    )
+end
+-- END Fel hound CARD
