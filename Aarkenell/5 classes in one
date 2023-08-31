@@ -1,0 +1,3280 @@
+require "herorealms"
+require "decks"
+require "stdlib"
+require "stdcards"
+require "hardai"
+require "mediumai"
+require "easyai"
+
+-- START Choose Demonologist CARD
+function choose_demonologist_carddef()
+    return createDef({
+        id="choose_demonologist",
+        name="Choose the Demonologist",
+        types={noStealType, itemType},
+		cardTypeLabel = "Item",
+		playLocation = castPloc,
+        acquireCost=0,
+        abilities = {
+            createAbility({
+                id="choose_demonologist",
+                trigger= onPlayTrigger,
+				playAllType = noPlayPlayType,
+                effect = sacrificeTarget().apply(selectLoc(loc(currentPid, handPloc)).union(selectLoc(loc(currentPid, deckPloc))).union(selectLoc(loc(currentPid, skillsPloc))))
+			.seq(setPlayerNameEffect("Demonologist", currentPid))
+			.seq(setPlayerAvatarEffect("ruinos_zealot", currentPid))
+			.seq(gainMaxHealthEffect(currentPid, const(50).add(getPlayerMaxHealth(currentPid).negate())))
+			.seq(gainHealthEffect(50))
+			.seq(createCardEffect(demonologist_summon_demon_carddef(), currentSkillsLoc))
+			.seq(createCardEffect(demonologist_summon_greater_demon_carddef(), currentSkillsLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(demonologist_shadow_feeder_carddef(), currentDeckLoc))
+			.seq(createCardEffect(demonologist_void_guard_carddef(), currentDeckLoc))
+			.seq(createCardEffect(demonologist_lesser_devourer_carddef(), currentDeckLoc))
+			.seq(createCardEffect(demonologist_shadow_gem_carddef(), currentDeckLoc))
+			.seq(shuffleEffect(currentDeckLoc))
+			.seq(sacrificeTarget().apply(selectSource()))
+			.seq(waitForClickEffect("Thank you for choosing your class.", ""))
+			.seq(waitForClickEffect("If you enjoy this game, be sure to Favourite the script.", ""))
+            })
+        },
+        layout = createLayout({
+            name = "Demonologist",
+            art = "art/T_Tyrannor_The_Devourer",
+			frame = "frames/Coop_Campaign_CardFrame",
+            xmlText=[[
+			<vlayout>
+			<hlayout flexibleheight="1">
+				<box flexiblewidth="1">
+					<tmpro text="Play as a level 3 Demonologist.
+
+-Class by Aarkenell-" fontsize="22"/>
+				</box>
+			</hlayout>
+		</vlayout>
+			]]
+			}),
+        })
+	end
+-- END Choose Demonologist CARD
+
+-- START Choose Apothecary CARD
+function choose_apothecary_carddef()
+    return createDef({
+        id="choose_apothecary",
+        name="Choose the Apothecary",
+        types={noStealType, itemType},
+		cardTypeLabel = "Item",
+		playLocation = castPloc,
+        acquireCost=0,
+        abilities = {
+            createAbility({
+                id="choose_apothecary",
+                trigger= onPlayTrigger,
+				playAllType = noPlayPlayType,
+                effect = sacrificeTarget().apply(selectLoc(loc(currentPid, handPloc)).union(selectLoc(loc(currentPid, deckPloc))).union(selectLoc(loc(currentPid, skillsPloc))))
+			.seq(setPlayerNameEffect("Apothecary", currentPid))
+			.seq(setPlayerAvatarEffect("alchemist_01", currentPid))
+			.seq(gainMaxHealthEffect(currentPid, const(52).add(getPlayerMaxHealth(currentPid).negate())))
+			.seq(gainHealthEffect(52))
+			.seq(createCardEffect(apothecary_restorative_draught_carddef(), currentSkillsLoc))
+			.seq(createCardEffect(apothecary_custom_brew_carddef(), currentSkillsLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(apothecary_mezzaluna_carddef(), currentDeckLoc))
+			.seq(createCardEffect(apothecary_apprentice_potion_maker_carddef(), currentDeckLoc))
+			.seq(createCardEffect(apothecary_yellow_potion_carddef(), currentDeckLoc))
+			.seq(createCardEffect(apothecary_red_potion_carddef(), currentDeckLoc))
+			.seq(createCardEffect(apothecary_green_potion_carddef(), currentDeckLoc))
+			.seq(shuffleEffect(currentDeckLoc))
+			.seq(sacrificeTarget().apply(selectSource()))
+			.seq(waitForClickEffect("Thank you for choosing your class.", ""))
+			.seq(waitForClickEffect("If you enjoy this game, be sure to Favourite the script.", ""))
+            })
+        },
+        layout = createLayout({
+            name = "Apothecary",
+            art = "art/treasures/T_Green_Potions_Medium",
+			frame = "frames/Coop_Campaign_CardFrame",
+            xmlText=[[
+			<vlayout>
+			<hlayout flexibleheight="1">
+				<box flexiblewidth="1">
+					<tmpro text="Play as a level 3 Apothecary.
+
+-Class by Aarkenell-" fontsize="22"/>
+				</box>
+			</hlayout>
+		</vlayout>
+			]]
+			}),
+        })
+	end
+-- END Choose Apothecary CARD
+
+-- START Choose Cryomancer CARD
+function choose_cryomancer_carddef()
+    return createDef({
+        id="choose_cryomancer",
+        name="Choose the Cryomancer",
+        types={noStealType, itemType},
+		cardTypeLabel = "Item",
+		playLocation = castPloc,
+        acquireCost=0,
+        abilities = {
+            createAbility({
+                id="choose_cryomancer",
+                trigger= onPlayTrigger,
+				playAllType = noPlayPlayType,
+                effect = sacrificeTarget().apply(selectLoc(loc(currentPid, handPloc)).union(selectLoc(loc(currentPid, deckPloc))).union(selectLoc(loc(currentPid, skillsPloc))))
+			.seq(setPlayerNameEffect("Cryomancer", currentPid))
+			.seq(setPlayerAvatarEffect("rayla__endweaver_flipped", currentPid))
+			.seq(gainMaxHealthEffect(currentPid, const(52).add(getPlayerMaxHealth(currentPid).negate())))
+			.seq(gainHealthEffect(52))
+			.seq(createCardEffect(cryomancer_frostbiteskill_carddef(), currentSkillsLoc))
+			.seq(createCardEffect(cryomancer_blizzard_carddef(), currentSkillsLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(cryomancer_ice_burst_carddef(), currentDeckLoc))
+			.seq(createCardEffect(cryomancer_ice_shield_carddef(), currentDeckLoc))
+			.seq(createCardEffect(cryomancer_ice_gem_carddef(), currentDeckLoc))
+			.seq(createCardEffect(cryomancer_freeze_carddef(), currentDeckLoc))
+			.seq(shuffleEffect(currentDeckLoc))
+			.seq(sacrificeTarget().apply(selectSource()))
+			.seq(waitForClickEffect("Thank you for choosing your class.", ""))
+			.seq(waitForClickEffect("If you enjoy this game, be sure to Favourite the script.", ""))
+            })
+        },
+        layout = createLayout({
+            name = "Cryomancer",
+            art = "art/T_Heavy_Gust",
+			frame = "frames/Coop_Campaign_CardFrame",
+            xmlText=[[
+			<vlayout>
+			<hlayout flexibleheight="1">
+				<box flexiblewidth="1">
+					<tmpro text="Play as a level 3 Cryomancer.
+
+-Class by Aarkenell-" fontsize="22"/>
+				</box>
+			</hlayout>
+		</vlayout>
+			]]
+			}),
+        })
+	end
+-- END Choose Cryomancer CARD
+
+-- START Choose Pyromancer CARD
+function choose_pyromancer_carddef()
+    return createDef({
+        id="choose_pyromancer",
+        name="Choose the Pryomancer",
+        types={noStealType, itemType},
+		cardTypeLabel = "Item",
+		playLocation = castPloc,
+        acquireCost=0,
+        abilities = {
+            createAbility({
+                id="choose_pyromancer",
+                trigger= onPlayTrigger,
+				playAllType = noPlayPlayType,
+                effect = sacrificeTarget().apply(selectLoc(loc(currentPid, handPloc)).union(selectLoc(loc(currentPid, deckPloc))).union(selectLoc(loc(currentPid, skillsPloc))))
+			.seq(setPlayerNameEffect("Pyromancer", currentPid))
+			.seq(setPlayerAvatarEffect("summoner", currentPid))
+			.seq(gainMaxHealthEffect(currentPid, const(48).add(getPlayerMaxHealth(currentPid).negate())))
+			.seq(gainHealthEffect(48))
+			.seq(createCardEffect(pyromancer_fuel_1p_carddef(), currentSkillsLoc))
+			.seq(createCardEffect(pyromancer_conflagration_1p_carddef(), currentSkillsLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(ruby_carddef(), currentDeckLoc))
+			.seq(createCardEffect(pyromancer_sear_carddef(), currentDeckLoc))
+			.seq(createCardEffect(pyromancer_scorch_carddef(), currentDeckLoc))
+			.seq(createCardEffect(pyromancer_fire_shard_carddef(), currentDeckLoc))
+			.seq(createCardEffect(pyromancer_combust_carddef(), currentDeckLoc))
+			.seq(shuffleEffect(currentDeckLoc))
+			.seq(sacrificeTarget().apply(selectSource()))
+			.seq(waitForClickEffect("Thank you for choosing your class.", ""))
+			.seq(waitForClickEffect("If you enjoy this game, be sure to Favourite the script.", ""))
+            })
+        },
+        layout = createLayout({
+            name = "Pyromancer",
+            art = "art/T_Blistering_Blaze",
+			frame = "frames/Coop_Campaign_CardFrame",
+            xmlText=[[
+			<vlayout>
+			<hlayout flexibleheight="1">
+				<box flexiblewidth="1">
+					<tmpro text="Play as a level 3 Pyromancer.
+
+-Class by Aarkenell-" fontsize="22"/>
+				</box>
+			</hlayout>
+		</vlayout>
+			]]
+			}),
+        })
+	end
+-- END Choose Pyromancer CARD
+
+-- START Choose Thandarlorian CARD
+function choose_thandarlorian_carddef()
+    return createDef({
+        id="choose_thandarlorian",
+        name="Choose the Thandarlorian",
+        types={noStealType, itemType},
+		cardTypeLabel = "Item",
+		playLocation = castPloc,
+        acquireCost=0,
+        abilities = {
+            createAbility({
+                id="choose_thandarlorian",
+                trigger= onPlayTrigger,
+				playAllType = noPlayPlayType,
+                effect = sacrificeTarget().apply(selectLoc(loc(currentPid, handPloc)).union(selectLoc(loc(currentPid, deckPloc))).union(selectLoc(loc(currentPid, skillsPloc))))
+			.seq(setPlayerNameEffect("Thandarlorian", currentPid))
+			.seq(setPlayerAvatarEffect("cristov__the_just", currentPid))
+			.seq(gainMaxHealthEffect(currentPid, const(36).add(getPlayerMaxHealth(currentPid).negate())))
+			.seq(gainHealthEffect(const(36).add(getPlayerMaxHealth(currentPid).negate())))
+			.seq(createCardEffect(thandarlorian_dragon_shard_armour_carddef(), currentSkillsLoc))
+			.seq(createCardEffect(thandarlorian_bracer_blades_carddef(), currentSkillsLoc))
+			.seq(createCardEffect(thandarlorian_whipcord_carddef(), currentSkillsLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(ruby_carddef(), currentDeckLoc))
+			.seq(createCardEffect(ruby_carddef(), currentDeckLoc))
+			.seq(createCardEffect(thandarlorian_coordinated_attack_carddef(), currentDeckLoc))
+			.seq(createCardEffect(thandarlorian_combat_shield_carddef(), currentDeckLoc))
+			.seq(createCardEffect(thandarlorian_hand_ballista_carddef(), currentDeckLoc))
+			.seq(createCardEffect(thandarlorian_bounty_hunters_stone_of_seeking_carddef(), currentDeckLoc))
+			.seq(createCardEffect(shortsword_carddef(), currentDeckLoc))
+			.seq(shuffleEffect(currentDeckLoc))
+			.seq(sacrificeTarget().apply(selectSource()))
+			.seq(waitForClickEffect("Thank you for choosing your class.", ""))
+			.seq(waitForClickEffect("If you enjoy this game, be sure to Favourite the script.", ""))
+            })
+        },
+        layout = createLayout({
+            name = "Choose the Thandarlorian",
+            art = "art/T_Domination",
+            frame = "frames/Coop_Campaign_CardFrame",
+            xmlText=[[
+			<vlayout>
+			<hlayout flexibleheight="1">
+				<box flexiblewidth="1">
+					<tmpro text="Play as a level 3 Thandarlorian.
+
+-Class by Aarkenell-" fontsize="22"/>
+				</box>
+			</hlayout>
+		</vlayout>
+			]]
+        })
+    })
+	end
+-- END Choose Thandarlorian CARD
+
+
+-- START Choose Paladin CARD
+function choose_paladin_carddef()
+    return createDef({
+        id="choose_paladin",
+        name="Choose the Paladin",
+        types={noStealType, itemType},
+		cardTypeLabel = "Item",
+		playLocation = castPloc,
+        acquireCost=0,
+        abilities = {
+            createAbility({
+                id="choose_paladin",
+                trigger= onPlayTrigger,
+				playAllType = noPlayPlayType,
+                effect = sacrificeTarget().apply(selectLoc(loc(currentPid, handPloc)).union(selectLoc(loc(currentPid, deckPloc))).union(selectLoc(loc(currentPid, skillsPloc))))
+			.seq(setPlayerNameEffect("Paladin", currentPid))
+			.seq(setPlayerAvatarEffect("cristov__the_just", currentPid))
+			.seq(gainMaxHealthEffect(currentPid, const(58).add(getPlayerMaxHealth(currentPid).negate())))
+			.seq(gainHealthEffect(58))
+			.seq(createCardEffect(paladin_prayer_carddef(), currentSkillsLoc))
+			.seq(createCardEffect(paladin_sacred_oath_carddef(), currentSkillsLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(ruby_carddef(), currentDeckLoc))
+			.seq(createCardEffect(paladin_warhammer_carddef(), currentDeckLoc))
+			.seq(createCardEffect(paladin_crusader_carddef(), currentDeckLoc))
+			.seq(createCardEffect(cleric_spiked_mace_carddef(), currentDeckLoc))
+			.seq(createCardEffect(fighter_longsword_carddef(), currentDeckLoc))
+			.seq(shuffleEffect(currentDeckLoc))
+			.seq(sacrificeTarget().apply(selectSource()))
+			.seq(waitForClickEffect("Thank you for choosing your class.", ""))
+			.seq(waitForClickEffect("If you enjoy this game, be sure to Favourite the script.", ""))
+            })
+        },
+        layout = createLayout({
+            name = "Paladin",
+            art = "art/T_Cristov_The_Just",
+			frame = "frames/Coop_Campaign_CardFrame",
+            xmlText=[[
+			<vlayout>
+			<hlayout flexibleheight="1">
+				<box flexiblewidth="1">
+					<tmpro text="Play as a level 3 Paladin.
+
+-Class by agentC13-" fontsize="22"/>
+				</box>
+			</hlayout>
+		</vlayout>
+			]]
+			}),
+        })
+	end
+-- END Choose Paladin CARD
+
+
+-- START Choose Witch CARD
+function choose_witch_carddef()
+    return createDef({
+        id="choose_witch",
+        name="Choose the Witch",
+        types={noStealType, itemType},
+		cardTypeLabel = "Item",
+		playLocation = castPloc,
+        acquireCost=0,
+        abilities = {
+            createAbility({
+                id="choose_witch",
+                trigger= onPlayTrigger,
+				playAllType = noPlayPlayType,
+                effect = sacrificeTarget().apply(selectLoc(loc(currentPid, handPloc)).union(selectLoc(loc(currentPid, deckPloc))).union(selectLoc(loc(currentPid, skillsPloc))))
+			.seq(setPlayerNameEffect("Witch", currentPid))
+			.seq(setPlayerAvatarEffect("chanting_cultist", currentPid))
+			.seq(gainMaxHealthEffect(currentPid, const(51).add(getPlayerMaxHealth(currentPid).negate())))
+			.seq(gainHealthEffect(51))
+			.seq(createCardEffect(siphon_life_def(), currentSkillsLoc))
+			.seq(createCardEffect(piercing_screech_def(), currentSkillsLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(witch_flash_freeze_carddef(), currentDeckLoc))
+			.seq(createCardEffect(witch_flash_freeze_carddef(), currentDeckLoc))
+			.seq(createCardEffect(cleric_everburning_candle_carddef(), currentDeckLoc))
+			.seq(createCardEffect(witch_cauldron_carddef(), currentDeckLoc))
+			.seq(createCardEffect(wizard_cat_familiar_carddef(), currentDeckLoc))
+			.seq(shuffleEffect(currentDeckLoc))
+			.seq(sacrificeTarget().apply(selectSource()))
+			.seq(waitForClickEffect("Thank you for choosing your class.", ""))
+			.seq(waitForClickEffect("If you enjoy this game, be sure to Favourite the script.", ""))
+            })
+        },
+        layout = createLayout({
+            name = "Witch",
+            art = "avatars/chanting_cultist",
+			frame = "frames/Coop_Campaign_CardFrame",
+            xmlText=[[
+			<vlayout>
+			<hlayout flexibleheight="1">
+				<box flexiblewidth="1">
+					<tmpro text="Play as a level 3 Witch.
+
+-Class by Userkaffe-" fontsize="22"/>
+				</box>
+			</hlayout>
+		</vlayout>
+			]]
+			}),
+        })
+	end
+-- END Choose Witch CARD
+
+
+-- START Shadow Gem CARD
+function demonologist_shadow_gem_carddef()
+    return createDef(
+        {
+            id = "demonologist_shadow_gem",
+            name = "Shadow Gem",
+            types = {gemType, noStealType, itemType},
+			            acquireCost = 0,
+            cardTypeLabel = "Item",
+            playLocation = castPloc,
+            abilities = {
+				createAbility(
+                    {
+                        id = "demonologist_shadow_gem_sac",
+                        PlayAllType = noPlayPlayType,
+						cost = noCost,
+						trigger = autoTrigger,
+                        activations = singleActivations,
+						                        effect = pushChoiceEffect(
+                                {
+                                    choices = {
+                                        {
+                                            effect = gainGoldEffect(2),
+                                            layout = layoutCard(
+                                                {
+                                                    title = "Shadow Gem",
+                                                    art = "art/treasures/T_Brillant_Ruby",
+                                                    xmlText=[[
+													<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="7">
+            <icon text="{gold_2}" fontsize="60"/>
+</box>
+</hlayout>
+</vlayout>
+													]]
+                                                }
+                                            ),
+                                            tags = {gainCombatTag}
+                                        },
+                                        {
+                                            effect = pushTargetedEffect({
+												desc = "Lose <sprite name=\"health_1\"> to give one minion +2 <sprite name=\"shield\"> until your next turn.",
+												validTargets = selectLoc(currentInPlayLoc).where(isCardType(minionType)),
+												min = 0,
+												max = 1,
+												check = minHealthCurrent(2),
+												targetEffect = grantHealthTarget(2, { SlotExpireEnum.startOfOwnerTurn }, nullEffect(), "shadow").seq(hitSelfEffect(1)),
+												}),
+                                            layout = layoutCard(
+                                                {
+                                                    title = "Shadow Gem",
+                                                    art = "art/treasures/T_Brillant_Ruby",
+                                                    xmlText=[[
+													<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="7">
+            <tmpro text="{health_-1}.
+Give one minion +2{shield} until your next turn." fontsize="25"/>
+</box>
+</hlayout>
+</vlayout>
+													]]
+                                                }
+                                            ),
+                                                                                    }
+                                    }
+                                }
+                        ),
+                        tags = {}
+                    }
+                )
+            },
+            layout = createLayout(
+                {
+                    name = "Shadow Gem",
+                    art = "art/treasures/T_Brillant_Ruby",
+                    frame = "frames/necromancer_frames/necromancer_item_cardframe",
+                    xmlText=[[
+					<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="7">
+            <tmpro text="{gold_2}
+-OR-
+{health_-1}. Give one minion +2{shield} until your next turn." fontsize="25"/>
+</box>
+</hlayout>
+</vlayout>
+					]]
+                }
+            )
+        }
+    )
+end
+-- END Shadow Gem CARD
+
+-- START Shadow Feeder CARD
+function demonologist_shadow_feeder_carddef()
+    return createChampionDef(
+        {
+            id = "demonologist_shadow_feeder",
+            name = "Shadow Feeder",
+			types = {minionType, championType, nosteaalType},
+            acquireCost = 0,
+            health = 1,
+            isGuard = false,
+            abilities = {
+                createAbility(
+                    {
+                        id = "Shadow_feeder_main",
+                        trigger = uiTrigger,
+                        cost = expendCost,
+                        activations = multipleActivations,
+                        effect = ifElseEffect(selectLoc(currentInPlayLoc).where(isCardType(demonType)).count().gte(1),gainCombatEffect(3),gainCombatEffect(1))
+                    }
+                )
+            },
+            layout = createLayout(
+                {
+                    name = "Shadow Feeder",
+                    art = "art/T_Devil",
+                    frame = "frames/necromancer_frames/necromancer_item_cardframe",
+                    xmlText=[[
+					<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="1">
+            <tmpro text="{expend}" fontsize="40"/>
+        </box>
+        <box flexiblewidth="7">
+            <tmpro text="{combat_1} 
+If you have another Demon in play gain {combat_2} more." fontsize="25"/>
+</box>
+</hlayout>
+</vlayout>
+					]],
+                    health = 2,
+                    isGuard = false
+                }
+            )
+        }
+    )
+end
+-- END Shadow Feeder CARD
+
+-- START Void Guard CARD
+function demonologist_void_guard_carddef()
+    return createChampionDef(
+        {
+            id = "demonologist_void_guard",
+            name = "Void guard",
+			types = {minionType, championType, demonType, nosteaalType},
+            acquireCost = 0,
+            health = 2,
+            isGuard = true,
+            abilities = {
+                createAbility(
+                    {
+                        id = "void_guard_main",
+                        trigger = autoTrigger,
+                        cost = expendCost,
+                        activations = multipleActivations,
+                        effect = gainCombatEffect(1)
+						
+                    }
+                )
+            },
+            layout = createLayout(
+                {
+                    name = "Void guard",
+                    art = "art/T_Midnight_Knight",
+                    frame = "frames/necromancer_frames/necromancer_item_cardframe",
+                    xmlText=[[
+					<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="1">
+            <tmpro text="{expend}" fontsize="40"/>
+        </box>
+        <box flexiblewidth="7">
+            <tmpro text="{combat_1} 
+You can't a-void him." fontsize="30"/>
+</box>
+</hlayout>
+</vlayout>
+					]],
+                    health = 2,
+                    isGuard = true
+                }
+            )
+        }
+    )
+end
+-- END Void guard CARD
+
+-- START lesser devourer CARD
+function demonologist_lesser_devourer_carddef()
+    return createChampionDef(
+        {
+            id = "demonologist_lesser_devourer",
+            name = "Lesser Devourer",
+			types = {minionType, championType, demonType, nosteaalType},
+            acquireCost = 0,
+            health = 2,
+            isGuard = true,
+            abilities = {
+                createAbility(
+                    {
+                        id = "lesser_devourer_main",
+                        trigger = uiTrigger,
+                        cost = expendCost,
+                        activations = multipleActivations,
+                        effect = hitSelfEffect(1).seq(grantHealthTarget(1, { SlotExpireEnum.LeavesPlay }, nullEffect(), "shadow").apply(selectSource())),
+                    }
+                )
+            },
+            layout = createLayout(
+                {
+                    name = "Lesser Devourer",
+                    art = "art/T_Demon",
+                    frame = "frames/necromancer_frames/necromancer_item_cardframe",
+                    xmlText = [[
+<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="1">
+            <tmpro text="{expend}" fontsize="40"/>
+        </box>
+        <box flexiblewidth="7">
+            <tmpro text="{health_-1} 
+Lesser Devourer gains +1{shield} until it leaves play." fontsize="30"/>
+</box>
+</hlayout>
+</vlayout>
+					]],
+                    health = 2,
+                    isGuard = true
+                }
+            )
+        }
+    )
+end
+-- END lesser devourer CARD
+
+-- START Summon Demon SKILL
+function demonologist_summon_demon_carddef()
+    local cardLayout = createLayout({
+        name = "Summon",
+        art = "icons/The_Summoning",
+        frame = "frames/necromancer_frames/necromancer_item_cardframe",
+		xmlText=[[
+		<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="1">
+            <tmpro text="{expend_2}" fontsize="72"/>
+        </box>
+        <box flexiblewidth="7">
+            <tmpro text="{health_-1} 
+Randomly summon 1 of 3 demon tokens into play." fontsize="25"/>
+</box>
+</hlayout>
+</vlayout>
+		]]
+    })
+
+ return createSkillDef({
+        id = "demonologist_summon_skill",
+        name = "Summon Demon",
+        types = { skillType },
+        layout = cardLayout,
+        layoutPath = "icons/The_Summoning",
+        abilities = {
+            createAbility({
+                id = "demonologist_summon_demon_ab",
+                trigger = uiTrigger,
+				check = minHealthCurrent(2),
+                activations = singleActivation,
+                layout = cardLayout,
+                promptType = showPrompt,
+                effect =pushChoiceEffectWithTitle(
+                                {
+                                    choices = {
+                                        {
+                                            effect = hitSelfEffect(1).seq(randomEffect({
+					valueItem(1, createCardEffect(demonologist_demonic_leech_carddef(), currentInPlayLoc)),
+					valueItem(1, createCardEffect(demonologist_succubus_carddef(), currentInPlayLoc)),
+					valueItem(1, createCardEffect(demonologist_fel_hound_carddef(), currentInPlayLoc))
+})).seq(noUndoEffect()),
+                                            layout = createLayout(
+                {
+                    name = "Demonic leech",
+                    art = "art/T_wurm",
+                    frame = "frames/necromancer_frames/necromancer_item_cardframe",
+					xmlText = [[
+<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="1">
+            <tmpro text="{expend}" fontsize="40"/>
+        </box>
+        <box flexiblewidth="7">
+            <tmpro text="Deal 1 damage to opponent.
+Demonic Leech gains 1{shield} until it leaves play." fontsize="25"/>
+</box>
+</hlayout>
+</vlayout>
+					]],
+					health = 1,
+                    isGuard = false
+                }
+            ),
+                                            tags = {gainCombatTag}
+                                        },
+                                        
+										{
+                                           effect = hitSelfEffect(1).seq(randomEffect({
+					valueItem(1, createCardEffect(demonologist_demonic_leech_carddef(), currentInPlayLoc)),
+					valueItem(1, createCardEffect(demonologist_succubus_carddef(), currentInPlayLoc)),
+					valueItem(1, createCardEffect(demonologist_fel_hound_carddef(), currentInPlayLoc))
+})).seq(noUndoEffect()),
+                                            layout = createLayout(
+                {
+                    name = "Fel hound",
+                    art = "art/T_Strength_of_the_wolf",
+                    frame = "frames/necromancer_frames/necromancer_item_cardframe",
+                    xmlText=[[
+					<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="1">
+            <tmpro text="{expend}" fontsize="40"/>
+        </box>
+        <box flexiblewidth="7">
+            <icon text="{combat_2}" fontsize="60"/>
+</box>
+</hlayout>
+</vlayout>
+					]],
+                    health = 1,
+                    isGuard = false
+                }
+            ),
+                                            tags = {gainCombatTag}
+                                        },
+										
+										{
+                                            effect = hitSelfEffect(1).seq(randomEffect({
+					valueItem(1, createCardEffect(demonologist_demonic_leech_carddef(), currentInPlayLoc)),
+					valueItem(1, createCardEffect(demonologist_succubus_carddef(), currentInPlayLoc)),
+					valueItem(1, createCardEffect(demonologist_fel_hound_carddef(), currentInPlayLoc))
+})).seq(noUndoEffect()),
+                                            layout = createLayout(
+                {
+                    name = "Succubus",
+                    art = "art/T_Banshee",
+                    frame = "frames/necromancer_frames/necromancer_item_cardframe",
+                    xmlText=[[
+					<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="1">
+            <tmpro text="{expend}" fontsize="40"/>
+        </box>
+        <box flexiblewidth="7">
+            <tmpro text="Give target champion -1{shield} until it leaves play." fontsize="25"/>
+</box>
+</hlayout>
+</vlayout>
+					]],
+                    health = 1,
+                    isGuard = false
+                }
+            ),
+                                                                                    }
+                                    },
+					upperTitle = "Summon one of these 3 demon tokens, randomly.",
+					lowerTitle = "Click any card to proceed."
+					}),
+				cost = goldCost(2),
+			}),
+        },
+		layout = createLayout(
+                {
+                    name = "Summon Demon",
+                    art = "icons/The_Summoning",
+                    frame = "frames/necromancer_frames/necromancer_item_cardframe",
+                    xmlText=[[
+					<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="1">
+            <tmpro text="{expend_2}" fontsize="72"/>
+        </box>
+        <box flexiblewidth="7">
+            <tmpro text="{health_-1} 
+Randomly summon 1 of 3 demon tokens into play." fontsize="25"/>
+</box>
+</hlayout>
+</vlayout>
+					]]
+                }
+            )
+        
+    })
+end
+-- END Summon Demon Skill
+
+--[[ START Demonic leech CARD
+for Demonologist v2.04
+Effect = Opponent loses 1 health. Demonic leech gains +1 shield until it leaves play.
+]]
+function demonologist_demonic_leech_carddef()
+    return createChampionDef(
+        {
+            id = "demonologist_demonic_leech",
+            name = "Demonic leech",
+			types = {minionType, championType, demonType, nostealType, tokenType},
+            acquireCost = 0,
+            health = 1,
+            isGuard = false,
+            abilities = {
+                createAbility(
+                    {
+                        id = "demonic_leech_main",
+                        trigger = autoTrigger,
+                        cost = expendCost,
+                        activations = multipleActivations,
+                        effect = hitOpponentEffect(1)
+								.seq((grantHealthTarget(1, { SlotExpireEnum.LeavesPlay }, nullEffect(), "shadow")).apply(selectSource()))
+                    }
+                ),
+				createAbility(
+                    {
+                        id = "demonic_leech_sac",
+                        trigger = onLeavePlayTrigger,
+                        cost = sacrificeSelfCost,
+                        activations = singleActivations,
+                        effect = nullEffect()
+					}	
+                    
+                )
+            },
+            layout = createLayout(
+                {
+                    name = "Demonic leech",
+                    art = "art/T_wurm",
+                    frame = "frames/necromancer_frames/necromancer_item_cardframe",
+					xmlText = [[
+<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="1">
+            <tmpro text="{expend}" fontsize="40"/>
+        </box>
+        <box flexiblewidth="7">
+            <tmpro text="Deal 1 damage to opponent.
+Demonic Leech gains 1{shield} until it leaves play." fontsize="25"/>
+</box>
+</hlayout>
+</vlayout>
+					]],
+					health = 1,
+                    isGuard = false
+                }
+            )
+        }
+    )
+end
+-- END Demonic leech CARD
+
+
+
+--This is an example of how to create a token champion, that self-sacrifices when it leaves play
+
+--START Fel Hound CARD
+
+function demonologist_fel_hound_carddef()
+    return createChampionDef(
+        {
+            id = "demonologist_fel_hound",
+            name = "Fel hound",
+			types = {minionType, championType, demonType, nostealType, tokenType},
+            acquireCost = 0,
+            health = 1,
+            isGuard = false,
+            abilities = {
+			--base ability
+                createAbility(
+                    {
+                        id = "fel_hound_main",
+                        trigger = autoTrigger,
+                        cost = expendCost,
+                        activations = multipleActivations,
+                        effect = gainCombatEffect(2)
+						
+                    }
+                )
+            ,
+			--self-sac ability
+                createAbility(
+                    {
+                        id = "fel_hound_sac",
+                        trigger = onLeavePlayTrigger,
+                        cost = sacrificeSelfCost,
+                        activations = singleActivations,
+                        effect = nullEffect()
+					}	
+                    
+                )},
+            layout = createLayout(
+                {
+                    name = "Fel hound",
+                    art = "art/T_Strength_of_the_wolf",
+                    frame = "frames/necromancer_frames/necromancer_item_cardframe",
+                    xmlText=[[
+					<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="1">
+            <tmpro text="{expend}" fontsize="40"/>
+        </box>
+        <box flexiblewidth="7">
+            <icon text="{combat_2}" fontsize="60"/>
+</box>
+</hlayout>
+</vlayout>
+					]],
+                    health = 1,
+                    isGuard = false
+                }
+            )
+        }
+    )
+end
+-- END Fel hound CARD
+
+-- START Succubus CARD v1.03
+function demonologist_succubus_carddef()
+    return createChampionDef(
+        {
+            id = "demonologist_succubus",
+            name = "Succubus",
+			types = {minionType, championType, demonType, nostealType, tokenType},
+            acquireCost = 0,
+            health = 1,
+            isGuard = false,
+            abilities = {
+                createAbility(
+                    {
+                        id = "succubus_main",
+                        trigger = uiTrigger,
+                        cost = expendCost,
+                        activations = multipleActivations,
+                        effect = pushTargetedEffect({
+                                                desc = "Give target champion -1<sprite name=\"shield\"> until it leaves play.",
+                                                validTargets = oppStunnableSelector(),
+                                                min = 0,
+                                                max = 1,
+                                                targetEffect = (grantHealthTarget(-1, { SlotExpireEnum.leavesPlay }, nullEffect(), "shadow")),
+                                                })
+						
+						
+						
+                    }
+                )
+            ,
+                },
+            layout = createLayout(
+                {
+                    name = "Succubus",
+                    art = "art/T_Banshee",
+                    frame = "frames/necromancer_frames/necromancer_item_cardframe",
+                    xmlText=[[
+					<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="1">
+            <tmpro text="{expend}" fontsize="40"/>
+        </box>
+        <box flexiblewidth="7">
+            <tmpro text="Give target champion -1{shield} until it leaves play." fontsize="25"/>
+</box>
+</hlayout>
+</vlayout>
+					]],
+                    health = 1,
+                    isGuard = false
+                }
+            )
+        }
+    )
+end
+-- END Succubus CARD
+
+
+-- START Summon Greater Demon Ability
+function demonologist_summon_greater_demon_carddef()
+    local cardLayout = createLayout({
+        name = "Summon Greater Demon",
+        art = "art/T_Tyrannor_The_Devourer",
+        frame = "frames/necromancer_frames/necromancer_item_cardframe",
+		xmlText=[[
+		<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="2">
+            <tmpro text="{scrap}" fontsize="50"/>
+        </box>
+        <box flexiblewidth="7">
+            <tmpro text="Randomly summon 1 of 3 Greater Demon tokens into play." fontsize="22"/> 
+</box>
+</hlayout>
+</vlayout>
+		]]
+    })
+
+    return createSkillDef({
+        id = "demonologist_summon_greater_demon_ability",
+        name = "Summon Greater Demon",
+        types = { skillType },
+        layout = cardLayout,
+        layoutPath = "art/T_Tyrannor_The_Devourer",
+        abilities = {
+            createAbility({
+                id = "demonologist_summon_greater_demon_ab",
+                trigger = uiTrigger,
+                activations = singleActivation,
+                layout = cardLayout,
+                promptType = showPrompt,
+                effect = pushChoiceEffectWithTitle({
+					  choices = {
+                                        {
+                                            effect = randomEffect({
+					valueItem(1, createCardEffect(demonologist_incubus_carddef(), currentInPlayLoc)),
+					valueItem(1, createCardEffect(demonologist_keeper_of_the_void_carddef(), currentInPlayLoc)),
+					valueItem(1, createCardEffect(demonologist_demon_master_carddef(), currentInPlayLoc))
+}).seq(noUndoEffect()),
+                                            layout = createLayout({
+            name = "Incubus",
+            art = "art/T_Lesser_Vampire",
+            frame = "frames/necromancer_frames/necromancer_item_cardframe",
+            xmlText = [[
+			<vlayout>
+    <hlayout flexibleheight="1">
+            <tmpro text="{expend}" fontsize="50" flexiblewidth="2"/>
+            <icon text="{combat_2}" fontsize="50" flexiblewidth="10" />
+    </hlayout>
+    <divider/>
+    <hlayout flexibleheight="3">
+            <tmpro text="Incubus gains {combat_1} (permanently) at the start of each turn." fontsize="20" flexiblewidth="10" />
+    </hlayout> 
+</vlayout>
+]],
+					health = 3,
+                    isGuard = false
+        }),
+                                            tags = {gainCombatTag}
+                                        },
+                                        {
+                                            effect = randomEffect({
+					valueItem(1, createCardEffect(demonologist_incubus_carddef(), currentInPlayLoc)),
+					valueItem(1, createCardEffect(demonologist_keeper_of_the_void_carddef(), currentInPlayLoc)),
+					valueItem(1, createCardEffect(demonologist_demon_master_carddef(), currentInPlayLoc))
+}).seq(noUndoEffect()),
+                                            layout = createLayout({
+            name = "Keeper of the Void",
+            art = "art/T_Giant_Knight",
+            frame = "frames/necromancer_frames/necromancer_item_cardframe",
+            xmlText = [[
+			<vlayout>
+    <hlayout flexibleheight="1">
+            <tmpro text="{expend}" fontsize="50" flexiblewidth="2"/>
+            <icon text="{combat_2}" fontsize="50" flexiblewidth="10" />
+    </hlayout>
+    <divider/>
+    <hlayout flexibleheight="3">
+            <tmpro text="Keeper of the Void gains +1{shield} for each other demon minion in play until your next turn." fontsize="20" flexiblewidth="10" />
+    </hlayout> 
+</vlayout>
+]],
+					health = 3,
+                    isGuard = true
+        }),
+                                                                                    },
+																					{
+                                            effect = randomEffect({
+					valueItem(1, createCardEffect(demonologist_incubus_carddef(), currentInPlayLoc)),
+					valueItem(1, createCardEffect(demonologist_keeper_of_the_void_carddef(), currentInPlayLoc)),
+					valueItem(1, createCardEffect(demonologist_demon_master_carddef(), currentInPlayLoc))
+}).seq(noUndoEffect()),
+                                            layout = createLayout({
+            name = "Demon Master",
+            art = "art/T_Angry_Skeleton",
+            frame = "frames/necromancer_frames/necromancer_item_cardframe",
+            xmlText = [[
+			<vlayout>
+    <hlayout flexibleheight="1">
+            <tmpro text="{expend}" fontsize="50" flexiblewidth="2"/>
+            <icon text="{combat_1}" fontsize="50" flexiblewidth="10" />
+    </hlayout>
+      <hlayout flexibleheight="3">
+            <tmpro text="Prepare up to 2 other demon minions." fontsize="20" flexiblewidth="10" />
+    </hlayout> 
+</vlayout>
+]],
+					health = 3,
+                    isGuard = false
+        }),
+                                                                                    }
+                                    },
+					  upperTitle = "Randomly summon one of these 3 demons.",
+					  lowerTitle = "Click any card to proceed."
+					}),
+				cost = sacrificeSelfCost,
+			}),
+        },
+		layout = createLayout(
+                {
+                    name = "Summon Greater Demon",
+                    art = "art/T_Tyrannor_The_Devourer",
+                    frame = "frames/necromancer_frames/necromancer_item_cardframe",
+                    xmlText=[[
+					<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="2">
+            <tmpro text="{scrap}" fontsize="50"/>
+        </box>
+        <box flexiblewidth="7">
+            <tmpro text="Randomly summon 1 of 3 Greater Demon tokens into play." fontsize="22"/> 
+</box>
+</hlayout>
+</vlayout>
+					]]
+                }
+            )
+        
+    })
+end
+-- END Summon Greater Demon Ability
+
+-- START Incubus CARD
+function demonologist_incubus_carddef()
+    return createChampionDef(
+        {
+            id = "demonologist_incubus",
+            name = "Incubus",
+			types = {championType, demonType, minionType, nostealType},
+            acquireCost = 0,
+            health = 3,
+            isGuard = false,
+            abilities = {
+                createAbility(
+                    {
+                        id = "demonologist_incubus_main",
+                        trigger = uiTrigger,
+                        cost = expendCost,
+                        activations = multipleActivations,
+                        effect = gainCombatEffect(2).seq(gainCombatEffect(getCounter("incubus")))
+                    }
+                ),
+				
+				createAbility(
+                    {
+                        id = "demonologist_incubus_main",
+                        trigger = startOfTurnTrigger,
+                        cost = noCost,
+                        activations = multipleActivations,
+                        effect = incrementCounterEffect("incubus", 1)
+                    }
+                ),
+			
+			createAbility(
+                    {
+                        id = "demonologist_incubus_sac",
+                        trigger = onLeavePlayTrigger,
+                        cost = sacrificeSelfCost,
+                        activations = multipleActivations,
+                        effect = nullEffect()
+					}	
+                    
+                )
+            },
+            layout = createLayout({
+            name = "Incubus",
+            art = "art/T_Lesser_Vampire",
+            frame = "frames/necromancer_frames/necromancer_item_cardframe",
+            xmlText = [[
+			<vlayout>
+    <hlayout flexibleheight="1">
+            <tmpro text="{expend}" fontsize="50" flexiblewidth="2"/>
+            <icon text="{combat_2}" fontsize="50" flexiblewidth="10" />
+    </hlayout>
+    <divider/>
+    <hlayout flexibleheight="3">
+            <tmpro text="Incubus gains {combat_1} (permanently) at the start of each turn." fontsize="20" flexiblewidth="10" />
+    </hlayout> 
+</vlayout>
+]],
+					health = 3,
+                    isGuard = false
+        })
+        }
+    )
+end
+-- END Incubus CARD
+
+-- START Keeper of the Void CARD
+function demonologist_keeper_of_the_void_carddef()
+    return createChampionDef(
+        {
+            id = "demonologist_keeper_of_the_void",
+            name = "Keeper of the Void",
+			types = {championType, demonType, minionType, nostealType},
+            acquireCost = 0,
+            health = 3,
+            isGuard = true,
+            abilities = {
+                createAbility(
+                    {
+                        id = "demonologist_keeper_of_the_void_main",
+                        trigger = uiTrigger,
+                        cost = expendCost,
+                        activations = multipleActivations,
+                        effect = gainCombatEffect(2)
+						.seq(grantHealthTarget(selectLoc(loc(currentPid, inPlayPloc)).where(isCardType("minion").And(isCardName("demonologist_keeper_of_the_void").invert())).count(), { SlotExpireEnum.startOfOwnerTurn }, nullEffect(), "Void Keeper").apply(selectSource())),
+                    }
+                ),
+				
+			createAbility(
+                    {
+                        id = "demonologist_keeper_of_the_void_sac",
+                        trigger = onLeavePlayTrigger,
+                        cost = sacrificeSelfCost,
+                        activations = multipleActivations,
+                        effect = nullEffect()
+					}	
+                    
+                )
+            },
+            layout = createLayout({
+            name = "Keeper of the Void",
+            art = "art/T_Giant_Knight",
+            frame = "frames/necromancer_frames/necromancer_item_cardframe",
+            xmlText = [[
+			<vlayout>
+    <hlayout flexibleheight="1">
+            <tmpro text="{expend}" fontsize="50" flexiblewidth="2"/>
+            <icon text="{combat_2}" fontsize="50" flexiblewidth="10" />
+    </hlayout>
+    <divider/>
+    <hlayout flexibleheight="3">
+            <tmpro text="Keeper of the Void gains +1{shield} for each other demon minion in play until your next turn." fontsize="20" flexiblewidth="10" />
+    </hlayout> 
+</vlayout>
+]],
+					health = 3,
+                    isGuard = true
+        })
+        }
+    )
+end
+-- END Keeper of the Void CARD
+
+-- START Demon Master CARD
+function demonologist_demon_master_carddef()
+    return createChampionDef(
+        {
+            id = "demonologist_demon_master",
+            name = "Demon Master",
+			types = {championType, demonType, minionType, nostealType},
+            acquireCost = 0,
+            health = 3,
+            isGuard = false,
+            abilities = {
+                createAbility(
+                    {
+                        id = "demonologist_demon_master_main",
+                        trigger = uiTrigger,
+                        cost = expendCost,
+                        activations = multipleActivations,
+                        effect = gainCombatEffect(1).seq(pushTargetedEffect({
+                    desc = "Prepare up to 2 other demon minions in play.",
+                    validTargets = selectLoc(currentInPlayLoc).where(isCardType(minionType).And(isCardName("demonologist_demon_master").invert())),
+                    min = 0,
+                    max = 2,
+                    targetEffect = prepareTarget()
+				
+            }))
+                    }
+                ),
+							createAbility(
+                    {
+                        id = "demonologist_demon_master_sac",
+                        trigger = onLeavePlayTrigger,
+                        cost = sacrificeSelfCost,
+                        activations = multipleActivations,
+                        effect = nullEffect()
+					}	
+                    
+                )
+            },
+            layout = createLayout({
+            name = "Demon Master",
+            art = "art/T_Angry_Skeleton",
+            frame = "frames/necromancer_frames/necromancer_item_cardframe",
+            xmlText = [[
+			<vlayout>
+    <hlayout flexibleheight="1">
+            <tmpro text="{expend}" fontsize="50" flexiblewidth="2"/>
+            <icon text="{combat_1}" fontsize="50" flexiblewidth="10" />
+    </hlayout>
+      <hlayout flexibleheight="3">
+            <tmpro text="Prepare up to 2 other demon minions." fontsize="20" flexiblewidth="10" />
+    </hlayout> 
+</vlayout>
+]],
+					health = 3,
+                    isGuard = false
+        })
+        }
+    )
+end
+-- END Demon Master CARD
+
+
+-- START Mezzaluna CARD
+function apothecary_mezzaluna_carddef()
+    return createDef(
+        {
+            id = "apothecary_mezzaluna",
+            name = "Mezzaluna",
+            types = {noStealType, itemType},
+            acquireCost = 0,
+            cardTypeLabel = "Item",
+            playLocation = castPloc,
+            abilities = {
+                createAbility({
+                        id = "apothecary_mezzaluna",
+                        layout = cardLayout,
+                        effect = gainCombatEffect(2),
+                        trigger = autoTrigger,
+                        tags = {}
+                    }
+                )
+            },
+            layout = createLayout(
+                {
+                    name = "Mezzaluna",
+                    art = "art/T_Spell_Components",
+                    frame = "frames/Wizard_CardFrame",
+                    text = "<sprite name=\"combat_2\">",
+                }
+            )
+        }
+    )
+end
+-- END Mezzaluna CARD
+
+-- START Apprentice Potion Maker CARD
+function apothecary_apprentice_potion_maker_carddef()
+    return createChampionDef(
+        {
+            id = "apothecary_apprentice_potion_maker",
+            name = "Apprentice Potion Maker",
+			types = {championType, nostealType},
+            acquireCost = 0,
+            health = 1,
+            isGuard = false,
+            abilities = {
+                createAbility(
+                    {
+                        id = "apprentice_potion_maker_main",
+                        trigger = uiTrigger,
+                        cost = expendCost,
+                        activations = multipleActivations,
+                        effect = pushChoiceEffect(
+                                {
+                                    choices = {
+                                        {
+                                            effect = gainGoldEffect(1),
+                                            layout = layoutCard(
+                                                {
+                                                    title = "Apprentice Potion Maker",
+                                                    art = "art/T_Thief_Shadow_Mask",
+                                                    text = "{1 gold}"
+                                                }
+                                            ),
+                                            tags = {gainGold1Tag}
+                                        },
+                                        {
+                                            effect = pushTargetedEffect({
+												  desc="Move a potion from your discard to the top of your deck.",
+												  min=0,
+												  max=1,
+												  validTargets= selectLoc(loc(currentPid, discardPloc)).where(isCardType("Elixir")),
+												  targetEffect= moveTarget(currentDeckLoc),
+												  tags = {}
+}),
+											
+                                            layout = layoutCard(
+                                                {
+                                                    title = "Apprentice Potion Maker",
+                                                    art = "art/T_Thief_Shadow_Mask",
+                                                    text = "Move a potion from  your discard to the top of your deck."
+                                                }
+                                            ),
+                                                                                    }
+                                    }
+                                }
+                        )
+                    }
+                )
+            },
+            layout = createLayout(
+                {
+                    name = "Apprentice Potion Maker",
+                    art = "art/T_Thief_Shadow_Mask",
+                    frame = "frames/Wizard_CardFrame",
+                    text = "<sprite name=\"expend\"><sprite name=\"gold_1\"> -or- Move a potion from  your discard to the top of your deck.",
+                    health = 1,
+                    isGuard = false
+                }
+            )
+        }
+    )
+end
+-- END Apprentice Potion Maker CARD
+
+-- START Red Potion CARD
+
+function apothecary_red_potion_carddef()
+    return createDef({
+        id="apothecary_red_potion",
+        name="Red Potion",
+        types={noStealType, itemType, elixirType},
+        acquireCost=0,
+		cardTypeLabel = "Item",
+		playLocation = castPloc,
+        abilities = {
+            createAbility({
+                id="apothecary_red_potion",
+                trigger= autoTrigger,
+                effect = gainCombatEffect(2)
+            }),
+			createAbility({
+                id="apothecary_red_potion_combo",
+                trigger= autoTrigger,
+				prompt = showPrompt,
+				cost = noCost,
+				activations = singleActivations,
+				check = selectLoc(loc(currentPid, castPloc)).where(isCardName("apothecary_yellow_potion")).count().gte(1),
+                effect = oppDiscardEffect(1),
+            })
+        },
+        layout = createLayout({
+            name = "Red potion",
+            art = "art/T_Elixir_of_strength",
+            frame = "frames/Wizard_CardFrame",
+            text = "<sprite name=\"combat_2\"> If you have yellow potion in play, opponent discards a card."
+        })
+    })
+	end
+-- END Red Potion CARD
+
+-- START green Potion CARD
+
+function apothecary_green_potion_carddef()
+    return createDef({
+        id="apothecary_green_potion",
+        name="Green Potion",
+        types={noStealType, itemType, elixirType},
+		cardTypeLabel = "Item",
+		playLocation = castPloc,
+        acquireCost=0,
+        abilities = {
+            createAbility({
+                id="apothecary_green_potion",
+                trigger= autoTrigger,
+                effect = gainHealthEffect(2)
+            }),
+			createAbility({
+                id="apothecary_green_potion_combo",
+				cost = noCost,
+                trigger= uiTrigger,
+				promptType = showPrompt,
+					layout = createLayout({
+					name = "Green Potion",
+					art = "art/treasures/T_Green_Potions_Medium",
+					frame = "frames/Wizard_CardFrame",
+					text = "<sprite name=\"health_2\"> If you have a red potion in play, draw a card."
+					}),
+				activations = singleActivations,
+				check = selectLoc(loc(currentPid, castPloc)).where(isCardName("apothecary_red_potion")).count().gte(1),
+                effect = drawCardsEffect(1),
+            })
+        },
+        layout = createLayout({
+            name = "Green Potion",
+            art = "art/treasures/T_Green_Potions_Medium",
+            frame = "frames/Wizard_CardFrame",
+            text = "<sprite name=\"health_2\"> If you have a red potion in play, draw a card."
+        })
+    })
+	end
+-- END green Potion CARD
+
+-- START yellow Potion CARD
+
+function apothecary_yellow_potion_carddef()
+    return createDef({
+        id="apothecary_yellow_potion",
+        name="Yellow Potion",
+        types={noStealType, itemType, elixirType},
+        acquireCost=0,
+		cardTypeLabel = "Item",
+		playLocation = castPloc,
+        abilities = {
+            createAbility({
+                id="apothecary_yellow_potion",
+                trigger= autoTrigger,
+                effect = gainGoldEffect(2)
+            }),
+			createAbility({
+                id="apothecary_yellow_potion_combo",
+                trigger= autoTrigger,
+				prompt = showPrompt,
+				layout = layoutCard({
+					name = "yellow Potion",
+					art = "art/T_Elixir_of_fortune",
+					frame = "frames/Wizard_CardFrame",
+					text = "<sprite name=\"gold_2\"> If you have a green potion in play, gain 2 Toughness this turn."
+							}),
+				cost = noCost,
+				activations = singleActivations,
+				check = selectLoc(loc(currentPid, castPloc)).where(isCardName("apothecary_green_potion")).count().gte(1),
+                effect = gainToughnessEffect(2),
+
+            })
+        },
+        layout = createLayout({
+            name = "yellow Potion",
+            art = "art/T_Elixir_of_fortune",
+            frame = "frames/Wizard_CardFrame",
+            text = "<sprite name=\"gold_2\"> If you have a green potion in play, gain 2 Toughness this turn."
+        })
+    })
+	end
+-- END yellow Potion CARD
+
+--START Custom Brew ABILITY 
+function apothecary_custom_brew_carddef()
+	return createHeroAbilityDef({
+		id = "custom_brew",
+		name = "Custom Brew",
+		types = { heroAbilityType },
+        abilities = {
+			createAbility({
+				id = "custom_brewActivate",
+				trigger = uiTrigger,
+				promptType = showPrompt,
+				layout = createLayout({
+					name = "Custom Brew",
+					art = "art/T_Elixir_of_concentration",
+					frame = "frames/Wizard_CardFrame",
+					xmlText = [[	
+<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="1">
+            <tmpro text="{scrap}" fontsize="36"/>
+        </box>
+        <box flexiblewidth="7">
+            <tmpro text="{combat_5}&lt;size=60%&gt; or &lt;/size&gt;{health_6}&lt;size=60%&gt; or 
+Draw 1 and opponent discards 1." fontsize="40" />
+        </box>
+    </hlayout>
+</vlayout>
+					]]					
+				}),
+				effect =
+				pushChoiceEffect(
+                                {
+                                    choices = {
+                                        {
+                                            effect = gainCombatEffect(5),
+                                            layout = layoutCard(
+                                                {
+                                                    title = "Custom Brew",
+                                                    art = "art/T_Elixir_of_concentration",
+													frame = "frames/Wizard_CardFrame",
+                                                    xmlText = [[
+													<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="7">
+            <tmpro text="{combat_5}&lt;size=60%&gt;" fontsize="46" />
+        </box>
+    </hlayout>
+</vlayout>
+]]
+                                                }
+                                            ),
+                                            tags = {gainCombat6Tag}
+                                        },
+										{
+                                            effect = gainHealthEffect(6),
+                                            layout = layoutCard(
+                                                {
+                                                    title = "Custom Brew",
+                                                    art = "art/T_Elixir_of_concentration",
+													frame = "frames/Wizard_CardFrame",
+                                                    xmlText = [[
+													<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="7">
+            <tmpro text="{health_6}&lt;size=60%&gt;" fontsize="46" />
+        </box>
+    </hlayout>
+</vlayout>
+]]
+                                                }
+                                            ),
+                                            tags = {gainHealthTag}
+                                        },
+                                        {
+                                            effect = drawCardsEffect(1).seq(oppDiscardEffect(1)),
+                                            layout = layoutCard(
+                                                {
+                                                    title = "Custom Brew",
+                                                    art = "art/T_Elixir_of_concentration",
+													frame = "frames/Wizard_CardFrame",
+                                                    xmlText = [[
+													<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="7">
+            <tmpro text="Draw 1.
+Opponent discards 1." fontsize="28" />
+        </box>
+    </hlayout>
+</vlayout>
+]]
+                                                }
+                                            ),
+                                                                                    }
+                                    }
+                                }
+                        ),
+				cost = sacrificeSelfCost
+			})
+		},
+        layout = createLayout({
+            name = "Custom Brew",	
+            art = "art/T_Elixir_of_concentration",
+			frame = "frames/Wizard_CardFrame",
+            text = "<sprite name=\"combat_5\"> or <sprite name=\"health_6\">  or Draw 1 and opponent discards 1."
+        }),
+        layoutPath  = "art/T_Elixir_of_concentration",
+	})
+end	
+-- END Custom Brew ABILITY
+
+--[[
+START Restorative Draught Skill
+]]
+
+function apothecary_restorative_draught_carddef()
+    local cardLayout = createLayout({
+        name = "Restorative Draught",
+        art = "art/treasures/T_ranger_elixir_yellow",
+        frame = "frames/Wizard_CardFrame",
+		xmlText = [[
+		<vlayout>
+			<hlayout flexibleheight="1">
+				<box flexiblewidth="1">
+					<tmpro text="{expend_2}" fontsize="72"/>
+				</box>
+				<box flexiblewidth="7">
+					<tmpro text="Put a champion or action of cost 3g or less from your discard on top of your deck." fontsize="22" />
+				</box>
+			</hlayout>
+		</vlayout>
+		]]
+    })
+
+    return createSkillDef({
+        id = "apothecary_restorative_draught_skill",
+        name = "Restorative Draught",
+        types = { skillType },
+        layout = cardLayout,
+        layoutPath = "art/treasures/T_ranger_elixir_yellow",
+        abilities = {
+            createAbility({
+                id = "apothecary_restorative_draught_ab",
+                trigger = uiTrigger,
+                activations = singleActivation,
+                layout = cardLayout,
+				promptType = showPrompt,
+                effect = pushTargetedEffect({
+												  desc="Put a champion or action of cost 3g or less from your discard on top of your deck.",
+												  min=0,
+												  max=1,
+												  validTargets= selectLoc(loc(currentPid, discardPloc)).where((isCardAction().Or(isCardChampion())).And(getCardCost().lte(3))),
+												  targetEffect= moveTarget(currentDeckLoc),
+												  tags = {}
+												}),
+                cost = goldCost(2),
+            }),
+        }
+        
+    })
+end
+-- END Restorative Draught  SKILL  
+
+
+-- START Ice burst CARD
+function cryomancer_ice_burst_carddef()
+    return createDef(
+        {
+            id = "cryomancer_ice_burst",
+            name = "Ice Burst",
+            types = {noStealType, actionType},
+            acquireCost = 0,
+            cardTypeLabel = "Action",
+            playLocation = castPloc,
+            abilities = {
+                createAbility({
+                        id = "cryomancer_ice_burst",
+                        layout = cardLayout,
+                        effect = gainCombatEffect(2),
+                        trigger = autoTrigger,
+                        tags = {}
+                    }
+                )
+            },
+            layout = createLayout(
+                {
+                    name = "Ice Burst",
+                    art = "art/T_Flame_Burst",
+                    frame = "frames/Wizard_CardFrame",
+                    text = "<sprite name=\"combat_2\"> \n<space=1.5em>\n<space=1.5em>'Have an ice day!!'",
+                }
+            )
+        }
+    )
+end
+-- END Ice Burst CARD
+
+-- START Ice shield CARD
+function cryomancer_ice_shield_carddef()
+    return createDef(
+        {
+            id = "cryomancer_ice_shield",
+            name = "Ice Shield",
+            types = {noStealType, actionType},
+            acquireCost = 0,
+            cardTypeLabel = "Action",
+            playLocation = castPloc,
+            abilities = {
+                createAbility({
+                        id = "cryomancer_ice_shield",
+                        layout = cardLayout,
+                        effect = ifElseEffect(selectLoc(loc(currentPid, castPloc)).where(isCardAction()).count().gte(3), gainToughnessEffect(2).seq(gainCombatEffect(2)), gainToughnessEffect(2)),
+                        trigger = autoTrigger,
+                        tags = {}
+                    }
+                ),
+				
+            },
+            layout = createLayout(
+                {
+                    name = "Ice Shield",
+                    art = "art/T_Glittering_Spray",
+                    frame = "frames/Wizard_CardFrame",
+                    xmlText = [[<vlayout forceheight="false" spacing="6">
+								<hlayout spacing="10">
+								<text text="Gain 2 Toughness." fontsize="22"/>   
+							</hlayout>    
+								<hlayout spacing="10">
+								<text text="If you have 2 other actions in play, also gain {combat_2}." fontsize="18"/>    
+							</hlayout>
+							</vlayout>]],
+                }
+            )
+        }
+    )
+end
+-- END Ice shield CARD
+
+-- START Ice Gem CARD
+function cryomancer_ice_gem_carddef()
+    return createDef(
+        {
+            id = "cryomancer_ice_gem",
+            name = "Ice Gem",
+            types = {gemType, noStealType, itemType},
+            acquireCost = 0,
+            cardTypeLabel = "Item",
+            playLocation = castPloc,
+            abilities = {
+                createAbility(
+                    {
+                        id = "cryomancer_ice_gem",
+                        layout = cardLayout,
+                        effect =
+                        pushChoiceEffect(
+                                {
+                                    choices = {
+                                        {
+                                            effect = gainGoldEffect(2),
+                                            layout = layoutCard(
+                                                {
+                                                    title = "Ice Gem",
+                                                    art = "art/T_Wizard_Alchemist_S_Stone",
+                                                    text = "<sprite name=\"gold_2\">"
+                                                }
+                                            ),
+                                            tags = {gainGold2Tag}
+                                        },
+                                        {
+                                            effect = oppDiscardEffect(1),
+                                            layout = layoutCard(
+                                                {
+                                                    title = "Ice Gem",
+                                                    art = "art/T_Wizard_Alchemist_S_Stone",
+                                                    text = "Opponent discards a card."
+                                                }
+                                            ),
+                                                                                    }
+                                    }
+                                }
+                        ),
+                        trigger = autoTrigger,
+                        tags = {}
+                    }
+                )
+            },
+            layout = createLayout(
+                {
+                    name = "Ice Gem",
+                    art = "art/T_Wizard_Alchemist_S_Stone",
+                    frame = "frames/Wizard_CardFrame",
+                    text = "<sprite name=\"gold_2\"> \n<space=1.5em>Or opponent discards a card.",
+                }
+            )
+        }
+    )
+end
+-- END Ice Gem CARD
+
+-- START Freeze CARD
+function cryomancer_freeze_carddef()
+    return createDef(
+        {
+            id = "cryomancer_freeze",
+            name = "Freeze",
+            types = {noStealType, actionType},
+            acquireCost = 0,
+            cardTypeLabel = "Action",
+            playLocation = castPloc,
+            abilities = {
+                createAbility({
+                        id = "cryomancer_freeze",
+                        layout = cardLayout,
+                        effect = pushTargetedEffect({
+												desc = "Brrr. It's cold in here. (Expend a champion.)",
+												validTargets = oppStunnableSelector(),
+												min = 0,
+												max = 1,
+												targetEffect = expendTarget().seq(gainCombatEffect(1)),
+												}),
+                        trigger = autoTrigger,
+                        tags = {}
+                    }
+                )
+            },
+            layout = createLayout(
+                {
+                    name = "Freeze",
+                    art = "art/T_Wind_Tunnel",
+                    frame = "frames/Wizard_CardFrame",
+                    text = "<sprite name=\"combat_1\"> Expend a champion.",
+                }
+            )
+        }
+    )
+end
+-- END Freeze CARD
+
+
+	--[[
+START Frostbite SKILL 
+]]
+
+function cryomancer_frostbiteskill_carddef()
+    local cardLayout = createLayout({
+        name = "Frostbite",
+        art = "icons/wind_storm",
+        frame = "frames/Wizard_CardFrame",
+        xmlText = 
+		[[
+		<vlayout>
+    <hlayout flexibleheight="3">
+            <tmpro text="{expend_2}" fontsize="50" flexiblewidth="2"/>
+            <tmpro text="Add a frostbite card to opponent's discard." fontsize="20" flexiblewidth="10" />
+    </hlayout>
+    <divider/>
+    <hlayout flexibleheight="2">
+            <tmpro text="Frostbite card: {scrap} {health_-1}" fontsize="20" flexiblewidth="10" />
+    </hlayout> 
+</vlayout>
+		]]
+    })
+
+    return createSkillDef({
+        id = "cryomancer_frostbiteskill_skill",
+        name = "Frostbite",
+        types = { skillType },
+        layout = cardLayout,
+        layoutPath = "icons/wind_storm",
+        abilities = {
+            createAbility({
+                id = "cryomancer_frostbiteskill_ab",
+                trigger = uiTrigger,
+                activations = singleActivation,
+                layout = cardLayout,
+				promptType = showPrompt,
+                effect = createCardEffect(cryomancer_frostbite_carddef(), loc(oppPid, discardPloc)),
+				cost = goldCost(2),
+            }),
+        }
+        
+    })
+end
+-- END Frostbite SKILL 
+
+-- START Frostbite CARD v1.03
+function cryomancer_frostbite_carddef()
+    return createDef(
+        {
+            id = "cryomancer_frostbite",
+            name = "Frostbite",
+            types = {noStealType, actionType},
+            acquireCost = 0,
+            cardTypeLabel = "Action",
+			playLocation = castPloc,
+            abilities = {
+                createAbility({
+                        id = "cryomancer_frostbite",
+                        layout = cardLayout,
+                        effect = hitSelfEffect(1),
+						cost = sacrificeSelfCost,
+                        trigger = autoTrigger,
+						playAllType = noPlayPlayType,
+                        tags = {}
+                    }
+                )
+            },
+            layout = createLayout(
+                {
+                    name = "Frostbite",
+                    art = "icons/wind_storm",
+                    frame = "frames/Wizard_CardFrame",
+                    xmlText = [[
+<vlayout forceheight="false" spacing="6">
+<hlayout spacing="10">
+<icon text="{scrap}" fontsize="60"/>
+<icon text="{health_-1}" fontsize="60"/>
+</hlayout>
+</vlayout>
+]],
+                }
+            )
+        }
+    )
+end
+-- END Frostbite CARD
+
+--START Blizzard ABILITY 
+function cryomancer_blizzard_carddef()
+	return createHeroAbilityDef({
+		id = "blizzard",
+		name = "Blizzard",
+		types = { heroAbilityType },
+        abilities = {
+			createAbility({
+				id = "blizzardActivate",
+				trigger = uiTrigger,
+				promptType = showPrompt,
+				layout = createLayout({
+					name = "Blizzard",
+					art = "art/T_heavy_gust",
+					frame = "frames/Wizard_CardFrame",
+					xmlText = [[<vlayout forceheight="false" spacing="1">
+<hlayout forcewidth="true" spacing="1">
+<icon text="{scrap}" fontsize="40"/>
+<vlayout  forceheight="false">
+<text text="
+Draw 2. 
+Deal 3 damage to ALL champions (including yours)." fontsize="22"/>
+</vlayout>
+<icon text="" fontsize="1"/>
+</hlayout>
+</vlayout>
+]]
+				}),
+				effect = drawCardsEffect(2).seq(damageTarget(3).apply(selectLoc(loc(currentPid, inPlayPloc)).union(selectLoc(loc(oppPid, inPlayPloc))).where(isCardChampion()))),
+				cost = sacrificeSelfCost
+			})
+		},
+        layout = createLayout({
+            name = "Blizzard",	
+            art = "art/T_heavy_gust",
+            xmlText = [[<vlayout forceheight="false" spacing="1">
+<hlayout forcewidth="true" spacing="1">
+<icon text="{scrap}" fontsize="40"/>
+<vlayout  forceheight="false">
+<text text="
+Draw 2. 
+Deal 3 damage to ALL champions (including yours)." fontsize="22"/>
+</vlayout>
+<icon text="" fontsize="1"/>
+</hlayout>
+</vlayout>]]
+        }),
+        layoutPath  = "icons/wizard_serene_channel",
+	})
+end	
+-- END Blizzard ABILITY
+
+-- START Combust CARD
+function pyromancer_combust_carddef()
+    return createDef(
+        {
+            id = "Pyromancer_Combust",
+            name = "combust",
+            types = {noStealType, actionType},
+            acquireCost = 0,
+            cardTypeLabel = "Action",
+            playLocation = castPloc,
+            abilities = {
+                createAbility({
+                        id="Pyromancer_Combust_combat",
+						trigger= autoTrigger,
+						effect = gainCombatEffect(1)
+                    }),
+			createAbility({
+                id="Pyromancer_Combust_FGsac",
+                trigger= autoTrigger,
+				activations = singleActivations,
+				check = selectLoc(loc(currentPid, castPloc)).union(selectLoc(loc(currentPid, discardPloc))).where(isCardName("fire_gem")).count().gte(1),
+                effect = gainCombatEffect(2)
+
+            })
+            },
+            layout = createLayout(
+                {
+                    name = "Combust",
+                    art = "art/T_Spark",
+                    frame = "frames/Wizard_CardFrame",
+                    text = "Gain <sprite name=\"combat_1\">. If you have a fire gem inn play or in your discard pile gain <sprite name=\"combat_2\"> more.",
+                }
+            )
+        }
+    )
+end
+-- END Combust CARD
+
+-- START Sear CARD
+function pyromancer_sear_carddef()
+    return createDef(
+        {
+            id = "Pyromancer_Sear",
+            name = "sear",
+            types = {noStealType, actionType},
+            acquireCost = 0,
+            cardTypeLabel = "Action",
+            playLocation = castPloc,
+            abilities = {
+                createAbility({
+                        id = "Pyromancer_Sear",
+                        layout = cardLayout,
+                        effect = gainCombatEffect(2),
+                        trigger = autoTrigger,
+                        tags = {}
+                    }
+                )
+            },
+            layout = createLayout(
+                {
+                    name = "Sear",
+                    art = "art/T_Fire_Blast",
+                    frame = "frames/Wizard_CardFrame",
+                    text = "Gain <sprite name=\"combat_2\">",
+                }
+            )
+        }
+    )
+end
+-- END Sear CARD
+
+-- START Scorch CARD
+function pyromancer_scorch_carddef()
+    return createDef(
+        {
+            id = "Pyromancer_Scorch",
+            name = "Scorch",
+            types = {noStealType, actionType},
+            acquireCost = 0,
+            cardTypeLabel = "Action",
+            playLocation = castPloc,
+            abilities = {
+                createAbility({
+                        id = "Pyromancer_Scorch",
+                        layout = cardLayout,
+                        effect = gainCombatEffect(1).seq(damageTarget(1).apply(selectLoc(loc(oppPid, inPlayPloc)))),
+                        trigger = autoTrigger,
+                        tags = {}
+                    }
+                )
+            },
+            layout = createLayout(
+                {
+                    name = "Scorch",
+                    art = "art/T_Pillar_Of_Fire",
+                    frame = "frames/Wizard_CardFrame",
+                    text = "Gain <sprite name=\"combat_1\"> and deal 1 damage to all opposing champions.",
+                }
+            )
+        }
+    )
+end
+-- END Scorch CARD
+
+-- START Fire Shard CARD
+function pyromancer_fire_shard_carddef()
+    return createDef(
+        {
+            id = "pyromancer_fire_shard",
+            name = "Fire Shard",
+            types = {gemType, noStealType, itemType},
+            acquireCost = 0,
+            cardTypeLabel = "Item",
+            playLocation = castPloc,
+            abilities = {
+                createAbility(
+                    {
+                        id = "pyromancer_fire_shard",
+                        layout = cardLayout,
+                        effect =
+                        pushChoiceEffect(
+                                {
+                                    choices = {
+                                        {
+                                            effect = gainGoldEffect(1),
+                                            layout = layoutCard(
+                                                {
+                                                    title = "Fire Shard",
+                                                    art = "art/treasures/T_Sharpened_ruby",
+                                                    text = "Gain <sprite name=\"gold_1\">"
+                                                }
+                                            ),
+                                            tags = {gainGold1Tag}
+                                        },
+                                        {
+                                            effect = createCardEffect(fire_gem_carddef(), currentDiscardLoc),
+                                            layout = layoutCard(
+                                                {
+                                                    title = "Shadow Gem",
+                                                    art = "art/treasures/T_Sharpened_ruby",
+                                                    text = "Acquire a Fire Gem for free."
+                                                }
+                                            ),
+                                                                                    }
+                                    }
+                                }
+                        ),
+                        trigger = autoTrigger,
+                        tags = {}
+                    }
+                )
+            },
+            layout = createLayout(
+                {
+                    name = "Fire Shard",
+                    art = "art/treasures/T_Sharpened_ruby",
+                    frame = "frames/Wizard_CardFrame",
+                    text = "Gain <sprite name=\"gold_1\"> or Acquire a Fire Gem for free. \n <size=50%>",
+                }
+            )
+        }
+    )
+end
+-- END Fire Shard CARD
+
+--START Conflagration ABILITY 
+function pyromancer_conflagration_1p_carddef()
+	return createHeroAbilityDef({
+		id = "conflagration_1p",
+		name = "Conflagration",
+		types = { heroAbilityType },
+        abilities = {
+			createAbility({
+				id = "conflagration_1pActivate",
+				trigger = uiTrigger,
+				promptType = showPrompt,
+				layout = createLayout({
+					name = "Conflagration",
+					art = "icons/growing_flame",
+					xmlText = [[<vlayout forceheight="false" spacing="6">
+							<hlayout forcewidth="true" spacing="10">
+								<icon text="{scrap}" fontsize="40"/>
+								<vlayout  forceheight="false">
+							<icon text="{combat_5}" fontsize="30"/>
+							<text text="Also gain any additional {combat} generated by your Fuel skill since the start of the game. Then replace Fuel with After Burn ({combat_1}{health_1})." fontsize="18"/>
+								</vlayout>
+							</hlayout>
+						</vlayout>
+							]]
+				}),
+				effect = gainCombatEffect(5).seq(gainCombatEffect(getCounter("conflagration_1p")))
+				.seq(sacrificeTarget().apply(selectLoc(loc(currentPid, skillsPloc)).where(isCardName("pyromancer_fuel_1p_skill"))))
+				.seq(createCardEffect(pyromancer_after_burn_carddef(), currentSkillsLoc)),
+				cost = sacrificeSelfCost
+			}),
+		},
+        layout = createLayout({
+            name = "Conflagration",	
+            art = "icons/growing_flame",
+            xmlText = [[<vlayout forceheight="false" spacing="6">
+    <hlayout forcewidth="true" spacing="10">
+        <icon text="{scrap}" fontsize="40"/>
+        <vlayout  forceheight="false">
+	<icon text="{combat_5}" fontsize="30"/>
+	<text text="Also gain any additional {combat} generated by your Fuel skill since the start of the game. Then replace Fuel with After Burn ({combat_1}{health_1})." fontsize="18"/>
+        </vlayout>
+    </hlayout>
+</vlayout>
+]]
+        }),
+        layoutPath  = "icons/fire_bomb",
+	})
+end	
+-- END Conflagration ABILITY
+
+-- START Fuel SKILL 
+function pyromancer_fuel_1p_carddef()
+    local cardLayout = createLayout({
+        name = "Fuel",
+        art = "icons/growing_flame",
+        frame = "frames/Wizard_CardFrame",
+        xmlText = [[<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="1">
+            <tmpro text="{expend_2}" fontsize="72"/>
+        </box>
+        <box flexiblewidth="7">
+            <tmpro text="Add {combat_1} to your Conflagration ability. Then increase the value of Fuel by {combat_1} (up to a maximum of {combat_5})." fontsize="22" />
+        </box>
+    </hlayout>
+</vlayout>]]
+    })
+
+    return createSkillDef({
+        id = "pyromancer_fuel_1p_skill",
+        name = "Fuel",
+        types = { skillType },
+        layout = cardLayout,
+        layoutPath = "icons/growing_flame",
+        abilities = {
+            createAbility({
+                id = "pyromancer_fuel_1p_ab",
+                trigger = uiTrigger,
+				promptType = showPrompt,
+                activations = singleActivation,
+                layout = cardLayout,
+                effect = ifEffect((getCounter("Fuel_1p")).lte(4), incrementCounterEffect("Fuel_1p", (1))).seq(incrementCounterEffect("conflagration_1p", (getCounter("Fuel_1p")))).seq(showTextEffect("Conflagration Up")).seq(showTextEffect("Fuel Up")),
+                cost = goldCost(2), sacrificeSelfCost
+            }),
+        }
+        
+    })
+end
+-- END Fuel SKILL 
+
+-- START After Burn SKILL 
+function pyromancer_after_burn_carddef()
+    local cardLayout = createLayout({
+        name = "After Burn",
+        art = "icons/growing_flame",
+        frame = "frames/Wizard_CardFrame",
+        xmlText = [[<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="1">
+            <tmpro text="{expend_2}" fontsize="72"/>
+        </box>
+        <box flexiblewidth="7">
+            <tmpro text="{combat_1} {health_1}" fontsize="52" />
+        </box>
+    </hlayout>
+</vlayout>]]
+    })
+
+    return createSkillDef({
+        id = "pyromancer_after_burn_skill",
+        name = "After Burn",
+        types = { skillType },
+        layout = cardLayout,
+        layoutPath = "icons/growing_flame",
+        abilities = {
+            createAbility({
+                id = "after_burn_ab",
+                trigger = uiTrigger,
+				promptType = showPrompt,
+                activations = singleActivation,
+                layout = cardLayout,
+                effect = gainCombatEffect(1).seq(gainHealthEffect(1)),
+                cost = goldCost(2)
+            }),
+        }
+        
+    })
+end
+-- END After Burn SKILL 
+
+-- START Combat Shield CARD - v1.00
+function thandarlorian_combat_shield_carddef()
+    return createDef({
+        id="thandarlorian_combat_shield",
+        name="Combat Shield",
+        types={noStealType, itemType},
+		cardTypeLabel = "Item",
+		playLocation = castPloc,
+        acquireCost=0,
+        abilities = {
+            createAbility({
+                id="thandarlorian_combat_shield",
+                trigger= autoTrigger,
+                effect = gainToughnessEffect(2)
+            }),
+			createAbility({
+                id="thandarlorian_combat_shield_combo",
+				cost = noCost,
+                trigger= uiTrigger,
+				promptType = showPrompt,
+					layout = createLayout({
+					name = "Combat Shield",
+					art = "art/T_Cleric_Brightstar_Shield",
+					frame = "frames/Coop_Campaign_CardFrame",
+					xmlText = [[<vlayout forceheight="false" spacing="6">
+								<hlayout spacing="10">
+								<text text="Gain 2 Toughness." fontsize="22"/>   
+							</hlayout>    
+								<hlayout spacing="10">
+								<text text="If you have a champion in play, draw 1." fontsize="18"/>    
+							</hlayout>
+							</vlayout>]]
+					}),
+				activations = singleActivations,
+				check = selectLoc(loc(currentPid, inPlayPloc)).where(isCardChampion()).count().gte(1),
+                effect = drawCardsEffect(1),
+            })
+        },
+        layout = createLayout({
+            name = "Combat Shield",
+            art = "art/T_Cleric_Brightstar_Shield",
+            frame = "frames/Coop_Campaign_CardFrame",
+            xmlText = [[<vlayout forceheight="false" spacing="6">
+								<hlayout spacing="10">
+								<text text="Gain 2 Toughness." fontsize="22"/>   
+							</hlayout>    
+								<hlayout spacing="10">
+								<text text="If you have a champion in play, draw 1." fontsize="18"/>    
+							</hlayout>
+							</vlayout>]]
+        })
+    })
+	end
+-- END Combat Shield  CARD
+
+-- START Coordinated Attack CARD - v1.00
+function thandarlorian_coordinated_attack_carddef()
+    return createDef({
+        id="thandarlorian_coordinated_attack",
+        name="Coordinated Attack",
+        types={noStealType, itemType},
+		cardTypeLabel = "Action",
+		playLocation = castPloc,
+        acquireCost=0,
+        abilities = {
+            createAbility({
+                id="thandarlorian_coordinated_attack",
+                trigger= autoTrigger,
+                effect = gainCombatEffect(2)
+            }),
+			createAbility({
+                id="thandarlorian_coordinated_attack_combo",
+				cost = noCost,
+                trigger= autoTrigger,
+				promptType = showPrompt,
+					layout = createLayout({
+					name = "Coordinated Attack",
+					art = "art/T_Rally_The_Troops",
+					frame = "frames/Coop_Campaign_CardFrame",
+					xmlText = [[<vlayout forceheight="false" spacing="6">
+								<hlayout spacing="10">
+								<text text="Gain {combat_2}." fontsize="22"/>   
+							</hlayout>    
+								<hlayout spacing="10">
+								<text text="If you have 2 champions in play, gain another {combat_2} and 1 Toughness." fontsize="18"/>    
+							</hlayout>
+							</vlayout>]]
+					}),
+				activations = singleActivations,
+				check = selectLoc(loc(currentPid, inPlayPloc)).where(isCardChampion()).count().gte(2),
+                effect = gainCombatEffect(2).seq(gainToughnessEffect(1)),
+            })
+        },
+        layout = createLayout({
+            name = "Coordinated Attack",
+            art = "art/T_Rally_The_Troops",
+            frame = "frames/Coop_Campaign_CardFrame",
+            xmlText = [[<vlayout forceheight="false" spacing="6">
+								<hlayout spacing="10">
+								<text text="Gain {combat_2}." fontsize="22"/>   
+							</hlayout>    
+								<hlayout spacing="10">
+								<text text="If you have 2 champions in play, gain another {combat_2} and 1 Toughness." fontsize="18"/>    
+							</hlayout>
+							</vlayout>]]
+        })
+    })
+	end
+-- END Coordinated Attack CARD
+
+-- START Hand Ballista CARD - v1.00
+function thandarlorian_hand_ballista_carddef()
+    return createDef({
+        id="thandarlorian_hand_ballista",
+        name="Hand Ballista",
+        types={noStealType, itemType, bowType, weaponType},
+		cardTypeLabel = "Item",
+		playLocation = castPloc,
+        acquireCost=0,
+        abilities = {
+            createAbility({
+                id="thandarlorian_hand_ballista",
+                trigger= autoTrigger,
+                effect = gainCombatEffect(1)
+            })
+        },
+        layout = createLayout({
+            name = "Hand Ballista",
+            art = "art/T_Light_Crossbow",
+            frame = "frames/Coop_Campaign_CardFrame",
+            xmlText = [[<vlayout forceheight="false" spacing="6">
+						<hlayout spacing="10">
+						   <icon text="{combat_1}" fontsize="50"/>
+						</hlayout>    
+						  <hlayout forcewidth="true" spacing="10">
+					  <text text="Ballista. Not blaster." fontsize="22"/>
+						</hlayout>
+					</vlayout>]]
+        })
+    })
+	end
+-- END Hand Ballista CARD
+
+--[[ START Bounty Hunter's Stone of Seeking CARD - v1.00
+]]
+function thandarlorian_bounty_hunters_stone_of_seeking_carddef()
+    return createDef({
+        id="thandarlorian_bounty_hunters_stone_of_seeking",
+        name="Bounty Hunter's Stone of Seeking",
+        types={noStealType, itemType},
+		cardTypeLabel = "Item",
+		playLocation = castPloc,
+        acquireCost=0,
+        abilities = {
+            createAbility({
+                id="thandarlorian_bounty_hunters_stone_of_seeking",
+                trigger= autoTrigger,
+                effect = gainGoldEffect(1)
+            }),
+			createAbility({
+                id="thandarlorian_bounty_hunters_stone_of_seeking_combo",
+				cost = noCost,
+                trigger= onStunGlobalTrigger,
+				activations = singleActivations,
+                effect = gainGoldEffect(1),
+				layout = createLayout({
+					name = "Bounty Hunter's Stone of Seeking",
+					art = "art/T_Wizard_Alchemist_S_Stone",
+					frame = "frames/Coop_Campaign_CardFrame",
+					Text = [[<vlayout forceheight="false" spacing="6">
+								<hlayout spacing="10">
+								<text text="Gain {gold_1}. If you stun a champion this turn, gain another {gold_1}." fontsize="22"/>   
+							</hlayout>
+							</vlayout>]]
+					}),
+            })
+        },
+        layout = createLayout({
+            name = "Bounty Hunter's Stone of Seeking",
+            art = "art/T_Wizard_Alchemist_S_Stone",
+            frame = "frames/Coop_Campaign_CardFrame",
+            xmlText = [[<vlayout forceheight="false" spacing="6">
+								<hlayout spacing="10">
+								<text text="Gain {gold_1}. If you stun a champion this turn, gain another {gold_1}." fontsize="22"/>   
+							</hlayout>
+							</vlayout>]]
+        })
+    })
+	end
+-- END Bounty Hunter's Stone of Seeking CARD
+
+--START Bracer Blades ABILITY 
+function thandarlorian_bracer_blades_carddef()
+	return createHeroAbilityDef({
+		id = "bracer_blades",
+		name = "Bracer Blades",
+		types = { heroAbilityType },
+        abilities = {
+			createAbility({
+				id = "bracer_bladesActivate",
+				trigger = uiTrigger,
+				promptType = showPrompt,
+				layout = createLayout({
+					name = "Bracer Blades",
+					art = "art/treasures/T_Bracers_Of_Brawn",
+					xmlText = [[
+					<vlayout>
+					<hlayout flexibleheight="1">
+					<box flexiblewidth="1">
+					<tmpro text="{scrap}" fontsize="36"/>
+					</box>
+					<box flexiblewidth="7">
+					<tmpro text="Hit a champion for 3 damage or gain {combat_2}. &lt;br&gt;&lt;br&gt;Make this choice 3 times." fontsize="22
+					" />
+					</box>
+					</hlayout>
+					</vlayout>
+					]]					
+				}),
+				effect =
+				pushChoiceEffect(
+                                {
+                                    choices = {
+                                        {
+                                            effect = pushTargetedEffect({
+                                                desc = "Deal 3 damage to target champion.",
+                                                validTargets = oppStunnableSelector(),
+                                                min = 0,
+                                                max = 1,
+                                                targetEffect = damageTarget(3),
+                                                }),
+                                            layout = layoutCard(
+                                                {
+                                                    title = "Bracer Blades",
+                                                    art = "art/treasures/T_Bracers_Of_Brawn",
+                                                    text = "Deal 3 damage to target champion."
+                                                }
+                                            ),
+                                            tags = {gainCombat6Tag}
+                                        },
+										{
+                                            effect = gainCombatEffect(2),
+                                            layout = layoutCard(
+                                                {
+                                                    title = "Bracer Blades",
+                                                    art = "art/treasures/T_Bracers_Of_Brawn",
+                                                    text = "<sprite name=\"combat_2\"> "
+                                                }
+                                            ),
+                                                                                    }
+                                    }
+                                }
+                        )
+						.seq(pushChoiceEffect(
+                                {
+                                    choices = {
+                                        {
+                                            effect = pushTargetedEffect({
+                                                desc = "Deal 3 damage to target champion.",
+                                                validTargets = oppStunnableSelector(),
+                                                min = 0,
+                                                max = 1,
+                                                targetEffect = damageTarget(3),
+                                                }),
+                                            layout = layoutCard(
+                                                {
+                                                    title = "Bracer Blades",
+                                                    art = "art/treasures/T_Bracers_Of_Brawn",
+                                                    text = "Deal 3 damage to target champion."
+                                                }
+                                            ),
+                                            tags = {gainCombat6Tag}
+                                        },
+										{
+                                            effect = gainCombatEffect(2),
+                                            layout = layoutCard(
+                                                {
+                                                    title = "Bracer Blades",
+                                                    art = "art/treasures/T_Bracers_Of_Brawn",
+                                                    text = "<sprite name=\"combat_2\"> "
+                                                }
+                                            ),
+                                                                                    }
+                                    }
+                                }
+                        ))
+						.seq(pushChoiceEffect(
+                                {
+                                    choices = {
+                                        {
+                                            effect = pushTargetedEffect({
+                                                desc = "Deal 3 damage to target champion.",
+                                                validTargets = oppStunnableSelector(),
+                                                min = 0,
+                                                max = 1,
+                                                targetEffect = damageTarget(3),
+                                                }),
+                                            layout = layoutCard(
+                                                {
+                                                    title = "Bracer Blades",
+                                                    art = "art/treasures/T_Bracers_Of_Brawn",
+                                                    text = "Deal 3 damage to target champion."
+                                                }
+                                            ),
+                                            tags = {gainCombat6Tag}
+                                        },
+										{
+                                            effect = gainCombatEffect(2),
+                                            layout = layoutCard(
+                                                {
+                                                    title = "Bracer Blades",
+                                                    art = "art/treasures/T_Bracers_Of_Brawn",
+                                                    text = "<sprite name=\"combat_2\"> "
+                                                }
+                                            ),
+                                                                                    }
+                                    }
+                                }
+                        )),
+				cost = sacrificeSelfCost
+			})
+		},
+        layout = createLayout({
+            name = "Bracer Blades",	
+            art = "art/treasures/T_Bracers_Of_Brawn",
+            text = "<sprite name=\"combat_5\"> or <sprite name=\"health_6\">  or <sprite name=\"gold_2\">"
+        }),
+        layoutPath  = "art/treasures/T_Bracers_Of_Brawn",
+	})
+end	
+-- END Bracer Blades ABILITY
+
+--[[
+START Whipcord Skill
+]]
+
+function thandarlorian_whipcord_carddef()
+    local cardLayout = createLayout({
+        name = "Whipcord",
+        art = "art/T_Thief_Enchanted_Garrote",
+        frame = "frames/Coop_Campaign_CardFrame",
+		xmlText = [[
+<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="1">
+            <tmpro text="{expend_2}" fontsize="72"/>
+        </box>
+        <box flexiblewidth="7">
+            <tmpro text="Move a champion of cost {gold_4} or less into your play area until end of turn. Champions moved this way will arrive in your play area expended. If you target an opponent's champion, return it to opponent's play area at end of turn and prepare it. If you target a champion from the market, return it to the top of the market deck at end of turn." fontsize="14"/>
+</box>
+</hlayout>
+</vlayout>
+		]]
+    })
+
+    return createSkillDef({
+        id = "thandarlorian_whipcord_skill",
+        name = "Whipcord",
+        types = { skillType },
+        layout = cardLayout,
+        layoutPath = "art/T_Thief_Enchanted_Garrote",
+        abilities = {
+            createAbility({
+                id = "thandarlorian_whipcord_ab",
+                trigger = uiTrigger,
+                activations = singleActivation,
+                layout = cardLayout,
+				promptType = showPrompt,
+                effect = pushChoiceEffect(
+                                {
+                                    choices = {
+										{
+                                            effect = pushTargetedEffect({
+												desc = "Expend target opponent's champion of cost 4 gold or less, then drag it into your play area. At end of turn, return it to opponent's play area. Prepare it..",
+												validTargets = oppStunnableSelector().where(isCardChampion().And(getCardCost().lte(4))),
+												min = 0,
+												max = 1,
+												targetEffect = addSlotToTarget(createAbilitySlot({
+														ability = createAbility({
+															id = "thandarlorian_whipcord_ability",
+															effect = moveTargetWithLocAndPlayer(inPlayPloc, ownerPid).apply(selectSource()),
+															trigger = oppStartOfTurnTrigger
+														}),
+														expiry = { startOfOwnerTurnExpiry }
+													}))
+													.seq(expendTarget()).seq(moveTarget(loc(currentPid, inPlayPloc))),
+												}),
+                                            layout = layoutCard(
+                                                {
+                                                    title = "Whipcord",
+                                                    art = "art/T_Thief_Enchanted_Garrote",
+                                                    xmlText = [[<vlayout>
+																<hlayout flexibleheight="1">
+																	<box flexiblewidth="1">
+																		<tmpro text="Expend target opponent's champion of cost {gold_4} or less, then drag it into your play area. At end of turn, return it to opponent's play area. Prepare it." fontsize="18"/>
+																	</box>
+																</hlayout>
+															</vlayout>]]
+                                                }
+                                            ),
+                                            tags = {}
+                                        },
+                                        {
+                                            effect = pushTargetedEffect({
+												desc = "Drag champion of cost 4g or less from the Market into your play area. It will arrive expended. At end of turn, return it to the Market Deck. (Shuffle the deck.)",
+												validTargets = selectLoc(centerRowLoc).where(isCardChampion().And(getCardCost().lte(4))),
+												min = 0,
+												max = 1,
+												targetEffect = addSlotToTarget(createAbilitySlot({
+														ability = createAbility({
+															id = "thandarlorian_whipcord_ability",
+															effect = moveTarget(tradeDeckLoc).apply(selectSource()),
+															trigger = oppStartOfTurnTrigger
+														}),
+														expiry = { startOfOwnerTurnExpiry }
+													}))
+													.seq(expendTarget()).seq(moveTarget(loc(currentPid, inPlayPloc))),
+												}),
+                                            layout = layoutCard(
+                                                {
+                                                    title = "Whipcord",
+                                                    art = "art/T_Thief_Enchanted_Garrote",
+													xmlText = [[<vlayout>
+																<hlayout flexibleheight="1">
+																	<box flexiblewidth="1">
+																		<tmpro text="Drag champion of cost {gold_4} or less from the Market into your play area. It will arrive expended. At end of turn, return it to the Market Deck." fontsize="18"/>
+																	</box>
+																</hlayout>
+															</vlayout>]]
+												}
+                                            ),
+                                                                                    }
+                                    }
+                                }
+                        ),
+                cost = goldCost(2),
+            }),
+        }
+        
+    })
+end
+-- END Whipcord Skill
+
+--[[
+START Dragon Shard Armour Passive Skill
+]]
+
+function thandarlorian_dragon_shard_armour_carddef()
+    local cardLayout = createLayout({
+        name = "Dragon Shard Armour",
+        art = "art/T_Fighter_Helm_Of_Fury_2",
+        frame = "frames/Coop_Campaign_CardFrame",
+		xmlText = [[
+		<vlayout>
+			<hlayout flexibleheight="1">
+				<box flexiblewidth="1">
+					<tmpro text="Each turn gain 2 Toughness" fontsize="22"/>
+				</box>
+			</hlayout>
+		</vlayout>
+		]]
+    })
+
+    return createSkillDef({
+        id = "thandarlorian_dragon_shard_armour_skill",
+        name = "Dragon Shard Armour",
+        types = { skillType },
+        layout = cardLayout,
+        layoutPath = "art/T_Fighter_Helm_Of_Fury_2",
+        abilities = {
+            createAbility({
+                id = "thandarlorian_dragon_shard_armour_ab",
+                trigger = startOfTurnTrigger,
+                activations = singleActivation,
+                layout = cardLayout,
+				promptType = noPrompt,
+                effect = gainToughnessEffect(2),
+                cost = noCost,
+            }),
+        }
+        
+    })
+end
+-- END Dragon Shard Armour Passive Skill 
+
+-- START Warhammer CARD
+function paladin_warhammer_carddef()
+    return createDef(
+        {
+            id = "paladin_warhammer",
+            name = "Warhammer",
+            types = {weaponType, noStealType, paladinType, itemType, meleeWeaponType, hammerType},
+            acquireCost = 0,
+            cardTypeLabel = "Item",
+            playLocation = castPloc,
+            abilities = {
+                createAbility(
+                    {
+                        id = "paladin_warhammer",
+                        layout = cardLayout,
+                        effect = ifElseEffect(selectLoc(currentCastLoc).where(isCardType(weaponType)).count().gte(2),
+                        gainCombatEffect(2).seq(gainHealthEffect(2)),
+                        pushChoiceEffect(
+                                {
+                                    choices = {
+                                        {
+                                            effect = gainCombatEffect(2),
+                                            layout = layoutCard(
+                                                {
+                                                    title = "Warhammer",
+                                                    art = "art/T_Flesh_Ripper",
+                                                    text = "Gain <sprite name=\"combat_2\">"
+                                                }
+                                            ),
+                                            tags = {gainCombat2Tag}
+                                        },
+                                        {
+                                            effect = gainHealthEffect(2),
+                                            layout = layoutCard(
+                                                {
+                                                    title = "Warhammer",
+                                                    art = "art/T_Flesh_Ripper",
+                                                    text = "Gain <sprite name=\"health_2\">"
+                                                }
+                                            ),
+                                            tags = {gainHealth2Tag}
+                                        }
+                                    }
+                                }
+                        )),
+                        trigger = autoTrigger,
+                        tags = {}
+                    }
+                )
+            },
+            layout = createLayout(
+                {
+                    name = "Warhammer",
+                    art = "art/T_Flesh_Ripper",
+                    frame = "frames/Cleric_CardFrame",
+                    text = "Gain <sprite name=\"combat_2\"> or Gain <sprite name=\"health_2\"> \n <size=50%>If you have played a weapon this turn, gain both.</size>",
+                }
+            )
+        }
+    )
+end
+-- END Warhammer CARD
+
+-- START Crusader CARD
+function paladin_crusader_carddef()
+    return createChampionDef(
+        {
+            id = "paladin_Crusader",
+            name = "Crusader",
+            acquireCost = 0,
+            health = 2,
+            isGuard = true,
+            abilities = {
+                createAbility(
+                    {
+                        id = "Crusader_main",
+                        trigger = uiTrigger,
+                        cost = expendCost,
+                        activations = multipleActivations,
+                        effect = pushChoiceEffect(
+                            {
+                                choices = {
+                                    {
+                                        effect = gainGoldEffect(1),
+                                        layout = layoutCard(
+                                            {
+                                                title = "Crusader",
+                                                art = "avatars/man_at_arms",
+                                                text = ("{1 gold}")
+                                            }
+                                        ),
+                                        tags = {gainGoldTag}
+                                    },
+                                    {
+                                        effect = gainHealthEffect(1),
+                                        layout = layoutCard(
+                                            {
+                                                title = "Crusader",
+                                                art = "avatars/man_at_arms",
+                                                text = ("{1 health}")
+                                            }
+                                        ),
+                                        tags = {gainHealthTag}
+                                    }
+                                }
+                            }
+                        )
+                    }
+                )
+            },
+            layout = createLayout(
+                {
+                    name = "Crusader",
+                    art = "avatars/man_at_arms",
+                    frame = "frames/Cleric_CardFrame",
+                    text = "<size=250%><pos=-5%><sprite name=\"expend\"></pos></size><size=175%><pos=25%><voffset=.2em><sprite name=\"gold_1\"> or <sprite name=\"health_1\"></size></voffset>",
+                    health = 2,
+                    isGuard = true
+                }
+            )
+        }
+    )
+end
+-- END Crusader CARD
+
+-- START Prayer SKILL 
+function paladin_prayer_carddef()
+    local cardLayout = createLayout({
+        name = "Prayer",
+        art = "icons/wind_storm",
+        frame = "frames/Cleric_CardFrame",
+        text = "<size=400%><line-height=0%><voffset=-.25em> <pos=-75%><sprite name=\"expend_2\"></size><line-height=135%> \n <voffset=2em><size=120%><pos=10%>Gain <sprite name=\"health_3\">\n   Gain  <sprite name=\"combat_1\">"
+    })
+
+    return createSkillDef({
+        id = "paladin_prayer_skill",
+        name = "Prayer",
+        types = { paladinType, skillType },
+        layout = cardLayout,
+        layoutPath = "icons/wind_storm",
+        abilities = {
+            createAbility({
+                id = "paladin_prayer_ab",
+                trigger = uiTrigger,
+                activations = singleActivation,
+                layout = cardLayout,
+                promptType = showPrompt,
+                effect = gainHealthEffect(3).seq(gainCombatEffect(1)),
+                cost = goldCost(2),
+            }),
+        }
+        
+    })
+end
+-- END Prayer SKILL  
+
+--START Sacred Oath ABILITY 
+function paladin_sacred_oath_carddef()
+	return createHeroAbilityDef({
+		id = "sacred_oath",
+		name = "Sacred Oath",
+		types = { heroAbilityType },
+        abilities = {
+            createAbility( {
+                id = "sacred_oath_ab",
+                trigger = uiTrigger,
+                activations = singleActivation,
+                promptType = showPrompt,
+                layout = createLayout ({
+                    name = "Sacred Oath",
+                    art = "art/T_Devotion",
+                    frame = "frames/Cleric_CardFrame",
+                    text = "<voffset=1em><space=-.5em><voffset=-1.3em><size=200%><sprite name=\"scrap\"></size></voffset><pos=30%> <voffset=1.0em><line-height=40><space=-3.0em><space=1.5em>Prepare up to\n<space=1.5em>3 champions\n<space=1.5em>in play.</voffset></voffset>"
+                    }),
+                effect = pushTargetedEffect({
+                    desc = "Choose up to 3 champions in play. Prepare those champions",
+                    validTargets = s.CurrentPlayer(CardLocEnum.InPlay).where(isCardChampion()),
+                    min = 1,
+                    max = 3,
+                    targetEffect = prepareTarget(),
+			    }),
+                cost = sacrificeSelfCost,
+            }),
+        },
+        layout = createLayout({
+            name = "Sacred Oath",
+            art = "art/T_Devotion",
+            text = "<voffset=1em><space=-.5em><voffset=-1.3em><size=200%><sprite name=\"scrap\"></size></voffset><pos=30%> <voffset=1.0em><line-height=40><space=-3.0em><space=1.5em>Prepare up to\n<space=1.5em>3 champions\n<space=1.5em>in play.</voffset></voffset>"
+        }),
+        layoutPath  = "art/T_Devotion",
+	})
+end	
+-- END Sacred Oath ABILITY
+
+--START Siphon Life Skill
+
+function siphon_life_def()
+	return createSkillDef({
+		id = "siphon_life",
+		name = "Siphon Life",
+		cardTypeLabel = "Skill",
+		types = { skillType },
+        abilities = {
+			createAbility({
+				id = "siphonLifeActivate",
+				trigger = uiTrigger,
+				promptType = showPrompt,
+				layout = createLayout({
+					name = "Siphon Life",
+					art = "art/T_Life_Force",
+					text = "<size=400%><line-height=0%><voffset=-0.6em> <pos=-95%><sprite name=\"expend_2\"></size><line-height=100%> \n <voffset=1.8em><size=90%><pos=10%>You gain 1<sprite name=\"health\"> and\n<pos=10%>target opponent\n<pos=10%>loses 1<sprite name=\"health\">.\n<pos=10%>This also affects\n<pos=10%>maximum health."
+				}),
+				effect = gainMaxHealthEffect(currentPid, 1).seq(gainHealthEffect(1)).seq(hitOpponentEffect(1)).seq(gainMaxHealthEffect(oppPid, -1)),
+				cost = goldCost(2)
+			})
+		},
+		layout = createLayout({
+			name = "Siphon Life",
+			art = "art/T_Life_Force",
+			text = "<size=400%><line-height=0%><voffset=-0.6em> <pos=-95%><sprite name=\"expend_2\"></size><line-height=100%> \n <voffset=1.8em><size=90%><pos=10%>You gain 1<sprite name=\"health\"> and\n<pos=10%>target opponent\n<pos=10%>loses 1<sprite name=\"health\">.\n<pos=10%>This also affects\n<pos=10%>maximum health."
+		}),
+		layoutPath= "art/T_Life_Force"
+	})
+end		
+--END Siphon Life Skill
+
+--START Piercing Screech Ability
+function piercing_screech_def()
+	return createDef({
+		id = "piercing_screech",
+		name = "Piercing Screech",
+		acquireCost = 0,
+		cardTypeLabel = "Ability",
+		playLocation = skillsPloc,
+		types = { heroAbilityType },
+        abilities = {
+			createAbility({
+				id = "piercingScreechActivate",
+				trigger = uiTrigger,
+				promptType = showPrompt,
+				layout = createLayout({
+					name = "Piercing Screech",
+					art = "art/T_Banshee",
+					text = "<voffset=1em><space=-1.5em><voffset=-1.3em><size=300%><sprite name=\"scrap\"></size></voffset><pos=30%> <voffset=1.0em><line-height=40><space=-3.0em><space=1.0em>Target opponent\n<space=1.0em>discards\n<space=1.0em>two cards.</voffset></voffset>"
+				}),
+				effect = oppDiscardEffect(2),
+				cost = sacrificeSelfCost
+			})
+		},
+		layout = createLayout({
+			name = "Piercing Screech",
+			art = "art/T_Banshee",
+			text = "<voffset=1em><space=-1.5em><voffset=-1.3em><size=300%><sprite name=\"scrap\"></size></voffset><pos=30%> <voffset=1.0em><line-height=40><space=-3.0em><space=1.0em>Target opponent\n<space=1.0em>discards\n<space=1.0em>two cards.</voffset></voffset>"
+		}),
+		layoutPath= "art/T_Banshee"
+	})
+end	
+--END Piercing Screech Ability
+
+--START Flash Freexe Card
+function witch_flash_freeze_carddef()
+	local cardLayout = createLayout({
+		name = "Flash Freeze",
+		art = "icons/ranger_fast_track",
+		frame = "frames/Wizard_CardFrame",
+		text = "<size=180%><sprite name=\"combat_1\"><size=100%><br>Expend target champion."
+	})
+	
+	return createActionDef({
+		id = "witch_flash_freeze",
+		name = "Flash Freeze",
+		layout = cardLayout,
+		abilities = {
+			createAbility({
+				id = "flashFreezeMain",
+				trigger = autoTrigger,
+				effect = gainCombatEffect(1).seq(pushTargetedEffect({
+					desc = "Expend target Champion",
+					min = 1,
+					max = 1,
+					validTargets = selectLoc(loc(oppPid, inPlayPloc)).where(isCardStunnable()).where(isCardExpended().invert()),
+					targetEffect = expendTarget()
+				}))
+			})
+		}
+	})
+end
+--END Flash Freexe Card
+
+--START Witch's Cauldron Card
+
+function witch_cauldron_carddef()
+	local cardLayout = createLayout({
+		name = "Witch's Cauldron",
+		art = "art/T_Confused_Apparition",
+		frame = "frames/Coop_Campaign_CardFrame",
+		cardTypeLabel = "Item",
+		text = "<size=150%><sprite name=\"gold_1\"> <sprite name=\"health_3\"><size=80%><br>You may stun one of your champions. If you do, draw a card."
+	})
+	
+	return createDef({
+		id = "witch_cauldron",
+		name = "Witch's Cauldron",
+		acquireCost = 0,
+		cardTypeLabel = "Item",
+		types = { itemType },
+		layout = cardLayout,
+		playLocation = castPloc,
+		abilities = {
+			createAbility({
+				id = "cauldronMain",
+				trigger = autoTrigger,
+				effect = gainGoldEffect(1).seq(gainHealthEffect(3))
+			}),
+			createAbility({
+				id = "cauldronStun",
+				trigger = uiTrigger,
+				promptType = showPrompt,
+				layout = cardLayout,
+				effect = pushTargetedEffect({
+					desc = "Stun a friendly champion.",
+					min = 1,
+					max = 1,
+					validTargets = selectLoc(loc(currentPid, inPlayPloc)),
+					targetEffect = stunTarget().seq(drawCardsEffect(1))
+				}),
+				check = selectLoc(currentInPlayLoc).count().gte(1)
+			})
+		}
+	})
+end
+
+--END Witch's Cauldron Card
+
+local function goFirstEffect()
+	return createGlobalBuff({
+        id="draw_three_start_buff",
+        name = "Go First",
+        abilities = {
+            createAbility({
+                id="go_first_draw_effect",
+                trigger = endOfTurnTrigger,
+                effect = ifElseEffect(
+					getTurnsPlayed(oppPid).eq(1),
+					nullEffect(),
+					drawCardsEffect(2)
+				)
+            })
+        }
+    })
+end
+
+function setupGame(g)
+    registerCards(
+        g,
+        {
+	choose_demonologist_carddef(),
+			demonologist_shadow_gem_carddef(),
+			demonologist_shadow_feeder_carddef(),
+			demonologist_void_guard_carddef(),
+			demonologist_lesser_devourer_carddef(),
+			demonologist_summon_greater_demon_carddef(),
+			demonologist_demonic_leech_carddef(),
+			demonologist_succubus_carddef(),
+			demonologist_fel_hound_carddef(),
+			demonologist_incubus_carddef(),
+			demonologist_keeper_of_the_void_carddef(),
+			demonologist_demon_master_carddef(),
+	choose_apothecary_carddef(),
+			apothecary_apprentice_potion_maker_carddef(),
+			apothecary_red_potion_carddef(),
+			apothecary_green_potion_carddef(),
+			apothecary_yellow_potion_carddef(),
+			apothecary_mezzaluna_carddef(),
+	choose_cryomancer_carddef(),
+			cryomancer_ice_burst_carddef(),
+			cryomancer_ice_shield_carddef(),
+			cryomancer_ice_gem_carddef(),
+			cryomancer_freeze_carddef(),
+			cryomancer_frostbite_carddef(),
+	choose_pyromancer_carddef(),
+			pyromancer_sear_carddef(),
+			pyromancer_scorch_carddef(),
+			pyromancer_fire_shard_carddef(),
+			pyromancer_combust_carddef(),
+	choose_thandarlorian_carddef(),
+			thandarlorian_coordinated_attack_carddef(),
+			thandarlorian_combat_shield_carddef(),
+			thandarlorian_hand_ballista_carddef(),
+			thandarlorian_bounty_hunters_stone_of_seeking_carddef(),
+	choose_paladin_carddef(),
+	        paladin_warhammer_carddef(),
+            paladin_crusader_carddef(),
+            paladin_prayer_carddef(),
+            paladin_sacred_oath_carddef(),
+	choose_witch_carddef(),
+			witch_flash_freeze_carddef(),
+			witch_cauldron_carddef(),
+			siphon_life_def(),
+			piercing_screech_def()
+        }
+    )
+
+    standardSetup(
+        g,
+        {
+            description = "Lilu Dallas Multi-Class. Created by Aarkenell.",
+            playerOrder = {plid1, plid2},
+            ai = ai.CreateKillSwitchAi(createAggressiveAI(), createHardAi2()),
+            timeoutAi = createTimeoutAi(),
+            opponents = {{plid1, plid2}},
+            players = {
+                {
+                    id = plid1,
+                    startDraw = 7,
+                    name = "Unknown",
+                    avatar = "assassin",
+                    health = 50,
+                    cards = {
+                        deck = {
+                            {qty = 1, card = choose_thandarlorian_carddef()},
+							{qty = 1, card = choose_demonologist_carddef()},
+							{qty = 1, card = choose_apothecary_carddef()},
+							{qty = 1, card = choose_cryomancer_carddef()},
+							{qty = 1, card = choose_pyromancer_carddef()},
+							{qty = 1, card = choose_paladin_carddef()},
+							{qty = 1, card = choose_witch_carddef()},
+                        },
+                        skills = {
+                        
+                        },
+                        buffs = {
+                            drawCardsCountAtTurnEndDef(3),
+							goFirstEffect(),
+                            discardCardsAtTurnStartDef(),
+                            fatigueCount(42, 1, "FatigueP1")
+                        }
+                    }
+                },
+                {
+                    id = plid2,
+                    startDraw = 7,
+                    name = "Unknown",
+                    avatar = "assassin",
+                    health = 50,
+                    cards = {
+                        deck = {
+                            {qty = 1, card = choose_thandarlorian_carddef()},
+							{qty = 1, card = choose_demonologist_carddef()},
+							{qty = 1, card = choose_apothecary_carddef()},
+							{qty = 1, card = choose_cryomancer_carddef()},
+							{qty = 1, card = choose_pyromancer_carddef()},
+							{qty = 1, card = choose_paladin_carddef()},
+							{qty = 1, card = choose_witch_carddef()},
+                        },
+                        skills = {
+                        
+                        },
+                        buffs = {
+                            drawCardsCountAtTurnEndDef(5),
+                            discardCardsAtTurnStartDef(),
+                            fatigueCount(42, 1, "FatigueP1")
+                        }
+                    }
+                }
+            }
+        }
+    )
+end
+
+function endGame(g)
+end
+
