@@ -450,6 +450,118 @@ function choose_shaman_carddef()
         })
 	end
 
+function choose_king_midas_carddef()
+    return createDef({
+        id="choose_king_midas",
+        name="Choose King Midas",
+        types={noStealType, itemType},
+		cardTypeLabel = "Item",
+		playLocation = castPloc,
+        acquireCost=0,
+        abilities = {
+            createAbility({
+                id="choose_king_midas",
+                trigger= onPlayTrigger,
+				playAllType = noPlayPlayType,
+                effect = sacrificeTarget().apply(selectLoc(loc(currentPid, handPloc)).union(selectLoc(loc(currentPid, deckPloc))).union(selectLoc(loc(currentPid, skillsPloc))))
+			.seq(setPlayerNameEffect("King Midas", currentPid))
+			.seq(setPlayerAvatarEffect("profit", currentPid))
+			.seq(gainMaxHealthEffect(currentPid, const(42).add(getPlayerMaxHealth(currentPid).negate())))
+			.seq(gainHealthEffect(42))
+			.seq(createCardEffect(greed_is_good_skilldef(), currentSkillsLoc))
+			.seq(createCardEffect(golden_touch_abilitydef(), currentSkillsLoc))
+			.seq(createCardEffect(midas_kings_adviser_carddef(), currentDeckLoc))
+			.seq(createCardEffect(midas_kings_adviser_carddef(), currentDeckLoc))
+			.seq(createCardEffect(midas_kings_adviser_carddef(), currentDeckLoc))
+			.seq(createCardEffect(midas_kings_adviser_carddef(), currentDeckLoc))
+			.seq(createCardEffect(midas_gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(midas_gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(midas_gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(midas_gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(midas_liquid_gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(midas_liquid_gold_carddef(), currentDeckLoc))
+			.seq(shuffleEffect(currentDeckLoc))
+			.seq(sacrificeTarget().apply(selectSource()))
+			.seq(waitForClickEffect("Thank you for choosing your class.", ""))
+			.seq(waitForClickEffect("If you enjoy this game, be sure to Favourite the script.", ""))
+			.seq(waitForClickEffect("For game to begin normally please end turn now.", ""))
+            })
+        },
+        layout = createLayout({
+            name = "King Midas",
+            art = "art/T_Bribe",
+			frame = "frames/Coop_Campaign_CardFrame",
+            xmlText=[[
+			<vlayout>
+    <box flexibleheight="2">
+        <tmpro text="Play as a level 3 King Midas" fontsize="26"/>
+    </box>
+    <box flexibleheight="1">
+        <tmpro text="- Class by Zabuza -" fontsize="22" fontstyle="italic"/>
+    </box>
+</vlayout>
+
+			]]
+			}),
+        })
+	end
+
+function choose_brewmaster_carddef()
+    return createDef({
+        id="choose_brewmaster",
+        name="Choose the Brewmaster",
+        types={noStealType, itemType},
+		cardTypeLabel = "Item",
+		playLocation = castPloc,
+        acquireCost=0,
+        abilities = {
+            createAbility({
+                id="choose_brewmaster",
+                trigger= onPlayTrigger,
+				playAllType = noPlayPlayType,
+                effect = sacrificeTarget().apply(selectLoc(loc(currentPid, handPloc)).union(selectLoc(loc(currentPid, deckPloc))).union(selectLoc(loc(currentPid, skillsPloc))))
+			.seq(setPlayerNameEffect("Brewmaster", currentPid))
+			.seq(setPlayerAvatarEffect("lord_callum", currentPid))
+			.seq(gainMaxHealthEffect(currentPid, const(55).add(getPlayerMaxHealth(currentPid).negate())))
+			.seq(gainHealthEffect(55))
+			.seq(createCardEffect(brewmaster_wws_def(), currentSkillsLoc))
+			.seq(createCardEffect(brewmaster_get_out_of_my_bar_carddef(), currentSkillsLoc))
+			.seq(createCardEffect(brewmaster_mead_carddef(), currentDeckLoc))
+			.seq(createCardEffect(brewmaster_mead_carddef(), currentDeckLoc))
+			.seq(createCardEffect(brewmaster_mead_carddef(), currentDeckLoc))
+			.seq(createCardEffect(brewmaster_mead_carddef(), currentDeckLoc))
+			.seq(createCardEffect(brewmaster_mead_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(shuffleEffect(currentDeckLoc))
+			.seq(sacrificeTarget().apply(selectSource()))
+			.seq(waitForClickEffect("Thank you for choosing your class.", ""))
+			.seq(waitForClickEffect("If you enjoy this game, be sure to Favourite the script.", ""))
+			.seq(waitForClickEffect("For game to begin normally please end turn now.", ""))
+            })
+        },
+        layout = createLayout({
+            name = "Brewmaster",
+            art = "art/treasures/T_Fighter_Elixir_Red",
+			frame = "frames/Coop_Campaign_CardFrame",
+            xmlText=[[
+			<vlayout>
+    <box flexibleheight="2">
+        <tmpro text="Play as a level 3 Brewmaster" fontsize="26"/>
+    </box>
+    <box flexibleheight="1">
+        <tmpro text="- Class by Aarkenell -" fontsize="22" fontstyle="italic"/>
+    </box>
+</vlayout>
+
+			]]
+			}),
+        })
+	end
+
 -- Demonologist cards
 function demonologist_shadow_gem_carddef()
     return createDef(
@@ -530,13 +642,13 @@ function demonologist_shadow_gem_carddef()
                     frame = "frames/necromancer_frames/necromancer_item_cardframe",
                     xmlText=[[
 					<vlayout>
-    <hlayout flexibleheight="1">
-        <box flexiblewidth="7">
-            <tmpro text="{gold_2}
--OR-
-{health_-1}. Give one minion +2{shield} until your next turn." fontsize="25"/>
-</box>
-</hlayout>
+    <box flexibleheight="2">
+        <tmpro text="{gold_2}" fontsize="42"/>
+    </box>
+    <box flexibleheight="3">
+        <tmpro text="OR
+{health_-1} Give one minion +2{shield} until your next turn." fontsize="24" />
+    </box>
 </vlayout>
 					]]
                 }
@@ -572,15 +684,13 @@ function demonologist_shadow_feeder_carddef()
                     frame = "frames/necromancer_frames/necromancer_item_cardframe",
                     xmlText=[[
 					<vlayout>
-    <hlayout flexibleheight="1">
-        <box flexiblewidth="1">
-            <tmpro text="{expend}" fontsize="40"/>
-        </box>
-        <box flexiblewidth="7">
-            <tmpro text="{combat_1} 
-If you have another Demon in play gain {combat_2} more." fontsize="25"/>
-</box>
-</hlayout>
+<hlayout flexibleheight="7.7">
+            <tmpro text="{expend}" fontsize="40" flexiblewidth="1"/>
+            <vlayout flexiblewidth="6">
+                                <icon text="{combat_1}" fontsize="40" alignment="Center" flexibleheight="1"/>
+                                <tmpro text="+{combat_2}  if you have another Demon in play." fontsize="26" alignment="Center" flexibleheight="6.6"/>          
+            </vlayout>
+    </hlayout>
 </vlayout>
 					]],
                     health = 2,
@@ -619,15 +729,14 @@ function demonologist_void_guard_carddef()
                     frame = "frames/necromancer_frames/necromancer_item_cardframe",
                     xmlText=[[
 					<vlayout>
-    <hlayout flexibleheight="1">
-        <box flexiblewidth="1">
-            <tmpro text="{expend}" fontsize="40"/>
-        </box>
-        <box flexiblewidth="7">
-            <tmpro text="{combat_1} 
-You can't a-void him." fontsize="30"/>
-</box>
-</hlayout>
+    <hlayout flexibleheight="3">
+            <tmpro text="{expend}" fontsize="50" flexiblewidth="2"/>
+            <tmpro text="{combat_1}" fontsize="50" flexiblewidth="12" />
+    </hlayout>
+    <divider/>
+    <hlayout flexibleheight="2">
+            <tmpro text="You can't a-void him." fontsize="20" fontstyle="italic" flexiblewidth="10" />
+    </hlayout> 
 </vlayout>
 					]],
                     health = 2,
@@ -665,15 +774,13 @@ function demonologist_lesser_devourer_carddef()
                     frame = "frames/necromancer_frames/necromancer_item_cardframe",
                     xmlText = [[
 <vlayout>
-    <hlayout flexibleheight="1">
-        <box flexiblewidth="1">
-            <tmpro text="{expend}" fontsize="40"/>
-        </box>
-        <box flexiblewidth="7">
-            <tmpro text="{health_-1} 
-Lesser Devourer gains +1{shield} until it leaves play." fontsize="30"/>
-</box>
-</hlayout>
+<hlayout flexibleheight="7.7">
+            <tmpro text="{expend}" fontsize="40" flexiblewidth="1"/>
+            <vlayout flexiblewidth="6">
+                                <icon text="{health_-1}" fontsize="40" alignment="Center" flexibleheight="1"/>
+                                <tmpro text="Lesser Devourer gains +1{shield} until it leaves play." fontsize="26" alignment="Center" flexibleheight="6.6"/>          
+            </vlayout>
+    </hlayout>
 </vlayout>
 					]],
                     health = 2,
@@ -691,15 +798,13 @@ function demonologist_summon_demon_carddef()
         frame = "frames/necromancer_frames/necromancer_item_cardframe",
 		xmlText=[[
 		<vlayout>
-    <hlayout flexibleheight="1">
-        <box flexiblewidth="1">
-            <tmpro text="{expend_2}" fontsize="72"/>
-        </box>
-        <box flexiblewidth="7">
-            <tmpro text="{health_-1} 
-Randomly summon 1 of 3 demon tokens into play." fontsize="25"/>
-</box>
-</hlayout>
+<hlayout flexibleheight="7.7">
+            <tmpro text="{expend_2}" fontsize="72" flexiblewidth="1"/>
+            <vlayout flexiblewidth="6">
+                                <icon text="{health_-1}" fontsize="40" alignment="Center" flexibleheight="1"/>
+                                <tmpro text="Randomly summon 1 of 3 demon tokens into play." fontsize="24" alignment="Center" flexibleheight="6.6"/>          
+            </vlayout>
+    </hlayout>
 </vlayout>
 		]]
     })
@@ -740,7 +845,8 @@ Randomly summon 1 of 3 demon tokens into play." fontsize="25"/>
         </box>
         <box flexiblewidth="7">
             <tmpro text="Deal 1 damage to opponent.
-Demonic Leech gains 1{shield} until it leaves play." fontsize="25"/>
+
+Demonic Leech gains 1{shield} until it leaves play." fontsize="22"/>
 </box>
 </hlayout>
 </vlayout>
@@ -1360,7 +1466,13 @@ function apothecary_mezzaluna_carddef()
                     name = "Mezzaluna",
                     art = "art/T_Spell_Components",
                     frame = "frames/Wizard_CardFrame",
-                    text = "<sprite name=\"combat_2\">",
+                    xmlText=[[
+					<vlayout forceheight="false" spacing="6">
+    <hlayout spacing="10">
+       <icon text="{combat_2}" fontsize="50"/>
+    </hlayout>    
+</vlayout>
+					]],
                 }
             )
         }
@@ -1392,7 +1504,13 @@ function apothecary_apprentice_potion_maker_carddef()
                                                 {
                                                     title = "Apprentice Potion Maker",
                                                     art = "art/T_Thief_Shadow_Mask",
-                                                    text = "{1 gold}"
+                                                    xmlText=[[
+													<vlayout forceheight="false" spacing="6">
+    <hlayout spacing="10">
+       <icon text="{gold_1}" fontsize="50"/>
+    </hlayout>    
+</vlayout>
+													]]
                                                 }
                                             ),
                                             tags = {gainGold1Tag}
@@ -1411,7 +1529,13 @@ function apothecary_apprentice_potion_maker_carddef()
                                                 {
                                                     title = "Apprentice Potion Maker",
                                                     art = "art/T_Thief_Shadow_Mask",
-                                                    text = "Move a potion from  your discard to the top of your deck."
+                                                    xmlText=[[
+													<vlayout forceheight="false" spacing="6">
+    <hlayout spacing="10">
+       <text text="Move a potion from  your discard to the top of your deck." fontsize="24"/>
+    </hlayout>    
+</vlayout>
+													]]
                                                 }
                                             ),
                                                                                     }
@@ -1426,7 +1550,17 @@ function apothecary_apprentice_potion_maker_carddef()
                     name = "Apprentice Potion Maker",
                     art = "art/T_Thief_Shadow_Mask",
                     frame = "frames/Wizard_CardFrame",
-                    text = "<sprite name=\"expend\"><sprite name=\"gold_1\"> -or- Move a potion from  your discard to the top of your deck.",
+                    xmlText=[[
+					<vlayout>
+    <box flexibleheight="2">
+        <tmpro text="{gold_1}" fontsize="42"/>
+    </box>
+    <box flexibleheight="3">
+        <tmpro text="OR
+Move a potion from  your discard to the top of your deck." fontsize="22" />
+    </box>
+</vlayout>
+]],
                     health = 1,
                     isGuard = false
                 }
@@ -1463,7 +1597,16 @@ function apothecary_red_potion_carddef()
             name = "Red potion",
             art = "art/T_Elixir_of_strength",
             frame = "frames/Wizard_CardFrame",
-            text = "<sprite name=\"combat_2\"> If you have yellow potion in play, opponent discards a card."
+            xmlText=[[
+			<vlayout>
+    <box flexibleheight="4">
+        <tmpro text="{combat_2}" fontsize="42"/>
+    </box>
+    <box flexibleheight="3">
+        <tmpro text="If you have yellow potion in play, opponent discards a card." fontsize="22" />
+    </box>
+</vlayout>
+			]]
         })
     })
 	end
@@ -1491,7 +1634,16 @@ function apothecary_green_potion_carddef()
 					name = "Green Potion",
 					art = "art/treasures/T_Green_Potions_Medium",
 					frame = "frames/Wizard_CardFrame",
-					text = "<sprite name=\"health_2\"> If you have a red potion in play, draw a card."
+					xmlText=[[
+					<vlayout>
+    <box flexibleheight="4">
+        <tmpro text="{health_2}" fontsize="42"/>
+    </box>
+    <box flexibleheight="3">
+        <tmpro text="If you have a red potion in play, draw a card." fontsize="22" />
+    </box>
+</vlayout>
+]]
 					}),
 				activations = singleActivations,
 				check = selectLoc(loc(currentPid, castPloc)).where(isCardName("apothecary_red_potion")).count().gte(1),
@@ -1502,7 +1654,16 @@ function apothecary_green_potion_carddef()
             name = "Green Potion",
             art = "art/treasures/T_Green_Potions_Medium",
             frame = "frames/Wizard_CardFrame",
-            text = "<sprite name=\"health_2\"> If you have a red potion in play, draw a card."
+            xmlText=[[
+			<vlayout>
+    <box flexibleheight="4">
+        <tmpro text="{health_2}" fontsize="42"/>
+    </box>
+    <box flexibleheight="3">
+        <tmpro text="If you have a red potion in play, draw a card." fontsize="22" />
+    </box>
+</vlayout>
+			]]
         })
     })
 	end
@@ -1529,7 +1690,16 @@ function apothecary_yellow_potion_carddef()
 					name = "yellow Potion",
 					art = "art/T_Elixir_of_fortune",
 					frame = "frames/Wizard_CardFrame",
-					text = "<sprite name=\"gold_2\"> If you have a green potion in play, gain 2 Toughness this turn."
+					xmlText=[[
+					<vlayout>
+    <box flexibleheight="4">
+        <tmpro text="{gold_2}" fontsize="42"/>
+    </box>
+    <box flexibleheight="4">
+        <tmpro text="If you have a green potion in play, gain 2 Toughness." fontsize="22" />
+    </box>
+</vlayout>
+]]
 							}),
 				cost = noCost,
 				activations = singleActivations,
@@ -1542,7 +1712,16 @@ function apothecary_yellow_potion_carddef()
             name = "yellow Potion",
             art = "art/T_Elixir_of_fortune",
             frame = "frames/Wizard_CardFrame",
-            text = "<sprite name=\"gold_2\"> If you have a green potion in play, gain 2 Toughness this turn."
+            xmlText=[[
+					<vlayout>
+    <box flexibleheight="4">
+        <tmpro text="{gold_2}" fontsize="42"/>
+    </box>
+    <box flexibleheight="4">
+        <tmpro text="If you have a green potion in play, gain 2 Toughness." fontsize="22" />
+    </box>
+</vlayout>
+]]
         })
     })
 	end
@@ -1568,7 +1747,8 @@ function apothecary_custom_brew_carddef()
             <tmpro text="{scrap}" fontsize="36"/>
         </box>
         <box flexiblewidth="7">
-            <tmpro text="{combat_5}&lt;size=60%&gt; or &lt;/size&gt;{health_6}&lt;size=60%&gt; or 
+            <tmpro text="{combat_5}&lt;size=60%&gt; OR &lt;/size&gt;{health_6}&lt;size=60%&gt;
+OR
 Draw 1 and opponent discards 1." fontsize="40" />
         </box>
     </hlayout>
@@ -1667,7 +1847,7 @@ function apothecary_restorative_draught_carddef()
 					<tmpro text="{expend_2}" fontsize="72"/>
 				</box>
 				<box flexiblewidth="7">
-					<tmpro text="Put a champion or action of cost 3g or less from your discard on top of your deck." fontsize="22" />
+					<tmpro text="Put a champion or action of cost {gold_3} or less from your discard on top of your deck." fontsize="22" />
 				</box>
 			</hlayout>
 		</vlayout>
@@ -1730,11 +1910,12 @@ function cryomancer_ice_burst_carddef()
                     frame = "frames/Wizard_CardFrame",
                     xmlText=[[
 <vlayout>
-    <box flexibleheight="2">
+    <box flexibleheight="7">
         <tmpro text="{combat_2}" fontsize="42"/>
     </box>
-    <box flexibleheight="1">
-        <tmpro text="'Have an ice day.'" fontsize="24" />
+<divider/>
+    <box flexibleheight="3">
+        <tmpro text="'Have an ice day.'" fontsize="20" fontstyle="italic"/>
     </box>
 </vlayout>
 					]],
@@ -1769,14 +1950,15 @@ function cryomancer_ice_shield_carddef()
                     name = "Ice Shield",
                     art = "art/T_Glittering_Spray",
                     frame = "frames/Wizard_CardFrame",
-                    xmlText = [[<vlayout forceheight="false" spacing="6">
-								<hlayout spacing="10">
-								<text text="Gain 2 Toughness." fontsize="22"/>   
-							</hlayout>    
-								<hlayout spacing="10">
-								<text text="If you have 2 other actions in play, also gain {combat_2}." fontsize="18"/>    
-							</hlayout>
-							</vlayout>]],
+                    xmlText = [[
+<vlayout forceheight="false" spacing="6">
+<hlayout spacing="10">
+<text text="Gain 2 Toughness." fontsize="28"/>   
+</hlayout>    
+<hlayout spacing="10">
+<text text="If you have 2 other actions in play, also gain {combat_2}." fontsize="22"/>    
+</hlayout>
+</vlayout>]],
                 }
             )
         }
@@ -1807,7 +1989,15 @@ function cryomancer_ice_gem_carddef()
                                                 {
                                                     title = "Ice Gem",
                                                     art = "art/T_Wizard_Alchemist_S_Stone",
-                                                    text = "<sprite name=\"gold_2\">"
+                                                    xmlText=[[
+													<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="7">
+            <tmpro text="{gold_2}&lt;size=60%&gt;" fontsize="46" />
+        </box>
+    </hlayout>
+</vlayout>
+]]
                                                 }
                                             ),
                                             tags = {gainGold2Tag}
@@ -1818,7 +2008,15 @@ function cryomancer_ice_gem_carddef()
                                                 {
                                                     title = "Ice Gem",
                                                     art = "art/T_Wizard_Alchemist_S_Stone",
-                                                    text = "Opponent discards a card."
+                                                    xmlText=[[
+													<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="7">
+            <tmpro text="Opponent discards a card." fontsize="26" />
+        </box>
+    </hlayout>
+</vlayout>
+													]]
                                                 }
                                             ),
                                                                                     }
@@ -1906,8 +2104,8 @@ function cryomancer_frostbiteskill_carddef()
         xmlText = 
 		[[
 		<vlayout>
-    <hlayout flexibleheight="3">
-            <tmpro text="{expend_2}" fontsize="50" flexiblewidth="2"/>
+    <hlayout flexibleheight="2">
+            <icon text="{expend_2}" fontsize="72" flexiblewidth="0"/>
             <tmpro text="Add a frostbite card to opponent's discard." fontsize="20" flexiblewidth="10" />
     </hlayout>
     <divider/>
@@ -1994,15 +2192,17 @@ function cryomancer_blizzard_carddef()
 					name = "Blizzard",
 					art = "art/T_heavy_gust",
 					frame = "frames/Wizard_CardFrame",
-					xmlText = [[<vlayout forceheight="false" spacing="1">
-<hlayout forcewidth="true" spacing="1">
-<icon text="{scrap}" fontsize="40"/>
-<vlayout  forceheight="false">
-<text text="
-Draw 2. 
-Deal 3 damage to ALL champions (including yours)." fontsize="22"/>
-</vlayout>
-<icon text="" fontsize="1"/>
+					xmlText = [[
+					<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="2">
+            <tmpro text="{scrap}" fontsize="40"/>
+        </box>
+        <box flexiblewidth="7">
+            <tmpro text="Draw 2. 
+Deal 3 damage to ALL champions, including your own.
+(Your champions will not heal at the end of this turn.)" fontsize="20"/> 
+</box>
 </hlayout>
 </vlayout>
 ]]
@@ -2014,17 +2214,20 @@ Deal 3 damage to ALL champions (including yours)." fontsize="22"/>
         layout = createLayout({
             name = "Blizzard",	
             art = "art/T_heavy_gust",
-            xmlText = [[<vlayout forceheight="false" spacing="1">
-<hlayout forcewidth="true" spacing="1">
-<icon text="{scrap}" fontsize="40"/>
-<vlayout  forceheight="false">
-<text text="
-Draw 2. 
-Deal 3 damage to ALL champions (including yours)." fontsize="22"/>
-</vlayout>
-<icon text="" fontsize="1"/>
+            xmlText = [[
+			<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="2">
+            <tmpro text="{scrap}" fontsize="40"/>
+        </box>
+        <box flexiblewidth="7">
+            <tmpro text="Draw 2. 
+Deal 3 damage to ALL champions, including your own.
+(Your champions will not heal at the end of this turn.)" fontsize="20"/> 
+</box>
 </hlayout>
-</vlayout>]]
+</vlayout>
+			]]
         }),
         layoutPath  = "icons/wizard_serene_channel",
 	})
@@ -2225,7 +2428,7 @@ function pyromancer_fire_shard_carddef()
     </box>
     <box flexibleheight="1">
         <tmpro text="OR
-Acquire a Fire Gem for free." fontsize="20" />
+Acquire a Fire Gem for free." fontsize="26" />
     </box>
 </vlayout>
 					]],
@@ -2544,14 +2747,15 @@ function thandarlorian_combat_shield_carddef()
 					name = "Combat Shield",
 					art = "art/T_Cleric_Brightstar_Shield",
 					frame = "frames/Coop_Campaign_CardFrame",
-					xmlText = [[<vlayout forceheight="false" spacing="6">
-								<hlayout spacing="10">
-								<text text="Gain 2 Toughness." fontsize="22"/>   
-							</hlayout>    
-								<hlayout spacing="10">
-								<text text="If you have a champion in play, draw 1." fontsize="18"/>    
-							</hlayout>
-							</vlayout>]]
+					xmlText = [[
+<vlayout>
+    <box flexibleheight="1">
+        <tmpro text="Gain 2 Toughness" fontsize="26"/>
+    </box>
+    <box flexibleheight="1">
+        <tmpro text="If you have a champion in play, draw 1." fontsize="24" />
+    </box>
+</vlayout>]]
 					}),
 				activations = singleActivations,
 				check = selectLoc(loc(currentPid, inPlayPloc)).where(isCardChampion()).count().gte(1),
@@ -2562,14 +2766,14 @@ function thandarlorian_combat_shield_carddef()
             name = "Combat Shield",
             art = "art/T_Cleric_Brightstar_Shield",
             frame = "frames/Coop_Campaign_CardFrame",
-            xmlText = [[<vlayout forceheight="false" spacing="6">
-								<hlayout spacing="10">
-								<text text="Gain 2 Toughness." fontsize="22"/>   
-							</hlayout>    
-								<hlayout spacing="10">
-								<text text="If you have a champion in play, draw 1." fontsize="18"/>    
-							</hlayout>
-							</vlayout>]]
+            xmlText = [[<vlayout>
+    <box flexibleheight="1">
+        <tmpro text="Gain 2 Toughness" fontsize="26"/>
+    </box>
+    <box flexibleheight="1">
+        <tmpro text="If you have a champion in play, draw 1." fontsize="24" />
+    </box>
+</vlayout>]]
         })
     })
 	end
@@ -2598,14 +2802,14 @@ function thandarlorian_coordinated_attack_carddef()
 					name = "Coordinated Attack",
 					art = "art/T_Rally_The_Troops",
 					frame = "frames/Coop_Campaign_CardFrame",
-					xmlText = [[<vlayout forceheight="false" spacing="6">
-								<hlayout spacing="10">
-								<text text="Gain {combat_2}." fontsize="22"/>   
-							</hlayout>    
-								<hlayout spacing="10">
-								<text text="If you have 2 champions in play, gain another {combat_2} and 1 Toughness." fontsize="18"/>    
-							</hlayout>
-							</vlayout>]]
+					xmlText = [[<vlayout>
+    <box flexibleheight="1">
+        <tmpro text="{combat_2}" fontsize="50"/>
+    </box>
+    <box flexibleheight="1">
+        <tmpro text="If you have 2 champions in play, gain {combat_2} more and 1 Toughness." fontsize="24" />
+    </box>
+</vlayout>]]
 					}),
 				activations = singleActivations,
 				check = selectLoc(loc(currentPid, inPlayPloc)).where(isCardChampion()).count().gte(2),
@@ -2616,14 +2820,15 @@ function thandarlorian_coordinated_attack_carddef()
             name = "Coordinated Attack",
             art = "art/T_Rally_The_Troops",
             frame = "frames/Coop_Campaign_CardFrame",
-            xmlText = [[<vlayout forceheight="false" spacing="6">
-								<hlayout spacing="10">
-								<text text="Gain {combat_2}." fontsize="22"/>   
-							</hlayout>    
-								<hlayout spacing="10">
-								<text text="If you have 2 champions in play, gain another {combat_2} and 1 Toughness." fontsize="18"/>    
-							</hlayout>
-							</vlayout>]]
+            xmlText = [[<vlayout>
+    <box flexibleheight="1">
+        <tmpro text="{combat_2}" fontsize="50"/>
+    </box>
+    <box flexibleheight="1">
+        <tmpro text="If you have 2 champions in play, gain {combat_2} more and 1 Toughness." fontsize="24" />
+    </box>
+</vlayout>
+							]]
         })
     })
 	end
@@ -2648,14 +2853,17 @@ function thandarlorian_hand_ballista_carddef()
             name = "Hand Ballista",
             art = "art/T_Light_Crossbow",
             frame = "frames/Coop_Campaign_CardFrame",
-            xmlText = [[<vlayout forceheight="false" spacing="6">
-						<hlayout spacing="10">
-						   <icon text="{combat_1}" fontsize="50"/>
-						</hlayout>    
-						  <hlayout forcewidth="true" spacing="10">
-					  <text text="Ballista. Not blaster." fontsize="22"/>
-						</hlayout>
-					</vlayout>]]
+            xmlText = [[
+<vlayout forceheight="false" spacing="6">
+<hlayout spacing="10">
+<icon text="{combat_1}" fontsize="50"/>
+</hlayout>
+<divider/>
+<hlayout forcewidth="true" spacing="10">
+<text text="Ballista. Not blaster." fontsize="22" fontstyle="italic"/>
+</hlayout>
+</vlayout>
+]]
         })
     })
 	end
@@ -2686,11 +2894,16 @@ function thandarlorian_bounty_hunters_stone_of_seeking_carddef()
 					name = "Bounty Hunter's Stone of Seeking",
 					art = "art/T_Wizard_Alchemist_S_Stone",
 					frame = "frames/Coop_Campaign_CardFrame",
-					Text = [[<vlayout forceheight="false" spacing="6">
-								<hlayout spacing="10">
-								<text text="Gain {gold_1}. If you stun a champion this turn, gain another {gold_1}." fontsize="22"/>   
-							</hlayout>
-							</vlayout>]]
+					Text = [[
+<vlayout>
+    <box flexibleheight="1">
+        <tmpro text="{gold_1}" fontsize="50"/>
+    </box>
+    <box flexibleheight="1">
+        <tmpro text="If you stun a champion this turn, gain {gold_1} more." fontsize="24" />
+    </box>
+</vlayout>
+]]
 					}),
             })
         },
@@ -2698,11 +2911,16 @@ function thandarlorian_bounty_hunters_stone_of_seeking_carddef()
             name = "Bounty Hunter's Stone of Seeking",
             art = "art/T_Wizard_Alchemist_S_Stone",
             frame = "frames/Coop_Campaign_CardFrame",
-            xmlText = [[<vlayout forceheight="false" spacing="6">
-								<hlayout spacing="10">
-								<text text="Gain {gold_1}. If you stun a champion this turn, gain another {gold_1}." fontsize="22"/>   
-							</hlayout>
-							</vlayout>]]
+            xmlText = [[
+			<vlayout>
+    <box flexibleheight="1">
+        <tmpro text="{gold_1}" fontsize="50"/>
+    </box>
+    <box flexibleheight="1">
+        <tmpro text="If you stun a champion this turn, gain {gold_1} more." fontsize="24" />
+    </box>
+</vlayout>
+							]]
         })
     })
 	end
@@ -2721,17 +2939,16 @@ function thandarlorian_bracer_blades_carddef()
 					name = "Bracer Blades",
 					art = "art/treasures/T_Bracers_Of_Brawn",
 					xmlText = [[
-					<vlayout>
-					<hlayout flexibleheight="1">
-					<box flexiblewidth="1">
-					<tmpro text="{scrap}" fontsize="36"/>
-					</box>
-					<box flexiblewidth="7">
-					<tmpro text="Hit a champion for 3 damage or gain {combat_2}. &lt;br&gt;&lt;br&gt;Make this choice 3 times." fontsize="22
-					" />
-					</box>
-					</hlayout>
-					</vlayout>
+<vlayout forceheight="false" spacing="6">
+<hlayout forcewidth="true" spacing="10">
+<text text="{scrap}" fontsize="40"/>
+<vlayout  forceheight="false">
+<icon text="{combat_2}" fontsize="40"/>
+<text text="OR Hit a champion for 3 damage.
+Make this choice 3 times." fontsize="24"/>
+</vlayout>
+</hlayout>
+</vlayout>
 					]]					
 				}),
 				effect =
@@ -2761,7 +2978,13 @@ function thandarlorian_bracer_blades_carddef()
                                                 {
                                                     title = "Bracer Blades",
                                                     art = "art/treasures/T_Bracers_Of_Brawn",
-                                                    text = "<sprite name=\"combat_2\"> "
+                                                    xmlText=[[
+<vlayout>
+<hlayout flexiblewidth="1">
+<icon text="{combat_2}" fontsize="70"/>
+</hlayout>
+</vlayout>
+					]]
                                                 }
                                             ),
                                                                                     }
@@ -2794,7 +3017,13 @@ function thandarlorian_bracer_blades_carddef()
                                                 {
                                                     title = "Bracer Blades",
                                                     art = "art/treasures/T_Bracers_Of_Brawn",
-                                                    text = "<sprite name=\"combat_2\"> "
+                                                    xmlText=[[
+<vlayout>
+<hlayout flexiblewidth="1">
+<icon text="{combat_2}" fontsize="70"/>
+</hlayout>
+</vlayout>
+					]]
                                                 }
                                             ),
                                                                                     }
@@ -2827,7 +3056,13 @@ function thandarlorian_bracer_blades_carddef()
                                                 {
                                                     title = "Bracer Blades",
                                                     art = "art/treasures/T_Bracers_Of_Brawn",
-                                                    text = "<sprite name=\"combat_2\"> "
+                                                    xmlText=[[
+<vlayout>
+<hlayout flexiblewidth="1">
+<icon text="{combat_2}" fontsize="70"/>
+</hlayout>
+</vlayout>
+					]]
                                                 }
                                             ),
                                                                                     }
@@ -2841,17 +3076,16 @@ function thandarlorian_bracer_blades_carddef()
             name = "Bracer Blades",	
             art = "art/treasures/T_Bracers_Of_Brawn",
             xmlText = [[
-					<vlayout>
-					<hlayout flexibleheight="1">
-					<box flexiblewidth="1">
-					<tmpro text="{scrap}" fontsize="36"/>
-					</box>
-					<box flexiblewidth="7">
-					<tmpro text="Hit a champion for 3 damage or gain {combat_2}. &lt;br&gt;&lt;br&gt;Make this choice 3 times." fontsize="22
-					" />
-					</box>
-					</hlayout>
-					</vlayout>
+					<vlayout forceheight="false" spacing="6">
+<hlayout forcewidth="true" spacing="10">
+<text text="{scrap}" fontsize="40"/>
+<vlayout  forceheight="false">
+<icon text="{combat_2}" fontsize="40"/>
+<text text="OR Hit a champion for 3 damage.
+Make this choice 3 times." fontsize="24"/>
+</vlayout>
+</hlayout>
+</vlayout>
 					]]	
         }),
         layoutPath  = "art/treasures/T_Bracers_Of_Brawn",
@@ -3305,7 +3539,7 @@ function witch_flash_freeze_carddef()
 	})
 end
 
-function witch_cauldron_carddef()
+	function witch_cauldron_carddef()
 	local cardLayout = createLayout({
 		name = "Witch's Cauldron",
 		art = "art/T_Confused_Apparition",
@@ -3349,6 +3583,7 @@ function witch_cauldron_carddef()
 		}
 	})
 end
+
 
 -- Shaman cards
 function flame_burst_carddef()
@@ -3574,6 +3809,438 @@ function elemental_surge_def()
 end	
 
 
+-- King Midas cards
+function midas_kings_adviser_carddef()
+	return createChampionDef({
+        id="midas_kings_adviser",
+        name="Kings adviser",
+        types={championType, priestType},
+        acquireCost=1,
+        health = 1,
+        isGuard = false,
+        abilities = {
+			createAbility({
+				id = "kingsAdviserMain",
+				trigger = autoTrigger,
+				effect = gainGoldEffect(1),
+				cost = expendCost,
+				activations = multipleActivations
+			})
+		},
+        layout = createLayout({
+			name = "Kings adviser",
+			art = "art/T_Tithe_Priest",
+			frame = "frames/Treasure_CardFrame",
+			text = "<i>Lean into the power of “No” to fend off the distractions of shiny new objects.</i>",
+			xmlText = [[<vlayout forceheight="false" spacing="6">
+    <hlayout spacing="10">
+       <icon text="{expend}" fontsize="50"/>
+<icon text="{gold_1}" fontsize="50"/>
+    </hlayout>    
+    <divider/>
+    <hlayout forcewidth="true" spacing="10">
+        <vlayout  forceheight="false">
+<text fontstyle="italic" text="Lean into the power of 'No' to fend off the distractions of shiny new objects." fontsize="16"/>
+        </vlayout>
+    </hlayout>
+</vlayout>]],
+			health = 1,
+			cost = 1,
+			isGuard = false
+        })
+    })
+end
+
+
+function midas_gold_carddef()
+	return createItemDef({
+        id = "midas_gold",
+        name = "Gold",
+        types = { itemType, currencyType, coinType },
+        acquireCost = 0,
+        abilities = {
+            createAbility({
+                id = "midasGoldMain",
+                effect = gainGoldEffect(1),
+                cost = noCost,
+                trigger = autoTrigger
+            })
+        },
+        layout = createLayout({
+			name = "Gold",
+			art = "art/gold_male_pale",
+			frame = "frames/Treasure_CardFrame",
+			xmlText = [[<vlayout forceheight="false" spacing="6">
+    <hlayout spacing="10">
+
+<icon text="{gold_1}" fontsize="50"/>
+
+</hlayout>
+    <divider/>
+    <hlayout forcewidth="true" spacing="10">
+        <vlayout  forceheight="false">
+<text fontstyle="italic" text="Gold is forever. It is beautiful, useful, and never wears out." fontsize="16"/>
+        </vlayout>
+    </hlayout>
+</vlayout>]],
+        })
+    })
+end
+
+function midas_liquid_gold_carddef()
+	return createItemDef({
+        id = "midas_liquid_gold",
+        name = "Liquid gold",
+        types = { itemType, currencyType, coinType },
+        acquireCost = 0,
+        abilities = {
+            createAbility({
+                id = "midasLiquidGoldMain",
+                effect = gainGoldEffect(2),
+                cost = noCost,
+                trigger = autoTrigger
+            })
+        },
+        layout = createLayout({
+			name = "Liquid gold",
+			art = "art/treasures/T_Cleric_Elixir_Golden",
+			frame = "frames/Treasure_CardFrame",
+			xmlText = [[<vlayout forceheight="false" spacing="6">
+    <hlayout spacing="10">
+
+<icon text="{gold_2}" fontsize="50"/>
+
+</hlayout>
+    <divider/>
+    <hlayout forcewidth="true" spacing="10">
+        <vlayout  forceheight="false">
+<text fontstyle="italic" text="Wine has never tasted better." fontsize="16"/>
+        </vlayout>
+    </hlayout>
+</vlayout>]],
+        })
+    })
+end
+
+function greed_is_good_skilldef()
+	return createSkillDef({
+		id = "greed_is_good",
+		name = "Greed is Good",
+		cardTypeLabel = "Skill",
+		types = { skillType },
+        abilities = {
+			createAbility({
+				id = "GreedIsGoodActivate",
+				trigger = uiTrigger,
+				promptType = showPrompt,
+				layout = createLayout({
+					name = "Greed is good",
+					art = "art/T_Bribe",
+					frame = "frames/Treasure_CardFrame",
+					text = "",
+					xmlText = [[<vlayout forceheight="false" spacing="6">
+									<hlayout spacing="5">
+									   <icon text="{expend}" fontsize="55"/>
+									   <text text="-{health_1} permanent health to convert all gold you have in play into damage." fontsize="18"/>
+									</hlayout> 
+									<divider/>
+									<hlayout forcewidth="true" spacing="10">
+										<vlayout  forceheight="false">
+											 <text fontstyle="italic" text="Where Gold speaks, every tongue is silent." fontsize="14"/>
+										</vlayout>
+									</hlayout>
+								</vlayout>]]
+				}),
+				effect = gainCombatEffect(getPlayerGold(currentPid)).seq(gainGoldEffect(getPlayerGold(currentPid).multiply(-1))).seq(gainHealthEffect(-1)).seq(gainMaxHealthEffect(currentPid, -1)) ,
+				cost = expendCost
+			})
+		},
+		layout = createLayout({
+			name = "Greed is good",
+			art = "art/T_Bribe",
+			frame = "frames/Treasure_CardFrame",
+			text = "",
+			xmlText = [[<vlayout forceheight="false" spacing="6">
+							<hlayout spacing="5">
+							   <icon text="{expend}" fontsize="55"/>
+							   <text text="-{health_1} permanent health to convert all gold you have in play into damage." fontsize="18"/>
+							</hlayout> 
+							<divider/>
+							<hlayout forcewidth="true" spacing="10">
+								<vlayout  forceheight="false">
+									 <text fontstyle="italic" text="Where Gold speaks, every tongue is silent." fontsize="14"/>
+								</vlayout>
+							</hlayout>
+						</vlayout>]]
+		}),
+		layoutPath= "art/T_Bribe"
+	})
+end	
+
+function golden_touch_abilitydef()
+	return createDef({
+		id = "golden_touch",
+		name = "Golden touch",
+		acquireCost = 0,
+		cardTypeLabel = "Ability",
+		playLocation = skillsPloc,
+		types = { heroAbilityType },
+        abilities = {
+			createAbility({
+				id = "goldenTouchActivate",
+				trigger = uiTrigger,
+				promptType = showPrompt,
+				layout = createLayout({
+					name = "Golden touch",
+					art = "art/T_Strength_In_Numbers",
+					frame = "frames/Treasure_CardFrame",
+					text = "",
+					xmlText = [[
+						<vlayout forceheight="false" spacing="6">
+							<hlayout spacing="5">
+								<icon text="{scrap}" fontsize="65"/>
+								<text text="Sacrifice all champions you have in play and convert them back into gold." fontsize="20"/>
+							</hlayout> 
+						</vlayout>
+					]]
+				}),
+				effect = gainGoldEffect(selectCurrentChampions().sum(getCardCost())).seq(sacrificeTarget().apply(selectCurrentChampions())),
+				-- effect = sacrificeTarget().apply(selectCurrentChampions()),
+				-- effect = sacrificeTarget().apply(selectLoc(loc(currentPid, inPlayPloc)).where(isCardChampion())),
+				cost = sacrificeSelfCost
+			})
+		},
+		layout = createLayout({
+			name = "Golden touch",
+			art = "art/T_Strength_In_Numbers",
+			frame = "frames/Treasure_CardFrame",
+			text = "",
+			xmlText = [[
+				<vlayout forceheight="false" spacing="6">
+					<hlayout spacing="5">
+						<icon text="{scrap}" fontsize="65"/>
+						<text text="Sacrifice all champions you have in play and convert them back into gold." fontsize="20"/>
+					</hlayout> 
+				</vlayout>
+			]]
+		}),
+		layoutPath= "art/T_Strength_In_Numbers"
+	})
+end	
+
+
+-- Brewmaster cards
+function brewmaster_mead_carddef()
+    return createDef(
+        {
+            id = "brewmaster_mead",
+            name = "Mead",
+            types = {elixirType, noStealType, itemType},
+			acquireCost = 0,
+            cardTypeLabel = "Item",
+            playLocation = castPloc,
+            abilities = {
+				createAbility(
+                    {
+                        id = "brewmaster_mead",
+                        PlayAllType = noPlayPlayType,
+						cost = noCost,
+						trigger = autoTrigger,
+                        activations = singleActivations,
+						                        effect = pushChoiceEffect(
+                                {
+                                    choices = {
+                                        {
+                                            effect = gainGoldEffect(1),
+                                            layout = layoutCard(
+                                                {
+                                                    title = "Mead",
+                                                    art = "art/treasures/T_Fighter_Elixir_Red",
+                                                    xmlText=[[
+													<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="7">
+            <icon text="{gold_1}" fontsize="72"/>
+</box>
+</hlayout>
+</vlayout>
+													]]
+                                                }
+                                            ),
+                                            tags = {}
+                                        },
+                                        {
+                                            effect = pushTargetedEffect({
+												desc = "Target champion gains <sprite name=\"combat_2\"> and loses 1<sprite name=\"shield\">.",
+												validTargets = selectLoc(loc(currentPid, inPlayPloc)).union(selectLoc(loc(oppPid, inPlayPloc))).where(isCardChampion()),
+												min = 0,
+												max = 1,
+												targetEffect = grantHealthTarget(-1, { SlotExpireEnum.leavesPlay }, nullEffect(), "Mead")
+												.seq(addSlotToTarget(createAbilitySlot({
+														ability = createAbility({
+															id = "brewmaster_mead_combat_ability",
+															effect = gainCombatEffect(2),
+															trigger = onExpendTrigger
+														}),
+														expiry = { leavesPlayExpiry, }
+													}))),
+												}),
+                                            layout = layoutCard(
+                                                {
+                                                    title = "Mead",
+                                                    art = "art/treasures/T_Fighter_Elixir_Red",
+                                                    xmlText=[[
+													<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="7">
+            <tmpro text="Give a champion -1{shield} and {combat_2} until it leaves play." fontsize="25"/>
+</box>
+</hlayout>
+</vlayout>
+													]]
+                                                }
+                                            ),
+                                                                                    }
+                                    }
+                                }
+                        ),
+                        tags = {}
+                    }
+                )
+            },
+            layout = createLayout(
+                {
+                    name = "Mead",
+                    art = "art/treasures/T_Fighter_Elixir_Red",
+                    frame = "frames/Generic_CardFrame",
+                    xmlText=[[
+					<vlayout>
+    <box flexibleheight="3">
+        <tmpro text="{gold_1}" fontsize="42"/>
+    </box>
+    <box flexibleheight="3">
+        <tmpro text="OR
+Give a champion -1{shield} and {combat_2} until it leaves play." fontsize="22" />
+    </box>
+</vlayout>
+					]]
+                }
+            )
+        }
+    )
+end 
+
+function brewmaster_wws_def()
+    local priceBuff = getCostDiscountBuff("brewmaster_who_wants_shots_buff", -1, selectLoc(centerRowLoc))
+    local buffCreator = createGlobalBuff({
+        id="brewmaster_who_wants_shots_buff",
+        name = "Who wants shots?",
+        abilities = {
+            createAbility({
+                id="brewmaster_who_wants_shots_effect",
+                trigger = endOfTurnTrigger,
+                effect = createCardEffect(priceBuff, loc(oppPid, buffsPloc)).seq(sacrificeSelf())
+            })
+        }
+    })
+
+    local cardLayout = createLayout({
+        name = "Who wants shots?",
+        art = "art/treasures/T_Bottle_Of_Rum",
+        frame = "frames/Wizard_CardFrame",
+        xmlText=[[
+        <vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="1">
+            <icon text="{expend_2}" fontsize="72"/>
+        </box>
+        <box flexiblewidth="7">
+            <tmpro text="Opponent takes 1 damage and must pay {gold_1} more for their first purchase next turn." fontsize="24" />
+        </box>
+    </hlayout>
+</vlayout>
+        ]]
+    })
+
+    return createSkillDef({
+        id = "brewmaster_who_wants_shots_skill",
+        name = "Who wants shots?",
+        types = { skillType },
+        layout = cardLayout,
+        layoutPath = "art/treasures/T_Bottle_Of_Rum",
+        abilities = {
+            createAbility({
+                id = "who_wants_shots_ab",
+                trigger = uiTrigger,
+				promptType = showPrompt,
+                activations = singleActivation,
+                layout = cardLayout,
+                effect = hitOpponentEffect(1).seq(createCardEffect(buffCreator, loc(currentPid, buffsPloc))),
+                cost = goldCost(2)
+            }),
+        }
+        
+    })
+end
+
+function brewmaster_get_out_of_my_bar_carddef()
+	return createHeroAbilityDef({
+		id = "not_in_my_bar",
+		name = "Not in my bar",
+		types = { heroAbilityType },
+        abilities = {
+			createAbility({
+				id = "get_out_of_my_barActivate",
+				trigger = uiTrigger,
+				promptType = showPrompt,
+				layout = createLayout({
+					name = "Not in my bar",
+					art = "art/T_orc",
+					xmlText=[[
+					<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="1">
+            <tmpro text="{scrap}" fontsize="40"/>
+        </box>
+        <box flexiblewidth="7">
+            <tmpro text="Sacrifice a champion from opponent's discard pile. Use this ability only on a champion that was stunned this turn." fontsize="22" />
+        </box>
+    </hlayout>
+</vlayout>
+					]]
+				}),
+				effect = pushTargetedEffect({
+  desc = "Sacrifice a champion from opponent's discard pile. Only useable on champions stunned this turn.",
+  min=0,
+  max=1,
+  validTargets = selectLoc(loc(oppPid, discardPloc)).where(isCardChampion()).where(isCardStunned()),
+  targetEffect = sacrificeTarget()
+  }),
+				cost = sacrificeSelfCost
+			})
+		},
+        layout = createLayout({
+            name = "Get out of my bar",	
+            art = "art/T_orc",
+            xmlText=[[
+			<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="1">
+            <tmpro text="{scrap}" fontsize="40"/>
+        </box>
+        <box flexiblewidth="7">
+            <tmpro text="Sacrifice a champion from opponent's discard pile. Use this ability only on a champion that was stunned this turn." fontsize="22" />
+        </box>
+    </hlayout>
+</vlayout>
+			]]
+        }),
+        layoutPath  = "art/T_orc",
+	})
+end	
+
+
+
 -- Auxiliary effects
 local function goFirstEffect()
 -- this is a dirty hack to make player going first only draw three cards for their first turn. Feel free to replace it with a better implementation.
@@ -3616,8 +4283,10 @@ local function chooseTheClass()
 			.seq(createCardEffect(choose_paladin_carddef(), currentDeckLoc))
 			.seq(createCardEffect(choose_witch_carddef(), currentDeckLoc))
 			.seq(createCardEffect(choose_shaman_carddef(), currentDeckLoc))
+			.seq(createCardEffect(choose_king_midas_carddef(), currentDeckLoc))
+			.seq(createCardEffect(choose_brewmaster_carddef(), currentDeckLoc))
 			.seq(shuffleEffect(currentDeckLoc))
-			.seq(drawCardsEffect(8))
+			.seq(drawCardsEffect(10))
 			.seq(waitForClickEffect("Please play the card corresponding to the class you wish to play.", ""))
 			.seq(waitForClickEffect("Note: Game does not currently work properly if both players choose Pyromancer."))
 			.seq(waitForClickEffect("You can Undo your choice."))
@@ -3629,12 +4298,26 @@ local function chooseTheClass()
         layoutFirst = createLayout({
             name = "Pick a custom class",
             art = "art/T_Storm_Siregar",
-            text = "Choose 1 of 8 level 3 Custom Characters to play."  }),
+            xmlText=[[<vlayout>
+<hlayout flexiblewidth="1">
+<text text="Choose 1 of 10
+level 3 Custom Characters to play." fontsize="26"/>
+</hlayout>
+</vlayout>
+			
+			]]
+			}),
 
         layoutSecond = createLayout({
             name = "Selected class",
             art = "art/T_All_Heroes",
-            text = "Play as the character you selected when setting up the game." }),
+            xmlText=[[
+			<vlayout>
+<hlayout flexiblewidth="1">
+<text text="Play as the character you selected when setting up the game." fontsize="26"/>
+</hlayout>
+</vlayout>
+			]] }),
 
         turn = 1
     })
@@ -3697,14 +4380,22 @@ function setupGame(g)
 			flame_burst_carddef(),
 			call_lightning_carddef(),
 			gift_of_the_elements_carddef(),
-			natures_blessing_carddef()
+			natures_blessing_carddef(),
+	choose_king_midas_carddef(),		
+			midas_kings_adviser_carddef(),
+			greed_is_good_skilldef(),
+			golden_touch_abilitydef(),
+			midas_liquid_gold_carddef(),
+			midas_gold_carddef(),
+	choose_brewmaster_carddef(),		
+			brewmaster_mead_carddef()
         }
     )
 
     standardSetup(
         g,
         {
-            description = "Lilu Dallas Multi-Class. Multi-class script by Aarkenell and Userkaffe. Classes by Aarkenell, Userkaffe, AgentC13, & Filtrophobe. Updated 31.08.2023.",
+            description = "Lilu Dallas Multi-Class. Multi-class script by Aarkenell and Userkaffe. Classes by Aarkenell, Userkaffe, AgentC13, Filtrophobe, & Zabuza. Updated 01.09.2023.",
              playerOrder = { plid1, plid2 },
         ai = ai.CreateKillSwitchAi(createAggressiveAI(),  createHardAi2()),
         timeoutAi = createTimeoutAi(),
