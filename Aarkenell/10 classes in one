@@ -6,6 +6,8 @@ require "hardai"
 require "mediumai"
 require "easyai"
 
+-- Updated 06.09.2023 by Aarkenell - Brewmaster overhaul and Pyromancer UI updates for skill.
+
 -- Custom Class Selection cards
 function choose_demonologist_carddef()
     return createDef({
@@ -221,6 +223,10 @@ function choose_pyromancer_carddef()
     </box>
     <box flexibleheight="1">
         <tmpro text="- Class by Aarkenell -" fontsize="22" fontstyle="italic"/>
+    </box>
+
+<box flexibleheight="1">
+        <tmpro text="- Updated 06.09.2023-" fontsize="14" fontstyle="italic"/>
     </box>
 </vlayout>
 			]]
@@ -524,20 +530,20 @@ function choose_brewmaster_carddef()
 			.seq(setPlayerAvatarEffect("lord_callum", currentPid))
 			.seq(gainMaxHealthEffect(currentPid, const(55).add(getPlayerMaxHealth(currentPid).negate())))
 			.seq(gainHealthEffect(55))
-			.seq(createCardEffect(brewmaster_wws_def(), currentSkillsLoc))
+			.seq(createCardEffect(brewmaster_a_round_on_the_house_def(), currentSkillsLoc))
 			.seq(createCardEffect(brewmaster_get_out_of_my_bar_carddef(), currentSkillsLoc))
 			.seq(createCardEffect(brewmaster_mead_carddef(), currentDeckLoc))
 			.seq(createCardEffect(brewmaster_mead_carddef(), currentDeckLoc))
 			.seq(createCardEffect(brewmaster_mead_carddef(), currentDeckLoc))
 			.seq(createCardEffect(brewmaster_mead_carddef(), currentDeckLoc))
-			.seq(createCardEffect(brewmaster_mead_carddef(), currentDeckLoc))
-			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
-			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
-			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
-			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
-			.seq(createCardEffect(gold_carddef(), currentDeckLoc))
+			.seq(createCardEffect(brewmaster_spilled_drink_carddef(), currentDeckLoc))
+			.seq(createCardEffect(brewmaster_tap_a_keg_carddef(), currentDeckLoc))
+			.seq(createCardEffect(brewmaster_serve_the_strong_stuff_carddef(), currentDeckLoc))
+			.seq(createCardEffect(brewmaster_regular_regulars_carddef(), currentDeckLoc))
+			.seq(createCardEffect(brewmaster_irregular_regulars_carddef(), currentDeckLoc))
+			.seq(createCardEffect(brewmaster_zaboozer_carddef(), currentDeckLoc))
 			.seq(shuffleEffect(currentDeckLoc))
-			.seq(sacrificeTarget().apply(selectSource()))
+						.seq(sacrificeTarget().apply(selectSource()))
 			.seq(waitForClickEffect("Thank you for choosing your class.", ""))
 			.seq(waitForClickEffect("If you enjoy this game, be sure to Favourite the script.", ""))
 			.seq(waitForClickEffect("For game to begin normally please end turn now.", ""))
@@ -555,8 +561,11 @@ function choose_brewmaster_carddef()
     <box flexibleheight="1">
         <tmpro text="- Class by Aarkenell -" fontsize="22" fontstyle="italic"/>
     </box>
-</vlayout>
 
+<box flexibleheight="1">
+        <tmpro text="- Updated 06.09.2023-" fontsize="14" fontstyle="italic"/>
+    </box>
+</vlayout>
 			]]
 			}),
         })
@@ -2486,6 +2495,7 @@ function pyromancer_conflagration_1p_carddef()
 	})
 end	
  
+
 function pyromancer_fuel_1carddef()
     local cardLayout = createLayout({
         name = "Fuel",
@@ -2517,9 +2527,11 @@ function pyromancer_fuel_1carddef()
                 activations = singleActivation,
                 layout = cardLayout,
                 effect = incrementCounterEffect("conflagration_1p", 1).seq(waitForClickEffect("Conflagration Total = 6"))
-				.seq(sacrificeTarget().apply(selectLoc(loc(currentPid, skillsPloc)).where(isCardName("pyromancer_fuel_1_skill"))))
-				.seq(createCardEffect(pyromancer_fuel_2carddef(), currentSkillsLoc)),
-                cost = goldCost(2),
+				.seq(transformTarget("pyromancer_fuel_2_skill").apply(selectSource())),
+                cost = combineCosts({
+                    expendCost,
+                    goldCost(2)
+                }),
             }),
         }
         
@@ -2557,9 +2569,11 @@ function pyromancer_fuel_2carddef()
                 activations = singleActivation,
                 layout = cardLayout,
                 effect = incrementCounterEffect("conflagration_1p", 2).seq(waitForClickEffect("Conflagration Total = 8"))
-				.seq(sacrificeTarget().apply(selectLoc(loc(currentPid, skillsPloc)).where(isCardName("pyromancer_fuel_2_skill"))))
-				.seq(createCardEffect(pyromancer_fuel_3carddef(), currentSkillsLoc)),
-                cost = goldCost(2),
+				.seq(transformTarget("pyromancer_fuel_3_skill").apply(selectSource())),
+                cost = combineCosts({
+                    expendCost,
+                    goldCost(2)
+                }),
             }),
         }
         
@@ -2597,9 +2611,11 @@ function pyromancer_fuel_3carddef()
                 activations = singleActivation,
                 layout = cardLayout,
                 effect = incrementCounterEffect("conflagration_1p", 3).seq(waitForClickEffect("Conflagration Total = 11"))
-				.seq(sacrificeTarget().apply(selectLoc(loc(currentPid, skillsPloc)).where(isCardName("pyromancer_fuel_3_skill"))))
-				.seq(createCardEffect(pyromancer_fuel_4carddef(), currentSkillsLoc)),
-                cost = goldCost(2),
+				.seq(transformTarget("pyromancer_fuel_4_skill").apply(selectSource())),
+                cost = combineCosts({
+                    expendCost,
+                    goldCost(2)
+                }),
             }),
         }
         
@@ -2637,9 +2653,11 @@ function pyromancer_fuel_4carddef()
                 activations = singleActivation,
                 layout = cardLayout,
                 effect = incrementCounterEffect("conflagration_1p", 4).seq(waitForClickEffect("Conflagration Total = 15"))
-				.seq(sacrificeTarget().apply(selectLoc(loc(currentPid, skillsPloc)).where(isCardName("pyromancer_fuel_4_skill"))))
-				.seq(createCardEffect(pyromancer_fuel_5carddef(), currentSkillsLoc)),
-                cost = goldCost(2),
+				.seq(transformTarget("pyromancer_fuel_5_skill").apply(selectSource())),
+                cost = combineCosts({
+                    expendCost,
+                    goldCost(2)
+                }),
             }),
         }
         
@@ -2677,7 +2695,10 @@ function pyromancer_fuel_5carddef()
                 activations = singleActivation,
                 layout = cardLayout,
                 effect = incrementCounterEffect("conflagration_1p", 5).seq(waitForClickEffect("+5 to Conflagration")),
-                cost = goldCost(2),
+                cost = combineCosts({
+                    expendCost,
+                    goldCost(2)
+                }),
             }),
         }
         
@@ -4047,63 +4068,7 @@ function brewmaster_mead_carddef()
 						cost = noCost,
 						trigger = autoTrigger,
                         activations = singleActivations,
-						                        effect = pushChoiceEffect(
-                                {
-                                    choices = {
-                                        {
-                                            effect = gainGoldEffect(1),
-                                            layout = layoutCard(
-                                                {
-                                                    title = "Mead",
-                                                    art = "art/treasures/T_Fighter_Elixir_Red",
-                                                    xmlText=[[
-													<vlayout>
-    <hlayout flexibleheight="1">
-        <box flexiblewidth="7">
-            <icon text="{gold_1}" fontsize="72"/>
-</box>
-</hlayout>
-</vlayout>
-													]]
-                                                }
-                                            ),
-                                            tags = {}
-                                        },
-                                        {
-                                            effect = pushTargetedEffect({
-												desc = "Target champion gains <sprite name=\"combat_2\"> and loses 1<sprite name=\"shield\">.",
-												validTargets = selectLoc(loc(currentPid, inPlayPloc)).union(selectLoc(loc(oppPid, inPlayPloc))).where(isCardChampion()),
-												min = 0,
-												max = 1,
-												targetEffect = grantHealthTarget(-1, { SlotExpireEnum.leavesPlay }, nullEffect(), "Mead")
-												.seq(addSlotToTarget(createAbilitySlot({
-														ability = createAbility({
-															id = "brewmaster_mead_combat_ability",
-															effect = gainCombatEffect(2),
-															trigger = onExpendTrigger
-														}),
-														expiry = { leavesPlayExpiry, }
-													}))),
-												}),
-                                            layout = layoutCard(
-                                                {
-                                                    title = "Mead",
-                                                    art = "art/treasures/T_Fighter_Elixir_Red",
-                                                    xmlText=[[
-													<vlayout>
-    <hlayout flexibleheight="1">
-        <box flexiblewidth="7">
-            <tmpro text="Give a champion -1{shield} and {combat_2} until it leaves play." fontsize="25"/>
-</box>
-</hlayout>
-</vlayout>
-													]]
-                                                }
-                                            ),
-                                                                                    }
-                                    }
-                                }
-                        ),
+						effect = nullEffect(),
                         tags = {}
                     }
                 )
@@ -4116,11 +4081,7 @@ function brewmaster_mead_carddef()
                     xmlText=[[
 					<vlayout>
     <box flexibleheight="3">
-        <tmpro text="{gold_1}" fontsize="42"/>
-    </box>
-    <box flexibleheight="3">
-        <tmpro text="OR
-Give a champion -1{shield} and {combat_2} until it leaves play." fontsize="22" />
+        <tmpro text="Drink up!" fontsize="20" fontstyle="italic"/>
     </box>
 </vlayout>
 					]]
@@ -4130,24 +4091,397 @@ Give a champion -1{shield} and {combat_2} until it leaves play." fontsize="22" /
     )
 end 
 
-function brewmaster_wws_def()
-    local priceBuff = getCostDiscountBuff("brewmaster_who_wants_shots_buff", -1, selectLoc(centerRowLoc))
+function brewmaster_spilled_drink_carddef()
+    return createDef(
+        {
+            id = "brewmaster_spilled_drink",
+            name = "Spilled Drink",
+            types = {elixirType, noStealType, itemType},
+			acquireCost = 0,
+            cardTypeLabel = "Item",
+            playLocation = castPloc,
+            abilities = {
+				createAbility(
+                    {
+                        id = "brewmaster_spilled_drink",
+                        PlayAllType = blockPlayType,
+						cost = noCost,
+						trigger = autoTrigger,
+                        activations = singleActivations,
+						effect = gainGoldEffect(1).seq(pushChoiceEffect(
+                                {
+                                    choices = {
+                                        {
+                                            effect = nullEffect(),
+                                            layout = layoutCard(
+                                                {
+                                                    name = "Spilled Drink",	
+													art = "art/treasures/T_Ranger_Elixir_Yellow",
+													frame = "frames/Generic_CardFrame",
+                                                    xmlText=[[
+													<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="7">
+            <text text="Do nothing." fontsize="24"/>
+</box>
+</hlayout>
+</vlayout>
+													]]
+                                                }
+                                            ),
+                                            tags = {gainCombatTag}
+                                        },
+                                        {
+                                            effect = forceDiscard(1).seq(drawCardsEffect(1)),
+                                            layout = createLayout({
+													name = "Spilled Drink",	
+													art = "art/treasures/T_Ranger_Elixir_Yellow",
+													frame = "frames/Generic_CardFrame",
+													xmlText=[[
+<vlayout>
+    <hlayout flexibleheight="1">
+
+        <box flexiblewidth="7">
+            <tmpro text="Discard a card,
+then draw a card." fontsize="24" />
+        </box>
+    </hlayout>
+</vlayout>
+			]]
+        }),
+                                                                                    }
+                                    }
+                                }
+                        )),
+                        tags = {}
+                    }
+                )
+            },
+            layout = createLayout(
+                {
+                    name = "Spilled Drink",
+                    art = "art/treasures/T_Ranger_Elixir_Yellow",
+                    frame = "frames/Generic_CardFrame",
+                    xmlText=[[
+					<vlayout>
+    <box flexibleheight="3">
+        <tmpro text="{gold_1}" fontsize="50"/>
+    </box>
+<box flexibleheight="3">
+        <tmpro text="You may discard a card. If you do, draw a card." fontsize="24"/>
+    </box></vlayout>
+					]]
+                }
+            )
+        }
+    )
+end 
+
+function brewmaster_tap_a_keg_carddef()
+    return createDef(
+        {
+            id = "brewmaster_tap_a_keg",
+            name = "Tap a Keg",
+            types = {actionType, noStealType, brewmasterType},
+            acquireCost = 0,
+            cardTypeLabel = "Action",
+            playLocation = castPloc,
+            abilities = {
+                createAbility(
+                    {
+                        id = "brewmaster_tap_a_keg_main",
+                        layout = cardLayout,
+                        effect = gainGoldEffect(1),
+                        trigger = autoTrigger,
+						playAllType = blockPlayType,
+                        tags = {}
+                    }
+                ),
+				createAbility(
+                    {
+                        id = "brewmaster_tap_a_keg_1",
+                        layout = cardLayout,
+                        effect = ifElseEffect(selectLoc(currentDiscardLoc).where(isCardName("brewmaster_mead")).count().gte(1),gainGoldEffect(1),nullEffect()),
+                        trigger = autoTrigger,
+						playAllType = blockPlayType,
+                        tags = {}
+                    }),
+				createAbility(
+                    {
+                        id = "brewmaster_tap_a_keg_2",
+                        layout = cardLayout,
+                        effect = ifElseEffect(selectLoc(currentDiscardLoc).where(isCardName("brewmaster_mead")).count().gte(3),gainGoldEffect(1),nullEffect()),
+                        trigger = autoTrigger,
+						playAllType = blockPlayType,
+                        tags = {}
+                    })
+                
+            },
+            layout = createLayout(
+                {
+                    name = "Tap a Keg",
+                    art = "art/treasures/T_Ranger_Elixir_Orange",
+                    frame = "frames/Generic_CardFrame",
+                    xmlText=[[
+					<vlayout>
+    <box flexibleheight="3">
+        <tmpro text="{gold_1}" fontsize="30"/>
+    </box>
+    <box flexibleheight="3">
+        <tmpro text="+{gold_1} if you have a Mead card in your discard pile.
++{gold_1} more if you have 3+ Mead cards in your discard pile." fontsize="20" />
+    </box>
+</vlayout>
+					]],
+                }
+            )
+        }
+    )
+end
+
+function brewmaster_serve_the_strong_stuff_carddef()
+
+    local priceBuff = getCostDiscountBuff("brewmaster_serve_the_strong_stuff_buff", -1, selectLoc(centerRowLoc).union(selectLoc(fireGemsLoc)))
     local buffCreator = createGlobalBuff({
-        id="brewmaster_who_wants_shots_buff",
-        name = "Who wants shots?",
+        id="brewmaster_serve_the_strong_stuff_buff",
+        name = "Serve the strong stuff",
         abilities = {
             createAbility({
-                id="brewmaster_who_wants_shots_effect",
+                id="brewmaster_serve_the_strong_stuff_effect",
                 trigger = endOfTurnTrigger,
                 effect = createCardEffect(priceBuff, loc(oppPid, buffsPloc)).seq(sacrificeSelf())
             })
-        }
+        },
+		
     })
+    return createDef(
+        {
+            id = "brewmaster_serve_the_strong_stuff",
+            name = "Serve the strong stuff",
+            types = {noStealType, itemType},
+            acquireCost = 0,
+            cardTypeLabel = "Action",
+            playLocation = castPloc,
+            abilities = {
+                createAbility(
+                    {
+                        id = "brewmaster_serve_the_strong_stuff",
+                        layout = cardLayout,
+                        effect = pushTargetedEffect({
+							desc = "Prepare a champion.",
+							validTargets = s.CurrentPlayer(CardLocEnum.InPlay).where(isCardChampion()),
+							min = 0,
+							max = 1,
+							targetEffect = prepareTarget(),
+			    }),
+                        trigger = uiTrigger,
+                        tags = {}
+                    }
+					
+                ),
+				createAbility(
+                    {
+                        id = "brewmaster_serve_the_strong_buff",
+                        layout = cardLayout,
+                        effect = createCardEffect(buffCreator, loc(currentPid, buffsPloc)),
+                        trigger = autoTrigger,
+                        tags = {}
+                    }
+					
+                )
+            },
+            
+			createBuffDetails({
+					art = "art/treasures/T_Bottle_Of_Rum",
+					name = "Serve the strong stuff",
+					text = "Your first purchase this turn costs +1 gold."
+							}),
+		
+		layout = createLayout(
+                {
+                    name = "Serve the strong stuff",
+                    art = "art/treasures/T_Bottle_Of_Rum",
+                    frame = "frames/Generic_CardFrame",
+                    xmlText=[[
+<vlayout>
+    <box flexibleheight="1">
+        <tmpro text="Opponent must pay +{gold_1} for their first purchase next turn.
+
+Prepare a champion." fontsize="20"/>
+</box>
+</vlayout>
+					]],
+                }
+            )
+        }
+    )
+end
+
+function brewmaster_regular_regulars_carddef()
+    return createChampionDef(
+        {
+            id = "brewmaster_regular_regulars",
+            name = "Regular Regulars",
+			types = {championType, nostealType},
+            acquireCost = 0,
+            health = 1,
+            isGuard = false,
+            abilities = {
+                createAbility(
+                    {
+                        id = "regular_regulars_main",
+                        trigger = autoTrigger,
+                        cost = expendCost,
+                        activations = multipleActivations,
+						playAllType = blockPlayType,
+                        effect = ifElseEffect(selectLoc(loc(currentPid, castPloc)).where(isCardName("brewmaster_mead")).count().gte(1), gainGoldEffect(2), gainGoldEffect(1)),
+                    }
+                ),
+            },
+            layout = createLayout(
+                {
+                    name = "Regular Regulars",
+                    art = "avatars/cristov_s_recruits",
+                    frame = "frames/Generic_CardFrame",
+                    xmlText=[[
+<vlayout>
+    <hlayout flexibleheight="3">
+        <box flexiblewidth="1">
+            <tmpro text="{expend}" fontsize="40"/>
+        </box>
+        <vlayout flexiblewidth="4">
+            <box flexibleheight="1">
+                <tmpro text="{gold_1}" fontsize="40" />
+            </box>
+            <box flexibleheight="1">
+                <tmpro text="+{gold_1} if you already have Mead in play." fontsize="24" />
+            </box>
+        </vlayout>
+    </hlayout>
+</vlayout>
+]],
+                    health = 1,
+                    isGuard = false
+                }
+            )
+        }
+    )
+end
+
+function brewmaster_irregular_regulars_carddef()
+    return createChampionDef(
+        {
+            id = "brewmaster_irregular_regulars",
+            name = "Irregular Regulars",
+			types = {championType, nostealType},
+            acquireCost = 0,
+            health = 2,
+            isGuard = false,
+            abilities = {
+                createAbility(
+                    {
+                        id = "irregular_regulars_main",
+                        trigger = autoTrigger,
+                        cost = expendCost,
+                        activations = multipleActivations,
+						playAllType = blockPlayType,
+                        effect = ifElseEffect(selectLoc(loc(currentPid, castPloc)).where(isCardName("brewmaster_mead")).count().gte(1), gainGoldEffect(1).seq(gainCombatEffect(2)), gainGoldEffect(1)),
+                    }
+                ),
+            },
+            layout = createLayout(
+                {
+                    name = "Iregular Regulars",
+                    art = "art/T_Orc_Riot",
+                    frame = "frames/Generic_CardFrame",
+                    xmlText=[[
+
+<vlayout>
+    <hlayout flexibleheight="3">
+        <box flexiblewidth="1">
+            <tmpro text="{expend}" fontsize="40"/>
+        </box>
+        <vlayout flexiblewidth="4">
+            <box flexibleheight="1">
+                <tmpro text="{gold_1}" fontsize="40" />
+            </box>
+            <box flexibleheight="1">
+                <tmpro text="+{combat_2} if you already have Mead in play." fontsize="24" />
+            </box>
+        </vlayout>
+    </hlayout>
+</vlayout>
+]],
+                    health = 2,
+                    isGuard = false
+                }
+            )
+        }
+    )
+end
+
+function brewmaster_zaboozer_carddef()
+    return createChampionDef(
+        {
+            id = "brewmaster_zaboozer",
+            name = "Zaboozer, Heroic Regular",
+			types = {championType, nostealType},
+            acquireCost = 0,
+            health = 2,
+            isGuard = true,
+            abilities = {
+               	createAbility(
+                    {
+                        id = "zaboozer_mead",
+                        trigger = autoTrigger,
+                        cost = expendCost,
+                        activations = multipleActivations,
+						playAllType = blockPlayType,
+                        effect = ifElseEffect(selectLoc(loc(currentPid, castPloc)).where(isCardName("brewmaster_mead")).count().gte(1), gainCombatEffect(1).seq(addSlotToTarget(createGuardSwitchSlot(false, { endOfTurnExpiry })).apply(selectSource())), gainCombatEffect(3)),
+                    }
+                ),
+            },
+            layout = createLayout(
+                {
+                    name = "Zaboozer, Heroic Regular",
+                    art = "art/T_Maurader",
+                    frame = "frames/Generic_CardFrame",
+                    xmlText=[[
+					<vlayout>
+    <hlayout flexibleheight="3">
+        <box flexiblewidth="1">
+            <tmpro text="{expend}" fontsize="40"/>
+        </box>
+        <vlayout flexiblewidth="4">
+            <box flexibleheight="1">
+                <tmpro text="{combat_3} if no Mead in play." fontsize="20" />
+            </box>
+            <box flexibleheight="2">
+                <tmpro text="If Mead is in play, only gain {combat_1} and lose Guard." fontsize="20" />
+            </box>
+        </vlayout>
+    </hlayout>
+
+<divider/>
+            <box flexibleheight="1">
+                <tmpro text="'Where's my drink?!'" fontsize="14" fontstyle="bold, italic"/>
+            </box>
+</vlayout>
+]],
+                    health = 2,
+                    isGuard = true
+                }
+            )
+        }
+    )
+end
+
+function brewmaster_a_round_on_the_house_def()
 
     local cardLayout = createLayout({
-        name = "Who wants shots?",
-        art = "art/treasures/T_Bottle_Of_Rum",
-        frame = "frames/Wizard_CardFrame",
+        name = "A round on the House",
+        art = "art/T_Unify_Apsara",
+        frame = "frames/Generic_CardFrame",
         xmlText=[[
         <vlayout>
     <hlayout flexibleheight="1">
@@ -4155,7 +4489,9 @@ function brewmaster_wws_def()
             <icon text="{expend_2}" fontsize="72"/>
         </box>
         <box flexiblewidth="7">
-            <tmpro text="Opponent takes 1 damage and must pay {gold_1} more for their first purchase next turn." fontsize="24" />
+            <tmpro text="+{combat_1} for every champion you have in play.
+
+Then, ALL champions (yours and opponent's) get -1{shield} until they leave play." fontsize="18" />
         </box>
     </hlayout>
 </vlayout>
@@ -4163,25 +4499,39 @@ function brewmaster_wws_def()
     })
 
     return createSkillDef({
-        id = "brewmaster_who_wants_shots_skill",
-        name = "Who wants shots?",
+        id = "brewmaster_a_round_on_the_house_skill",
+        name = "A round on the House",
         types = { skillType },
         layout = cardLayout,
-        layoutPath = "art/treasures/T_Bottle_Of_Rum",
+        layoutPath = "art/T_Unify_Apsara",
         abilities = {
             createAbility({
-                id = "who_wants_shots_ab",
+                id = "a_round_on_the_house_ab",
                 trigger = uiTrigger,
 				promptType = showPrompt,
                 activations = singleActivation,
                 layout = cardLayout,
-                effect = hitOpponentEffect(1).seq(createCardEffect(buffCreator, loc(currentPid, buffsPloc))),
+                effect =  gainCombatEffect(selectLoc(currentInPlayLoc).where(isCardChampion()).count())
+					.seq((grantHealthTarget(-1, { SlotExpireEnum.leavesPlay }, nullEffect(), "shadow")).apply(selectLoc(loc(currentPid, inPlayPloc)).where(isCardChampion())))
+					.seq((grantHealthTarget(-1, { SlotExpireEnum.leavesPlay }, nullEffect(), "shadow")).apply(selectLoc(loc(oppPid, inPlayPloc)).where(isCardChampion()))),
                 cost = goldCost(2)
             }),
         }
         
     })
 end
+
+    local buffCreator = createGlobalBuff({
+        id="brewmaster_serve_the_strong_stuff_buff",
+        name = "Serve the strong stuff",
+        abilities = {
+            createAbility({
+                id="brewmaster_get_out_of_my_bar_effect",
+                trigger = deckShuffledTrigger,
+                effect = moveToBottomDeckTarget(false, 0).apply(selectSavedTargets("Thrown out bar"))
+            })
+        }
+    })
 
 function brewmaster_get_out_of_my_bar_carddef()
 	return createHeroAbilityDef({
@@ -4196,6 +4546,7 @@ function brewmaster_get_out_of_my_bar_carddef()
 				layout = createLayout({
 					name = "Not in my bar",
 					art = "art/T_orc",
+					frame = "frames/Generic_CardFrame",
 					xmlText=[[
 					<vlayout>
     <hlayout flexibleheight="1">
@@ -4203,33 +4554,82 @@ function brewmaster_get_out_of_my_bar_carddef()
             <tmpro text="{scrap}" fontsize="40"/>
         </box>
         <box flexiblewidth="7">
-            <tmpro text="Sacrifice a champion from opponent's discard pile. Use this ability only on a champion that was stunned this turn." fontsize="22" />
+            <tmpro text="Set aside a champion you stunned this turn. The next time your opponent shuffles their deck, put that champion on the bottom of their deck.
+
+Or draw a card." fontsize="18" />
         </box>
     </hlayout>
 </vlayout>
 					]]
 				}),
-				effect = pushTargetedEffect({
-  desc = "Sacrifice a champion from opponent's discard pile. Only useable on champions stunned this turn.",
-  min=0,
-  max=1,
-  validTargets = selectLoc(loc(oppPid, discardPloc)).where(isCardChampion()).where(isCardStunned()),
-  targetEffect = sacrificeTarget()
-  }),
+				effect = pushChoiceEffect(
+                                {
+                                    choices = {
+                                        {
+                                            effect = drawCardsEffect(1),
+                                            layout = layoutCard(
+                                                {
+                                                    name = "Get out of my bar",	
+													art = "art/T_orc",
+													frame = "frames/Generic_CardFrame",
+                                                    xmlText=[[
+													<vlayout>
+    <hlayout flexibleheight="1">
+        <box flexiblewidth="7">
+            <text text="Draw a card." fontsize="24"/>
+</box>
+</hlayout>
+</vlayout>
+													]]
+                                                }
+                                            ),
+                                            tags = {gainCombatTag}
+                                        },
+                                        {
+                                            effect = pushTargetedEffect({
+												  desc = "Sacrifice a champion from opponent's discard pile. Only useable on champions stunned this turn.",
+												  min=0,
+												  max=1,
+												  validTargets = selectLoc(loc(oppPid, discardPloc)).where(isCardChampion()).where(isCardStunned()),
+												  targetEffect = saveTarget("Thrown out bar").seq(moveTarget(sacrificePloc))
+																.seq(createCardEffect(buffCreator, loc(oppPid, buffsPloc)))
+												  }),
+                                            layout = createLayout({
+													name = "Get out of my bar",	
+													art = "art/T_orc",
+													frame = "frames/Generic_CardFrame",
+													xmlText=[[
+<vlayout>
+    <hlayout flexibleheight="1">
+
+        <box flexiblewidth="7">
+            <tmpro text="Set aside a champion you stunned this turn. The next time your opponent shuffles their deck, put that champion on the bottom of their deck." fontsize="18" />
+        </box>
+    </hlayout>
+</vlayout>
+			]]
+        }),
+                                                                                    }
+                                    }
+                                }
+                        ),
 				cost = sacrificeSelfCost
 			})
 		},
         layout = createLayout({
             name = "Get out of my bar",	
             art = "art/T_orc",
+			frame = "frames/Generic_CardFrame",
             xmlText=[[
-			<vlayout>
+<vlayout>
     <hlayout flexibleheight="1">
         <box flexiblewidth="1">
             <tmpro text="{scrap}" fontsize="40"/>
         </box>
         <box flexiblewidth="7">
-            <tmpro text="Sacrifice a champion from opponent's discard pile. Use this ability only on a champion that was stunned this turn." fontsize="22" />
+            <tmpro text="Set aside a champion you stunned this turn. The next time your opponent shuffles their deck, put that champion on the bottom of their deck.
+
+Or draw a card." fontsize="18" />
         </box>
     </hlayout>
 </vlayout>
@@ -4388,14 +4788,21 @@ function setupGame(g)
 			midas_liquid_gold_carddef(),
 			midas_gold_carddef(),
 	choose_brewmaster_carddef(),		
-			brewmaster_mead_carddef()
+			brewmaster_mead_carddef(),
+			brewmaster_get_out_of_my_bar_carddef(),
+			brewmaster_tap_a_keg_carddef(),
+			brewmaster_regular_regulars_carddef(),
+			brewmaster_irregular_regulars_carddef(),
+			brewmaster_serve_the_strong_stuff_carddef(),
+			brewmaster_zaboozer_carddef(),
+			brewmaster_spilled_drink_carddef()
         }
     )
 
     standardSetup(
         g,
         {
-            description = "Lilu Dallas Multi-Class. Multi-class script by Aarkenell and Userkaffe. Classes by Aarkenell, Userkaffe, AgentC13, Filtrophobe, & Zabuza. Updated 01.09.2023.",
+            description = "Lilu Dallas Multi-Class. Multi-class script by Aarkenell and Userkaffe. Classes by Aarkenell, Userkaffe, AgentC13, Filtrophobe, & Zabuza. Updated 06.09.2023.",
              playerOrder = { plid1, plid2 },
         ai = ai.CreateKillSwitchAi(createAggressiveAI(),  createHardAi2()),
         timeoutAi = createTimeoutAi(),
