@@ -34,6 +34,7 @@ function setupGame(g)
                     },
                     hand = {
                         --{ qty = 1, card = wizard_treasure_map_carddef() },
+                        --{ qty = 1, card = ranger_parrot_carddef() },
                         --{ qty = 1, card = influence_carddef() },
                         --{ qty = 1, card = elven_curse_carddef() }
                     },
@@ -57,6 +58,7 @@ function setupGame(g)
                     deck = {
                     },
                     hand = {
+                        --{ qty = 1, card = ranger_parrot_carddef() }
                     },
                     buffs = {
                         drawCardsCountAtTurnEndDef(5),
@@ -74,8 +76,8 @@ end
 
 function setupMeta(meta)
                 meta.name = "knights_of_balance_v1"
-                meta.minLevel = 0
-                meta.maxLevel = 0
+                meta.minLevel = 13
+                meta.maxLevel = 24
                 meta.introbackground = ""
                 meta.introheader = ""
                 meta.introdescription = ""
@@ -247,7 +249,9 @@ function ranger_parrot_carddef()
                 id = "ranger_parrot_discarded",
                 trigger = onDiscardTrigger,
                 activations = multipleActivations,
-                effect = drawCardsEffect(1)
+                effect = ifElseEffect(getPlayerDamageReceivedThisTurn(currentPid).eq(getPlayerDamageReceivedThisTurn(ownerPid)),
+                                        drawCardsEffect(1),
+                                        createCardEffect(parrotDrawBuff(), oppBuff()).seq(simpleMessageEffect("Drawing a card next turn."))) 
             }),
             createAbility({
                 id = "ranger_parrot_killed",
@@ -339,8 +343,8 @@ function wizard_treasure_map_carddef()
                                                                  }).seq(removeSlotFromPlayerEffect(currentPid, "mapNecro")),                
                                                 layout = layoutCard({
                                                     title = "Necros",
-                                                    art = "art/t_the_rot",
-                                                    text = "Scrap a card",
+                                                    art = "art/treasures/t_treasure_map",
+                                                    text = "<sprite name=\"necro\"> Scrap a card",
                                                 }),
                                                 condition = hasPlayerSlot(currentPid, "mapNecro")                         
                                             },
@@ -356,8 +360,8 @@ function wizard_treasure_map_carddef()
                                                                     .seq(removeSlotFromPlayerEffect(currentPid, "mapWild")),              
                                                 layout = layoutCard({
                                                     title = "Wild",
-                                                    art = "art/t_elven_gift",
-                                                    text = "Draw a card and then discard a card.",
+                                                    art = "art/treasures/t_treasure_map",
+                                                    text = "<sprite name=\"wild\"> Draw a card, then discard a card.",
                                                 }),
                                                 condition = hasPlayerSlot(currentPid, "mapWild")
                                             }
