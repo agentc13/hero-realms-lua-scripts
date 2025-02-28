@@ -58,7 +58,7 @@ function setupGame(g)
                     deck = {
                     },
                     hand = {
-                        --{ qty = 1, card = ranger_parrot_carddef() }
+                        --{ qty = 1, card = cleric_redeemed_ruinos_carddef() }
                     },
                     buffs = {
                         drawCardsCountAtTurnEndDef(5),
@@ -158,6 +158,7 @@ function cleric_redeemed_ruinos_carddef()
         layout = cardLayout,
         factions = {},
         types = { championType, noStealType, humanType, clericType, noKillType},
+        tags = {noAttackButtonTag},
         abilities = {
             createAbility({
                 id = "cleric_redeemed_ruinos",
@@ -237,6 +238,7 @@ function ranger_parrot_carddef()
         layout = cardLayout,
         factions = {},
         types = { championType, rangerType, reserveType, noKillType, parrotType},
+        tags = {noAttackButtonTag},
         abilities = {
             createAbility({
                 id = "ranger_parrot",
