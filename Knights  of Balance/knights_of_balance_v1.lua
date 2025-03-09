@@ -37,6 +37,7 @@ function setupGame(g)
                         --{ qty = 1, card = ranger_parrot_carddef() },
                         --{ qty = 1, card = influence_carddef() },
                         --{ qty = 1, card = elven_curse_carddef() }
+                        --{ qty = 1, card =  barbarian_plunder_carddef() }
                     },
                     buffs = {
                         drawCardsCountAtTurnEndDef(5),
@@ -496,6 +497,7 @@ function barbarian_plunder_carddef()
                         </hlayout>
                     </vlayout>]]
     })
+    --
     return createActionDef({
         id = "barbarian_plunder",
         name = "Plunder",
@@ -509,28 +511,22 @@ function barbarian_plunder_carddef()
                 trigger = autoTrigger,
                 activations = sigleActivations,
                 cost = noCost,
-                check = hasPlayerSlot(currentPid, berserkSlotKey).invert(),
-                effect = pushTargetedEffect({
-                                desc="Acquire a card for free.",
-                                min=0,
-                                max=1,
-                                validTargets = selectLoc(centerRowLoc).union(selectLoc(fireGemsLoc)).where(isCardAcquirable().And(getCardCost().lte(2))),
-                                targetEffect = acquireForFreeTarget(),
-                            }),
-            }),
-            createAbility({
-                id = "barbarian_plunder_rage",
-                trigger = autoTrigger,
-                activations = sigleActivations,
-                cost = noCost,
-                check = hasPlayerSlot(currentPid, berserkSlotKey),
-                effect = pushTargetedEffect({
-                    desc="Acquire a card for free.",
-                    min=0,
-                    max=1,
-                    validTargets = selectLoc(centerRowLoc).union(selectLoc(fireGemsLoc)).where(isCardAcquirable().And(getCardCost().lte(3))),
-                    targetEffect = acquireForFreeTarget(),
-                }),
+                effect = ifElseEffect(hasPlayerSlot(currentPid, berserkSlotKey),
+                                pushTargetedEffect({
+                                    desc="Acquire a card for free.",
+                                    min=0,
+                                    max=1,
+                                    validTargets = selectLoc(centerRowLoc).union(selectLoc(fireGemsLoc)).where(isCardAcquirable().And(getCardCost().lte(3))),
+                                    targetEffect = acquireForFreeTarget(),
+                                }),
+                                pushTargetedEffect({
+                                    desc="Acquire a card for free.",
+                                    min=0,
+                                    max=1,
+                                    validTargets = selectLoc(centerRowLoc).union(selectLoc(fireGemsLoc)).where(isCardAcquirable().And(getCardCost().lte(2))),
+                                    targetEffect = acquireForFreeTarget(),
+                                })
+                            )              
             }),
         }
     })
