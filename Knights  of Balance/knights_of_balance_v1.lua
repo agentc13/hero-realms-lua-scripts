@@ -33,12 +33,14 @@ function setupGame(g)
                     deck = {
                     },
                     hand = {
-                        --{ qty = 1, card = wizard_treasure_map_carddef() },
-                        --{ qty = 1, card = ranger_parrot_carddef() },
-                        --{ qty = 1, card = influence_carddef() },
-                        --{ qty = 1, card = elven_curse_carddef() }
-                        --{ qty = 1, card =  barbarian_plunder_carddef() }
+                        --{ qty = 1, card = ranger_light_crossbow_carddef() },
+                        --{ qty = 1, card = ranger_honed_black_arrow_carddef() },
+                        --{ qty = 1, card = cleric_follower_b_carddef() },
+                        --{ qty = 1, card = cleric_brightstar_shield_carddef() },
                     },
+                      skills = {
+                        --{ qty = 1, card = thief_silent_boots_carddef() },
+                      },
                     buffs = {
                         drawCardsCountAtTurnEndDef(5),
                         discardCardsAtTurnStartDef(),
@@ -101,7 +103,7 @@ function fighter_rallying_flag_carddef()
         types = { championType, humanType, fighterType },
         xmlText = [[<vlayout>
                         <box flexibleheight="1">
-                            <tmpro text="{gold_1}   {combat_1}" fontsize="52"/>
+                            <tmpro text="{gold_2}   {combat_1}" fontsize="60"/>
                         </box>
                     </vlayout>]]
     })
@@ -120,7 +122,7 @@ function fighter_rallying_flag_carddef()
                 trigger = autoTrigger,
                 activations = multipleActivations,
                 cost = expendCost,
-                effect = gainCombatEffect(1).seq(gainGoldEffect(1))
+                effect = gainCombatEffect(1).seq(gainGoldEffect(2))
             }),
         }
     })
@@ -198,94 +200,94 @@ function ruinosDrawBuff()
     })
     end
 --=========================================
-function ranger_parrot_carddef()
-    local cardLayout = createLayout({
-        name = "Parrot",
-        art = "art/treasures/t_parrot",
-        frame = "frames/Ranger_CardFrame",
-        cardTypeLabel = "Champion",
-        isGuard = false,
-        health = 1,
-        types = { championType, rangerType, reserveType, noKillType,  parrotType},
-        xmlText = [[<vlayout>
-                    <hlayout flexibleheight="1.8">
-                    <box flexiblewidth="1">
-                    <tmpro text="{expend}" fontsize="42"/>
-                    </box>
-                    <vlayout flexiblewidth="7">
-                    <box flexibleheight="0.5">
-                    <tmpro text="Reserve  1" fontsize="18" />
-                    </box>
-                    <box flexibleheight="1">
-                    <tmpro text="{gold_2}  {combat_1}" fontsize="50" />
-                    </box>
-                    </vlayout>
-                    </hlayout>
-                    <divider/>
-                    <hlayout flexibleheight="1">
-                    <box flexiblewidth="7">
-                    <tmpro text="When this card enters your discard pile (except end of turn) draw a card." fontsize="16" />
-                    </box>
-                    </hlayout>
-                    </vlayout>
-                    ]]
-    })
-    return createChampionDef({
-        id = "ranger_parrot",
-        name = "Parrot",
-        acquireCost = 0,
-        health = 1,
-        isGuard = false,
-        layout = cardLayout,
-        factions = {},
-        types = { championType, rangerType, reserveType, noKillType, parrotType},
-        tags = {noAttackButtonTag},
-        abilities = {
-            createAbility({
-                id = "ranger_parrot",
-                trigger = autoTrigger,
-                activations = multipleActivations,
-                cost = expendCost,
-                effect = gainGoldEffect(2).seq(gainCombatEffect(1))
-            }),
-            createAbility({
-                id = "ranger_parrot_discarded",
-                trigger = onDiscardTrigger,
-                activations = multipleActivations,
-                effect = ifElseEffect(getPlayerDamageReceivedThisTurn(currentPid).eq(getPlayerDamageReceivedThisTurn(ownerPid)),
-                                        drawCardsEffect(1),
-                                        createCardEffect(parrotDrawBuff(), oppBuff()).seq(simpleMessageEffect("Drawing a card next turn."))) 
-            }),
-            createAbility({
-                id = "ranger_parrot_killed",
-                trigger = onLeavePlayTrigger,
-                activations = multipleActivations,
-                effect = createCardEffect(parrotDrawBuff(), oppBuff()).seq(simpleMessageEffect("Drawing a card next turn."))
-            })
-        }
-    })
-end   
+-- function ranger_parrot_carddef()
+--     local cardLayout = createLayout({
+--         name = "Parrot",
+--         art = "art/treasures/t_parrot",
+--         frame = "frames/Ranger_CardFrame",
+--         cardTypeLabel = "Champion",
+--         isGuard = false,
+--         health = 1,
+--         types = { championType, rangerType, reserveType, noKillType,  parrotType},
+--         xmlText = [[<vlayout>
+--                     <hlayout flexibleheight="1.8">
+--                     <box flexiblewidth="1">
+--                     <tmpro text="{expend}" fontsize="42"/>
+--                     </box>
+--                     <vlayout flexiblewidth="7">
+--                     <box flexibleheight="0.5">
+--                     <tmpro text="Reserve  1" fontsize="18" />
+--                     </box>
+--                     <box flexibleheight="1">
+--                     <tmpro text="{gold_2}  {combat_1}" fontsize="50" />
+--                     </box>
+--                     </vlayout>
+--                     </hlayout>
+--                     <divider/>
+--                     <hlayout flexibleheight="1">
+--                     <box flexiblewidth="7">
+--                     <tmpro text="When this card enters your discard pile (except end of turn) draw a card." fontsize="16" />
+--                     </box>
+--                     </hlayout>
+--                     </vlayout>
+--                     ]]
+--     })
+--     return createChampionDef({
+--         id = "ranger_parrot",
+--         name = "Parrot",
+--         acquireCost = 0,
+--         health = 1,
+--         isGuard = false,
+--         layout = cardLayout,
+--         factions = {},
+--         types = { championType, rangerType, reserveType, noKillType, parrotType},
+--         tags = {noAttackButtonTag},
+--         abilities = {
+--             createAbility({
+--                 id = "ranger_parrot",
+--                 trigger = autoTrigger,
+--                 activations = multipleActivations,
+--                 cost = expendCost,
+--                 effect = gainGoldEffect(2).seq(gainCombatEffect(1))
+--             }),
+--             createAbility({
+--                 id = "ranger_parrot_discarded",
+--                 trigger = onDiscardTrigger,
+--                 activations = multipleActivations,
+--                 effect = ifElseEffect(getPlayerDamageReceivedThisTurn(currentPid).eq(getPlayerDamageReceivedThisTurn(ownerPid)),
+--                                         drawCardsEffect(1),
+--                                         createCardEffect(parrotDrawBuff(), oppBuff()).seq(simpleMessageEffect("Drawing a card next turn."))) 
+--             }),
+--             createAbility({
+--                 id = "ranger_parrot_killed",
+--                 trigger = onLeavePlayTrigger,
+--                 activations = multipleActivations,
+--                 effect = createCardEffect(parrotDrawBuff(), oppBuff()).seq(simpleMessageEffect("Drawing a card next turn."))
+--             })
+--         }
+--     })
+-- end   
 
-function parrotDrawBuff()
-    return createGlobalBuff({
-        id="ranger_parrot_stunned",
-        name="Parrot Draw",
-        abilities = {
-            createAbility({
-                id = "parrot_draw",
-                triggerPriority = 10,
-                trigger = startOfTurnTrigger,
-                cost = sacrificeSelfCost,
-                effect = drawCardsEffect(1)
-            }),
-        },
-        buffDetails = createBuffDetails({
-            name = "Parrot",
-            art = "art/treasures/t_parrot",
-            text = "Draw a card."
-        })
-    })
-    end
+-- function parrotDrawBuff()
+--     return createGlobalBuff({
+--         id="ranger_parrot_stunned",
+--         name="Parrot Draw",
+--         abilities = {
+--             createAbility({
+--                 id = "parrot_draw",
+--                 triggerPriority = 10,
+--                 trigger = startOfTurnTrigger,
+--                 cost = sacrificeSelfCost,
+--                 effect = drawCardsEffect(1)
+--             }),
+--         },
+--         buffDetails = createBuffDetails({
+--             name = "Parrot",
+--             art = "art/treasures/t_parrot",
+--             text = "Draw a card."
+--         })
+--     })
+--     end
 --=========================================
 function wizard_treasure_map_carddef()
     local cardLayout = createLayout({
@@ -532,3 +534,202 @@ function barbarian_plunder_carddef()
     })
 end
 --=========================================
+function ranger_honed_black_arrow_carddef()
+    local cardLayout = createLayout({
+        name = "Honed Black Arrow",
+        art = "art/t_ranger_honed_black_arrow",
+        frame = "frames/Ranger_CardFrame",
+        cardTypeLabel = "Item",
+        xmlText =[[<vlayout>
+                    <hlayout flexibleheight="2">
+                            <tmpro text="&lt;space=-0.3em/&gt;{combat_4}" fontsize="60" flexiblewidth="8" />
+                    </hlayout>
+                    <hlayout flexibleheight="3">
+                            <tmpro text="If you have a bow in play, Draw a card." fontsize="28" flexiblewidth="1" />
+                    </hlayout>
+                </vlayout>]]
+    })
+    --
+    local bowInPlay = selectLoc(loc(currentPid, castPloc)).where(isCardType(bowType)).count()
+    --
+    return createItemDef({
+        id = "ranger_honed_black_arrow",
+        name = "Honed Black Arrow",
+        acquireCost = 0,
+        cardTypeLabel = "Item",
+        types = { itemType, noStealType, rangerType, arrowType},
+        factions = {},
+        layout = cardLayout,
+        playLocation = castPloc,
+            abilities = {
+                createAbility({
+                    id = "honedMain",
+                    trigger = autoTrigger,
+                    playAllType = blockPlayType,
+                    check = bowInPlay.gte(1),
+                    effect = gainCombatEffect(4).seq(drawCardsEffect(1))
+                }),
+                createAbility({
+                    id = "honedSlot",
+                    trigger = autoTrigger,
+                    playAllType = blockPlayType,
+                    check = bowInPlay.eq(0),
+                    effect = gainCombatEffect(4).seq(addSlotToPlayerEffect(currentPid, createPlayerSlot({ key = "bowPlayedSlot", expiry = { endOfTurnExpiry } })))
+                }),
+                createAbility({
+                    id = "honedDraw",
+                    trigger = onPlayTrigger,
+                    activations = multipleActivations,
+                    effect = ifElseEffect(hasPlayerSlot(currentPid, "bowPlayedSlot").And(bowInPlay.gte(1)),
+                                            drawCardsEffect(1),
+                                            nullEffect()) 
+                })
+                },
+    })
+end
+
+--=========================================
+function cleric_brightstar_shield_carddef()
+    local cardLayout = createLayout({
+        name = "Brightstar Shield",
+        art = "art/t_cleric_brightstar_shield",
+        frame = "frames/Cleric_CardFrame",
+        cardTypeLabel = "Item",
+        xmlText =[[<vlayout>
+                    <hlayout flexibleheight="3">
+                            <tmpro text="Draw 1.&lt;br&gt; Attach this to a friendly champion.&lt;br&gt;Prepare it and it has +2 {shield}." fontsize="20" flexiblewidth="1" />
+                    </hlayout>
+                </vlayout>]]
+    })
+    --
+    return createItemDef({
+        id = "cleric_brightstar_shield",
+        name = "Brightstar Shield",
+        acquireCost = 0,
+        cardTypeLabel = "Item",
+        types = { itemType, noStealType, clericType, attachmentType},
+        factions = {},
+        layout = cardLayout,
+        playLocation = castPloc,
+            abilities = {
+                createAbility({
+                    id = "brightMain",
+                    trigger = autoTrigger,
+                    playAllType = blockPlayType,
+                    effect = drawCardsEffect(1)
+                }),
+                createAbility({
+                    id = "brightAttachmentOne",
+                    trigger = autoTrigger,
+                    playAllType = blockPlayType,
+                    check = selectLoc(loc(currentPid,inPlayPloc)).where(isCardChampion()).count().eq(1),
+                    effect = prepareTarget().apply(selectLoc(loc(currentPid,inPlayPloc)))
+                                .seq(grantHealthTarget(2, { SlotExpireEnum.LeavesPlay }, moveTarget(loc(oppPid, discardPloc)).apply(selectLoc(loc(oppPid, asidePloc))), "shield").apply(selectLoc(loc(currentPid,inPlayPloc))))
+                                .seq(moveTarget(asidePloc).apply(selectLoc(loc(currentPid, castPloc)).where(isCardName("cleric_brightstar_shield"))))
+                }),
+                createAbility({
+                    id = "brightAttachmentTwo",
+                    trigger = autoTrigger,
+                    playAllType = blockPlayType,
+                    check = selectLoc(loc(currentPid,inPlayPloc)).where(isCardChampion()).count().gte(2),
+                    effect = pushTargetedEffect({
+                                    desc="Choose a champion to prepare and gain +2 defense from brightstar shield",
+                                    min=1,
+                                    max=1,
+                                    validTargets = selectLoc(loc(currentPid,inPlayPloc)).where(isCardChampion()),
+                                    targetEffect = prepareTarget().seq(grantHealthTarget(2, { SlotExpireEnum.LeavesPlay }, moveTarget(loc(oppPid, discardPloc)).apply(selectLoc(loc(oppPid, asidePloc))), "shield")),
+                                })
+                                .seq(moveTarget(asidePloc).apply(selectLoc(loc(currentPid, castPloc)).where(isCardName("cleric_brightstar_shield"))))
+                })
+                },
+    })
+end
+
+--=========================================
+function thief_silent_boots_carddef()
+    --
+    local cardLayout = createLayout({
+						name = "Silent Boots",
+						art = "art/t_thief_silent_boots",
+						frame = "frames/Thief_armor_frame",
+						xmlText = [[<vlayout>
+                                    <hlayout flexibleheight="1">
+                                        <box flexiblewidth="1.5">
+                                            <tmpro text="{requiresHealth_10}" fontsize="72"/>
+                                        </box>
+                                        <box flexiblewidth="7">
+                                            <tmpro text="Reveal the top two cards from the market deck. Sacrifice one, you may acquire the other for &lt;br&gt;1 {gold} less or put it back." fontsize="20" />
+                                        </box>
+                                    </hlayout>
+                                </vlayout>]]
+    })
+    --
+    local cardLayoutBuy = createLayout({
+                                    name = "Silent Boots",
+                                    art = "art/t_thief_silent_boots",
+                                    frame = "frames/Thief_armor_frame",
+                                    xmlText = [[<vlayout>
+                                                    <hlayout flexibleheight="1">
+                                                        <box flexiblewidth="7">
+                                                            <tmpro text="Acquire for 1 {gold} less." fontsize="26" />
+                                                        </box>
+                                                    </hlayout>
+                                                </vlayout>]]
+                            })
+    --
+    local cardLayoutTopDeck = createLayout({
+                                    name = "Silent Boots",
+                                    art = "art/t_thief_silent_boots",
+                                    frame = "frames/Thief_armor_frame",
+                                    xmlText = [[<vlayout>
+                                                    <hlayout flexibleheight="1">
+                                                        <box flexiblewidth="7">
+                                                            <tmpro text="Put it back on the top the market deck." fontsize="26" />
+                                                        </box>
+                                                    </hlayout>
+                                                </vlayout>]]
+                                })
+    --                            
+    local effReveal =  noUndoEffect().seq(moveTarget(currentRevealLoc).apply(selectLoc(tradeDeckLoc).take(2).reverse())
+                            .seq(pushTargetedEffect({
+                                    desc="Select one card to Sacrifice. The other card may be aquired for 1 less or put back on top of the market deck.",
+                                    min = 1,
+                                    max = 1,
+                                    validTargets = selectLoc(currentRevealLoc),
+                                    targetEffect = sacrificeTarget(),
+                                })))
+        --
+    local checkSelector = selectLoc(currentRevealLoc).Where(isCardAcquirable().And(getCardCost().lte(getPlayerGold(currentPid).add(toIntExpression(1)))))
+    --
+    local effTopOrBuy = noUndoEffect().seq(pushChoiceEffect({
+                                choices={
+                                    {
+                                        effect = acquireTarget(1,discardPloc).apply(selectLoc(currentRevealLoc)),
+                                        layout = cardLayoutBuy,
+                                        condition = checkSelector.count().gte(1),                      
+                                    },
+                                    {
+                                        effect = moveTarget(tradeDeckLoc).apply(selectLoc(currentRevealLoc)),            
+                                        layout = cardLayoutTopDeck,
+                                    }
+                                }
+                            }))
+    --
+    return createMagicArmorDef({
+        id = "thief_silent_boots",
+        name = "Silent Boots",
+        types = { magicArmorType, thiefType, feetType, treasureType },
+        layout = cardLayout,
+        abilities = {
+            createAbility({
+                id = "triggerBoots",
+				trigger = uiTrigger,
+                layout = cardLayout,
+				promptType = showPrompt,
+                check =  minHealthCurrent(10),
+                effect = noUndoEffect().seq(effTopOrBuy).seq(effReveal),
+        }),
+    },
+		layoutPath = "icons/thief_silent_boots"
+    })
+end
