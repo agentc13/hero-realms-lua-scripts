@@ -35,7 +35,7 @@ function setupGame(g)
                     hand = {
                         --{ qty = 1, card = ranger_light_crossbow_carddef() },
                         --{ qty = 1, card = ranger_honed_black_arrow_carddef() },
-                        --{ qty = 1, card = cleric_follower_b_carddef() },
+                        --{ qty = 2, card = cleric_follower_b_carddef() },
                         --{ qty = 1, card = cleric_brightstar_shield_carddef() },
                     },
                       skills = {
@@ -602,6 +602,21 @@ function cleric_brightstar_shield_carddef()
                 </vlayout>]]
     })
     --
+    local  oneChamp =  prepareTarget().apply(selectLoc(loc(currentPid,inPlayPloc)))
+                        .seq(grantHealthTarget(2, { SlotExpireEnum.LeavesPlay }, moveTarget(loc(oppPid, discardPloc)).apply(selectLoc(loc(oppPid, asidePloc))), "shield").apply(selectLoc(loc(currentPid,inPlayPloc))))
+                        .seq(moveTarget(asidePloc).apply(selectLoc(loc(currentPid, castPloc)).where(isCardName("cleric_brightstar_shield"))))
+    --
+    local  multiChamp = pushTargetedEffect({
+                            desc="Choose a champion to prepare and gain +2 defense from brightstar shield",
+                            min=1,
+                            max=1,
+                            validTargets = selectLoc(loc(currentPid,inPlayPloc)).where(isCardChampion()),
+                            targetEffect = prepareTarget().seq(grantHealthTarget(2, { SlotExpireEnum.LeavesPlay }, moveTarget(loc(oppPid, discardPloc)).apply(selectLoc(loc(oppPid, asidePloc))), "shield")),
+                        })
+                        .seq(moveTarget(asidePloc).apply(selectLoc(loc(currentPid, castPloc)).where(isCardName("cleric_brightstar_shield"))))
+    --
+    local numChamps =  selectLoc(loc(currentPid,inPlayPloc)).where(isCardChampion()).count()
+    --
     return createItemDef({
         id = "cleric_brightstar_shield",
         name = "Brightstar Shield",
@@ -616,31 +631,12 @@ function cleric_brightstar_shield_carddef()
                     id = "brightMain",
                     trigger = autoTrigger,
                     playAllType = blockPlayType,
-                    effect = drawCardsEffect(1)
+                    effect = drawCardsEffect(1).seq(ifElseEffect(numChamps.eq(0),
+                                                        nullEffect(),
+                                                        ifElseEffect(numChamps.eq(1),
+                                                        oneChamp,
+                                                        multiChamp)))
                 }),
-                createAbility({
-                    id = "brightAttachmentOne",
-                    trigger = autoTrigger,
-                    playAllType = blockPlayType,
-                    check = selectLoc(loc(currentPid,inPlayPloc)).where(isCardChampion()).count().eq(1),
-                    effect = prepareTarget().apply(selectLoc(loc(currentPid,inPlayPloc)))
-                                .seq(grantHealthTarget(2, { SlotExpireEnum.LeavesPlay }, moveTarget(loc(oppPid, discardPloc)).apply(selectLoc(loc(oppPid, asidePloc))), "shield").apply(selectLoc(loc(currentPid,inPlayPloc))))
-                                .seq(moveTarget(asidePloc).apply(selectLoc(loc(currentPid, castPloc)).where(isCardName("cleric_brightstar_shield"))))
-                }),
-                createAbility({
-                    id = "brightAttachmentTwo",
-                    trigger = autoTrigger,
-                    playAllType = blockPlayType,
-                    check = selectLoc(loc(currentPid,inPlayPloc)).where(isCardChampion()).count().gte(2),
-                    effect = pushTargetedEffect({
-                                    desc="Choose a champion to prepare and gain +2 defense from brightstar shield",
-                                    min=1,
-                                    max=1,
-                                    validTargets = selectLoc(loc(currentPid,inPlayPloc)).where(isCardChampion()),
-                                    targetEffect = prepareTarget().seq(grantHealthTarget(2, { SlotExpireEnum.LeavesPlay }, moveTarget(loc(oppPid, discardPloc)).apply(selectLoc(loc(oppPid, asidePloc))), "shield")),
-                                })
-                                .seq(moveTarget(asidePloc).apply(selectLoc(loc(currentPid, castPloc)).where(isCardName("cleric_brightstar_shield"))))
-                })
                 },
     })
 end
