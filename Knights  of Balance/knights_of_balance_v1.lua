@@ -38,9 +38,16 @@ function setupGame(g)
                         --{ qty = 2, card = cleric_follower_b_carddef() },
                         --{ qty = 1, card = cleric_brightstar_shield_carddef() },
                     },
-                      skills = {
-                        --{ qty = 1, card = thief_silent_boots_carddef() },
-                      },
+                    discard = {
+                        -- { qty = 2, card = torgen_rocksplitter_carddef() },
+                        -- { qty = 2, card = cleric_follower_b_carddef() },
+                        -- { qty = 1, card = cleric_follower_a_carddef() },
+                        -- { qty = 1, card = cleric_veteran_follower_carddef() },
+                        -- { qty = 1, card = cleric_redeemed_ruinos_carddef() },
+                    },
+                    skills = {
+                        --{ qty = 1, card = cleric_shining_breastplate_carddef() },
+                    },
                     buffs = {
                         drawCardsCountAtTurnEndDef(5),
                         discardCardsAtTurnStartDef(),
@@ -57,11 +64,22 @@ function setupGame(g)
                 },
                 cards = {
                     reserve = {
+                        --{ qty = 1, card = wizard_treasure_map_carddef() }
+                        --{ qty = 1, card = ranger_parrot_carddef() }
                     },
                     deck = {
                     },
                     hand = {
-                        --{ qty = 1, card = cleric_redeemed_ruinos_carddef() }
+                        --{ qty = 1, card = ranger_light_crossbow_carddef() },
+                        --{ qty = 1, card = ranger_honed_black_arrow_carddef() },
+                        --{ qty = 2, card = cleric_follower_b_carddef() },
+                        --{ qty = 1, card = cleric_brightstar_shield_carddef() },
+                    },
+                    discard = {
+                        --{ qty = 2, card = cleric_follower_b_carddef() },
+                    },
+                    skills = {
+                        --{ qty = 1, card = cleric_shining_breastplate_carddef() },
                     },
                     buffs = {
                         drawCardsCountAtTurnEndDef(5),
@@ -640,6 +658,58 @@ function cleric_brightstar_shield_carddef()
                 },
     })
 end
+
+--=========================================
+function cleric_shining_breastplate_carddef()
+    local cardLayout = createLayout({
+        name = "Shining Breastplate",
+        art = "art/t_cleric_shining_breastplate",
+        frame = "frames/Cleric_CardFrame",
+        cardTypeLabel = "Magical Armor",
+        xmlText =[[<vlayout>
+                        <hlayout flexibleheight="1">
+                            <box flexiblewidth="1">
+                                <tmpro text="{requiresHealth_10}" fontsize="72"/>
+                            </box>
+                            <box flexiblewidth="7">
+                                <tmpro text="Put a champion without a cost from your discard into play." fontsize="28" />
+                            </box>
+                        </hlayout>
+                    </vlayout>]]
+    })
+    local noCostChamps = selectLoc(loc(currentPid, discardPloc)).where(isCardChampion().And(getCardCost().eq(0)))
+    --
+    return createMagicArmorDef({
+        id = "cleric_shining_breastplate",
+        name = "Shining Breastplate",
+        types = {clericType, magicArmorType, treasureType, chestType},
+        layout = cardLayout,
+        layoutPath = "icons/cleric_shining_breastplate",
+        abilities = {
+            createAbility( {
+                id = "cleric_shining_breastplate",
+                trigger = uiTrigger,
+                activations = singleActivation,
+                promptType = showPrompt,
+                layout = cardLayout,
+                effect = pushTargetedEffect(
+                    {
+                        desc = "Choose a champion without a cost to put in play",
+                        validTargets = noCostChamps,
+                        min = 0,
+                        max = 1,
+                        targetEffect = moveTarget(currentInPlayLoc),
+                        tags = {toughestTag}                        
+                    }
+                ),
+                cost = expendCost,
+                check = minHealthCurrent(10).And(noCostChamps.count().gte(1))
+            })
+        }        
+    })
+end
+
+
 
 --=========================================
 function thief_silent_boots_carddef()
