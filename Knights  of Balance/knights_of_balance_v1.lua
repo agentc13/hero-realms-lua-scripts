@@ -37,7 +37,7 @@ function setupGame(g)
                         --{ qty = 1, card = ranger_honed_black_arrow_carddef() },
                         --{ qty = 2, card = cleric_follower_b_carddef() },
                         --{ qty = 2, card = cleric_imperial_sailor_carddef() },
-                        {-- qty = 1, card = cleric_brightstar_shield_carddef() },
+                        --{ qty = 1, card = cleric_brightstar_shield_carddef() },
                     },
                     discard = {
                         -- { qty = 2, card = torgen_rocksplitter_carddef() },
