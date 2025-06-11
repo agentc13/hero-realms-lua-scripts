@@ -33,7 +33,7 @@ function setupGame(g)
                     deck = {
                     },
                     hand = {
-                        --{ qty = 1, card = ranger_light_crossbow_carddef() },
+                        --{ qty = 1, card = thief_enchanted_garrote_carddef() },
                         --{ qty = 1, card = ranger_honed_black_arrow_carddef() },
                         --{ qty = 2, card = cleric_follower_b_carddef() },
                         --{ qty = 2, card = cleric_imperial_sailor_carddef() },
@@ -803,5 +803,58 @@ function thief_silent_boots_carddef()
         }),
     },
 		layoutPath = "icons/thief_silent_boots"
+    })
+end
+
+--=========================================
+function thief_enchanted_garrote_carddef()
+    local cardLayout = createLayout({
+        name = "Enchanted Garrote",
+        art = "art/t_thief_enchanted_garrote",
+        frame = "frames/Thief_CardFrame",
+        cardTypeLabel = "Item",
+        xmlText =[[<vlayout>
+                    <hlayout flexibleheight="2.5">
+                            <tmpro text="&lt;space=0.2em/&gt;{combat_1} {gold_1}" fontsize="50" flexiblewidth="8" />
+                    </hlayout>
+                    <hlayout flexibleheight="4">
+                            <tmpro text="If you stun a champion this turn, gain {gold_1}" fontsize="20" flexiblewidth="1" />
+                    </hlayout>
+                </vlayout>]]
+    })
+    --
+    local stunnedChamps = selectLoc(loc(oppPid, discardPloc)).where(isCardStunned()).count()
+    --
+    return createItemDef({
+        id = "thief_enchanted_garrote",
+        name = "Enchanted Garrote",
+        acquireCost = 0,
+        cardTypeLabel = "Item",
+        types = { itemType, noStealType, thiefType, garoteType, weaponType},
+        factions = {},
+        layout = cardLayout,
+        playLocation = castPloc,
+            abilities = {
+                createAbility({
+                    id = "garroteMain",
+                    trigger = autoTrigger,
+                    check = stunnedChamps.eq(0),
+                    effect = gainCombatEffect(1).seq(gainGoldEffect(1)).seq(addSlotToPlayerEffect(currentPid, createPlayerSlot({ key = "champStunnedSlot", expiry = { endOfTurnExpiry } })))
+                }),
+                createAbility({
+                    id = "garroteSlot",
+                    trigger = autoTrigger,
+                    check = hasPlayerSlot(currentPid, "champStunnedSlot").invert().And(stunnedChamps.gte(1)),
+                    effect = gainCombatEffect(1).seq(gainGoldEffect(2))
+                }),
+                createAbility({
+                    id = "garroteStun",
+                    trigger = onStunGlobalTrigger,
+                    activations = singleActivation,
+                    effect = ifElseEffect(hasPlayerSlot(currentPid, "champStunnedSlot").And(stunnedChamps.gte(1)),
+                                            gainGoldEffect(1),
+                                            nullEffect()) 
+                })
+                },
     })
 end
