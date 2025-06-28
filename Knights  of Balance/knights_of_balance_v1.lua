@@ -38,6 +38,7 @@ function setupGame(g)
                         --{ qty = 2, card = cleric_follower_b_carddef() },
                         --{ qty = 2, card = cleric_imperial_sailor_carddef() },
                         --{ qty = 1, card = cleric_brightstar_shield_carddef() },
+                        --{ qty = 1, card = fighter_rallying_flag_carddef() },
                     },
                     discard = {
                         -- { qty = 2, card = torgen_rocksplitter_carddef() },
@@ -47,7 +48,7 @@ function setupGame(g)
                         -- { qty = 1, card = cleric_redeemed_ruinos_carddef() },
                     },
                     skills = {
-                        --{ qty = 1, card = cleric_shining_breastplate_carddef() },
+                        --{ qty = 1, card = fighter_helm_of_fury_carddef() },
                     },
                     buffs = {
                         drawCardsCountAtTurnEndDef(5),
@@ -715,8 +716,6 @@ function cleric_shining_breastplate_carddef()
     })
 end
 
-
-
 --=========================================
 function thief_silent_boots_carddef()
     --
@@ -856,5 +855,61 @@ function thief_enchanted_garrote_carddef()
                                             nullEffect()) 
                 })
                 },
+    })
+end
+
+--=========================================
+function fighter_helm_of_fury_carddef()
+    local cardLayout = createLayout({
+        name = "Helm of Fury",
+        art = "art/t_fighter_helm_of_fury",
+        frame = "frames/Warrior_CardFrame",
+        cardTypeLabel = "Magical Armor",
+        xmlText =[[<vlayout>
+                        <hlayout flexibleheight="1">
+                            <box flexiblewidth="1">
+                                <tmpro text="{requiresHealth_20}" fontsize="72"/>
+                            </box>
+                            <box flexiblewidth="7">
+                                <tmpro text="If you have a guard in play,&lt;br&gt; gain {gold_1} {combat_1}" fontsize="32" />
+                            </box>
+                        </hlayout>
+                </vlayout>
+                    ]]
+    })
+    local guardChamps = selectLoc(loc(currentPid, inPlayPloc)).where(isGuard()).count()
+    --
+    return createMagicArmorDef({
+        id = "fighter_helm_of_fury",
+        name = "Helm of Fury",
+        types = {fighterType, magicArmorType, treasureType, headType},
+        layout = cardLayout,
+        layoutPath = "icons/fighter_helm_of_fury",
+        abilities = {
+                createAbility({
+                    id = "helmGuard",
+                    trigger = autoTrigger,
+                    check = minHealthCurrent(20).And(guardChamps.gte(1)),
+                    effect = gainCombatEffect(1).seq(gainGoldEffect(1))
+                }),
+                createAbility({
+                    id = "helmLateGuard",
+                    trigger = onPlayTrigger,
+                    activations = singleActivation,
+                    check = minHealthCurrent(20),
+                    effect = ifElseEffect(guardChamps.gte(1),
+                                            gainCombatEffect(1).seq(gainGoldEffect(1)),
+                                            nullEffect()) 
+                }),
+                createAbility({
+                    id = "helmHeal",
+                    trigger = gainedHealthTrigger,
+                    activations = singleActivation,
+                    check = minHealthCurrent(20),
+                    effect = ifElseEffect(guardChamps.gte(1),
+                                            gainCombatEffect(1).seq(gainGoldEffect(1)),
+                                            nullEffect()) 
+                })
+        }        
     })
 end
