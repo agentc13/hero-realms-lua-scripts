@@ -878,6 +878,8 @@ function fighter_helm_of_fury_carddef()
                     ]]
     })
     local guardChamps = selectLoc(loc(currentPid, inPlayPloc)).where(isGuard()).count()
+    local disableHelm = disableTarget({ endOfTurnExpiry }).apply(selectLoc(loc(currentPid, skillsPloc)).where(isCardType(magicArmorType)))
+    --local disableHelm = nullEffect()
     --
     return createMagicArmorDef({
         id = "fighter_helm_of_fury",
@@ -890,7 +892,7 @@ function fighter_helm_of_fury_carddef()
                     id = "helmGuard",
                     trigger = autoTrigger,
                     check = minHealthCurrent(20).And(guardChamps.gte(1)),
-                    effect = gainCombatEffect(1).seq(gainGoldEffect(1))
+                    effect = gainCombatEffect(1).seq(gainGoldEffect(1)).seq(disableHelm)
                 }),
                 createAbility({
                     id = "helmLateGuard",
@@ -898,7 +900,7 @@ function fighter_helm_of_fury_carddef()
                     activations = singleActivation,
                     check = minHealthCurrent(20),
                     effect = ifElseEffect(guardChamps.gte(1),
-                                            gainCombatEffect(1).seq(gainGoldEffect(1)),
+                                            gainCombatEffect(1).seq(gainGoldEffect(1)).seq(disableHelm),
                                             nullEffect()) 
                 }),
                 createAbility({
@@ -907,7 +909,7 @@ function fighter_helm_of_fury_carddef()
                     activations = singleActivation,
                     check = minHealthCurrent(20),
                     effect = ifElseEffect(guardChamps.gte(1),
-                                            gainCombatEffect(1).seq(gainGoldEffect(1)),
+                                            gainCombatEffect(1).seq(gainGoldEffect(1)).seq(disableHelm),
                                             nullEffect()) 
                 })
         }        
