@@ -49,6 +49,7 @@ function setupGame(g)
                     },
                     skills = {
                         --{ qty = 1, card = fighter_helm_of_fury_carddef() },
+                        { qty = 1, card = alchemist_spectrum_spectacles_carddef() }
                     },
                     buffs = {
                         drawCardsCountAtTurnEndDef(5),
@@ -913,5 +914,127 @@ function fighter_helm_of_fury_carddef()
                                             nullEffect()) 
                 })
         }        
+    })
+end
+
+--=========================================
+function alchemist_spectrum_spectacles_carddef()
+    local cardLayout = createLayout({
+        name = "Spectrum Spectacles",
+        art = "art/classes/alchemist/spectrum_spectacles",
+        frame = "frames/alchemist_frames/alchemist_skill_cardframe",
+        cardTypeLabel = "Magic Armor",
+        xmlText =[[<vlayout>
+                    <hlayout flexibleheight="1.2">
+                        <box flexiblewidth="2">
+                            <tmpro text="{requiresHealth_30}" fontsize="42"/>
+                        </box>
+                        <box flexiblewidth="3">
+                            <tmpro text="{imperial}" fontsize="32" />
+                        </box>
+                        <box flexiblewidth="3">
+                            <tmpro text="{imperial}" fontsize="32" />
+                        </box>
+                        <box flexiblewidth="13">
+                            <tmpro text="{health_2}" fontsize="32" />
+                        </box>
+                    </hlayout>
+                    <divider/>
+                    <hlayout flexibleheight="1.2">
+                        <box flexiblewidth="2">
+                            <tmpro text="{requiresHealth_30}" fontsize="42"/>
+                        </box>
+                        <box flexiblewidth="3">
+                            <tmpro text="{necro}" fontsize="32" />
+                        </box>
+                        <box flexiblewidth="3">
+                            <tmpro text="{necro}" fontsize="32" />
+                        </box>
+                        <box flexiblewidth="13">
+                            <tmpro text="{combat_2}" fontsize="32" />
+                        </box>
+                    </hlayout>
+                    <divider/>
+                    <hlayout flexibleheight="1.2">
+                        <box flexiblewidth="2">
+                            <tmpro text="{requiresHealth_30}" fontsize="42"/>
+                        </box>
+                        <box flexiblewidth="3">
+                            <tmpro text="{wild}" fontsize="32" />
+                        </box>
+                        <box flexiblewidth="3">
+                            <tmpro text="{wild}" fontsize="32" />
+                        </box>
+                        <box flexiblewidth="13">
+                            <tmpro text="Draw a card, then discard a card" fontsize="16" />
+                        </box>
+                    </hlayout>
+                    <divider/>
+                    <hlayout flexibleheight="1.2">
+                        <box flexiblewidth="2">
+                            <tmpro text="{requiresHealth_30}" fontsize="42"/>
+                        </box>
+                        <box flexiblewidth="3">
+                            <tmpro text="{guild}" fontsize="32" />
+                        </box>
+                        <box flexiblewidth="3">
+                            <tmpro text="{guild}" fontsize="32" />
+                        </box>
+                        <box flexiblewidth="13">
+                            <tmpro text="{gold_1}" fontsize="32" />
+                        </box>
+                    </hlayout>
+                </vlayout>]]
+    })
+    --
+    return createMagicArmorDef({
+        id = "alchemist_spectrum_spectacles",
+        name = "Spectrum Spectacles",
+        acquireCost = 0,
+        cardTypeLabel = "Magic Armor",
+        types = { magicArmorType, noStealType, alchemistType},
+        factions = {},
+        layout = cardLayout,
+        playLocation = castPloc,
+            abilities = {     
+                createAbility({
+                    id = "impMain",
+                    trigger = autoTrigger,
+                    tags = {allyTag},
+                    allyFactions = { imperialFaction, imperialFaction },
+                    check = minHealthCurrent(30),
+                    effect = gainHealthEffect(2)
+                }),
+                createAbility({
+                    id = "necrosMain",
+                    trigger = autoTrigger,
+                    tags = {allyTag},
+                    allyFactions = {necrosFaction,necrosFaction},
+                    check = minHealthCurrent(30),
+                    effect = gainCombatEffect(2)
+                }),
+                createAbility({
+                    id = "wildMain",
+                    trigger = uiTrigger,
+                    tags = {allyTag},
+                    allyFactions = {wildFaction,wildFaction},
+                    check = minHealthCurrent(30),
+                    effect = drawCardsEffect(1).seq(pushTargetedEffect({
+                                                desc = "Discard a card.",
+                                                min = 1,
+                                                max = 1,
+                                                validTargets = selectLoc(loc(currentPid, handPloc)),
+                                                targetEffect = discardTarget(),
+                                                }))                    
+                }),
+                 createAbility({
+                    id = "guildMain",
+                    trigger = autoTrigger,
+                    tags = {allyTag},
+                    allyFactions = {guildFaction,guildFaction},
+                    check = minHealthCurrent(30),
+                    effect = gainGoldEffect(1)
+                }),
+            }
     })
 end
