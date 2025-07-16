@@ -39,6 +39,7 @@ function setupGame(g)
                         --{ qty = 2, card = cleric_imperial_sailor_carddef() },
                         --{ qty = 1, card = cleric_brightstar_shield_carddef() },
                         --{ qty = 1, card = fighter_rallying_flag_carddef() },
+                        --{ qty = 1, card = barbarian_disorienting_headbutt_carddef() },
                     },
                     discard = {
                         -- { qty = 2, card = torgen_rocksplitter_carddef() },
@@ -49,7 +50,7 @@ function setupGame(g)
                     },
                     skills = {
                         --{ qty = 1, card = fighter_helm_of_fury_carddef() },
-                        { qty = 1, card = alchemist_spectrum_spectacles_carddef() }
+                        --{ qty = 1, card = alchemist_spectrum_spectacles_carddef() }
                     },
                     buffs = {
                         drawCardsCountAtTurnEndDef(5),
@@ -764,7 +765,7 @@ function thief_silent_boots_carddef()
     --                            
     local effReveal =  noUndoEffect().seq(moveTarget(currentRevealLoc).apply(selectLoc(tradeDeckLoc).take(2).reverse())
                             .seq(pushTargetedEffect({
-                                    desc="Select one card to Sacrifice. The other card may be aquired for 1 less or put back on top of the market deck.",
+                                    desc="Select one card to Sacrifice. The other card may be acquired for 1 less or put back on top of the market deck.",
                                     min = 1,
                                     max = 1,
                                     validTargets = selectLoc(currentRevealLoc),
@@ -925,14 +926,14 @@ function alchemist_spectrum_spectacles_carddef()
         frame = "frames/alchemist_frames/alchemist_skill_cardframe",
         cardTypeLabel = "Magic Armor",
         xmlText =[[<vlayout>
-                    <hlayout flexibleheight="1.2">
+                    <hlayout flexibleheight="10">
                         <box flexiblewidth="2">
-                            <tmpro text="{requiresHealth_30}" fontsize="42"/>
+                            <tmpro text="{requiresHealth_30}" fontsize="32"/>
                         </box>
-                        <box flexiblewidth="3">
+                        <box flexiblewidth="2">
                             <tmpro text="{imperial}" fontsize="32" />
                         </box>
-                        <box flexiblewidth="3">
+                        <box flexiblewidth="1.5">
                             <tmpro text="{imperial}" fontsize="32" />
                         </box>
                         <box flexiblewidth="13">
@@ -940,14 +941,14 @@ function alchemist_spectrum_spectacles_carddef()
                         </box>
                     </hlayout>
                     <divider/>
-                    <hlayout flexibleheight="1.2">
+                    <hlayout flexibleheight="10">
                         <box flexiblewidth="2">
-                            <tmpro text="{requiresHealth_30}" fontsize="42"/>
+                            <tmpro text="{requiresHealth_30}" fontsize="32"/>
                         </box>
-                        <box flexiblewidth="3">
+                        <box flexiblewidth="2">
                             <tmpro text="{necro}" fontsize="32" />
                         </box>
-                        <box flexiblewidth="3">
+                        <box flexiblewidth="1.5">
                             <tmpro text="{necro}" fontsize="32" />
                         </box>
                         <box flexiblewidth="13">
@@ -955,29 +956,29 @@ function alchemist_spectrum_spectacles_carddef()
                         </box>
                     </hlayout>
                     <divider/>
-                    <hlayout flexibleheight="1.2">
+                    <hlayout flexibleheight="10">
                         <box flexiblewidth="2">
-                            <tmpro text="{requiresHealth_30}" fontsize="42"/>
+                            <tmpro text="{requiresHealth_30}" fontsize="32"/>
                         </box>
-                        <box flexiblewidth="3">
+                        <box flexiblewidth="2">
                             <tmpro text="{wild}" fontsize="32" />
                         </box>
-                        <box flexiblewidth="3">
+                        <box flexiblewidth="1.5">
                             <tmpro text="{wild}" fontsize="32" />
                         </box>
                         <box flexiblewidth="13">
-                            <tmpro text="Draw a card, then discard a card" fontsize="16" />
+                            <tmpro text="  Draw a card, then discard a card" fontsize="16" />
                         </box>
                     </hlayout>
                     <divider/>
-                    <hlayout flexibleheight="1.2">
+                    <hlayout flexibleheight="10">
                         <box flexiblewidth="2">
-                            <tmpro text="{requiresHealth_30}" fontsize="42"/>
+                            <tmpro text="{requiresHealth_30}" fontsize="32"/>
                         </box>
-                        <box flexiblewidth="3">
+                        <box flexiblewidth="2">
                             <tmpro text="{guild}" fontsize="32" />
                         </box>
-                        <box flexiblewidth="3">
+                        <box flexiblewidth="1.5">
                             <tmpro text="{guild}" fontsize="32" />
                         </box>
                         <box flexiblewidth="13">
@@ -985,6 +986,47 @@ function alchemist_spectrum_spectacles_carddef()
                         </box>
                     </hlayout>
                 </vlayout>]]
+        -- xmlText =[[<vlayout>
+        --             <hlayout spacing="2" flexibleheight="1.2">
+        --                     <text text="{requiresHealth_30}" flexiblewidth="1" fontsize="32"/>
+        --                     <vlayout flexiblewidth="0.2" spacing="-115" forceheight="true">
+        --                         <text text="{imperial}"  fontsize="32" alignment="right"/>
+        --                         <text text="{imperial}"  fontsize="32"/>
+        --                     </vlayout>
+        --                     <text text="{health_2}" flexiblewidth="1" fontsize="32"/>
+        --                     <text text="txt" color="0,0,0,0" fontsize="32"/>
+        --                 </hlayout>
+        --             <divider/>
+        --             <hlayout spacing="2" flexibleheight="1.2">
+        --                     <text text="{requiresHealth_30}" flexiblewidth="1" fontsize="32"/>
+        --                     <vlayout flexiblewidth="0.2" spacing="-115" forceheight="true">
+        --                         <text text="{necro}"  fontsize="32" alignment="right"/>
+        --                         <text text="{necro}"  fontsize="32"/>
+        --                     </vlayout>
+        --                     <text text="{combat_2}" flexiblewidth="1" fontsize="32"/>
+        --                     <text text="txt" color="0,0,0,0" fontsize="32"/>
+        --                 </hlayout>
+        --             <divider/>
+        --             <hlayout spacing="2" flexibleheight="1.2">
+        --                     <text text="{requiresHealth_30}" flexiblewidth="1" fontsize="32"/>
+        --                     <vlayout flexiblewidth="0.2" spacing="-115" forceheight="true">
+        --                         <text text="{wild}"  fontsize="32" alignment="right"/>
+        --                         <text text="{wild}"  fontsize="32"/>
+        --                     </vlayout>
+        --                     <text text="Draw a card, then discard a card." flexiblewidth="1" fontsize="18"/>
+        --                     <text text="txt" color="0,0,0,0" fontsize="32"/>
+        --                 </hlayout>
+        --             <divider/>
+        --             <hlayout spacing="2" flexibleheight="1.2">
+        --                     <text text="{requiresHealth_30}" flexiblewidth="1" fontsize="32"/>
+        --                     <vlayout flexiblewidth="0.2" spacing="-115" forceheight="true">
+        --                         <text text="{guild}"  fontsize="32" alignment="right"/>
+        --                         <text text="{guild}"  fontsize="32"/>
+        --                     </vlayout>
+        --                     <text text="{gold_1}" flexiblewidth="1" fontsize="32"/>
+        --                     <text text="txt" color="0,0,0,0" fontsize="42"/>
+        --                 </hlayout>
+        --         </vlayout>]]
     })
     --
     return createMagicArmorDef({
@@ -1038,3 +1080,91 @@ function alchemist_spectrum_spectacles_carddef()
             }
     })
 end
+
+--=========================================
+function barbarian_disorienting_headbutt_carddef()
+    local cardLayout = createLayout({
+        name = "Disorienting Headbutt",
+        art = "art/classes/barbarian/disorienting_headbutt",
+        frame = "frames/barbarian_frames/barbarian_skill_cardframe",
+        acquireCost = 0,
+        cardTypeLabel = "Action",
+        types = { actionType, barbarianType, currencyType, coinType},
+        factions = {},
+        layout = cardLayout,
+        playLocation = castPloc,
+        xmlText = [[<vlayout forceheight="false" spacing="6">
+                        <hlayout spacing="10">
+                        <icon text="{combat_1}" fontsize="50"/>
+                        </hlayout>
+                        <hlayout spacing="10">
+                        <text text="If you're Berserk, opponent discards 1 and the next card they acquire this turn costs 1 {gold} more." fontsize="22"/>
+                        </hlayout>
+                    </vlayout>]]
+    })
+    local isBerserk = hasPlayerSlot(currentPid, berserkSlotKey)
+    --
+    return createActionDef({
+        id = "disorienting_headbutt",
+        name = "Disorienting Headbutt",
+        acquireCost = 0,
+        layout = cardLayout,
+        types = { actionType, barbarianType, currencyType, coinType},
+        factions = {},
+        abilities = {
+                createAbility({
+                    id = "dhbSlot",
+                    trigger = autoTrigger,
+                    check = isBerserk.invert(),
+                    effect = gainCombatEffect(1).seq(addSlotToPlayerEffect(currentPid, createPlayerSlot({ key = "notBerserkSlot", expiry = { endOfTurnExpiry } })))
+                }),
+                createAbility({
+                    id = "dhbMain",
+                    trigger = autoTrigger,
+                    check = isBerserk,
+                    effect = gainCombatEffect(1).seq(oppDiscardEffect(1)).seq(createCardEffect(disorientingHeadbuttBuff(), oppBuff()))
+                }),
+                createAbility({
+                    id = "dhbBerserkPostPlay",
+                    trigger = onPlayTrigger,
+                    effect = ifElseEffect(hasPlayerSlot(currentPid, "notBerserkSlot").And(isBerserk),
+                                            drawCardsEffect(100),
+                                            nullEffect()) 
+                })
+        }
+    })
+end
+
+function disorientingHeadbuttBuff()
+    local theftCards = selectLoc(loc(oppPid, discardPloc)).where(getCardCost().gte(1)).take(100)
+    local acquirableCards = selectLoc(centerRowLoc).union(selectLoc(fireGemsLoc)).union(theftCards).take(100)
+    return createGlobalBuff({
+        id="disorienting_headbutt_buff",
+        name="Disorienting Headbutt",
+        abilities = {
+            createAbility({
+                id = "disorienting_headbutt_buff",
+                triggerPriority = 10,
+                trigger = startOfTurnTrigger,
+                effect = addSlotToTarget(createCostChangeSlot(-1, { endOfTurnExpiry })).apply(acquirableCards)
+            }),
+            createAbility({
+                id = "disorienting_headbutt_buy",
+                triggerPriority = 10,
+                trigger = onAcquireGlobalTrigger,
+                effect = addSlotToTarget(createCostChangeSlot(1, { endOfTurnExpiry })).apply(acquirableCards).seq(sacrificeSelf())
+            }),
+            createAbility({
+                id = "disorienting_headbutt_cleanup",
+                triggerPriority = 10,
+                trigger = endOfTurnTrigger,
+                effect = sacrificeSelf()
+            }),
+        },
+        buffDetails = createBuffDetails({
+            name = "Disorienting Headbutt",
+            art = "art/classes/barbarian/disorienting_headbutt",
+            text = "If you're Berserk, opponent discards 1 and the next card they acquire this turn costs +1 gold."
+        })
+    })
+    end
