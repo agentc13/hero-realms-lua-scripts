@@ -442,5 +442,6 @@
     "lowercase-global",
     "duplicate-index",
     "redundant-value"
-  ]
+  ],
+  "githubPullRequests.ignoredPullRequestBranches": ["main"]
 }
